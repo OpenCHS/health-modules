@@ -8,5 +8,5 @@ test:
 	npm test
 
 deploy-local:
-	mkdir -p ../openchs-server/fs/config/modules/vhw/js
-	cp modules/vhw/js/* ../openchs-server/fs/config/modules/vhw/js
+	mkdir -p ../openchs-server/fs/config/modules/vhw
+	cp modules/vhw/*.js* ../openchs-server/fs/config/modules/vhw/
