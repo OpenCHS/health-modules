@@ -1,4 +1,4 @@
-export const treatmentByDiagnosisAndCode = {
+var treatmentByDiagnosisAndCode = {
     "Malaria": {
         "X1": {
             "1": [
@@ -1268,11 +1268,11 @@ export const treatmentByDiagnosisAndCode = {
                     "Dose Unit": "Tablet",
                     "Times": 2
                 }]
-        },
+        }
     }
 };
 
-export const weightRangesToCode = [
+var weightRangesToCode = [
     {start: 3.0, end: 5.5, code: "X1"},
     {start: 5.6, end: 7.9, code: "X2"},
     {start: 8.0, end: 13, code: "X3"},
@@ -1318,7 +1318,7 @@ var doseQuantityToMarathi = function (doseQuantity, doseUnit) {
     if (doseQuantity === 2) return "२";
     if (doseQuantity === 3) return "३";
     if (doseQuantity === 4) return "४";
-    console.error(`Dose quantity - ${doseQuantity} for dose unit - ${doseUnit} is not supported`);
+    console.error("Dose quantity - " + doseQuantity + " for dose unit - " + doseUnit + " is not supported");
 };
 
 var dosageTimingToMarathi = function (times) {
@@ -1326,7 +1326,7 @@ var dosageTimingToMarathi = function (times) {
     if (times === 2 || times === "2") return "दिवसातून दोन वेळा";
     if (times === 3 || times === "3") return "दिवसातून तीन वेळा";
     if (times === "Once Evening") return "रोज संध्याकाळी एकदा";
-    console.error(`Number of times ${times} not supported yet`);
+    console.error("Number of times " + times + " not supported yet");
 };
 
 var getDoseUnitMessage = function (daysPrescription) {
@@ -1345,14 +1345,14 @@ var getKeys = function (obj) {
     return keys;
 };
 
-export let getDecision = function (questionnaireAnswers) {
+var getDecision = function (questionnaireAnswers) {
     const weight = questionnaireAnswers.getAnswerFor('Weight');
     const diagnosis = questionnaireAnswers.getAnswerFor('Diagnosis');
     const age = questionnaireAnswers.getAnswerFor('Age');
     const sex = questionnaireAnswers.getAnswerFor('Sex');
 
-    const weightRangeToCode = weightRangesToCode.find((weightRangeToCode) => {
-        return weightRangeToCode.start <= weight && weightRangeToCode.end >= weight;
+    var weightRangeToCode = weightRangesToCode.find(function(entry) {
+        return entry.start <= weight && entry.end >= weight;
     });
 
     var decision = {};
@@ -1377,7 +1377,7 @@ export let getDecision = function (questionnaireAnswers) {
     for (var token = 0; token < dayTokens.length; token++) {
         for (var medicine = 0; medicine < prescription[dayTokens[token]].length; medicine++) {
             const daysPrescription = prescription[dayTokens[token]][medicine];
-            message += englishWordsToMarathi[`${daysPrescription.Medicine}`];
+            message += englishWordsToMarathi[""+daysPrescription.Medicine];
             message += " ";
             message += doseQuantityToMarathi(daysPrescription.Amount, daysPrescription["Dose Unit"]);
             message += " ";
@@ -1400,7 +1400,7 @@ export let getDecision = function (questionnaireAnswers) {
     return [decision];
 };
 
-let validate = function(questionnaireAnswers) {
+var validate = function(questionnaireAnswers) {
     const diagnosis = questionnaireAnswers.getAnswerFor('Diagnosis');
     const age = questionnaireAnswers.getAnswerFor('Age');
     const sex = questionnaireAnswers.getAnswerFor('Sex');
@@ -1420,3 +1420,5 @@ let validate = function(questionnaireAnswers) {
     validationResult.passed = false;
     return validationResult;
 };
+
+module.exports = {getDecision: getDecision, treatmentByDiagnosisAndCode: treatmentByDiagnosisAndCode, weightRangesToCode: weightRangesToCode};
