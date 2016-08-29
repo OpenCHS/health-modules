@@ -375,7 +375,7 @@ var treatmentByDiagnosisAndCode = {
         "X1": {
             "1-5": [
                 {
-                    "Medicine": "Ceptron Syrup",
+                    "Medicine": "Septran Syrup",
                     "Amount": 0.5,
                     "Dose Unit": "Spoon",
                     "Times": "2"
@@ -385,7 +385,7 @@ var treatmentByDiagnosisAndCode = {
         "X2": {
             "1-5": [
                 {
-                    "Medicine": "Ceptron Syrup",
+                    "Medicine": "Septran Syrup",
                     "Amount": 0.5,
                     "Dose Unit": "Spoon",
                     "Times": "2"
@@ -395,7 +395,7 @@ var treatmentByDiagnosisAndCode = {
         "X3": {
             "1-5": [
                 {
-                    "Medicine": "Ceptron Syrup",
+                    "Medicine": "Septran Syrup",
                     "Amount": 1,
                     "Dose Unit": "Spoon",
                     "Times": "2"
@@ -405,7 +405,7 @@ var treatmentByDiagnosisAndCode = {
         "X4": {
             "1-5": [
                 {
-                    "Medicine": "Ceptron",
+                    "Medicine": "Septran",
                     "Amount": 0.5,
                     "Dose Unit": "Tablet",
                     "Times": "2"
@@ -415,7 +415,7 @@ var treatmentByDiagnosisAndCode = {
         "X5": {
             "1-5": [
                 {
-                    "Medicine": "Ceptron",
+                    "Medicine": "Septran",
                     "Amount": 1,
                     "Dose Unit": "Tablet",
                     "Times": "2"
@@ -425,7 +425,7 @@ var treatmentByDiagnosisAndCode = {
         "X6": {
             "1-5": [
                 {
-                    "Medicine": "Ceptron",
+                    "Medicine": "Septran",
                     "Amount": 1,
                     "Dose Unit": "Tablet",
                     "Times": "2"
@@ -435,7 +435,7 @@ var treatmentByDiagnosisAndCode = {
         "X7": {
             "1-5": [
                 {
-                    "Medicine": "Ceptron",
+                    "Medicine": "Septran",
                     "Amount": 2,
                     "Dose Unit": "Tablet",
                     "Times": "2"
@@ -453,10 +453,10 @@ var treatmentByDiagnosisAndCode = {
                     "Times": 3
                 },
                 {
-                    "Medicine": "Abdak Syrup",
+                    "Medicine": "Abdec Syrup",
                     "Amount": 0.5,
                     "Dose Unit": "Spoon",
-                    "Times": 3
+                    "Times": 2
                 }]
         },
         "X2": {
@@ -465,13 +465,13 @@ var treatmentByDiagnosisAndCode = {
                     "Medicine": "Furoxone Syrup",
                     "Amount": 1,
                     "Dose Unit": "Spoon Syrup",
-                    "Times": 1
+                    "Times": 3
                 },
                 {
-                    "Medicine": "Abdak Syrup",
+                    "Medicine": "Abdec Syrup",
                     "Dose Unit": "Spoon",
                     "Amount": 1,
-                    "Times": 3
+                    "Times": 2
                 }]
         },
         "X3": {
@@ -480,13 +480,13 @@ var treatmentByDiagnosisAndCode = {
                     "Medicine": "Furoxone Syrup",
                     "Amount": 2,
                     "Dose Unit": "Spoon",
-                    "Times": 1
+                    "Times": 3
                 },
                 {
-                    "Medicine": "Abdak Syrup",
+                    "Medicine": "Abdec Syrup",
                     "Amount": 1,
                     "Dose Unit": "Spoon",
-                    "Times": 3
+                    "Times": 2
                 }]
         },
         "X4": {
@@ -498,7 +498,7 @@ var treatmentByDiagnosisAndCode = {
                     "Times": 2
                 },
                 {
-                    "Medicine": "Abdak",
+                    "Medicine": "B/C",
                     "Amount": 0.5,
                     "Dose Unit": "Tablet",
                     "Times": 2
@@ -510,13 +510,13 @@ var treatmentByDiagnosisAndCode = {
                     "Medicine": "Furoxone",
                     "Amount": 0.5,
                     "Dose Unit": "Tablet",
-                    "Times": 2
+                    "Times": 3
                 },
                 {
-                    "Medicine": "Abdak",
+                    "Medicine": "B/C",
                     "Amount": 0.5,
                     "Dose Unit": "Tablet",
-                    "Times": 2
+                    "Times": 3
                 }]
         },
         "X6": {
