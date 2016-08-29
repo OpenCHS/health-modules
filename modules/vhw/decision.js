@@ -64,7 +64,7 @@ var treatmentByDiagnosisAndCode = {
                 },
                 {
                     "Medicine": "Paracetamol Syrup",
-                    "Amount": 0.5,
+                    "Amount": 1,
                     "Dose Unit": "Spoon",
                     "Times": 3
                 }],
@@ -77,7 +77,7 @@ var treatmentByDiagnosisAndCode = {
                 },
                 {
                     "Medicine": "Paracetamol Syrup",
-                    "Amount": 0.5,
+                    "Amount": 1,
                     "Dose Unit": "Spoon",
                     "Times": 3
                 }]
@@ -112,7 +112,7 @@ var treatmentByDiagnosisAndCode = {
             "3": [
                 {
                     "Medicine": "Chloroquin Syrup",
-                    "Amount": 2,
+                    "Amount": 1,
                     "Dose Unit": "Spoon",
                     "Times": 1
                 },
@@ -153,7 +153,7 @@ var treatmentByDiagnosisAndCode = {
             "3": [
                 {
                     "Medicine": "Chloroquin",
-                    "Amount": 1,
+                    "Amount": 0.5,
                     "Dose Unit": "Tablet",
                     "Times": 1
                 },
