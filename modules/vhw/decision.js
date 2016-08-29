@@ -453,7 +453,7 @@ var treatmentByDiagnosisAndCode = {
                     "Times": 3
                 },
                 {
-                    "Medicine": "Abidec Syrup",
+                    "Medicine": "Abdek Syrup",
                     "Amount": 0.5,
                     "Dose Unit": "Spoon",
                     "Times": 2
@@ -468,7 +468,7 @@ var treatmentByDiagnosisAndCode = {
                     "Times": 3
                 },
                 {
-                    "Medicine": "Abidec Syrup",
+                    "Medicine": "Abdek Syrup",
                     "Dose Unit": "Spoon",
                     "Amount": 1,
                     "Times": 2
@@ -483,7 +483,7 @@ var treatmentByDiagnosisAndCode = {
                     "Times": 3
                 },
                 {
-                    "Medicine": "Abidec Syrup",
+                    "Medicine": "Abdek Syrup",
                     "Amount": 1,
                     "Dose Unit": "Spoon",
                     "Times": 2
