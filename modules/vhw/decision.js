@@ -498,7 +498,7 @@ var treatmentByDiagnosisAndCode = {
                     "Times": 2
                 },
                 {
-                    "Medicine": "B/C",
+                    "Medicine": "BC",
                     "Amount": 0.5,
                     "Dose Unit": "Tablet",
                     "Times": 2
@@ -513,7 +513,7 @@ var treatmentByDiagnosisAndCode = {
                     "Times": 3
                 },
                 {
-                    "Medicine": "B/C",
+                    "Medicine": "BC",
                     "Amount": 0.5,
                     "Dose Unit": "Tablet",
                     "Times": 3
@@ -528,7 +528,7 @@ var treatmentByDiagnosisAndCode = {
                     "Times": 2
                 },
                 {
-                    "Medicine": "B/C",
+                    "Medicine": "BC",
                     "Amount": 1,
                     "Dose Unit": "Tablet",
                     "Times": 2
@@ -543,7 +543,7 @@ var treatmentByDiagnosisAndCode = {
                     "Times": 3
                 },
                 {
-                    "Medicine": "B/C",
+                    "Medicine": "BC",
                     "Amount": 1,
                     "Dose Unit": "Tablet",
                     "Times": 3
@@ -1293,16 +1293,16 @@ const englishWordsToMarathi = {
     "Cetrizine Syrup": "सेट्रीझीन सायरप",
     "Furoxone Syrup": "फ्युरोक्सोन सायरप",
     "Furoxone": "फ्युरोक्सोन",
-    "Abdak": "अबडक",
-    "Abdak Syrup": "अबडक सायरप",
+    "Abdek": "अबडक",
+    "Abdek Syrup": "अबडक सायरप",
     "BC": "बीसी",
     "Perinorm": "पेरीनॉर्म",
-    "Onden Syrup": "ऑन्डेन सायरप",
-    "Cyroclopam Syrup": "सायरप सायक्लोपाम",
-    "Cyroclopam": "सायक्लोपाम",
-    "Femotidine": "फॅमोटिडीन",
-    "Ceptron Syrup": "सायरप सेप्ट्रान",
-    "Ceptron": "सेप्ट्रान",
+    "Ondensetran Syrup": "ऑन्डेन सायरप",
+    "Cyclopam Syrup": "सायरप सायक्लोपाम",
+    "Cyclopam": "सायक्लोपाम",
+    "Famotidine": "फॅमोटिडीन",
+    "Septran Syrup": "सायरप सेप्ट्रान",
+    "Septran": "सेप्ट्रान",
     "Scabizol": "खरजेचे औषध",
     "Salicylic Acid": "सॅलिसिलिक ऍसिड",
     "Iron": "लोहाच्या",
