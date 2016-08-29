@@ -740,7 +740,7 @@ var treatmentByDiagnosisAndCode = {
         "X1": {
             "1-5": [
                 {
-                    "Medicine": "Ceptron Syrup",
+                    "Medicine": "Septran Syrup",
                     "Amount": 0.5,
                     "Dose Unit": "Spoon",
                     "Times": "2"
@@ -750,7 +750,7 @@ var treatmentByDiagnosisAndCode = {
         "X2": {
             "1-5": [
                 {
-                    "Medicine": "Ceptron Syrup",
+                    "Medicine": "Septran Syrup",
                     "Amount": 0.5,
                     "Dose Unit": "Spoon",
                     "Times": "2"
@@ -760,7 +760,7 @@ var treatmentByDiagnosisAndCode = {
         "X3": {
             "1-5": [
                 {
-                    "Medicine": "Ceptron Syrup",
+                    "Medicine": "Septran Syrup",
                     "Amount": 1,
                     "Dose Unit": "Spoon",
                     "Times": "2"
@@ -770,7 +770,7 @@ var treatmentByDiagnosisAndCode = {
         "X4": {
             "1-5": [
                 {
-                    "Medicine": "Ceptron",
+                    "Medicine": "Septran",
                     "Amount": 0.5,
                     "Dose Unit": "Tablet",
                     "Times": "2"
@@ -780,7 +780,7 @@ var treatmentByDiagnosisAndCode = {
         "X5": {
             "1-5": [
                 {
-                    "Medicine": "Ceptron",
+                    "Medicine": "Septran",
                     "Amount": 1,
                     "Dose Unit": "Tablet",
                     "Times": "2"
@@ -790,7 +790,7 @@ var treatmentByDiagnosisAndCode = {
         "X6": {
             "1-5": [
                 {
-                    "Medicine": "Ceptron",
+                    "Medicine": "Septran",
                     "Amount": 1,
                     "Dose Unit": "Tablet",
                     "Times": "2"
@@ -800,7 +800,7 @@ var treatmentByDiagnosisAndCode = {
         "X7": {
             "1-5": [
                 {
-                    "Medicine": "Ceptron",
+                    "Medicine": "Septran",
                     "Amount": 2,
                     "Dose Unit": "Tablet",
                     "Times": "2"
