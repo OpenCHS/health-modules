@@ -554,7 +554,7 @@ var treatmentByDiagnosisAndCode = {
         "X1": {
             "3": [
                 {
-                    "Medicine": "Onden Syrup",
+                    "Medicine": "Ondensetran Syrup",
                     "Amount": 1,
                     "Dose Unit": "ml",
                     "Times": "2"
@@ -564,7 +564,7 @@ var treatmentByDiagnosisAndCode = {
         "X2": {
             "3": [
                 {
-                    "Medicine": "Onden Syrup",
+                    "Medicine": "Ondensetran Syrup",
                     "Amount": 2,
                     "Dose Unit": "ml",
                     "Times": "2"
@@ -626,7 +626,7 @@ var treatmentByDiagnosisAndCode = {
         "X1": {
             "2": [
                 {
-                    "Medicine": "Cyroclopam Syrup",
+                    "Medicine": "Cyclopam Syrup",
                     "Amount": 0.5,
                     "Dose Unit": "ml",
                     "Times": "3"
@@ -636,7 +636,7 @@ var treatmentByDiagnosisAndCode = {
         "X2": {
             "2": [
                 {
-                    "Medicine": "Cyroclopam Syrup",
+                    "Medicine": "Cyclopam Syrup",
                     "Amount": 1,
                     "Dose Unit": "ml",
                     "Times": "3"
@@ -646,7 +646,7 @@ var treatmentByDiagnosisAndCode = {
         "X3": {
             "2": [
                 {
-                    "Medicine": "Cyroclopam Syrup",
+                    "Medicine": "Cyclopam Syrup",
                     "Amount": 1,
                     "Dose Unit": "Spoon",
                     "Times": "3"
@@ -656,7 +656,7 @@ var treatmentByDiagnosisAndCode = {
         "X4": {
             "2": [
                 {
-                    "Medicine": "Cyroclopam",
+                    "Medicine": "Cyclopam",
                     "Amount": 0.5,
                     "Dose Unit": "Tablet",
                     "Times": "2"
@@ -666,7 +666,7 @@ var treatmentByDiagnosisAndCode = {
         "X5": {
             "2": [
                 {
-                    "Medicine": "Cyroclopam",
+                    "Medicine": "Cyclopam",
                     "Amount": 0.5,
                     "Dose Unit": "Tablet",
                     "Times": "3"
@@ -676,7 +676,7 @@ var treatmentByDiagnosisAndCode = {
         "X6": {
             "2": [
                 {
-                    "Medicine": "Cyroclopam",
+                    "Medicine": "Cyclopam",
                     "Amount": 1,
                     "Dose Unit": "Tablet",
                     "Times": "2"
@@ -686,7 +686,7 @@ var treatmentByDiagnosisAndCode = {
         "X7": {
             "2": [
                 {
-                    "Medicine": "Cyroclopam",
+                    "Medicine": "Cyclopam",
                     "Amount": 1,
                     "Dose Unit": "Tablet",
                     "Times": "3"
@@ -698,7 +698,7 @@ var treatmentByDiagnosisAndCode = {
         "X4": {
             "1-5": [
                 {
-                    "Medicine": "Femotidine",
+                    "Medicine": "Famotidine",
                     "Amount": 0.5,
                     "Dose Unit": "Tablet",
                     "Times": "1"
@@ -708,7 +708,7 @@ var treatmentByDiagnosisAndCode = {
         "X5": {
             "1-5": [
                 {
-                    "Medicine": "Femotidine",
+                    "Medicine": "Famotidine",
                     "Amount": 0.5,
                     "Dose Unit": "Tablet",
                     "Times": "2"
@@ -718,7 +718,7 @@ var treatmentByDiagnosisAndCode = {
         "X6": {
             "1-5": [
                 {
-                    "Medicine": "Femotidine",
+                    "Medicine": "Famotidine",
                     "Amount": 1,
                     "Dose Unit": "Tablet",
                     "Times": "2"
@@ -728,7 +728,7 @@ var treatmentByDiagnosisAndCode = {
         "X7": {
             "1-5": [
                 {
-                    "Medicine": "Femotidine",
+                    "Medicine": "Famotidine",
                     "Amount": 1,
                     "Dose Unit": "Tablet",
                     "Times": "2"
