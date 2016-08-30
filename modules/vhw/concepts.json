@@ -81,7 +81,7 @@
       }
     ],
     "datatype": {
-      "name": "Numeric"
+      "name": "Duration"
     },
     "lowAbsolute": 0,
     "hiAbsolute": 130
@@ -218,13 +218,13 @@
     },
     "answers": [
       {
-        "name": "Cold"
+        "name": "Vomiting"
       },
       {
         "name": "Cough"
       },
       {
-        "name": "Vomiting"
+        "name": "Cold"
       },
       {
         "name": "Diarrhoea"

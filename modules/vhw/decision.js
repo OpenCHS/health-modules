@@ -1412,7 +1412,7 @@ var validate = function(questionnaireAnswers) {
     if (sex === 'Male' && diagnosis === 'Pregnancy') {
         validationResult.message = "Male cannot be pregnant"; //convert to marathi
         return validationResult;
-    } else if (diagnosis === 'Pregnancy' && age < 10) {
+    } else if (diagnosis === 'Pregnancy' && age.durationValue < 10) {
         validationResult.message = "One cannot be pregnant before 10"; //convert to marathi
         return validationResult;
     }
