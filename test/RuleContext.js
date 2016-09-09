@@ -7,8 +7,13 @@ class RuleContext {
         return this.questionAnswers.get(questionName);
     }
 
+    getDurationInYears(questionName) {
+        return this.questionAnswers.get(questionName);
+    }
+
     set(key, value) {
         this.questionAnswers.set(key, value);
+        return this;
     }
 }
 

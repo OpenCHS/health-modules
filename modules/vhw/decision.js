@@ -1345,11 +1345,11 @@ var getKeys = function (obj) {
     return keys;
 };
 
-var getDecision = function (questionnaireAnswers) {
-    const weight = questionnaireAnswers.getAnswerFor('Weight');
-    const diagnosis = questionnaireAnswers.getAnswerFor('Diagnosis');
-    const age = questionnaireAnswers.getAnswerFor('Age');
-    const sex = questionnaireAnswers.getAnswerFor('Sex');
+var getDecision = function (ruleContext) {
+    const weight = ruleContext.getAnswerFor('Weight');
+    const diagnoses = ruleContext.getAnswerFor('Diagnosis');
+    const age = ruleContext.getAnswerFor('Age');
+    const sex = ruleContext.getAnswerFor('Sex');
 
     var weightRangeToCode = weightRangesToCode.find(function(entry) {
         return entry.start <= weight && entry.end >= weight;
@@ -1358,7 +1358,7 @@ var getDecision = function (questionnaireAnswers) {
     var decision = {};
     decision.name = "Treatment";
     decision.code = weightRangeToCode.code;
-    var prescription = treatmentByDiagnosisAndCode[diagnosis][weightRangeToCode.code];
+    var prescription = treatmentByDiagnosisAndCode[diagnoses[0]][weightRangeToCode.code];
     var message = "";
 
     var dayTokens = getKeys(prescription);
@@ -1390,35 +1390,38 @@ var getDecision = function (questionnaireAnswers) {
     }
     decision.value = message;
 
-    if (weight >= 13 && diagnosis === "Malaria")
+    if (weight >= 13 && diagnoses.indexOf('Malaria') !== -1)
         decision.alert = "क्लोरोक्विन व पॅरासिटामॉल ही औषधे जेवल्यावर खायला सांगावी";
-    else if (diagnosis === 'Cough' && age >= 16 && age <= 40 && weight >= 13 && sex === "Female")
+    else if (diagnoses.indexOf('Cough') !== -1 && age >= 16 && age <= 40 && weight >= 13 && sex === "Female")
         decision.alert = "१६ ते ४० वर्षाच्या बायकांना सेप्ट्रान देऊ नये त्याऐवजी सिफ्रान १गोळी दिवसातून २ वेळा द्यावी";
-    else if (diagnosis === 'Vomiting')
+    else if (diagnoses.indexOf('Vomiting') !== -1)
         decision.alert = "उलटी असल्यास आधी औषध द्यावे व अर्ध्या तासांनंतर जेवण, दुध द्यावे व अर्ध्या तासांनंतर इतर औषधे द्यावीत";
 
     return [decision];
 };
 
-var validate = function(questionnaireAnswers) {
-    const diagnosis = questionnaireAnswers.getAnswerFor('Diagnosis');
-    const age = questionnaireAnswers.getAnswerFor('Age');
-    const sex = questionnaireAnswers.getAnswerFor('Sex');
+var validate = function(ruleContext) {
+    const diagnoses = ruleContext.getAnswerFor('Diagnosis');
+    const age = ruleContext.getDurationInYears('Age');
+    const sex = ruleContext.getAnswerFor('Sex');
+
+    // console.log("[VHW][validate] Diagnosis: " + diagnoses + ", Age: " + age + ", Diagnosis Data Type: " + typeof diagnoses + ", Sex: " + sex);
 
     var validationResult = {
         "passed": false
     };
 
-    if (sex === 'Male' && diagnosis === 'Pregnancy') {
-        validationResult.message = "Male cannot be pregnant"; //convert to marathi
+    if (sex === 'Male' && diagnoses.indexOf('Pregnancy') !== -1) {
+        validationResult.message = "Male cannot be pregnant";
         return validationResult;
-    } else if (diagnosis === 'Pregnancy' && age.durationValue < 10) {
-        validationResult.message = "One cannot be pregnant before 10"; //convert to marathi
+    } else if (diagnoses.indexOf('Pregnancy') !== -1 && age < 10) {
+        console.log("Inside");
+        validationResult.message = "One cannot be pregnant before 10";
         return validationResult;
     }
 
-    validationResult.passed = false;
+    validationResult.passed = true;
     return validationResult;
 };
 
-module.exports = {getDecision: getDecision, treatmentByDiagnosisAndCode: treatmentByDiagnosisAndCode, weightRangesToCode: weightRangesToCode};
+module.exports = {getDecision: getDecision, treatmentByDiagnosisAndCode: treatmentByDiagnosisAndCode, weightRangesToCode: weightRangesToCode, validate: validate};
