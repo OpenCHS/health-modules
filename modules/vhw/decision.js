@@ -1388,7 +1388,7 @@ var getKeys = function (obj) {
 
 var getDecision = function (ruleContext) {
     const weight = ruleContext.getAnswerFor('Weight');
-    const diagnoses = ruleContext.getAnswerFor('Diagnosis');
+    const complaint = ruleContext.getAnswerFor('Complaint');
     const age = ruleContext.getAnswerFor('Age');
     const sex = ruleContext.getAnswerFor('Sex');
 
@@ -1399,7 +1399,7 @@ var getDecision = function (ruleContext) {
     var decision = {};
     decision.name = "Treatment";
     decision.code = weightRangeToCode.code;
-    var prescription = treatmentByDiagnosisAndCode[diagnoses[0]][weightRangeToCode.code];
+    var prescription = treatmentByDiagnosisAndCode[complaint[0]][weightRangeToCode.code];
     var message = "";
 
     var dayTokens = getKeys(prescription);
@@ -1431,11 +1431,11 @@ var getDecision = function (ruleContext) {
     }
     decision.value = message;
 
-    if (weight >= 13 && diagnoses.indexOf('Malaria') !== -1)
+    if (weight >= 13 && complaint.indexOf('Malaria') !== -1)
         decision.alert = "क्लोरोक्विन व पॅरासिटामॉल ही औषधे जेवल्यावर खायला सांगावी";
-    else if (diagnoses.indexOf('Cough') !== -1 && age >= 16 && age <= 40 && weight >= 13 && sex === "Female")
+    else if (complaint.indexOf('Cough') !== -1 && age >= 16 && age <= 40 && weight >= 13 && sex === "Female")
         decision.alert = "१६ ते ४० वर्षाच्या बायकांना सेप्ट्रान देऊ नये त्याऐवजी सिफ्रान १गोळी दिवसातून २ वेळा द्यावी";
-    else if (diagnoses.indexOf('Vomiting') !== -1)
+    else if (complaint.indexOf('Vomiting') !== -1)
         decision.alert = "उलटी असल्यास आधी औषध द्यावे व अर्ध्या तासांनंतर जेवण, दुध द्यावे व अर्ध्या तासांनंतर इतर औषधे द्यावीत";
 
     return [decision];
