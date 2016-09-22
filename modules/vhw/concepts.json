@@ -1,14 +1,14 @@
 [
   {
-    "name": "vhw",
+    "name": "health-centre",
     "uuid": "749d0f83-5ac5-4a22-be09-9bf5958f4f55",
     "conceptNames": [
       {
-        "name": "आरोग्य दूत",
+        "name": "आरोग्य केंद्र",
         "locale": "mr_IN"
       },
       {
-        "name": "Aarogya Doot",
+        "name": "Health Centre",
         "locale": "en"
       }
     ],
@@ -201,15 +201,15 @@
     "hiAbsolute": 40
   },
   {
-    "name": "Diagnosis",
+    "name": "Complaint",
     "uuid": "93a70513-dd1b-4d93-9edd-6173cb67a88b",
     "conceptNames": [
       {
-        "name": "निदान",
+        "name": "तक्रार",
         "locale": "hi_IN"
       },
       {
-        "name": "Diagnosis",
+        "name": "Complaint",
         "locale": "en"
       }
     ],

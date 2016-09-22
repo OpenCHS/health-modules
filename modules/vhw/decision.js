@@ -291,12 +291,44 @@ var treatmentByDiagnosisAndCode = {
     },
     "Chloroquine Resistant Malaria": {
         "X1": {
-            "1-3": [
+            "1": [
                 {
-                    "Medicine": "Lonart Forte",
+                    "Medicine": "Chloroquin Syrup",
                     "Amount": 0.5,
-                    "Dose Unit": "Tablet",
-                    "Times": 2
+                    "Dose Unit": "Spoon",
+                    "Times": 1
+                },
+                {
+                    "Medicine": "Paracetamol Syrup",
+                    "Amount": 0.5,
+                    "Dose Unit": "Spoon",
+                    "Times": 3
+                }],
+            "2": [
+                {
+                    "Medicine": "Chloroquin Syrup",
+                    "Amount": 0.5,
+                    "Dose Unit": "Spoon",
+                    "Times": 1
+                },
+                {
+                    "Medicine": "Paracetamol Syrup",
+                    "Amount": 0.5,
+                    "Dose Unit": "Spoon",
+                    "Times": 3
+                }],
+            "3": [
+                {
+                    "Medicine": "Chloroquin Syrup",
+                    "Amount": 0.5,
+                    "Dose Unit": "Spoon",
+                    "Times": 1
+                },
+                {
+                    "Medicine": "Paracetamol Syrup",
+                    "Amount": 0.5,
+                    "Dose Unit": "Spoon",
+                    "Times": 3
                 }]
         }
     },
@@ -629,7 +661,7 @@ var treatmentByDiagnosisAndCode = {
                 {
                     "Medicine": "Cyclopam Syrup",
                     "Amount": 0.5,
-                    "Dose Unit": "ml",
+                    "Dose Unit": "Spoon",
                     "Times": "3"
                 }
             ]
@@ -639,7 +671,7 @@ var treatmentByDiagnosisAndCode = {
                 {
                     "Medicine": "Cyclopam Syrup",
                     "Amount": 1,
-                    "Dose Unit": "ml",
+                    "Dose Unit": "Spoon",
                     "Times": "3"
                 }
             ]
@@ -1282,6 +1314,14 @@ var weightRangesToCode = [
     {start: 25.6, end: 32.5, code: "X6"},
     {start: 32.6, end: 1000, code: "X7"}
 ];
+
+var weightRangesToCodeForLonart = [
+    {start: 5.0, end: 14.0, code: "X1"},
+    {start: 15, end: 24, code: "X2"},
+    {start: 25, end: 34, code: "X3"},
+    {start: 35, end: 1000, code: "X4"},
+];
+
 
 const englishWordsToMarathi = {
     "Chloroquin": "क्लोरोक्विन",
