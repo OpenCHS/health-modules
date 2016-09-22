@@ -9,8 +9,7 @@
   "license": "AGPL-3.0",
   "scripts": {
     "start": "",
-    "lint": "./node_modules/.bin/eslint src",
-    "test": "find ./test -name '*Test.js' | xargs mocha --require test/testHelper.js"
+    "test": "find ./test -name '*Test.js' | xargs mocha "
   },
   "dependencies": {
   },
