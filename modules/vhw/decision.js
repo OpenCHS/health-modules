@@ -1445,6 +1445,12 @@ var englishWordsToMarathi = {
 
 };
 
+var dayInMarathi = {
+    "1": "पहिल्या दिवशी",
+    "2": "दुसऱ्या दिवशी",
+    "3": "तिसऱ्या दिवशी"
+};
+
 var doseQuantityToMarathi = function (doseQuantity, doseUnit) {
     if (doseQuantity === 0.25) return "१/४";
     if (doseQuantity === 0.5 && doseUnit === "Spoon") return "अर्धा";
@@ -1526,8 +1532,12 @@ var getDecision = function (ruleContext) {
         message += "\n";
     }
     for (var token = 0; token < dayTokens.length; token++) {
-        for (var medicine = 0; medicine < prescription[dayTokens[token]].length; medicine++) {
-            var daysPrescription = prescription[dayTokens[token]][medicine];
+        if (dayTokens.length !== 1 && dayTokens[0] === "1") {
+            message += dayInMarathi[dayTokens[token]];
+            message += "\n";
+        }
+        for (var medicineIndex = 0; medicineIndex < prescription[dayTokens[token]].length; medicineIndex++) {
+            var daysPrescription = prescription[dayTokens[token]][medicineIndex];
             message += englishWordsToMarathi[""+daysPrescription.Medicine];
             message += " ";
             if (daysPrescription.Times !== "Special Instruction") {

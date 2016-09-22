@@ -67,11 +67,19 @@ describe('Make Decision', function () {
         var decisions = decision.getDecision(new RuleContext().set("Complaint", ["Cough"]).set("Sex", "Male").set("Age", 25).set("Weight", 40));
         var medicineCount = (decisions[0].value.match(/सेप्ट्रान/g) || []).length;
         expect(medicineCount).to.equal(1, decisions[0].value);
+        expect((decisions[0].value.match(/पहिल्या दिवशी/g) || []).length).to.equal(0, decisions[0].value);
     });
 
     it('Print special instruction', () => {
         var decisions = decision.getDecision(new RuleContext().set("Complaint", ["Ring Worm"]).set("Sex", "Male").set("Age", 25).set("Weight", 40));
         var count = (decisions[0].value.match(/गजकर्णाच्या जागेवर लावण्यास सांगावे/g) || []).length;
+        expect(count).to.equal(1, decisions[0].value);
+        expect((decisions[0].value.match(/पहिल्या दिवशी/g) || []).length).to.equal(0, decisions[0].value);
+    });
+
+    it('Display daily changing instructions in a day wise fashion', () => {
+        var decisions = decision.getDecision(new RuleContext().set("Complaint", ["Malaria"]).set("Sex", "Male").set("Age", 25).set("Weight", 40));
+        var count = (decisions[0].value.match(/पहिल्या दिवशी/g) || []).length;
         expect(count).to.equal(1, decisions[0].value);
     });
 });
