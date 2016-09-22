@@ -1455,6 +1455,7 @@ var getWeightRangeToCode = function (complaint, weight) {
 };
 
 var getDecision = function (ruleContext) {
+    console.log(ruleContext);
     const weight = ruleContext.getAnswerFor('Weight');
     const complaints = ruleContext.getAnswerFor('Complaint');
     const age = ruleContext.getAnswerFor('Age');
@@ -1515,6 +1516,7 @@ var getDecision = function (ruleContext) {
 };
 
 var validate = function(ruleContext) {
+    console.log(ruleContext);
     const complaints = ruleContext.getAnswerFor('Complaint');
     const age = ruleContext.getDurationInYears('Age');
     const sex = ruleContext.getAnswerFor('Sex');
