@@ -1379,7 +1379,7 @@ var complaintToWeightRangesToCodeMap = {
 };
 
 
-const englishWordsToMarathi = {
+var englishWordsToMarathi = {
     "Chloroquin": "क्लोरोक्विन",
     "Chloroquin Syrup": "क्लोरोक्विन सायरप",
     "Paracetamol Syrup": "पॅरासिटामॉल सायरप",
@@ -1455,10 +1455,11 @@ var getWeightRangeToCode = function (complaint, weight) {
 };
 
 var getDecision = function (ruleContext) {
-    const weight = ruleContext.getAnswerFor('Weight');
-    const complaints = ruleContext.getAnswerFor('Complaint');
-    const age = ruleContext.getAnswerFor('Age');
-    const sex = ruleContext.getAnswerFor('Sex');
+    var weight = ruleContext.getAnswerFor('Weight');
+    var height = ruleContext.getAnswerFor('Height');
+    var complaints = ruleContext.getAnswerFor('Complaint');
+    var age = ruleContext.getAnswerFor('Age');
+    var sex = ruleContext.getAnswerFor('Sex');
 
     var weightRangeToCode = getWeightRangeToCode(complaints[0], weight);
 
@@ -1486,7 +1487,7 @@ var getDecision = function (ruleContext) {
     }
     for (var token = 0; token < dayTokens.length; token++) {
         for (var medicine = 0; medicine < prescription[dayTokens[token]].length; medicine++) {
-            const daysPrescription = prescription[dayTokens[token]][medicine];
+            var daysPrescription = prescription[dayTokens[token]][medicine];
             message += englishWordsToMarathi[""+daysPrescription.Medicine];
             message += " ";
             message += doseQuantityToMarathi(daysPrescription.Amount, daysPrescription["Dose Unit"]);
@@ -1515,10 +1516,10 @@ var getDecision = function (ruleContext) {
 };
 
 var validate = function(ruleContext) {
-    const complaints = ruleContext.getAnswerFor('Complaint');
-    const age = ruleContext.getDurationInYears('Age');
-    const sex = ruleContext.getAnswerFor('Sex');
-    const weight = ruleContext.getAnswerFor('Weight');
+    var complaints = ruleContext.getAnswerFor('Complaint');
+    var age = ruleContext.getDurationInYears('Age');
+    var sex = ruleContext.getAnswerFor('Sex');
+    var weight = ruleContext.getAnswerFor('Weight');
 
     var weightRangeToCode = getWeightRangeToCode(complaints[0], weight);
 
