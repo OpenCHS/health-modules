@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {treatmentByDiagnosisAndCode, weightRangesToCode, getDecision, validate} from '../modules/vhw/decision';
+import {treatmentByComplaintAndCode, weightRangesToCode, getDecision, validate} from '../modules/vhw/decision';
 import _ from 'lodash';
 import RuleContext from './RuleContext';
 
@@ -7,29 +7,35 @@ describe('Make Decision', () => {
     it('Regression for all diseases, to ensure there are no exceptions and error messages', () => {
         var ruleContext = new RuleContext();
 
-        _.keys(treatmentByDiagnosisAndCode).forEach((diagnosis) => {
+        _.keys(treatmentByComplaintAndCode).forEach((complaint) => {
             weightRangesToCode.forEach((weightRangeToCode) => {
                 ["Male", "Female"].forEach((gender) => {
-                    ruleContext.set("Diagnosis", [diagnosis]);
+                    ruleContext.set("Complaint", [complaint]);
                     ruleContext.set("Weight", weightRangeToCode.start);
                     ruleContext.set("Sex", gender);
                     ruleContext.set("Age", 10);
-                    console.log(`##### ${diagnosis}, ${weightRangeToCode.start}, ${gender}  ######`);
-                    var decisions = getDecision(ruleContext);
-                    expect(decisions.length).to.equal(1);
+                    console.log(`##### ${complaint}, ${weightRangeToCode.start}, ${gender}  ######`);
+                    if (validate(ruleContext).passed) {
+                        var decisions = getDecision(ruleContext);
+                        expect(decisions.length).to.equal(1);
+                    }
                 });
             });
         });
     });
 
     it('Validate', () => {
-        var ruleContext = new RuleContext().set("Diagnosis", "Pregnancy").set("Sex", "Male");
-        expect(validate(ruleContext).passed).to.equal(false);
+        var complaintConceptName = "Complaint";
+        var validationResult = validate(new RuleContext().set(complaintConceptName, ["Pregnancy"]).set("Sex", "Male").set("Age", "25").set("Weight", 40));
+        expect(validationResult.passed).to.equal(false, validationResult.message);
 
-        ruleContext = new RuleContext().set("Diagnosis", "Pregnancy").set("Age", 5);
-        expect(validate(ruleContext).passed).to.equal(false);
+        validationResult = validate(new RuleContext().set(complaintConceptName, ["Pregnancy"]).set("Age", 5).set("Sex", "Female").set("Weight", 40));
+        expect(validationResult.passed).to.equal(false, validationResult.message);
 
-        ruleContext = new RuleContext().set("Diagnosis", "Pregnancy").set("Age", 12);
-        expect(validate(ruleContext).passed).to.equal(true);
+        validationResult = validate(new RuleContext().set(complaintConceptName, ["Pregnancy"]).set("Age", 12).set("Sex", "Female").set("Weight", 40));
+        expect(validationResult.passed).to.equal(true, validationResult.message);
+
+        validationResult = validate(new RuleContext().set(complaintConceptName, ["Chloroquine Resistant Malaria"]).set("Weight", 3).set("Sex", "Male"));
+        expect(validationResult.passed).to.equal(false, validationResult.message);
     });
 });
