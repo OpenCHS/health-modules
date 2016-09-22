@@ -1460,7 +1460,7 @@ var getDecision = function (ruleContext) {
     var complaints = ruleContext.getAnswerFor('Complaint');
     var age = ruleContext.getAnswerFor('Age');
     var sex = ruleContext.getAnswerFor('Sex');
-
+    console.log(age);
     var weightRangeToCode = getWeightRangeToCode(complaints[0], weight);
 
     var decision = {};

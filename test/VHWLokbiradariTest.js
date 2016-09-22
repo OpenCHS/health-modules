@@ -38,11 +38,11 @@ describe('Make Decision', function () {
         expect(validationResult.passed).to.equal(false, validationResult.message);
     });
 
-    it('Complaint which allows for prescription', function() {
+    it('Complaint which allows for prescription', function () {
         var decisions = decision.getDecision(new RuleContext().set("Complaint", ["Cold"]).set("Sex", "Male").set("Age", 25).set("Weight", 40));
-    expect(decisions[0].value).to.not.equal(undefined);
-    expect(decisions[0].alert).to.equal(undefined);
-})
+        expect(decisions[0].value).to.not.equal(undefined);
+        expect(decisions[0].alert).to.equal(undefined);
+    })
     ;
 
     it('Do not give any medicine for chloroquin resistant malaria to women between 16-40', function () {
@@ -50,4 +50,5 @@ describe('Make Decision', function () {
         expect(decisions[0].value).to.equal("");
         expect(decisions[0].alert).to.not.equal(undefined);
     });
+
 });
