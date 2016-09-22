@@ -296,16 +296,16 @@
     }
   },
   {
-    "name": "VHW Lokbiradari",
+    "name": "vhw",
     "uuid": "db7d9086-f5ce-4652-9925-741041b13a38",
     "conceptNames": [
       {
-        "name": "",
-        "locale": "hi_IN"
-      },
-      {
         "name": "VHW Lokbiradari",
         "locale": "en"
+      },
+      {
+        "name": "आरोग्य केंद्र",
+        "locale": "mr_IN"
       }
     ],
     "datatype": {
