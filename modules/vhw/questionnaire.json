@@ -21,9 +21,6 @@
       "name": "Weight"
     },
     {
-      "name": "Height"
-    },
-    {
       "name": "Temperature",
       "mandatory": false
     },
