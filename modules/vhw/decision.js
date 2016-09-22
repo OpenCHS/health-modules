@@ -905,7 +905,7 @@ var treatmentByComplaintAndCode = {
                     "Medicine": "Scabizol",
                     "Amount": 0,
                     "Dose Unit": "Paste",
-                    "Times": "Scabies Instruction"
+                    "Times": "Special Instruction"
                 }
             ]
         },
@@ -921,7 +921,7 @@ var treatmentByComplaintAndCode = {
                     "Medicine": "Scabizol",
                     "Amount": 0,
                     "Dose Unit": "Paste",
-                    "Times": "Once"
+                    "Times": "Special Instruction"
                 }
             ]
         },
@@ -937,7 +937,7 @@ var treatmentByComplaintAndCode = {
                     "Medicine": "Scabizol",
                     "Amount": 0,
                     "Dose Unit": "Paste",
-                    "Times": "Once"
+                    "Times": "Special Instruction"
                 }
             ]
         },
@@ -953,7 +953,7 @@ var treatmentByComplaintAndCode = {
                     "Medicine": "Scabizol",
                     "Amount": 0,
                     "Dose Unit": "Paste",
-                    "Times": "Once"
+                    "Times": "Special Instruction"
                 }
             ]
         },
@@ -969,7 +969,7 @@ var treatmentByComplaintAndCode = {
                     "Medicine": "Scabizol",
                     "Amount": 0,
                     "Dose Unit": "Paste",
-                    "Times": "Once"
+                    "Times": "Special Instruction"
                 }
             ]
         },
@@ -985,7 +985,7 @@ var treatmentByComplaintAndCode = {
                     "Medicine": "Scabizol",
                     "Amount": 0,
                     "Dose Unit": "Paste",
-                    "Times": "Once"
+                    "Times": "Special Instruction"
                 }
             ]
         },
@@ -1001,7 +1001,7 @@ var treatmentByComplaintAndCode = {
                     "Medicine": "Scabizol",
                     "Amount": 0,
                     "Dose Unit": "Paste",
-                    "Times": "Once"
+                    "Times": "Special Instruction"
                 }
             ]
         }
@@ -1019,7 +1019,7 @@ var treatmentByComplaintAndCode = {
                     "Medicine": "Salicylic Acid",
                     "Amount": 0,
                     "Dose Unit": "Paste",
-                    "Times": "Once"
+                    "Times": "Special Instruction"
                 }
             ]
         },
@@ -1030,6 +1030,12 @@ var treatmentByComplaintAndCode = {
                     "Amount": 0.5,
                     "Dose Unit": "Spoon",
                     "Times": "Once Evening"
+                },
+                {
+                    "Medicine": "Salicylic Acid",
+                    "Amount": 0,
+                    "Dose Unit": "Paste",
+                    "Times": "Special Instruction"
                 }
             ]
         },
@@ -1040,6 +1046,12 @@ var treatmentByComplaintAndCode = {
                     "Amount": 0.5,
                     "Dose Unit": "Spoon",
                     "Times": "Once Evening"
+                },
+                {
+                    "Medicine": "Salicylic Acid",
+                    "Amount": 0,
+                    "Dose Unit": "Paste",
+                    "Times": "Special Instruction"
                 }
             ]
         },
@@ -1050,6 +1062,12 @@ var treatmentByComplaintAndCode = {
                     "Amount": 1,
                     "Dose Unit": "Spoon",
                     "Times": "Once Evening"
+                },
+                {
+                    "Medicine": "Salicylic Acid",
+                    "Amount": 0,
+                    "Dose Unit": "Paste",
+                    "Times": "Special Instruction"
                 }
             ]
         },
@@ -1060,6 +1078,12 @@ var treatmentByComplaintAndCode = {
                     "Amount": 0.5,
                     "Dose Unit": "Tablet",
                     "Times": "Once Evening"
+                },
+                {
+                    "Medicine": "Salicylic Acid",
+                    "Amount": 0,
+                    "Dose Unit": "Paste",
+                    "Times": "Special Instruction"
                 }
             ]
         },
@@ -1070,6 +1094,12 @@ var treatmentByComplaintAndCode = {
                     "Amount": 0.5,
                     "Dose Unit": "Tablet",
                     "Times": "Once Evening"
+                },
+                {
+                    "Medicine": "Salicylic Acid",
+                    "Amount": 0,
+                    "Dose Unit": "Paste",
+                    "Times": "Special Instruction"
                 }
             ]
         },
@@ -1080,6 +1110,12 @@ var treatmentByComplaintAndCode = {
                     "Amount": 1,
                     "Dose Unit": "Tablet",
                     "Times": "Once Evening"
+                },
+                {
+                    "Medicine": "Salicylic Acid",
+                    "Amount": 0,
+                    "Dose Unit": "Paste",
+                    "Times": "Special Instruction"
                 }
             ]
         }
@@ -1251,13 +1287,13 @@ var treatmentByComplaintAndCode = {
         "X1": {
             "1-30": [
                 {
-                    "Medicine": "Iron Tablets",
+                    "Medicine": "Iron",
                     "Amount": 1,
                     "Dose Unit": "Tablet",
                     "Times": 2
                 },
                 {
-                    "Medicine": "Calcium Tablets",
+                    "Medicine": "Calcium",
                     "Amount": 1,
                     "Dose Unit": "Tablet",
                     "Times": 2
@@ -1266,13 +1302,13 @@ var treatmentByComplaintAndCode = {
         "X2": {
             "1-30": [
                 {
-                    "Medicine": "Iron Tablets",
+                    "Medicine": "Iron",
                     "Amount": 1,
                     "Dose Unit": "Tablet",
                     "Times": 2
                 },
                 {
-                    "Medicine": "Calcium Tablets",
+                    "Medicine": "Calcium",
                     "Amount": 1,
                     "Dose Unit": "Tablet",
                     "Times": 2
@@ -1281,13 +1317,13 @@ var treatmentByComplaintAndCode = {
         "X3": {
             "1-30": [
                 {
-                    "Medicine": "Iron Tablets",
+                    "Medicine": "Iron",
                     "Amount": 1,
                     "Dose Unit": "Tablet",
                     "Times": 2
                 },
                 {
-                    "Medicine": "Calcium Tablets",
+                    "Medicine": "Calcium",
                     "Amount": 1,
                     "Dose Unit": "Tablet",
                     "Times": 2
@@ -1296,13 +1332,13 @@ var treatmentByComplaintAndCode = {
         "X4": {
             "1-30": [
                 {
-                    "Medicine": "Iron Tablets",
+                    "Medicine": "Iron",
                     "Amount": 1,
                     "Dose Unit": "Tablet",
                     "Times": 2
                 },
                 {
-                    "Medicine": "Calcium Tablets",
+                    "Medicine": "Calcium",
                     "Amount": 1,
                     "Dose Unit": "Tablet",
                     "Times": 2
@@ -1311,13 +1347,13 @@ var treatmentByComplaintAndCode = {
         "X5": {
             "1-30": [
                 {
-                    "Medicine": "Iron Tablets",
+                    "Medicine": "Iron",
                     "Amount": 1,
                     "Dose Unit": "Tablet",
                     "Times": 2
                 },
                 {
-                    "Medicine": "Calcium Tablets",
+                    "Medicine": "Calcium",
                     "Amount": 1,
                     "Dose Unit": "Tablet",
                     "Times": 2
@@ -1326,13 +1362,13 @@ var treatmentByComplaintAndCode = {
         "X6": {
             "1-30": [
                 {
-                    "Medicine": "Iron Tablets",
+                    "Medicine": "Iron",
                     "Amount": 1,
                     "Dose Unit": "Tablet",
                     "Times": 2
                 },
                 {
-                    "Medicine": "Calcium Tablets",
+                    "Medicine": "Calcium",
                     "Amount": 1,
                     "Dose Unit": "Tablet",
                     "Times": 2
@@ -1341,13 +1377,13 @@ var treatmentByComplaintAndCode = {
         "X7": {
             "1-30": [
                 {
-                    "Medicine": "Iron Tablets",
+                    "Medicine": "Iron",
                     "Amount": 1,
                     "Dose Unit": "Tablet",
                     "Times": 2
                 },
                 {
-                    "Medicine": "Calcium Tablets",
+                    "Medicine": "Calcium",
                     "Amount": 1,
                     "Dose Unit": "Tablet",
                     "Times": 2
@@ -1404,7 +1440,9 @@ var englishWordsToMarathi = {
     "Salicylic Acid": "सॅलिसिलिक ऍसिड",
     "Iron": "लोहाच्या",
     "Calcium": "कॅल्शियम",
-    "Lonart Forte": "लोनर्ट फोर्टे"
+    "Lonart Forte": "लोनर्ट फोर्टे",
+    "Onden Syrup": "सायरप ओंडेन",
+
 };
 
 var doseQuantityToMarathi = function (doseQuantity, doseUnit) {
@@ -1419,11 +1457,13 @@ var doseQuantityToMarathi = function (doseQuantity, doseUnit) {
     console.error("Dose quantity - " + doseQuantity + " for dose unit - " + doseUnit + " is not supported");
 };
 
-var dosageTimingToMarathi = function (times) {
+var dosageTimingToMarathi = function (complaint, times) {
     if (times === 1 || times === "1") return "दिवसातून एकदा";
     if (times === 2 || times === "2") return "दिवसातून दोन वेळा";
     if (times === 3 || times === "3") return "दिवसातून तीन वेळा";
     if (times === "Once Evening") return "रोज संध्याकाळी एकदा";
+    if (times === "Special Instruction" && complaint === "Scabies") return "रोज संध्याकाळी एकदा";
+    if (times === "Special Instruction" && complaint === "Ring Worm") return "गजकर्णाच्या जागेवर लावण्यास सांगावे";
     console.error("Number of times " + times + " not supported yet");
 };
 
@@ -1475,7 +1515,7 @@ var getDecision = function (ruleContext) {
     var dayTokens = getKeys(prescription);
     if (dayTokens.length === 1 && dayTokens[0] !== "1") {
         if (dayTokens[0] === "3-5")
-            message += "३ ते ५ दिवस";
+            message += "३ किंवा ५ दिवसांसाठी";
         else if (dayTokens[0] === "1-5")
             message += "१ ते ५ दिवस";
         else if (dayTokens[0] === "3")
@@ -1490,11 +1530,13 @@ var getDecision = function (ruleContext) {
             var daysPrescription = prescription[dayTokens[token]][medicine];
             message += englishWordsToMarathi[""+daysPrescription.Medicine];
             message += " ";
-            message += doseQuantityToMarathi(daysPrescription.Amount, daysPrescription["Dose Unit"]);
-            message += " ";
-            message += getDoseUnitMessage(daysPrescription);
-            message += " ";
-            message += dosageTimingToMarathi(daysPrescription.Times);
+            if (daysPrescription.Times !== "Special Instruction") {
+                message += doseQuantityToMarathi(daysPrescription.Amount, daysPrescription["Dose Unit"]);
+                message += " ";
+                message += getDoseUnitMessage(daysPrescription);
+                message += " ";
+            }
+            message += dosageTimingToMarathi(complaints[0], daysPrescription.Times);
             message += "\n";
         }
         message += "\n";
