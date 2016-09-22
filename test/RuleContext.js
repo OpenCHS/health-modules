@@ -1,20 +1,17 @@
-class RuleContext {
-    constructor() {
-        this.questionAnswers = new Map();
-    }
+function RuleContext() {
+    this.questionAnswers = new Map();
 
-    getAnswerFor(questionName) {
+    this.getAnswerFor = function(questionName) {
         return this.questionAnswers.get(questionName);
-    }
+    };
 
-    getDurationInYears(questionName) {
+    this.getDurationInYears = function(questionName) {
         return this.questionAnswers.get(questionName);
-    }
+    };
 
-    set(key, value) {
+    this.set = function(key, value) {
         this.questionAnswers.set(key, value);
         return this;
     }
 }
-
-export default RuleContext;
+module.exports = RuleContext;

@@ -1506,6 +1506,10 @@ var getDecision = function (ruleContext) {
         decision.alert = "१६ ते ४० वर्षाच्या बायकांना सेप्ट्रान देऊ नये त्याऐवजी सिफ्रान १गोळी दिवसातून २ वेळा द्यावी";
     else if (complaints.indexOf('Vomiting') !== -1)
         decision.alert = "उलटी असल्यास आधी औषध द्यावे व अर्ध्या तासांनंतर जेवण, दुध द्यावे व अर्ध्या तासांनंतर इतर औषधे द्यावीत";
+    else if (complaints.indexOf('Chloroquine Resistant Malaria') !== -1 && (age >= 16 || age <= 40) && sex === "Female") {
+        decision.alert = "Refer to hospital because they may be pregnant";
+        decision.value = "";
+    }
 
     return [decision];
 };
