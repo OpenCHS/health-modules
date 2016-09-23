@@ -1458,7 +1458,7 @@ var dosageTimingToMarathi = function (complaint, times) {
     if (times === 2 || times === "2") return "दिवसातून दोन वेळा";
     if (times === 3 || times === "3") return "दिवसातून तीन वेळा";
     if (times === "Once Evening") return "रोज संध्याकाळी एकदा";
-    if (times === "Special Instruction" && complaint === "Scabies") return "रोज संध्याकाळी एकदा";
+    if (times === "Special Instruction" && complaint === "Scabies") return "औषध मानेपासून संपूर्ण अंगास आंघोळीनंतर लावणे आणि कपडे १ तास गरम पाण्यात उकाडविणे";
     if (times === "Special Instruction" && complaint === "Ring Worm") return "गजकर्णाच्या जागेवर लावण्यास सांगावे";
     console.error("Number of times " + times + " not supported yet");
 };
