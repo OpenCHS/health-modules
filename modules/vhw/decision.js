@@ -291,20 +291,6 @@ var treatmentByComplaintAndCode = {
     },
     "Chloroquine Resistant Malaria": {
         "X1": {
-            "1": [
-                {
-                    "Medicine": "Lonart Forte",
-                    "Amount": 0.5,
-                    "Dose Unit": "Tablet",
-                    "Times": 2
-                }],
-            "2": [
-                {
-                    "Medicine": "Lonart Forte",
-                    "Amount": 0.5,
-                    "Dose Unit": "Tablet",
-                    "Times": 2
-                }],
             "3": [
                 {
                     "Medicine": "Lonart Forte",
@@ -314,20 +300,6 @@ var treatmentByComplaintAndCode = {
                 }]
         },
         "X2": {
-            "1": [
-                {
-                    "Medicine": "Lonart Forte",
-                    "Amount": 1,
-                    "Dose Unit": "Tablet",
-                    "Times": 2
-                }],
-            "2": [
-                {
-                    "Medicine": "Lonart Forte",
-                    "Amount": 1,
-                    "Dose Unit": "Tablet",
-                    "Times": 2
-                }],
             "3": [
                 {
                     "Medicine": "Lonart Forte",
@@ -337,20 +309,6 @@ var treatmentByComplaintAndCode = {
                 }]
         },
         "X3": {
-            "1": [
-                {
-                    "Medicine": "Lonart Forte",
-                    "Amount": 1.5,
-                    "Dose Unit": "Tablet",
-                    "Times": 2
-                }],
-            "2": [
-                {
-                    "Medicine": "Lonart Forte",
-                    "Amount": 1.5,
-                    "Dose Unit": "Tablet",
-                    "Times": 2
-                }],
             "3": [
                 {
                     "Medicine": "Lonart Forte",
@@ -360,20 +318,6 @@ var treatmentByComplaintAndCode = {
                 }]
         },
         "X4": {
-            "1": [
-                {
-                    "Medicine": "Lonart Forte",
-                    "Amount": 2,
-                    "Dose Unit": "Tablet",
-                    "Times": 2
-                }],
-            "2": [
-                {
-                    "Medicine": "Lonart Forte",
-                    "Amount": 2,
-                    "Dose Unit": "Tablet",
-                    "Times": 2
-                }],
             "3": [
                 {
                     "Medicine": "Lonart Forte",
@@ -521,6 +465,78 @@ var treatmentByComplaintAndCode = {
                 {
                     "Medicine": "Septran",
                     "Amount": 2,
+                    "Dose Unit": "Tablet",
+                    "Times": "2"
+                }
+            ]
+        }
+    },
+    "Cifran-Special": {
+        "X1": {
+            "1-5": [
+                {
+                    "Medicine": "Cifran",
+                    "Amount": 1,
+                    "Dose Unit": "Tablet",
+                    "Times": "2"
+                }
+            ]
+        },
+        "X2": {
+            "1-5": [
+                {
+                    "Medicine": "Cifran",
+                    "Amount": 1,
+                    "Dose Unit": "Tablet",
+                    "Times": "2"
+                }
+            ]
+        },
+        "X3": {
+            "1-5": [
+                {
+                    "Medicine": "Cifran",
+                    "Amount": 1,
+                    "Dose Unit": "Tablet",
+                    "Times": "2"
+                }
+            ]
+        },
+        "X4": {
+            "1-5": [
+                {
+                    "Medicine": "Cifran",
+                    "Amount": 1,
+                    "Dose Unit": "Tablet",
+                    "Times": "2"
+                }
+            ]
+        },
+        "X5": {
+            "1-5": [
+                {
+                    "Medicine": "Cifran",
+                    "Amount": 1,
+                    "Dose Unit": "Tablet",
+                    "Times": "2"
+                }
+            ]
+        },
+        "X6": {
+            "1-5": [
+                {
+                    "Medicine": "Cifran",
+                    "Amount": 1,
+                    "Dose Unit": "Tablet",
+                    "Times": "2"
+                }
+            ]
+        },
+        "X7": {
+            "1-5": [
+                {
+                    "Medicine": "Cifran",
+                    "Amount": 1,
                     "Dose Unit": "Tablet",
                     "Times": "2"
                 }
@@ -1122,20 +1138,6 @@ var treatmentByComplaintAndCode = {
     },
     "Body Ache": {
         "X1": {
-            "1": [
-                {
-                    "Medicine": "Paracetamol Syrup",
-                    "Amount": 0.5,
-                    "Dose Unit": "Spoon",
-                    "Times": 3
-                }],
-            "2": [
-                {
-                    "Medicine": "Paracetamol Syrup",
-                    "Amount": 0.5,
-                    "Dose Unit": "Spoon",
-                    "Times": 3
-                }],
             "3": [
                 {
                     "Medicine": "Paracetamol Syrup",
@@ -1145,43 +1147,15 @@ var treatmentByComplaintAndCode = {
                 }]
         },
         "X2": {
-            "1": [
+            "3": [
                 {
                     "Medicine": "Paracetamol Syrup",
                     "Dose Unit": "Spoon",
                     "Amount": 1,
                     "Times": 3
-                }],
-            "2": [
-                {
-                    "Medicine": "Paracetamol Syrup",
-                    "Amount": 0.5,
-                    "Dose Unit": "Spoon",
-                    "Times": 3
-                }],
-            "3": [
-                {
-                    "Medicine": "Paracetamol Syrup",
-                    "Amount": 0.5,
-                    "Dose Unit": "Spoon",
-                    "Times": 3
                 }]
         },
         "X3": {
-            "1": [
-                {
-                    "Medicine": "Paracetamol Syrup",
-                    "Amount": 1.5,
-                    "Dose Unit": "Spoon",
-                    "Times": 3
-                }],
-            "2": [
-                {
-                    "Medicine": "Paracetamol Syrup",
-                    "Amount": 1.5,
-                    "Dose Unit": "Spoon",
-                    "Times": 3
-                }],
             "3": [
                 {
                     "Medicine": "Paracetamol Syrup",
@@ -1191,20 +1165,6 @@ var treatmentByComplaintAndCode = {
                 }]
         },
         "X4": {
-            "1": [
-                {
-                    "Medicine": "Paracetamol",
-                    "Amount": 0.5,
-                    "Dose Unit": "Tablet",
-                    "Times": 2
-                }],
-            "2": [
-                {
-                    "Medicine": "Paracetamol",
-                    "Amount": 0.5,
-                    "Dose Unit": "Tablet",
-                    "Times": 2
-                }],
             "3": [
                 {
                     "Medicine": "Paracetamol",
@@ -1214,20 +1174,6 @@ var treatmentByComplaintAndCode = {
                 }]
         },
         "X5": {
-            "1": [
-                {
-                    "Medicine": "Paracetamol",
-                    "Amount": 0.5,
-                    "Dose Unit": "Tablet",
-                    "Times": 3
-                }],
-            "2": [
-                {
-                    "Medicine": "Paracetamol",
-                    "Amount": 0.5,
-                    "Dose Unit": "Tablet",
-                    "Times": 3
-                }],
             "3": [
                 {
                     "Medicine": "Paracetamol",
@@ -1237,20 +1183,6 @@ var treatmentByComplaintAndCode = {
                 }]
         },
         "X6": {
-            "1": [
-                {
-                    "Medicine": "Paracetamol",
-                    "Amount": 1,
-                    "Dose Unit": "Tablet",
-                    "Times": 2
-                }],
-            "2": [
-                {
-                    "Medicine": "Paracetamol",
-                    "Amount": 1,
-                    "Dose Unit": "Tablet",
-                    "Times": 2
-                }],
             "3": [
                 {
                     "Medicine": "Paracetamol",
@@ -1260,20 +1192,6 @@ var treatmentByComplaintAndCode = {
                 }]
         },
         "X7": {
-            "1": [
-                {
-                    "Medicine": "Paracetamol",
-                    "Amount": 1,
-                    "Dose Unit": "Tablet",
-                    "Times": 3
-                }],
-            "2": [
-                {
-                    "Medicine": "Paracetamol",
-                    "Amount": 1,
-                    "Dose Unit": "Tablet",
-                    "Times": 3
-                }],
             "3": [
                 {
                     "Medicine": "Paracetamol",
@@ -1389,7 +1307,79 @@ var treatmentByComplaintAndCode = {
                     "Times": 2
                 }]
         }
-    }
+    },
+    "Wound": {
+        "X1": {
+            "1-5": [
+                {
+                    "Medicine": "Septran Syrup",
+                    "Amount": 0.5,
+                    "Dose Unit": "Spoon",
+                    "Times": "2"
+                }
+            ]
+        },
+        "X2": {
+            "1-5": [
+                {
+                    "Medicine": "Septran Syrup",
+                    "Amount": 0.5,
+                    "Dose Unit": "Spoon",
+                    "Times": "2"
+                }
+            ]
+        },
+        "X3": {
+            "1-5": [
+                {
+                    "Medicine": "Septran Syrup",
+                    "Amount": 1,
+                    "Dose Unit": "Spoon",
+                    "Times": "2"
+                }
+            ]
+        },
+        "X4": {
+            "1-5": [
+                {
+                    "Medicine": "Septran",
+                    "Amount": 0.5,
+                    "Dose Unit": "Tablet",
+                    "Times": "2"
+                }
+            ]
+        },
+        "X5": {
+            "1-5": [
+                {
+                    "Medicine": "Septran",
+                    "Amount": 1,
+                    "Dose Unit": "Tablet",
+                    "Times": "2"
+                }
+            ]
+        },
+        "X6": {
+            "1-5": [
+                {
+                    "Medicine": "Septran",
+                    "Amount": 1,
+                    "Dose Unit": "Tablet",
+                    "Times": "2"
+                }
+            ]
+        },
+        "X7": {
+            "1-5": [
+                {
+                    "Medicine": "Septran",
+                    "Amount": 2,
+                    "Dose Unit": "Tablet",
+                    "Times": "2"
+                }
+            ]
+        }
+    },
 };
 
 var defaultWeightRangesToCode = [
@@ -1442,7 +1432,7 @@ var englishWordsToMarathi = {
     "Calcium": "कॅल्शियम",
     "Lonart Forte": "लोनर्ट फोर्टे",
     "Onden Syrup": "सायरप ओंडेन",
-
+    "Cifran": "सिफ्रान"
 };
 
 var dayInMarathi = {
@@ -1512,7 +1502,12 @@ var getDecision = function (ruleContext) {
     var decision = {};
     decision.name = "Treatment";
     decision.code = weightRangeToCode.code;
-    var prescription = treatmentByComplaintAndCode[complaints[0]][weightRangeToCode.code];
+
+    var potentiallyPregnant = (sex === "Female" && (age >= 16 && age <= 40));
+
+    var prescriptionSet = (potentiallyPregnant && ["Cough", "Boils", "Wound"].indexOf(complaints[0]) !== -1) ? treatmentByComplaintAndCode["Cifran-Special"] : treatmentByComplaintAndCode[complaints[0]]
+
+    var prescription = prescriptionSet[weightRangeToCode.code];
     if (prescription === null || prescription === undefined) {
         throw "No prescription defined for " + complaints[0] + " for weight: " + weight + ", calculated code: " + weightRangeToCode.code;
     }
@@ -1555,12 +1550,10 @@ var getDecision = function (ruleContext) {
 
     if (weight >= 13 && complaints.indexOf('Malaria') !== -1)
         decision.alert = "क्लोरोक्विन व पॅरासिटामॉल ही औषधे जेवल्यावर खायला सांगावी";
-    else if (complaints.indexOf('Cough') !== -1 && age >= 16 && age <= 40 && weight >= 13 && sex === "Female")
-        decision.alert = "१६ ते ४० वर्षाच्या बायकांना सेप्ट्रान देऊ नये त्याऐवजी सिफ्रान १गोळी दिवसातून २ वेळा द्यावी";
     else if (complaints.indexOf('Vomiting') !== -1)
         decision.alert = "उलटी असल्यास आधी औषध द्यावे व अर्ध्या तासांनंतर जेवण, दुध द्यावे व अर्ध्या तासांनंतर इतर औषधे द्यावीत";
     else if (complaints.indexOf('Chloroquine Resistant Malaria') !== -1 && (age >= 16 || age <= 40) && sex === "Female") {
-        decision.alert = "Refer to hospital because they may be pregnant";
+        decision.alert = "पुढे दवाखान्यात पाठवावे";
         decision.value = "";
     }
 
@@ -1580,10 +1573,11 @@ var validate = function(ruleContext) {
     };
 
     if (sex === 'Male' && complaints.indexOf('Pregnancy') !== -1) {
-        validationResult.message = "Male cannot be pregnant";
+        validationResult.message = "पुरुष गरोदर राहू शकत नाही";
     } else if (complaints.indexOf('Pregnancy') !== -1 && age < 10) {
-        validationResult.message = "One cannot be pregnant before 10";
+        validationResult.message = "वय वर्ष १० च्या खाली महिला गरोदर राहू शकत नाही";
     } else if (weightRangeToCode.code === "X0" || (complaints.indexOf('Acidity') !== -1 && weight < 13)) {
+        // ५ किलो पेक्षा कमी वजनास लोनर्ट देऊ नये
         validationResult.message = "No medicine defined for - Complaint: " + complaints[0] + ", Weight: " + weight;
     } else {
         validationResult.passed = true;

@@ -206,7 +206,7 @@
     "conceptNames": [
       {
         "name": "तक्रार",
-        "locale": "hi_IN"
+        "locale": "mr_IN"
       },
       {
         "name": "Complaint",
@@ -336,10 +336,6 @@
     "uuid": "9bcf1baa-0537-4475-bbe6-2d92952e4f3d",
     "conceptNames": [
       {
-        "name": "जन्मतिथि",
-        "locale": "hi_IN"
-      },
-      {
         "name": "Height",
         "locale": "en"
       }
@@ -411,7 +407,7 @@
     "conceptNames": [
       {
         "name": "पायावर सूज",
-        "locale": "hi_IN"
+        "locale": "mr_IN"
       },
       {
         "name": "Pedal Edema",
@@ -525,7 +521,7 @@
     "uuid": "565ebfdf-eb19-4a61-963b-63599b937044",
     "conceptNames": [
       {
-        "name": "Scabies",
+        "name": "खरूज",
         "locale": "mr_IN"
       },
       {
@@ -661,7 +657,7 @@
     "uuid": "0d8c2c84-2773-46e5-a3a4-d0e976d22796",
     "conceptNames": [
       {
-        "name": "Ring Worm",
+        "name": "गजकरण",
         "locale": "mr_IN"
       },
       {
@@ -712,7 +708,7 @@
     "uuid": "b7f7a42b-4b7e-486e-a431-e982dadcd8e9",
     "conceptNames": [
       {
-        "name": "Paracheck",
+        "name": "पॅराचेक",
         "locale": "mr_IN"
       },
       {
@@ -811,7 +807,7 @@
     "uuid": "38e69018-0218-4887-b426-c56ef156026d",
     "conceptNames": [
       {
-        "name": "Chloroquine Resistant Malaria",
+        "name": "क्लोरोक्विनणे बरा न होणारा मलेरिया",
         "locale": "mr_IN"
       },
       {

@@ -82,4 +82,26 @@ describe('Make Decision', function () {
         var count = (decisions[0].value.match(/पहिल्या दिवशी/g) || []).length;
         expect(count).to.equal(1, decisions[0].value);
     });
+
+    it('In cough do not give Septran to potentially pregnant women', () => {
+        var decisions = decision.getDecision(new RuleContext().set("Complaint", ["Cough"]).set("Sex", "Male").set("Age", 25).set("Weight", 40));
+        expect((decisions[0].value.match(/सिफ्रान/g) || []).length).to.equal(0, decisions[0].value);
+        expect((decisions[0].value.match(/सेप्ट्रान/g) || []).length).to.equal(1, decisions[0].value);
+
+        decisions = decision.getDecision(new RuleContext().set("Complaint", ["Cough"]).set("Sex", "Female").set("Age", 25).set("Weight", 40));
+        expect((decisions[0].value.match(/सिफ्रान/g) || []).length).to.equal(1, decisions[0].value);
+        expect((decisions[0].value.match(/सेप्ट्रान/g) || []).length).to.equal(0, decisions[0].value);
+
+        decisions = decision.getDecision(new RuleContext().set("Complaint", ["Cough"]).set("Sex", "Female").set("Age", 45).set("Weight", 40));
+        expect((decisions[0].value.match(/सिफ्रान/g) || []).length).to.equal(0, decisions[0].value);
+        expect((decisions[0].value.match(/सेप्ट्रान/g) || []).length).to.equal(1, decisions[0].value);
+
+        decisions = decision.getDecision(new RuleContext().set("Complaint", ["Boils"]).set("Sex", "Female").set("Age", 25).set("Weight", 40));
+        expect((decisions[0].value.match(/सिफ्रान/g) || []).length).to.equal(1, decisions[0].value);
+        expect((decisions[0].value.match(/सेप्ट्रान/g) || []).length).to.equal(0, decisions[0].value);
+
+        decisions = decision.getDecision(new RuleContext().set("Complaint", ["Wound"]).set("Sex", "Female").set("Age", 25).set("Weight", 40));
+        expect((decisions[0].value.match(/सिफ्रान/g) || []).length).to.equal(1, decisions[0].value);
+        expect((decisions[0].value.match(/सेप्ट्रान/g) || []).length).to.equal(0, decisions[0].value);
+    });
 });
