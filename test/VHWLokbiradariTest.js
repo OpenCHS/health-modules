@@ -104,4 +104,12 @@ describe('Make Decision', function () {
         expect((decisions[0].value.match(/सिफ्रान/g) || []).length).to.equal(1, decisions[0].value);
         expect((decisions[0].value.match(/सेप्ट्रान/g) || []).length).to.equal(0, decisions[0].value);
     });
+
+    it('Before food and after food instruction', () => {
+        var decisions = decision.getDecision(new RuleContext().set("Complaint", ["Cold"]).set("Sex", "Male").set("Age", 25).set("Weight", 40));
+        expect((decisions[0].value.match(/Before food/g) || []).length).to.equal(0, decisions[0].value);
+
+        decisions = decision.getDecision(new RuleContext().set("Complaint", ["Acidity"]).set("Sex", "Male").set("Age", 25).set("Weight", 40));
+        expect((decisions[0].value.match(/Before food/g) || []).length).to.equal(1, decisions[0].value);
+    });
 });

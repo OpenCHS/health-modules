@@ -1404,7 +1404,6 @@ var complaintToWeightRangesToCodeMap = {
     "Chloroquine Resistant Malaria": weightRangesToCodeForLonartForte
 };
 
-
 var englishWordsToMarathi = {
     "Chloroquin": "क्लोरोक्विन",
     "Chloroquin Syrup": "क्लोरोक्विन सायरप",
@@ -1439,6 +1438,33 @@ var dayInMarathi = {
     "1": "पहिल्या दिवशी",
     "2": "दुसऱ्या दिवशी",
     "3": "तिसऱ्या दिवशी"
+};
+
+var medicines = {
+    "Abdek Syrup": {take: "Depends"},
+    "BC": {take: "Depends"},
+    "Calcium": {take: "After"},
+    "Cetrizine": {take: "After"},
+    "Cetrizine Syrup": {take: "After"},
+    "Cifran": {take: "After"},
+    "Chloroquin": {take: "After"},
+    "Chloroquin Syrup": {take: "After"},
+    "Cyclopam": {take: "After"},
+    "Cyclopam Syrup": {take: "After"},
+    "Famotidine": {take: "Before"},
+    "Furoxone": {take: "Depends"},
+    "Furoxone Syrup": {take: "Depends"},
+    "Iron": {take: "After"},
+    "Ondensetran Syrup": {take: "Depends"},
+    "Onden Syrup": {take: "Depends"},
+    "Paracetamol": {take: "After"},
+    "Paracetamol Syrup": {take: "After"},
+    "Perinorm": {take: "Depends"},
+    "Lonart Forte": {take: "After"},
+    "Salicylic Acid": {take: "After"},
+    "Scabizol": {take: "After"},
+    "Septran": {take: "After"},
+    "Septran Syrup": {take: "After"}
 };
 
 var doseQuantityToMarathi = function (doseQuantity, doseUnit) {
@@ -1496,7 +1522,6 @@ var getDecision = function (ruleContext) {
     var complaints = ruleContext.getAnswerFor('Complaint');
     var age = ruleContext.getAnswerFor('Age');
     var sex = ruleContext.getAnswerFor('Sex');
-    console.log(age);
     var weightRangeToCode = getWeightRangeToCode(complaints[0], weight);
 
     var decision = {};
@@ -1505,7 +1530,7 @@ var getDecision = function (ruleContext) {
 
     var potentiallyPregnant = (sex === "Female" && (age >= 16 && age <= 40));
 
-    var prescriptionSet = (potentiallyPregnant && ["Cough", "Boils", "Wound"].indexOf(complaints[0]) !== -1) ? treatmentByComplaintAndCode["Cifran-Special"] : treatmentByComplaintAndCode[complaints[0]]
+    var prescriptionSet = (potentiallyPregnant && ["Cough", "Boils", "Wound"].indexOf(complaints[0]) !== -1) ? treatmentByComplaintAndCode["Cifran-Special"] : treatmentByComplaintAndCode[complaints[0]];
 
     var prescription = prescriptionSet[weightRangeToCode.code];
     if (prescription === null || prescription === undefined) {
@@ -1527,7 +1552,8 @@ var getDecision = function (ruleContext) {
         message += "\n";
     }
     for (var token = 0; token < dayTokens.length; token++) {
-        if (dayTokens.length !== 1 && dayTokens[0] === "1") {
+        var dayWiseInstruction = dayTokens.length !== 1 && dayTokens[0] === "1";
+        if (dayWiseInstruction) {
             message += dayInMarathi[dayTokens[token]];
             message += "\n";
         }
@@ -1542,6 +1568,7 @@ var getDecision = function (ruleContext) {
                 message += " ";
             }
             message += dosageTimingToMarathi(complaints[0], daysPrescription.Times);
+            message += medicines[daysPrescription.Medicine].take === "Before" ? "Before food" : "";
             message += "\n";
         }
         message += "\n";
@@ -1578,7 +1605,7 @@ var validate = function(ruleContext) {
         validationResult.message = "वय वर्ष १० च्या खाली महिला गरोदर राहू शकत नाही";
     } else if (weightRangeToCode.code === "X0" || (complaints.indexOf('Acidity') !== -1 && weight < 13)) {
         // ५ किलो पेक्षा कमी वजनास लोनर्ट देऊ नये
-        validationResult.message = "No medicine defined for - Complaint: " + complaints[0] + ", Weight: " + weight;
+        validationResult.message = "५ किलो पेक्षा कमी वजनास लोनर्ट देऊ नये";
     } else {
         validationResult.passed = true;
     }
