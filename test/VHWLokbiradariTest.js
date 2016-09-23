@@ -112,4 +112,27 @@ describe('Make Decision', function () {
         decisions = decision.getDecision(new RuleContext().set("Complaint", ["Acidity"]).set("Sex", "Male").set("Age", 25).set("Weight", 40));
         expect((decisions[0].value.match(/Before food/g) || []).length).to.equal(1, decisions[0].value);
     });
+
+    it('Multiple complaints without same medicines', () => {
+        var decisions = decision.getDecision(new RuleContext().set("Complaint", ["Cold", "Malaria"]).set("Sex", "Male").set("Age", 25).set("Weight", 40));
+        var completeValue = decisions[0].value + decisions[1].value;
+        expect((completeValue.match(/क्लोरोक्विन/g) || []).length).to.equal(3, completeValue);
+        expect((completeValue.match(/सेट्रीझीन/g) || []).length).to.equal(1, completeValue);
+    });
+
+    it('Multiple complaints with overlapping medicines', () => {
+        var decisions = decision.getDecision(new RuleContext().set("Complaint", ["Cold", "Malaria", "Body Ache"]).set("Sex", "Male").set("Age", 25).set("Weight", 40));
+        var completeValue = decisions[0].value + decisions[1].value + decisions[2].value;
+        expect((completeValue.match(/क्लोरोक्विन/g) || []).length).to.equal(3, completeValue);
+        expect((completeValue.match(/सेट्रीझीन/g) || []).length).to.equal(1, completeValue);
+        expect((completeValue.match(/पॅरासिटामॉल/g) || []).length).to.equal(3, completeValue);
+    });
+
+    it('Multiple complaints with overlapping medicines and different order of medicines', () => {
+        var decisions = decision.getDecision(new RuleContext().set("Complaint", ["Cold", "Body Ache", "Malaria"]).set("Sex", "Male").set("Age", 25).set("Weight", 40));
+        var completeValue = decisions[0].value + decisions[1].value + decisions[2].value;
+        expect((completeValue.match(/क्लोरोक्विन/g) || []).length).to.equal(3, completeValue);
+        expect((completeValue.match(/सेट्रीझीन/g) || []).length).to.equal(1, completeValue);
+        expect((completeValue.match(/पॅरासिटामॉल/g) || []).length).to.equal(3, completeValue);
+    });
 });

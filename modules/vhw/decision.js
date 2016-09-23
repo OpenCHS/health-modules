@@ -1518,73 +1518,89 @@ var getWeightRangeToCode = function (complaint, weight) {
 
 var getDecision = function (ruleContext) {
     var weight = ruleContext.getAnswerFor('Weight');
-    var height = ruleContext.getAnswerFor('Height');
+    // var height = ruleContext.getAnswerFor('Height');
     var complaints = ruleContext.getAnswerFor('Complaint');
     var age = ruleContext.getAnswerFor('Age');
     var sex = ruleContext.getAnswerFor('Sex');
-    var weightRangeToCode = getWeightRangeToCode(complaints[0], weight);
-
-    var decision = {};
-    decision.name = "Treatment";
-    decision.code = weightRangeToCode.code;
-
+    complaints = complaints.filter(function(item){return item=='Malaria';}).concat(complaints.filter(function(item){return item!='Malaria'}));
     var potentiallyPregnant = (sex === "Female" && (age >= 16 && age <= 40));
+    var decisions = [];
+    var prescribedMedicines = [];
 
-    var prescriptionSet = (potentiallyPregnant && ["Cough", "Boils", "Wound"].indexOf(complaints[0]) !== -1) ? treatmentByComplaintAndCode["Cifran-Special"] : treatmentByComplaintAndCode[complaints[0]];
+    for (var complaintIndex = 0; complaintIndex < complaints.length; complaintIndex++) {
+        var weightRangeToCode = getWeightRangeToCode(complaints[complaintIndex], weight);
+        var decision = {};
+        decision.name = "Treatment";
+        decision.code = weightRangeToCode.code;
 
-    var prescription = prescriptionSet[weightRangeToCode.code];
-    if (prescription === null || prescription === undefined) {
-        throw "No prescription defined for " + complaints[0] + " for weight: " + weight + ", calculated code: " + weightRangeToCode.code;
-    }
-    var message = "";
+        var prescriptionSet = (potentiallyPregnant && ["Cough", "Boils", "Wound"].indexOf(complaints[complaintIndex]) !== -1) ? treatmentByComplaintAndCode["Cifran-Special"] : treatmentByComplaintAndCode[complaints[complaintIndex]];
 
-    var dayTokens = getKeys(prescription);
-    if (dayTokens.length === 1 && dayTokens[0] !== "1") {
-        if (dayTokens[0] === "3-5")
-            message += "३ किंवा ५ दिवसांसाठी";
-        else if (dayTokens[0] === "1-5")
-            message += "१ ते ५ दिवस";
-        else if (dayTokens[0] === "3")
-            message += "३ दिवस";
-        else if (dayTokens[0] === "2")
-            message += "२ दिवस";
-
-        message += "\n";
-    }
-    for (var token = 0; token < dayTokens.length; token++) {
-        var dayWiseInstruction = dayTokens.length !== 1 && dayTokens[0] === "1";
-        if (dayWiseInstruction) {
-            message += dayInMarathi[dayTokens[token]];
-            message += "\n";
+        var prescription = prescriptionSet[weightRangeToCode.code];
+        if (prescription === null || prescription === undefined) {
+            throw "No prescription defined for " + complaints[complaintIndex] + " for weight: " + weight + ", calculated code: " + weightRangeToCode.code;
         }
-        for (var medicineIndex = 0; medicineIndex < prescription[dayTokens[token]].length; medicineIndex++) {
-            var daysPrescription = prescription[dayTokens[token]][medicineIndex];
-            message += englishWordsToMarathi[""+daysPrescription.Medicine];
-            message += " ";
-            if (daysPrescription.Times !== "Special Instruction") {
-                message += doseQuantityToMarathi(daysPrescription.Amount, daysPrescription["Dose Unit"]);
-                message += " ";
-                message += getDoseUnitMessage(daysPrescription);
-                message += " ";
+
+        var message = "";
+        var dayTokens = getKeys(prescription);
+        for (var token = 0; token < dayTokens.length; token++) {
+            var firstToken = dayTokens[0];
+
+            var daywisePrescription = dayTokens.length !== 1 && firstToken === "1";
+            if (daywisePrescription) {
+                message += dayInMarathi[dayTokens[token]];
+                message += "\n";
             }
-            message += dosageTimingToMarathi(complaints[0], daysPrescription.Times);
-            message += medicines[daysPrescription.Medicine].take === "Before" ? "Before food" : "";
+
+            for (var medicineIndex = 0; medicineIndex < prescription[dayTokens[token]].length; medicineIndex++) {
+                var daysPrescription = prescription[dayTokens[token]][medicineIndex];
+                if (prescribedMedicines.indexOf(daysPrescription.Medicine) === -1) {
+                    prescribedMedicines.push(daysPrescription.Medicine);
+                } else if (prescribedMedicines.indexOf(daysPrescription.Medicine) !== -1 && !daywisePrescription) {
+                    continue;
+                }
+
+                if (dayTokens.length === 1 && firstToken !== "1") {
+                    if (firstToken === "3-5")
+                        message += "३ किंवा ५ दिवसांसाठी";
+                    else if (firstToken === "1-5")
+                        message += "१ ते ५ दिवस";
+                    else if (firstToken === "3")
+                        message += "३ दिवस";
+                    else if (firstToken === "2")
+                        message += "२ दिवस";
+
+                    message += "\n";
+                }
+
+                message += englishWordsToMarathi[""+daysPrescription.Medicine];
+                message += " ";
+                if (daysPrescription.Times !== "Special Instruction") {
+                    message += doseQuantityToMarathi(daysPrescription.Amount, daysPrescription["Dose Unit"]);
+                    message += " ";
+                    message += getDoseUnitMessage(daysPrescription);
+                    message += " ";
+                }
+                message += dosageTimingToMarathi(complaints[complaintIndex], daysPrescription.Times);
+                message += medicines[daysPrescription.Medicine].take === "Before" ? "Before food" : "";
+                message += "\n";
+            }
             message += "\n";
         }
-        message += "\n";
-    }
-    decision.value = message;
+        decision.value = message;
 
-    if (weight >= 13 && complaints.indexOf('Malaria') !== -1)
-        decision.alert = "क्लोरोक्विन व पॅरासिटामॉल ही औषधे जेवल्यावर खायला सांगावी";
-    else if (complaints.indexOf('Vomiting') !== -1)
-        decision.alert = "उलटी असल्यास आधी औषध द्यावे व अर्ध्या तासांनंतर जेवण, दुध द्यावे व अर्ध्या तासांनंतर इतर औषधे द्यावीत";
-    else if (complaints.indexOf('Chloroquine Resistant Malaria') !== -1 && (age >= 16 || age <= 40) && sex === "Female") {
-        decision.alert = "पुढे दवाखान्यात पाठवावे";
-        decision.value = "";
+        if (weight >= 13 && complaints.indexOf('Malaria') !== -1)
+            decision.alert = "क्लोरोक्विन व पॅरासिटामॉल ही औषधे जेवल्यावर खायला सांगावी";
+        else if (complaints.indexOf('Vomiting') !== -1)
+            decision.alert = "उलटी असल्यास आधी औषध द्यावे व अर्ध्या तासांनंतर जेवण, दुध द्यावे व अर्ध्या तासांनंतर इतर औषधे द्यावीत";
+        else if (complaints.indexOf('Chloroquine Resistant Malaria') !== -1 && (age >= 16 || age <= 40) && sex === "Female") {
+            decision.alert = "पुढे दवाखान्यात पाठवावे";
+            decision.value = "";
+        }
+
+        decisions.push(decision);
     }
 
-    return [decision];
+    return decisions;
 };
 
 var validate = function(ruleContext) {
