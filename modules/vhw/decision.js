@@ -1609,21 +1609,26 @@ var validate = function(ruleContext) {
     var sex = ruleContext.getAnswerFor('Sex');
     var weight = ruleContext.getAnswerFor('Weight');
 
-    var weightRangeToCode = getWeightRangeToCode(complaints[0], weight);
-
     var validationResult = {
         "passed": false
     };
 
-    if (sex === 'Male' && complaints.indexOf('Pregnancy') !== -1) {
-        validationResult.message = "पुरुष गरोदर राहू शकत नाही";
-    } else if (complaints.indexOf('Pregnancy') !== -1 && age < 10) {
-        validationResult.message = "वय वर्ष १० च्या खाली महिला गरोदर राहू शकत नाही";
-    } else if (weightRangeToCode.code === "X0" || (complaints.indexOf('Acidity') !== -1 && weight < 13)) {
-        // ५ किलो पेक्षा कमी वजनास लोनर्ट देऊ नये
-        validationResult.message = "५ किलो पेक्षा कमी वजनास लोनर्ट देऊ नये";
-    } else {
-        validationResult.passed = true;
+    for (var complaintIndex = 0; complaintIndex < complaints.length; complaintIndex++) {
+        var weightRangeToCode = getWeightRangeToCode(complaints[complaintIndex], weight);
+
+        if (sex === 'Male' && complaints.indexOf('Pregnancy') !== -1) {
+            validationResult.passed = false;
+            validationResult.message += "पुरुष गरोदर राहू शकत नाही. ";
+        } else if (complaints.indexOf('Pregnancy') !== -1 && age < 10) {
+            validationResult.passed = false;
+            validationResult.message += "वय वर्ष १० च्या खाली महिला गरोदर राहू शकत नाही. ";
+        } else if (weightRangeToCode.code === "X0" || (complaints.indexOf('Acidity') !== -1 && weight < 13)) {
+            // ५ किलो पेक्षा कमी वजनास लोनर्ट देऊ नये
+            validationResult.passed = false;
+            validationResult.message += "५ किलो पेक्षा कमी वजनास लोनर्ट देऊ नये. ";
+        } else {
+            validationResult.passed = true;
+        }
     }
 
     return validationResult;

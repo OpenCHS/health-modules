@@ -135,4 +135,17 @@ describe('Make Decision', function () {
         expect((completeValue.match(/सेट्रीझीन/g) || []).length).to.equal(1, completeValue);
         expect((completeValue.match(/पॅरासिटामॉल/g) || []).length).to.equal(3, completeValue);
     });
+
+    it('Pick validation errors corresponding to all complaints', () => {
+        var complaintConceptName = "Complaint";
+        var validationResult = decision.validate(new RuleContext().set(complaintConceptName, ["Cold", "Acidity"]).set("Sex", "Male").set("Age", 5).set("Weight", 12));
+        expect(validationResult.passed).to.equal(false, validationResult.message);
+    });
+
+    it('Multiple complaints and passing all validations', () => {
+        var complaintConceptName = "Complaint";
+        var validationResult = decision.validate(new RuleContext().set(complaintConceptName, ["Cold", "Acidity"]).set("Sex", "Male").set("Age", 10).set("Weight", 22));
+        expect(validationResult.passed).to.equal(true, validationResult.message);
+    });
+
 });
