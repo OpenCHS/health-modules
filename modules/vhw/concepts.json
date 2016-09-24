@@ -248,7 +248,7 @@
         "name": "Ring Worm"
       },
       {
-        "name": "Malaria"
+        "name": "Fever"
       },
       {
         "name": "Chloroquine Resistant Malaria"
@@ -262,15 +262,15 @@
     ]
   },
   {
-    "name": "Malaria",
+    "name": "Fever",
     "uuid": "ce49cf92-fb44-4498-adaf-5bd95464e862",
     "conceptNames": [
       {
-        "name": "मलेरिया",
+        "name": "ताप",
         "locale": "mr_IN"
       },
       {
-        "name": "Malaria",
+        "name": "Fever",
         "locale": "en"
       }
     ],

@@ -1,4 +1,4 @@
-var treatmentByComplaintAndCode = {
+var treatmentCodes = {
     "Malaria": {
         "X1": {
             "1": [
@@ -280,6 +280,71 @@ var treatmentByComplaintAndCode = {
                     "Dose Unit": "Tablet",
                     "Times": 1
                 },
+                {
+                    "Medicine": "Paracetamol",
+                    "Amount": 1,
+                    "Dose Unit": "Tablet",
+                    "Times": 3
+                }]
+        }
+    },
+    "Fever": {
+        "X1": {
+            "3": [
+                {
+                    "Medicine": "Paracetamol Syrup",
+                    "Amount": 0.5,
+                    "Dose Unit": "Spoon",
+                    "Times": 3
+                }]
+        },
+        "X2": {
+            "3": [
+                {
+                    "Medicine": "Paracetamol Syrup",
+                    "Dose Unit": "Spoon",
+                    "Amount": 1,
+                    "Times": 3
+                }]
+        },
+        "X3": {
+            "3": [
+                {
+                    "Medicine": "Paracetamol Syrup",
+                    "Amount": 1.5,
+                    "Dose Unit": "Spoon",
+                    "Times": 3
+                }]
+        },
+        "X4": {
+            "3": [
+                {
+                    "Medicine": "Paracetamol",
+                    "Amount": 0.5,
+                    "Dose Unit": "Tablet",
+                    "Times": 2
+                }]
+        },
+        "X5": {
+            "3": [
+                {
+                    "Medicine": "Paracetamol",
+                    "Amount": 0.5,
+                    "Dose Unit": "Tablet",
+                    "Times": 3
+                }]
+        },
+        "X6": {
+            "3": [
+                {
+                    "Medicine": "Paracetamol",
+                    "Amount": 1,
+                    "Dose Unit": "Tablet",
+                    "Times": 2
+                }]
+        },
+        "X7": {
+            "3": [
                 {
                     "Medicine": "Paracetamol",
                     "Amount": 1,
@@ -1512,10 +1577,9 @@ var getWeightRangeToCode = function (complaint, weight) {
     if (weightRangeToCodeMap === undefined || weightRangeToCodeMap === null)
         weightRangeToCodeMap = defaultWeightRangesToCode;
 
-    var weightRangeToCode = weightRangeToCodeMap.find(function (entry) {
+    return weightRangeToCodeMap.find(function (entry) {
         return entry.start <= weight && entry.end > weight;
     });
-    return weightRangeToCode;
 };
 
 var getDecision = function (ruleContext) {
@@ -1523,10 +1587,11 @@ var getDecision = function (ruleContext) {
     var complaints = ruleContext.getAnswerFor('Complaint');
     var age = ruleContext.getAnswerFor('Age');
     var sex = ruleContext.getAnswerFor('Sex');
+    var paracheckResult = ruleContext.getAnswerFor('Paracheck');
     complaints = complaints.filter(function (item) {
-        return item == 'Malaria';
+        return item == 'Fever';
     }).concat(complaints.filter(function (item) {
-        return item != 'Malaria'
+        return item != 'Fever'
     }));
     var potentiallyPregnant = (sex === "Female" && (age >= 16 && age <= 40));
     var decisions = [];
@@ -1538,7 +1603,15 @@ var getDecision = function (ruleContext) {
         decision.name = "Treatment";
         decision.code = weightRangeToCode.code;
 
-        var prescriptionSet = (potentiallyPregnant && ["Cough", "Boils", "Wound"].indexOf(complaints[complaintIndex]) !== -1) ? treatmentByComplaintAndCode["Cifran-Special"] : treatmentByComplaintAndCode[complaints[complaintIndex]];
+        var prescriptionSet;
+        if(potentiallyPregnant && ["Cough", "Boils", "Wound"].indexOf(complaints[complaintIndex]) !== -1) {
+            prescriptionSet = treatmentCodes["Cifran-Special"];
+        } else if (complaints[complaintIndex] === "Fever" && paracheckResult !== undefined &&
+                    paracheckResult.includes("Positive")) {
+            prescriptionSet = treatmentCodes["Malaria"];
+        } else {
+            prescriptionSet = treatmentCodes[complaints[complaintIndex]];
+        }
 
         var prescription = prescriptionSet[weightRangeToCode.code];
         if (prescription === null || prescription === undefined) {
@@ -1617,6 +1690,7 @@ var validate = function (ruleContext) {
     var age = ruleContext.getDurationInYears('Age');
     var sex = ruleContext.getAnswerFor('Sex');
     var weight = ruleContext.getAnswerFor('Weight');
+    var paracheckResult = ruleContext.getAnswerFor('Paracheck');
 
     var validationResult = {
         "passed": false,
@@ -1633,7 +1707,6 @@ var validate = function (ruleContext) {
             validationResult.passed = false;
             validationResult.message += "वय वर्ष १० च्या खाली महिला गरोदर राहू शकत नाही. ";
         } else if (weightRangeToCode.code === "X0" || (complaints.indexOf('Acidity') !== -1 && weight < 13)) {
-            // ५ किलो पेक्षा कमी वजनास लोनर्ट देऊ नये
             validationResult.passed = false;
             validationResult.message += "५ किलो पेक्षा कमी वजनास लोनर्ट देऊ नये. ";
         } else {
@@ -1646,7 +1719,7 @@ var validate = function (ruleContext) {
 
 module.exports = {
     getDecision: getDecision,
-    treatmentByComplaintAndCode: treatmentByComplaintAndCode,
+    treatmentByComplaintAndCode: treatmentCodes,
     weightRangesToCode: defaultWeightRangesToCode,
     validate: validate
 };

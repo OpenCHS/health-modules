@@ -56,7 +56,7 @@ describe('Make Decision', function () {
     });
 
     it('Provide day wise instructions when specified for days separately', function () {
-        var decisions = decision.getDecision(new RuleContext().set("Complaint", ["Malaria"]).set("Sex", "Male").set("Age", 25).set("Weight", 40));
+        var decisions = decision.getDecision(new RuleContext().set("Complaint", ["Fever"]).set("Paracheck", "Positive for PF").set("Sex", "Male").set("Age", 25).set("Weight", 40));
         var chloroquinCount = (decisions[0].value.match(/क्लोरोक्विन/g) || []).length;
         expect(chloroquinCount).to.equal(3, decisions[0].value);
         var pcmCount = (decisions[0].value.match(/पॅरासिटामॉल/g) || []).length;
@@ -75,12 +75,6 @@ describe('Make Decision', function () {
         var count = (decisions[0].value.match(/गजकर्णाच्या जागेवर लावण्यास सांगावे/g) || []).length;
         expect(count).to.equal(1, decisions[0].value);
         expect((decisions[0].value.match(/पहिल्या दिवशी/g) || []).length).to.equal(0, decisions[0].value);
-    });
-
-    it('Display daily changing instructions in a day wise fashion', function () {
-        var decisions = decision.getDecision(new RuleContext().set("Complaint", ["Malaria"]).set("Sex", "Male").set("Age", 25).set("Weight", 40));
-        var count = (decisions[0].value.match(/पहिल्या दिवशी/g) || []).length;
-        expect(count).to.equal(1, decisions[0].value);
     });
 
     it('In cough do not give Septran to potentially pregnant women', function () {
@@ -114,22 +108,21 @@ describe('Make Decision', function () {
     });
 
     it('Multiple complaints without same medicines', function () {
-        var decisions = decision.getDecision(new RuleContext().set("Complaint", ["Cold", "Malaria"]).set("Sex", "Male").set("Age", 25).set("Weight", 40));
+        var decisions = decision.getDecision(new RuleContext().set("Complaint", ["Cold", "Body Ache"]).set("Sex", "Male").set("Age", 25).set("Weight", 40));
         var completeValue = decisions[0].value + decisions[1].value;
-        expect((completeValue.match(/क्लोरोक्विन/g) || []).length).to.equal(3, completeValue);
+        expect((completeValue.match(/पॅरासिटामॉल/g) || []).length).to.equal(1, completeValue);
         expect((completeValue.match(/सेट्रीझीन/g) || []).length).to.equal(1, completeValue);
     });
 
     it('Multiple complaints with overlapping medicines', function () {
-        var decisions = decision.getDecision(new RuleContext().set("Complaint", ["Cold", "Malaria", "Body Ache"]).set("Sex", "Male").set("Age", 25).set("Weight", 40));
+        var decisions = decision.getDecision(new RuleContext().set("Complaint", ["Cold", "Fever", "Body Ache"]).set("Sex", "Male").set("Age", 25).set("Weight", 40));
         var completeValue = decisions[0].value + decisions[1].value + decisions[2].value;
-        expect((completeValue.match(/क्लोरोक्विन/g) || []).length).to.equal(3, completeValue);
         expect((completeValue.match(/सेट्रीझीन/g) || []).length).to.equal(1, completeValue);
-        expect((completeValue.match(/पॅरासिटामॉल/g) || []).length).to.equal(3, completeValue);
+        expect((completeValue.match(/पॅरासिटामॉल/g) || []).length).to.equal(1, completeValue);
     });
 
     it('Multiple complaints with overlapping medicines and different order of medicines', function () {
-        var decisions = decision.getDecision(new RuleContext().set("Complaint", ["Cold", "Body Ache", "Malaria"]).set("Sex", "Male").set("Age", 25).set("Weight", 40));
+        var decisions = decision.getDecision(new RuleContext().set("Complaint", ["Cold", "Body Ache", "Fever"]).set("Paracheck", "Positive for PF and PV").set("Sex", "Male").set("Age", 25).set("Weight", 40));
         var message = completeValue(decisions);
         expect((message.match(/क्लोरोक्विन/g) || []).length).to.equal(3, message);
         expect((message.match(/सेट्रीझीन/g) || []).length).to.equal(1, message);
