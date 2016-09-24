@@ -1586,7 +1586,7 @@ var getDecision = function (ruleContext) {
     var weight = ruleContext.getAnswerFor('Weight');
     var complaints = ruleContext.getAnswerFor('Complaint');
     var age = ruleContext.getAnswerFor('Age');
-    var sex = ruleContext.getAnswerFor('Sex');
+    var sex = ruleContext.getAnswerFor('Sex')[0];
     var paracheckResult = ruleContext.getAnswerFor('Paracheck');
 
     complaints = complaints.filter(function (item) {
@@ -1594,6 +1594,7 @@ var getDecision = function (ruleContext) {
     }).concat(complaints.filter(function (item) {
         return item != 'Fever'
     }));
+
     var potentiallyPregnant = (sex === "Female" && (age >= 16 && age <= 40));
     var decisions = [];
     var prescribedMedicines = [];
@@ -1689,7 +1690,7 @@ var getDecision = function (ruleContext) {
 var validate = function (ruleContext) {
     var complaints = ruleContext.getAnswerFor('Complaint');
     var age = ruleContext.getDurationInYears('Age');
-    var sex = ruleContext.getAnswerFor('Sex');
+    var sex = ruleContext.getAnswerFor('Sex')[0];
     var weight = ruleContext.getAnswerFor('Weight');
     var paracheckResult = ruleContext.getAnswerFor('Paracheck');
 

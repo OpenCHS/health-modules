@@ -26,37 +26,37 @@ describe('Make Decision', function () {
 
     it('Validate', function () {
         var complaintConceptName = "Complaint";
-        var validationResult = decision.validate(new RuleContext().set(complaintConceptName, ["Pregnancy"]).set("Sex", "Male").set("Age", 25).set("Weight", 40));
+        var validationResult = decision.validate(new RuleContext().set(complaintConceptName, ["Pregnancy"]).set("Sex", ["Male"]).set("Age", 25).set("Weight", 40));
         expect(validationResult.passed).to.equal(false, validationResult.message);
 
-        validationResult = decision.validate(new RuleContext().set(complaintConceptName, ["Pregnancy"]).set("Age", 5).set("Sex", "Female").set("Weight", 40));
+        validationResult = decision.validate(new RuleContext().set(complaintConceptName, ["Pregnancy"]).set("Age", 5).set("Sex", ["Female"]).set("Weight", 40));
         expect(validationResult.passed).to.equal(false, validationResult.message);
 
-        validationResult = decision.validate(new RuleContext().set(complaintConceptName, ["Pregnancy"]).set("Age", 3).set("Sex", "Female").set("Weight", 40));
+        validationResult = decision.validate(new RuleContext().set(complaintConceptName, ["Pregnancy"]).set("Age", 3).set("Sex", ["Female"]).set("Weight", 40));
         expect(validationResult.passed).to.equal(false, validationResult.message);
 
-        validationResult = decision.validate(new RuleContext().set(complaintConceptName, ["Pregnancy"]).set("Age", 12).set("Sex", "Female").set("Weight", 40));
+        validationResult = decision.validate(new RuleContext().set(complaintConceptName, ["Pregnancy"]).set("Age", 12).set("Sex", ["Female"]).set("Weight", 40));
         expect(validationResult.passed).to.equal(true, validationResult.message);
 
-        validationResult = decision.validate(new RuleContext().set(complaintConceptName, ["Chloroquine Resistant Malaria"]).set("Weight", 3).set("Sex", "Male"));
+        validationResult = decision.validate(new RuleContext().set(complaintConceptName, ["Chloroquine Resistant Malaria"]).set("Weight", 3).set("Sex", ["Male"]));
         expect(validationResult.passed).to.equal(false, validationResult.message);
     });
 
     it('Complaint which allows for prescription', function () {
-        var decisions = decision.getDecision(new RuleContext().set("Complaint", ["Cold"]).set("Sex", "Male").set("Age", 25).set("Weight", 40));
+        var decisions = decision.getDecision(new RuleContext().set("Complaint", ["Cold"]).set("Sex", ["Male"]).set("Age", 25).set("Weight", 40));
         expect(decisions[0].value).to.not.equal(undefined);
         expect(decisions[0].alert).to.equal(undefined);
     })
     ;
 
     it('Do not give any medicine for chloroquin resistant malaria to women between 16-40', function () {
-        var decisions = decision.getDecision(new RuleContext().set("Complaint", ["Chloroquine Resistant Malaria"]).set("Sex", "Female").set("Age", 25).set("Weight", 40));
+        var decisions = decision.getDecision(new RuleContext().set("Complaint", ["Chloroquine Resistant Malaria"]).set("Sex", ["Female"]).set("Age", 25).set("Weight", 40));
         expect(decisions[0].value).to.equal("");
         expect(decisions[0].alert).to.not.equal(undefined);
     });
 
     it('Provide day wise instructions when specified for days separately', function () {
-        var decisions = decision.getDecision(new RuleContext().set("Complaint", ["Fever"]).set("Paracheck", ["Positive for PF"]).set("Sex", "Male").set("Age", 25).set("Weight", 40));
+        var decisions = decision.getDecision(new RuleContext().set("Complaint", ["Fever"]).set("Paracheck", ["Positive for PF"]).set("Sex", ["Male"]).set("Age", 25).set("Weight", 40));
         var chloroquinCount = (decisions[0].value.match(/क्लोरोक्विन/g) || []).length;
         expect(chloroquinCount).to.equal(3, decisions[0].value);
         var pcmCount = (decisions[0].value.match(/पॅरासिटामॉल/g) || []).length;
@@ -64,65 +64,65 @@ describe('Make Decision', function () {
     });
 
     it('Do not provide day wise instructions when not specified for days separately', function () {
-        var decisions = decision.getDecision(new RuleContext().set("Complaint", ["Cough"]).set("Sex", "Male").set("Age", 25).set("Weight", 40));
+        var decisions = decision.getDecision(new RuleContext().set("Complaint", ["Cough"]).set("Sex", ["Male"]).set("Age", 25).set("Weight", 40));
         var medicineCount = (decisions[0].value.match(/सेप्ट्रान/g) || []).length;
         expect(medicineCount).to.equal(1, decisions[0].value);
         expect((decisions[0].value.match(/पहिल्या दिवशी/g) || []).length).to.equal(0, decisions[0].value);
     });
 
     it('Print special instruction', function () {
-        var decisions = decision.getDecision(new RuleContext().set("Complaint", ["Ring Worm"]).set("Sex", "Male").set("Age", 25).set("Weight", 40));
+        var decisions = decision.getDecision(new RuleContext().set("Complaint", ["Ring Worm"]).set("Sex", ["Male"]).set("Age", 25).set("Weight", 40));
         var count = (decisions[0].value.match(/गजकर्णाच्या जागेवर लावण्यास सांगावे/g) || []).length;
         expect(count).to.equal(1, decisions[0].value);
         expect((decisions[0].value.match(/पहिल्या दिवशी/g) || []).length).to.equal(0, decisions[0].value);
     });
 
     it('In cough do not give Septran to potentially pregnant women', function () {
-        var decisions = decision.getDecision(new RuleContext().set("Complaint", ["Cough"]).set("Sex", "Male").set("Age", 25).set("Weight", 40));
+        var decisions = decision.getDecision(new RuleContext().set("Complaint", ["Cough"]).set("Sex", ["Male"]).set("Age", 25).set("Weight", 40));
         expect((decisions[0].value.match(/सिफ्रान/g) || []).length).to.equal(0, decisions[0].value);
         expect((decisions[0].value.match(/सेप्ट्रान/g) || []).length).to.equal(1, decisions[0].value);
 
-        decisions = decision.getDecision(new RuleContext().set("Complaint", ["Cough"]).set("Sex", "Female").set("Age", 25).set("Weight", 40));
+        decisions = decision.getDecision(new RuleContext().set("Complaint", ["Cough"]).set("Sex", ["Female"]).set("Age", 25).set("Weight", 40));
         expect((decisions[0].value.match(/सिफ्रान/g) || []).length).to.equal(1, decisions[0].value);
         expect((decisions[0].value.match(/सेप्ट्रान/g) || []).length).to.equal(0, decisions[0].value);
 
-        decisions = decision.getDecision(new RuleContext().set("Complaint", ["Cough"]).set("Sex", "Female").set("Age", 45).set("Weight", 40));
+        decisions = decision.getDecision(new RuleContext().set("Complaint", ["Cough"]).set("Sex", ["Female"]).set("Age", 45).set("Weight", 40));
         expect((decisions[0].value.match(/सिफ्रान/g) || []).length).to.equal(0, decisions[0].value);
         expect((decisions[0].value.match(/सेप्ट्रान/g) || []).length).to.equal(1, decisions[0].value);
 
-        decisions = decision.getDecision(new RuleContext().set("Complaint", ["Boils"]).set("Sex", "Female").set("Age", 25).set("Weight", 40));
+        decisions = decision.getDecision(new RuleContext().set("Complaint", ["Boils"]).set("Sex", ["Female"]).set("Age", 25).set("Weight", 40));
         expect((decisions[0].value.match(/सिफ्रान/g) || []).length).to.equal(1, decisions[0].value);
         expect((decisions[0].value.match(/सेप्ट्रान/g) || []).length).to.equal(0, decisions[0].value);
 
-        decisions = decision.getDecision(new RuleContext().set("Complaint", ["Wound"]).set("Sex", "Female").set("Age", 25).set("Weight", 40));
+        decisions = decision.getDecision(new RuleContext().set("Complaint", ["Wound"]).set("Sex", ["Female"]).set("Age", 25).set("Weight", 40));
         expect((decisions[0].value.match(/सिफ्रान/g) || []).length).to.equal(1, decisions[0].value);
         expect((decisions[0].value.match(/सेप्ट्रान/g) || []).length).to.equal(0, decisions[0].value);
     });
 
     it('Before food and after food instruction', function () {
-        var decisions = decision.getDecision(new RuleContext().set("Complaint", ["Cold"]).set("Sex", "Male").set("Age", 25).set("Weight", 40));
+        var decisions = decision.getDecision(new RuleContext().set("Complaint", ["Cold"]).set("Sex", ["Male"]).set("Age", 25).set("Weight", 40));
         expect((decisions[0].value.match(/जेवणाआधी/g) || []).length).to.equal(0, decisions[0].value);
 
-        decisions = decision.getDecision(new RuleContext().set("Complaint", ["Acidity"]).set("Sex", "Male").set("Age", 25).set("Weight", 40));
+        decisions = decision.getDecision(new RuleContext().set("Complaint", ["Acidity"]).set("Sex", ["Male"]).set("Age", 25).set("Weight", 40));
         expect((decisions[0].value.match(/जेवणाआधी/g) || []).length).to.equal(1, decisions[0].value);
     });
 
     it('Multiple complaints without same medicines', function () {
-        var decisions = decision.getDecision(new RuleContext().set("Complaint", ["Cold", "Body Ache"]).set("Sex", "Male").set("Age", 25).set("Weight", 40));
+        var decisions = decision.getDecision(new RuleContext().set("Complaint", ["Cold", "Body Ache"]).set("Sex", ["Male"]).set("Age", 25).set("Weight", 40));
         var completeValue = decisions[0].value + decisions[1].value;
         expect((completeValue.match(/पॅरासिटामॉल/g) || []).length).to.equal(1, completeValue);
         expect((completeValue.match(/सेट्रीझीन/g) || []).length).to.equal(1, completeValue);
     });
 
     it('Multiple complaints with overlapping medicines', function () {
-        var decisions = decision.getDecision(new RuleContext().set("Complaint", ["Cold", "Fever", "Body Ache"]).set("Sex", "Male").set("Age", 25).set("Weight", 40));
+        var decisions = decision.getDecision(new RuleContext().set("Complaint", ["Cold", "Fever", "Body Ache"]).set("Sex", ["Male"]).set("Age", 25).set("Weight", 40));
         var completeValue = decisions[0].value + decisions[1].value + decisions[2].value;
         expect((completeValue.match(/सेट्रीझीन/g) || []).length).to.equal(1, completeValue);
         expect((completeValue.match(/पॅरासिटामॉल/g) || []).length).to.equal(1, completeValue);
     });
 
     it('Multiple complaints with overlapping medicines and different order of medicines', function () {
-        var decisions = decision.getDecision(new RuleContext().set("Complaint", ["Cold", "Body Ache", "Fever"]).set("Paracheck", ["Positive for PF and PV"]).set("Sex", "Male").set("Age", 25).set("Weight", 40));
+        var decisions = decision.getDecision(new RuleContext().set("Complaint", ["Cold", "Body Ache", "Fever"]).set("Paracheck", ["Positive for PF and PV"]).set("Sex", ["Male"]).set("Age", 25).set("Weight", 40));
         var message = completeValue(decisions);
         expect((message.match(/क्लोरोक्विन/g) || []).length).to.equal(3, message);
         expect((message.match(/सेट्रीझीन/g) || []).length).to.equal(1, message);
@@ -131,19 +131,19 @@ describe('Make Decision', function () {
 
     it('Pick validation errors corresponding to all complaints', function () {
         var complaintConceptName = "Complaint";
-        var validationResult = decision.validate(new RuleContext().set(complaintConceptName, ["Cold", "Acidity"]).set("Sex", "Male").set("Age", 5).set("Weight", 12));
+        var validationResult = decision.validate(new RuleContext().set(complaintConceptName, ["Cold", "Acidity"]).set("Sex", ["Male"]).set("Age", 5).set("Weight", 12));
         expect(validationResult.passed).to.equal(false, validationResult.message);
     });
 
     it('Multiple complaints and passing all validations', function () {
         var complaintConceptName = "Complaint";
-        var validationResult = decision.validate(new RuleContext().set(complaintConceptName, ["Cold", "Acidity"]).set("Sex", "Male").set("Age", 10).set("Weight", 22));
+        var validationResult = decision.validate(new RuleContext().set(complaintConceptName, ["Cold", "Acidity"]).set("Sex", ["Male"]).set("Age", 10).set("Weight", 22));
         expect(validationResult.passed).to.equal(true, validationResult.message);
     });
 
     it('Alert should be only for the decision for the complaint', () => {
         var complaintConceptName = "Complaint";
-        var decisions = decision.getDecision(new RuleContext().set(complaintConceptName, ["Cold", "Vomiting"]).set("Sex", "Male").set("Age", 10).set("Weight", 22));
+        var decisions = decision.getDecision(new RuleContext().set(complaintConceptName, ["Cold", "Vomiting"]).set("Sex", ["Male"]).set("Age", 10).set("Weight", 22));
         expect(decisions[0].alert).to.equal(undefined);
         expect((decisions[1].alert.match(/उलटी असल्यास/g) || []).length).to.equal(1, decisions[0].alert);
     });
