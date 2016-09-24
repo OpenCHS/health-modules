@@ -730,7 +730,7 @@
         "name": "Positive for PV"
       },
       {
-        "name": "Positive for Both"
+        "name": "Positive for PF and PV"
       }
     ]
   },
@@ -769,15 +769,15 @@
     }
   },
   {
-    "name": "Positive for Both",
+    "name": "Positive for PF and PV",
     "uuid": "6c424c3b-ed82-4170-9319-50187f509891",
     "conceptNames": [
       {
-        "name": "Positive for Both",
+        "name": "Positive for PF and PV",
         "locale": "mr_IN"
       },
       {
-        "name": "Positive for Both",
+        "name": "Positive for PF and PV",
         "locale": "en"
       }
     ],

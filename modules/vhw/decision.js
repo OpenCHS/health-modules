@@ -1204,7 +1204,7 @@ var treatmentByComplaintAndCode = {
         "X1": {
             "1-30": [
                 {
-                    "Medicine": "Iron",
+                    "Medicine": "Iron Folic Acid",
                     "Amount": 1,
                     "Dose Unit": "Tablet",
                     "Times": 2
@@ -1219,7 +1219,7 @@ var treatmentByComplaintAndCode = {
         "X2": {
             "1-30": [
                 {
-                    "Medicine": "Iron",
+                    "Medicine": "Iron Folic Acid",
                     "Amount": 1,
                     "Dose Unit": "Tablet",
                     "Times": 2
@@ -1234,7 +1234,7 @@ var treatmentByComplaintAndCode = {
         "X3": {
             "1-30": [
                 {
-                    "Medicine": "Iron",
+                    "Medicine": "Iron Folic Acid",
                     "Amount": 1,
                     "Dose Unit": "Tablet",
                     "Times": 2
@@ -1249,7 +1249,7 @@ var treatmentByComplaintAndCode = {
         "X4": {
             "1-30": [
                 {
-                    "Medicine": "Iron",
+                    "Medicine": "Iron Folic Acid",
                     "Amount": 1,
                     "Dose Unit": "Tablet",
                     "Times": 2
@@ -1264,7 +1264,7 @@ var treatmentByComplaintAndCode = {
         "X5": {
             "1-30": [
                 {
-                    "Medicine": "Iron",
+                    "Medicine": "Iron Folic Acid",
                     "Amount": 1,
                     "Dose Unit": "Tablet",
                     "Times": 2
@@ -1279,7 +1279,7 @@ var treatmentByComplaintAndCode = {
         "X6": {
             "1-30": [
                 {
-                    "Medicine": "Iron",
+                    "Medicine": "Iron Folic Acid",
                     "Amount": 1,
                     "Dose Unit": "Tablet",
                     "Times": 2
@@ -1294,7 +1294,7 @@ var treatmentByComplaintAndCode = {
         "X7": {
             "1-30": [
                 {
-                    "Medicine": "Iron",
+                    "Medicine": "Iron Folic Acid",
                     "Amount": 1,
                     "Dose Unit": "Tablet",
                     "Times": 2
@@ -1426,7 +1426,7 @@ var englishWordsToMarathi = {
     "Septran": "सेप्ट्रान",
     "Scabizol": "खरजेचे औषध",
     "Salicylic Acid": "सॅलिसिलिक ऍसिड",
-    "Iron": "लोहाच्या",
+    "Iron Folic Acid": "लोहाच्या",
     "Calcium": "कॅल्शियम",
     "Lonart Forte": "लोनर्ट फोर्टे",
     "Onden Syrup": "सायरप ओंडेन",
@@ -1456,7 +1456,7 @@ var medicines = {
     "Famotidine": {take: "Before"},
     "Furoxone": {take: ""},
     "Furoxone Syrup": {take: ""},
-    "Iron": {take: "After"},
+    "Iron Folic Acid": {take: "After"},
     "Ondensetran Syrup": {take: "Before"},
     "Onden Syrup": {take: "Before"},
     "Paracetamol": {take: "After"},
@@ -1602,6 +1602,8 @@ var getDecision = function (ruleContext) {
         else if (complaints[complaintIndex] === 'Chloroquine Resistant Malaria' && (age >= 16 || age <= 40) && sex === "Female") {
             decision.alert = "पुढे दवाखान्यात पाठवावे";
             decision.value = "";
+        } else if (complaints[complaintIndex] === 'Wound') {
+            decision.alert = "ड्रेसिंग";
         }
 
         decisions.push(decision);
