@@ -1430,7 +1430,10 @@ var englishWordsToMarathi = {
     "Calcium": "कॅल्शियम",
     "Lonart Forte": "लोनर्ट फोर्टे",
     "Onden Syrup": "सायरप ओंडेन",
-    "Cifran": "सिफ्रान"
+    "Cifran": "सिफ्रान",
+    "Before": "जेवणाआधी",
+    "After": "जेवणानंतर",
+    "": ""
 };
 
 var dayInMarathi = {
@@ -1440,8 +1443,8 @@ var dayInMarathi = {
 };
 
 var medicines = {
-    "Abdek Syrup": {take: "Depends"},
-    "BC": {take: "Depends"},
+    "Abdek Syrup": {take: ""},
+    "BC": {take: ""},
     "Calcium": {take: "After"},
     "Cetrizine": {take: "After"},
     "Cetrizine Syrup": {take: "After"},
@@ -1451,14 +1454,14 @@ var medicines = {
     "Cyclopam": {take: "After"},
     "Cyclopam Syrup": {take: "After"},
     "Famotidine": {take: "Before"},
-    "Furoxone": {take: "Depends"},
-    "Furoxone Syrup": {take: "Depends"},
+    "Furoxone": {take: ""},
+    "Furoxone Syrup": {take: ""},
     "Iron": {take: "After"},
-    "Ondensetran Syrup": {take: "Depends"},
-    "Onden Syrup": {take: "Depends"},
+    "Ondensetran Syrup": {take: "Before"},
+    "Onden Syrup": {take: "Before"},
     "Paracetamol": {take: "After"},
     "Paracetamol Syrup": {take: "After"},
-    "Perinorm": {take: "Depends"},
+    "Perinorm": {take: "Before"},
     "Lonart Forte": {take: "After"},
     "Salicylic Acid": {take: "After"},
     "Scabizol": {take: "After"},
@@ -1583,18 +1586,20 @@ var getDecision = function (ruleContext) {
                     message += " ";
                 }
                 message += dosageTimingToMarathi(complaints[complaintIndex], daysPrescription.Times);
-                message += medicines[daysPrescription.Medicine].take === "Before" ? "Before food" : "";
+                message += " ";
+                //dressing ड्रेसिंग
+                message += englishWordsToMarathi[medicines[daysPrescription.Medicine].take];
                 message += "\n";
             }
             message += "\n";
         }
         decision.value = message;
 
-        if (weight >= 13 && complaints.indexOf('Malaria') !== -1)
+        if (weight >= 13 && complaints[complaintIndex] === 'Malaria')
             decision.alert = "क्लोरोक्विन व पॅरासिटामॉल ही औषधे जेवल्यावर खायला सांगावी";
-        else if (complaints.indexOf('Vomiting') !== -1)
+        else if (complaints[complaintIndex] === 'Vomiting')
             decision.alert = "उलटी असल्यास आधी औषध द्यावे व अर्ध्या तासांनंतर जेवण, दुध द्यावे व अर्ध्या तासांनंतर इतर औषधे द्यावीत";
-        else if (complaints.indexOf('Chloroquine Resistant Malaria') !== -1 && (age >= 16 || age <= 40) && sex === "Female") {
+        else if (complaints[complaintIndex] === 'Chloroquine Resistant Malaria' && (age >= 16 || age <= 40) && sex === "Female") {
             decision.alert = "पुढे दवाखान्यात पाठवावे";
             decision.value = "";
         }
