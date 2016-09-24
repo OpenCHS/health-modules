@@ -1588,6 +1588,7 @@ var getDecision = function (ruleContext) {
     var age = ruleContext.getAnswerFor('Age');
     var sex = ruleContext.getAnswerFor('Sex');
     var paracheckResult = ruleContext.getAnswerFor('Paracheck');
+
     complaints = complaints.filter(function (item) {
         return item == 'Fever';
     }).concat(complaints.filter(function (item) {
@@ -1606,8 +1607,8 @@ var getDecision = function (ruleContext) {
         var prescriptionSet;
         if(potentiallyPregnant && ["Cough", "Boils", "Wound"].indexOf(complaints[complaintIndex]) !== -1) {
             prescriptionSet = treatmentCodes["Cifran-Special"];
-        } else if (complaints[complaintIndex] === "Fever" && paracheckResult !== undefined &&
-                    paracheckResult.includes("Positive")) {
+        } else if (complaints[complaintIndex] === "Fever" && paracheckResult !== undefined && paracheckResult.length === 1 &&
+                    paracheckResult[0].includes("Positive")) {
             prescriptionSet = treatmentCodes["Malaria"];
         } else {
             prescriptionSet = treatmentCodes[complaints[complaintIndex]];
