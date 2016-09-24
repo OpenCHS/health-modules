@@ -1520,9 +1520,9 @@ var getWeightRangeToCode = function (complaint, weight) {
 
 var getDecision = function (ruleContext) {
     var weight = ruleContext.getAnswerFor('Weight');
-    var complaints = ruleContext.getCodedAnswerFor('Complaint');
+    var complaints = ruleContext.getAnswerFor('Complaint');
     var age = ruleContext.getAnswerFor('Age');
-    var sex = ruleContext.getCodedAnswerFor('Sex')[0];
+    var sex = ruleContext.getAnswerFor('Sex');
     complaints = complaints.filter(function (item) {
         return item == 'Malaria';
     }).concat(complaints.filter(function (item) {
@@ -1613,9 +1613,9 @@ var getDecision = function (ruleContext) {
 };
 
 var validate = function (ruleContext) {
-    var complaints = ruleContext.getCodedAnswerFor('Complaint');
+    var complaints = ruleContext.getAnswerFor('Complaint');
     var age = ruleContext.getDurationInYears('Age');
-    var sex = ruleContext.getCodedAnswerFor('Sex')[0];
+    var sex = ruleContext.getAnswerFor('Sex');
     var weight = ruleContext.getAnswerFor('Weight');
 
     var validationResult = {
