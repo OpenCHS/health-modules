@@ -379,8 +379,8 @@
     "datatype": {
       "name": "Numeric"
     },
-    "lowAbsolute": 80,
-    "hiAbsolute": 200
+    "lowAbsolute": 60,
+    "hiAbsolute": 230
   },
   {
     "name": "Diastolic",
@@ -398,8 +398,8 @@
     "datatype": {
       "name": "Numeric"
     },
-    "lowAbsolute": 50,
-    "hiAbsolute": 120
+    "lowAbsolute": 40,
+    "hiAbsolute": 140
   },
   {
     "name": "Pedal Edema",
