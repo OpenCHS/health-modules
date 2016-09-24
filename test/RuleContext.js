@@ -9,6 +9,14 @@ function RuleContext() {
         return this.questionAnswers.get(questionName);
     };
 
+    this.getCodedAnswerFor = function (questionName) {
+        var answer = this.getAnswerFor(questionName);
+        if (answer.push === undefined) {
+            return [answer];
+        }
+        return answer;
+    };
+
     this.set = function (key, value) {
         this.questionAnswers.set(key, value);
         return this;
