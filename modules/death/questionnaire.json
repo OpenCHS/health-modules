@@ -25,12 +25,10 @@
       "name": "Date of Death"
     },
     {
-      "name": "Reason for Death",
+      "name": "Reason for Death"
     }
-
   ],
   "decisionKeys": [
-    ""
   ],
   "summaryFields": [
     "Name",

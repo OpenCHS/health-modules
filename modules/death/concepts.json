@@ -1,9 +1,4 @@
-[{
-  "conceptNames": [{"locale": "en", "name": "INSERT NAME HERE"}, {"locale": "mr_IN", "name": "INSERT MARATHI NAME"}],
-  "datatype": {"name": "N/A"},
-  "name": "INSERT NAME",
-  "uuid": "9e19242a-2992-42eb-91bd-7432cffe44bd"
-},
+[
   {
     "name": "Date of visit",
     "uuid": "fc0dbe3b-9c4d-424f-ac13-fe9f563ae311",
@@ -117,105 +112,105 @@
     }
   },
   {
-  "name": "Village",
-  "uuid": "f24484b3-b9dd-4a06-a292-a21f4ca382f4",
-  "conceptNames": [
-    {
-      "name": "गाव",
-      "locale": "mr_IN"
+    "name": "Village",
+    "uuid": "f24484b3-b9dd-4a06-a292-a21f4ca382f4",
+    "conceptNames": [
+      {
+        "name": "गाव",
+        "locale": "mr_IN"
+      },
+      {
+        "name": "Village",
+        "locale": "en"
+      }
+    ],
+    "datatype": {
+      "name": "Coded"
     },
-    {
-      "name": "Village",
-      "locale": "en"
-    }
-  ],
-  "datatype": {
-    "name": "Coded"
+    "answers": [
+      {
+        "name": "Pengunda"
+      },
+      {
+        "name": "Parenar"
+      },
+      {
+        "name": "Kucher"
+      },
+      {
+        "name": "Mahakapadi"
+      },
+      {
+        "name": "Ghotpadi"
+      },
+      {
+        "name": "Bodonge"
+      },
+      {
+        "name": "Bhatpar"
+      },
+      {
+        "name": "Darbha"
+      },
+      {
+        "name": "Juwi"
+      },
+      {
+        "name": "Mardmallenga"
+      },
+      {
+        "name": "Ittalvar"
+      },
+      {
+        "name": "Jinjagaon"
+      },
+      {
+        "name": "Maraampalli"
+      },
+      {
+        "name": "Gurnur"
+      },
+      {
+        "name": "Chichoda"
+      },
+      {
+        "name": "Boriya"
+      },
+      {
+        "name": "Rela"
+      },
+      {
+        "name": "Gopnar"
+      },
+      {
+        "name": "Hodri"
+      },
+      {
+        "name": "Lashkar"
+      },
+      {
+        "name": "Aaldandi"
+      },
+      {
+        "name": "Moradpur"
+      },
+      {
+        "name": "Midapalli"
+      },
+      {
+        "name": "Nilgunda"
+      },
+      {
+        "name": "Kavande"
+      },
+      {
+        "name": "Morometta"
+      },
+      {
+        "name": "Other Village"
+      }
+    ]
   },
-  "answers": [
-    {
-      "name": "Pengunda"
-    },
-    {
-      "name": "Parenar"
-    },
-    {
-      "name": "Kucher"
-    },
-    {
-      "name": "Mahakapadi"
-    },
-    {
-      "name": "Ghotpadi"
-    },
-    {
-      "name": "Bodonge"
-    },
-    {
-      "name": "Bhatpar"
-    },
-    {
-      "name": "Darbha"
-    },
-    {
-      "name": "Juwi"
-    },
-    {
-      "name": "Mardmallenga"
-    },
-    {
-      "name": "Ittalvar"
-    },
-    {
-      "name": "Jinjagaon"
-    },
-    {
-      "name": "Maraampalli"
-    },
-    {
-      "name": "Gurnur"
-    },
-    {
-      "name": "Chichoda"
-    },
-    {
-      "name": "Boriya"
-    },
-    {
-      "name": "Rela"
-    },
-    {
-      "name": "Gopnar"
-    },
-    {
-      "name": "Hodri"
-    },
-    {
-      "name": "Lashkar"
-    },
-    {
-      "name": "Aaldandi"
-    },
-    {
-      "name": "Moradpur"
-    },
-    {
-      "name": "Midapalli"
-    },
-    {
-      "name": "Nilgunda"
-    },
-    {
-      "name": "Kavande"
-    },
-    {
-      "name": "Morometta"
-    },
-    {
-      "name": "Other Village"
-    }
-  ]
-},
   {
     "name": "Reason for Death",
     "uuid": "b6261d0a-fea4-4ac0-80fc-7e628afd4f79",
@@ -239,8 +234,6 @@
       {
         "name": "Infant"
       }
-
     ]
   }
-
 ]
