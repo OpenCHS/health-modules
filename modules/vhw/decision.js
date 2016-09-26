@@ -353,6 +353,71 @@ var treatmentCodes = {
                 }]
         }
     },
+    "Headache": {
+        "X1": {
+            "3": [
+                {
+                    "Medicine": "Paracetamol Syrup",
+                    "Amount": 0.5,
+                    "Dose Unit": "Spoon",
+                    "Times": 3
+                }]
+        },
+        "X2": {
+            "3": [
+                {
+                    "Medicine": "Paracetamol Syrup",
+                    "Dose Unit": "Spoon",
+                    "Amount": 1,
+                    "Times": 3
+                }]
+        },
+        "X3": {
+            "3": [
+                {
+                    "Medicine": "Paracetamol Syrup",
+                    "Amount": 1.5,
+                    "Dose Unit": "Spoon",
+                    "Times": 3
+                }]
+        },
+        "X4": {
+            "3": [
+                {
+                    "Medicine": "Paracetamol",
+                    "Amount": 0.5,
+                    "Dose Unit": "Tablet",
+                    "Times": 2
+                }]
+        },
+        "X5": {
+            "3": [
+                {
+                    "Medicine": "Paracetamol",
+                    "Amount": 0.5,
+                    "Dose Unit": "Tablet",
+                    "Times": 3
+                }]
+        },
+        "X6": {
+            "3": [
+                {
+                    "Medicine": "Paracetamol",
+                    "Amount": 1,
+                    "Dose Unit": "Tablet",
+                    "Times": 2
+                }]
+        },
+        "X7": {
+            "3": [
+                {
+                    "Medicine": "Paracetamol",
+                    "Amount": 1,
+                    "Dose Unit": "Tablet",
+                    "Times": 3
+                }]
+        }
+    },
     "Chloroquine Resistant Malaria": {
         "X1": {
             "3": [
@@ -621,6 +686,12 @@ var treatmentCodes = {
                     "Amount": 0.5,
                     "Dose Unit": "Spoon",
                     "Times": 2
+                },
+                {
+                    "Medicine": "ORS",
+                    "Amount": 0,
+                    "Dose Unit": "Powder",
+                    "Times": "Special Instruction"
                 }]
         },
         "X2": {
@@ -636,6 +707,12 @@ var treatmentCodes = {
                     "Dose Unit": "Spoon",
                     "Amount": 1,
                     "Times": 2
+                },
+                {
+                    "Medicine": "ORS",
+                    "Amount": 0,
+                    "Dose Unit": "Powder",
+                    "Times": "Special Instruction"
                 }]
         },
         "X3": {
@@ -651,6 +728,12 @@ var treatmentCodes = {
                     "Amount": 1,
                     "Dose Unit": "Spoon",
                     "Times": 2
+                },
+                {
+                    "Medicine": "ORS",
+                    "Amount": 0,
+                    "Dose Unit": "Powder",
+                    "Times": "Special Instruction"
                 }]
         },
         "X4": {
@@ -666,6 +749,12 @@ var treatmentCodes = {
                     "Amount": 0.5,
                     "Dose Unit": "Tablet",
                     "Times": 2
+                },
+                {
+                    "Medicine": "ORS",
+                    "Amount": 0,
+                    "Dose Unit": "Powder",
+                    "Times": "Special Instruction"
                 }]
         },
         "X5": {
@@ -681,6 +770,12 @@ var treatmentCodes = {
                     "Amount": 0.5,
                     "Dose Unit": "Tablet",
                     "Times": 3
+                },
+                {
+                    "Medicine": "ORS",
+                    "Amount": 0,
+                    "Dose Unit": "Powder",
+                    "Times": "Special Instruction"
                 }]
         },
         "X6": {
@@ -696,6 +791,12 @@ var treatmentCodes = {
                     "Amount": 1,
                     "Dose Unit": "Tablet",
                     "Times": 2
+                },
+                {
+                    "Medicine": "ORS",
+                    "Amount": 0,
+                    "Dose Unit": "Powder",
+                    "Times": "Special Instruction"
                 }]
         },
         "X7": {
@@ -711,6 +812,12 @@ var treatmentCodes = {
                     "Amount": 1,
                     "Dose Unit": "Tablet",
                     "Times": 3
+                },
+                {
+                    "Medicine": "ORS",
+                    "Amount": 0,
+                    "Dose Unit": "Powder",
+                    "Times": "Special Instruction"
                 }]
         }
     },
@@ -722,6 +829,12 @@ var treatmentCodes = {
                     "Amount": 1,
                     "Dose Unit": "ml",
                     "Times": "2"
+                },
+                {
+                    "Medicine": "ORS",
+                    "Amount": 0,
+                    "Dose Unit": "Powder",
+                    "Times": "Special Instruction"
                 }
             ]
         },
@@ -732,6 +845,12 @@ var treatmentCodes = {
                     "Amount": 2,
                     "Dose Unit": "ml",
                     "Times": "2"
+                },
+                {
+                    "Medicine": "ORS",
+                    "Amount": 0,
+                    "Dose Unit": "Powder",
+                    "Times": "Special Instruction"
                 }
             ]
         },
@@ -742,6 +861,12 @@ var treatmentCodes = {
                     "Amount": 0.5,
                     "Dose Unit": "Spoon",
                     "Times": "2"
+                },
+                {
+                    "Medicine": "ORS",
+                    "Amount": 0,
+                    "Dose Unit": "Powder",
+                    "Times": "Special Instruction"
                 }
             ]
         },
@@ -752,6 +877,12 @@ var treatmentCodes = {
                     "Amount": 1,
                     "Dose Unit": "Spoon",
                     "Times": "2"
+                },
+                {
+                    "Medicine": "ORS",
+                    "Amount": 0,
+                    "Dose Unit": "Powder",
+                    "Times": "Special Instruction"
                 }
             ]
         },
@@ -762,6 +893,12 @@ var treatmentCodes = {
                     "Amount": 0.5,
                     "Dose Unit": "Tablet",
                     "Times": "2"
+                },
+                {
+                    "Medicine": "ORS",
+                    "Amount": 0,
+                    "Dose Unit": "Powder",
+                    "Times": "Special Instruction"
                 }
             ]
         },
@@ -772,6 +909,12 @@ var treatmentCodes = {
                     "Amount": 0.5,
                     "Dose Unit": "Tablet",
                     "Times": "2"
+                },
+                {
+                    "Medicine": "ORS",
+                    "Amount": 0,
+                    "Dose Unit": "Powder",
+                    "Times": "Special Instruction"
                 }
             ]
         },
@@ -782,6 +925,12 @@ var treatmentCodes = {
                     "Amount": 1,
                     "Dose Unit": "Tablet",
                     "Times": "2"
+                },
+                {
+                    "Medicine": "ORS",
+                    "Amount": 0,
+                    "Dose Unit": "Powder",
+                    "Times": "Special Instruction"
                 }
             ]
         }
@@ -1491,14 +1640,15 @@ var englishWordsToMarathi = {
     "Septran": "सेप्ट्रान",
     "Scabizol": "खरजेचे औषध",
     "Salicylic Acid": "सॅलिसिलिक ऍसिड",
-    "Iron Folic Acid": "लोहाच्या",
+    "Iron Folic Acid": "आयरन",
     "Calcium": "कॅल्शियम",
     "Lonart Forte": "लोनर्ट फोर्टे",
     "Onden Syrup": "सायरप ओंडेन",
     "Cifran": "सिफ्रान",
     "Before": "जेवणाआधी",
     "After": "जेवणानंतर",
-    "": ""
+    "": "",
+    "ORS": ""
 };
 
 var dayInMarathi = {
@@ -1524,6 +1674,7 @@ var medicines = {
     "Iron Folic Acid": {take: "After"},
     "Ondensetran Syrup": {take: "Before"},
     "Onden Syrup": {take: "Before"},
+    "ORS": {take: ""},
     "Paracetamol": {take: "After"},
     "Paracetamol Syrup": {take: "After"},
     "Perinorm": {take: "Before"},
@@ -1553,6 +1704,7 @@ var dosageTimingToMarathi = function (complaint, times) {
     if (times === "Once Evening") return "रोज संध्याकाळी एकदा";
     if (times === "Special Instruction" && complaint === "Scabies") return "औषध मानेपासून संपूर्ण अंगास आंघोळीनंतर लावणे आणि कपडे १ तास गरम पाण्यात उकाडविणे";
     if (times === "Special Instruction" && complaint === "Ring Worm") return "गजकर्णाच्या जागेवर लावण्यास सांगावे";
+    if (times === "Special Instruction" && (complaint === "Vomiting" || complaint === "Diarrhoea")) return "";
     console.error("Number of times " + times + " not supported yet");
 };
 
@@ -1662,7 +1814,6 @@ var getDecision = function (ruleContext) {
                 }
                 message += dosageTimingToMarathi(complaints[complaintIndex], daysPrescription.Times);
                 message += " ";
-                //dressing ड्रेसिंग
                 message += englishWordsToMarathi[medicines[daysPrescription.Medicine].take];
                 message += "\n";
             }

@@ -257,6 +257,12 @@
         "name": "Body Ache"
       },
       {
+        "name": "Headache"
+      },
+      {
+        "name": "Giddiness"
+      },
+      {
         "name": "Pregnancy"
       }
     ]
@@ -696,6 +702,40 @@
       },
       {
         "name": "Pregnancy",
+        "locale": "en"
+      }
+    ],
+    "datatype": {
+      "name": "N/A"
+    }
+  },
+  {
+    "name": "Headache",
+    "uuid": "b97dfa0e-f8d3-4a92-8f92-0c0230f26fa2",
+    "conceptNames": [
+      {
+        "name": "डोकेरूखी",
+        "locale": "mr_IN"
+      },
+      {
+        "name": "Headache",
+        "locale": "en"
+      }
+    ],
+    "datatype": {
+      "name": "N/A"
+    }
+  },
+  {
+    "name": "Giddiness",
+    "uuid": "89b15d54-796f-4504-9af5-339351ef9666",
+    "conceptNames": [
+      {
+        "name": "चक्कर",
+        "locale": "mr_IN"
+      },
+      {
+        "name": "Giddiness",
         "locale": "en"
       }
     ],
