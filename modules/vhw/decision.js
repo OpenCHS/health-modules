@@ -46,7 +46,7 @@ var treatmentCodes = {
                 {
                     "Medicine": "Chloroquin Syrup",
                     "Amount": 1,
-                    "Dose Unit": "Spoon Syrup",
+                    "Dose Unit": "Spoon",
                     "Times": 1
                 },
                 {
