@@ -41,21 +41,21 @@
       "mandatory": false
     },
     {
-      "name": "Pedal Edema",
-      "mandatory": false
-    },
-    {
       "name": "Pallor",
       "mandatory": false
     },
     {
-      "name": "Paracheck",
+      "name": "Pedal Edema",
       "mandatory": false
     },
     {
       "name": "Skin Condition",
       "mandatory": false,
       "multiSelect" : true
+    },
+    {
+      "name": "Paracheck",
+      "mandatory": false
     },
     {
       "name": "Complaint",
