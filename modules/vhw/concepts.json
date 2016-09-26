@@ -159,8 +159,91 @@
       }
     ],
     "datatype": {
-      "name": "Text"
-    }
+      "name": "Coded"
+    },
+    "answers": [
+      {
+        "name": "Pengunda"
+      },
+      {
+        "name": "Parenar"
+      },
+      {
+        "name": "Kucher"
+      },
+      {
+        "name": "Mahakapadi"
+      },
+      {
+        "name": "Ghotpadi"
+      },
+      {
+        "name": "Bodonge"
+      },
+      {
+        "name": "Bhatpar"
+      },
+      {
+        "name": "Darbha"
+      },
+      {
+        "name": "Juwi"
+      },
+      {
+        "name": "Mardmallenga"
+      },
+      {
+        "name": "Ittalvar"
+      },
+      {
+        "name": "Jinjagaon"
+      },
+      {
+        "name": "Maraampalli"
+      },
+      {
+        "name": "Gurnur"
+      },
+      {
+        "name": "Chichoda"
+      },
+      {
+        "name": "Boriya"
+      },
+      {
+        "name": "Rela"
+      },
+      {
+        "name": "Gopnar"
+      },
+      {
+        "name": "Hodri"
+      },
+      {
+        "name": "Lashkar"
+      },
+      {
+        "name": "Aaldandi"
+      },
+      {
+        "name": "Moradpur"
+      },
+      {
+        "name": "Midapalli"
+      },
+      {
+        "name": "Nilgunda"
+      },
+      {
+        "name": "Kavande"
+      },
+      {
+        "name": "Morometta"
+      },
+      {
+        "name": "Other Village"
+      }
+    ]
   },
   {
     "name": "Weight",
@@ -264,6 +347,9 @@
       },
       {
         "name": "Pregnancy"
+      },
+      {
+        "name": "Gopnar"
       }
     ]
   },
@@ -852,6 +938,482 @@
       },
       {
         "name": "Chloroquine Resistant Malaria",
+        "locale": "en"
+      }
+    ],
+    "datatype": {
+      "name": "N/A"
+    }
+  },
+  {
+    "name": "Ghotpadi",
+    "uuid": "1a8f024e-9e99-4f8f-ac20-df81f9935fb5",
+    "conceptNames": [
+      {
+        "name": "घोटपाड़ी",
+        "locale": "mr_IN"
+      },
+      {
+        "name": "Ghotpadi",
+        "locale": "en"
+      }
+    ],
+    "datatype": {
+      "name": "N/A"
+    }
+  },
+  {
+    "name": "Bodonge",
+    "uuid": "7c69b6cd-78cc-446d-9930-d3786c73f838",
+    "conceptNames": [
+      {
+        "name": "बोडंगे",
+        "locale": "mr_IN"
+      },
+      {
+        "name": "Bodonge",
+        "locale": "en"
+      }
+    ],
+    "datatype": {
+      "name": "N/A"
+    }
+  },
+  {
+    "name": "Bhatpar",
+    "uuid": "4d00de49-4706-4e09-8ef3-9ebfefe9334b",
+    "conceptNames": [
+      {
+        "name": "भटपर",
+        "locale": "mr_IN"
+      },
+      {
+        "name": "Bhatpar",
+        "locale": "en"
+      }
+    ],
+    "datatype": {
+      "name": "N/A"
+    }
+  },
+  {
+    "name": "Darbha",
+    "uuid": "24f510ac-4fee-4579-a32a-7256f6712156",
+    "conceptNames": [
+      {
+        "name": "दर्भा",
+        "locale": "mr_IN"
+      },
+      {
+        "name": "Darbha",
+        "locale": "en"
+      }
+    ],
+    "datatype": {
+      "name": "N/A"
+    }
+  },
+  {
+    "name": "Juwi",
+    "uuid": "4b616765-a9e5-4049-940c-8f42fe4a8b80",
+    "conceptNames": [
+      {
+        "name": "जूवी",
+        "locale": "mr_IN"
+      },
+      {
+        "name": "Juwi",
+        "locale": "en"
+      }
+    ],
+    "datatype": {
+      "name": "N/A"
+    }
+  },
+  {
+    "name": "Jinjagaon",
+    "uuid": "8708a996-ab24-46bb-95a9-f68f5f3fb8bf",
+    "conceptNames": [
+      {
+        "name": "जिंजगाव",
+        "locale": "mr_IN"
+      },
+      {
+        "name": "Jinjagaon",
+        "locale": "en"
+      }
+    ],
+    "datatype": {
+      "name": "N/A"
+    }
+  },
+  {
+    "name": "Maraampalli",
+    "uuid": "2473d6e6-6454-41c5-9b29-b9d56617e4e4",
+    "conceptNames": [
+      {
+        "name": "मरामपल्ली",
+        "locale": "mr_IN"
+      },
+      {
+        "name": "Maraampalli",
+        "locale": "en"
+      }
+    ],
+    "datatype": {
+      "name": "N/A"
+    }
+  },
+  {
+    "name": "Gurnur",
+    "uuid": "b085dc51-e327-45eb-8a87-7ace4216b58f",
+    "conceptNames": [
+      {
+        "name": "गोरनुर",
+        "locale": "mr_IN"
+      },
+      {
+        "name": "Gurnur",
+        "locale": "en"
+      }
+    ],
+    "datatype": {
+      "name": "N/A"
+    }
+  },
+  {
+    "name": "Chichoda",
+    "uuid": "81a0be55-6dde-46ba-8bdc-0d96bed5fbbd",
+    "conceptNames": [
+      {
+        "name": "चिचोड़ा",
+        "locale": "mr_IN"
+      },
+      {
+        "name": "Chichoda",
+        "locale": "en"
+      }
+    ],
+    "datatype": {
+      "name": "N/A"
+    }
+  },
+  {
+    "name": "Rela",
+    "uuid": "b91b4d68-2c67-48a1-95b2-33166b17b2c7",
+    "conceptNames": [
+      {
+        "name": "रेला",
+        "locale": "mr_IN"
+      },
+      {
+        "name": "Rela",
+        "locale": "en"
+      }
+    ],
+    "datatype": {
+      "name": "N/A"
+    }
+  },
+  {
+    "name": "Other Village",
+    "uuid": "d2aafd66-8202-4890-9c30-4ed9614297e6",
+    "conceptNames": [
+      {
+        "name": "दूसरा गांव",
+        "locale": "mr_IN"
+      },
+      {
+        "name": "Other Village",
+        "locale": "en"
+      }
+    ],
+    "datatype": {
+      "name": "N/A"
+    }
+  },
+  {
+    "name": "Pengunda",
+    "uuid": "619e8865-4197-4d8f-b30e-b699287792f0",
+    "conceptNames": [
+      {
+        "name": "पेनगुंडा",
+        "locale": "mr_IN"
+      },
+      {
+        "name": "Pengunda",
+        "locale": "en"
+      }
+    ],
+    "datatype": {
+      "name": "N/A"
+    }
+  },
+  {
+    "name": "Kucher",
+    "uuid": "25c05a23-2f1e-4734-8bf7-9807f7b582c6",
+    "conceptNames": [
+      {
+        "name": "कुच्चेर",
+        "locale": "mr_IN"
+      },
+      {
+        "name": "Kucher",
+        "locale": "en"
+      }
+    ],
+    "datatype": {
+      "name": "N/A"
+    }
+  },
+  {
+    "name": "Mahakapadi",
+    "uuid": "eb8bc66f-89fc-4068-b5b6-25c9685d53bc",
+    "conceptNames": [
+      {
+        "name": "महाकापाड़ी",
+        "locale": "mr_IN"
+      },
+      {
+        "name": "Mahakapadi",
+        "locale": "en"
+      }
+    ],
+    "datatype": {
+      "name": "N/A"
+    }
+  },
+  {
+    "name": "Boriya",
+    "uuid": "01adec27-8db9-4f62-9147-0c6c843f1a46",
+    "conceptNames": [
+      {
+        "name": "बोरिया",
+        "locale": "mr_IN"
+      },
+      {
+        "name": "Boriya",
+        "locale": "en"
+      }
+    ],
+    "datatype": {
+      "name": "N/A"
+    }
+  },
+  {
+    "name": "Gopnar",
+    "uuid": "75532e8a-35bc-4c06-8092-5efd9060e4ad",
+    "conceptNames": [
+      {
+        "name": "गोपनार",
+        "locale": "mr_IN"
+      },
+      {
+        "name": "Gopnar",
+        "locale": "en"
+      }
+    ],
+    "datatype": {
+      "name": "N/A"
+    }
+  },
+  {
+    "name": "Hodri",
+    "uuid": "37ac7fae-68c0-4bb6-b032-c7c8ec09303b",
+    "conceptNames": [
+      {
+        "name": "होडरी",
+        "locale": "mr_IN"
+      },
+      {
+        "name": "Hodri",
+        "locale": "en"
+      }
+    ],
+    "datatype": {
+      "name": "N/A"
+    }
+  },
+  {
+    "name": "Lashkar",
+    "uuid": "80f758c5-1376-4583-9326-b25afad19d0b",
+    "conceptNames": [
+      {
+        "name": "लष्कर",
+        "locale": "mr_IN"
+      },
+      {
+        "name": "Lashkar",
+        "locale": "en"
+      }
+    ],
+    "datatype": {
+      "name": "N/A"
+    }
+  },
+  {
+    "name": "Aaldandi",
+    "uuid": "0e9464f3-bf63-4b74-adac-118f25a8a029",
+    "conceptNames": [
+      {
+        "name": "आल्डण्डी",
+        "locale": "mr_IN"
+      },
+      {
+        "name": "Aaldandi",
+        "locale": "en"
+      }
+    ],
+    "datatype": {
+      "name": "N/A"
+    }
+  },
+  {
+    "name": "Moradpur",
+    "uuid": "65f732bc-9aec-4a14-a186-6e769ffd66f2",
+    "conceptNames": [
+      {
+        "name": "मोरादपुर",
+        "locale": "mr_IN"
+      },
+      {
+        "name": "Other Village",
+        "locale": "en"
+      }
+    ],
+    "datatype": {
+      "name": "N/A"
+    }
+  },
+  {
+    "name": "Parenar",
+    "uuid": "325f2af2-c870-4625-94e7-69c0cefad0eb",
+    "conceptNames": [
+      {
+        "name": "पारायनार",
+        "locale": "mr_IN"
+      },
+      {
+        "name": "Parenar",
+        "locale": "en"
+      }
+    ],
+    "datatype": {
+      "name": "N/A"
+    }
+  },
+  {
+    "name": "Midapalli",
+    "uuid": "f092fa51-a1a5-45ab-ba69-29e135267c41",
+    "conceptNames": [
+      {
+        "name": "मिडापल्ली",
+        "locale": "mr_IN"
+      },
+      {
+        "name": "Midapalli",
+        "locale": "en"
+      }
+    ],
+    "datatype": {
+      "name": "N/A"
+    }
+  },
+  {
+    "name": "Other Village",
+    "uuid": "02caee40-501b-4184-b12c-674e2a4cdaf7",
+    "conceptNames": [
+      {
+        "name": "दूसरा गांव",
+        "locale": "mr_IN"
+      },
+      {
+        "name": "Other Village",
+        "locale": "en"
+      }
+    ],
+    "datatype": {
+      "name": "N/A"
+    }
+  },
+  {
+    "name": "Nilgunda",
+    "uuid": "7e6b7fd2-959a-42fc-b1bf-d6e4cef8da3b",
+    "conceptNames": [
+      {
+        "name": "निलगुंडा",
+        "locale": "mr_IN"
+      },
+      {
+        "name": "Nilgunda",
+        "locale": "en"
+      }
+    ],
+    "datatype": {
+      "name": "N/A"
+    }
+  },
+  {
+    "name": "Kavande",
+    "uuid": "d650d7c1-7e68-4053-87e7-e58a15484542",
+    "conceptNames": [
+      {
+        "name": "कावंडे",
+        "locale": "mr_IN"
+      },
+      {
+        "name": "Kavande",
+        "locale": "en"
+      }
+    ],
+    "datatype": {
+      "name": "N/A"
+    }
+  },
+  {
+    "name": "Morometta",
+    "uuid": "9b077339-ea4a-4f7f-82c9-03505d75db87",
+    "conceptNames": [
+      {
+        "name": "मोरोमेट्टा",
+        "locale": "mr_IN"
+      },
+      {
+        "name": "Morometta",
+        "locale": "en"
+      }
+    ],
+    "datatype": {
+      "name": "N/A"
+    }
+  },
+  {
+    "name": "Mardmallenga",
+    "uuid": "9b077339-ea4a-4f7f-82c9-03505d75db87",
+    "conceptNames": [
+      {
+        "name": "मर्दमल्लेन्गा",
+        "locale": "mr_IN"
+      },
+      {
+        "name": "Mardmallenga",
+        "locale": "en"
+      }
+    ],
+    "datatype": {
+      "name": "N/A"
+    }
+  },
+  {
+    "name": "Ittalvar",
+    "uuid": "9b077339-ea4a-4f7f-82c9-03505d75db87",
+    "conceptNames": [
+      {
+        "name": "इत्ताल्वर",
+        "locale": "mr_IN"
+      },
+      {
+        "name": "Ittalvar",
         "locale": "en"
       }
     ],
