@@ -1597,19 +1597,19 @@ var treatmentCodes = {
 
 var defaultWeightRangesToCode = [
     {start: 3.0, end: 5.5, code: "X1"},
-    {start: 5.6, end: 7.9, code: "X2"},
-    {start: 8.0, end: 13, code: "X3"},
-    {start: 13, end: 15.9, code: "X4"},
-    {start: 16, end: 25.5, code: "X5"},
+    {start: 5.6, end: 8.0, code: "X2"},
+    {start: 8.1, end: 13.0, code: "X3"},
+    {start: 13.1, end: 16.0, code: "X4"},
+    {start: 16.1, end: 25.5, code: "X5"},
     {start: 25.6, end: 32.5, code: "X6"},
     {start: 32.6, end: 1000, code: "X7"}
 ];
 
 var weightRangesToCodeForLonartForte = [
-    {start: 3.0, end: 5.5, code: "X0"},
-    {start: 5.0, end: 14.0, code: "X1"},
-    {start: 15, end: 24, code: "X2"},
-    {start: 25, end: 34, code: "X3"},
+    {start: 3.0, end: 4.9, code: "X0"},
+    {start: 5.0, end: 14.9, code: "X1"},
+    {start: 15, end: 24.9, code: "X2"},
+    {start: 25, end: 34.9, code: "X3"},
     {start: 35, end: 1000, code: "X4"},
 ];
 
@@ -1730,7 +1730,7 @@ var getWeightRangeToCode = function (complaint, weight) {
         weightRangeToCodeMap = defaultWeightRangesToCode;
 
     return weightRangeToCodeMap.find(function (entry) {
-        return entry.start <= weight && entry.end > weight;
+        return entry.start <= weight && entry.end >= weight;
     });
 };
 

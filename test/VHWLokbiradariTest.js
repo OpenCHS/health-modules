@@ -148,6 +148,12 @@ describe('Make Decision', function () {
         expect((decisions[1].alert.match(/उलटी असल्यास/g) || []).length).to.equal(1, decisions[0].alert);
     });
 
+    it('Boundary condition of weight', () => {
+        var complaintConceptName = "Complaint";
+        var decisions = decision.getDecision(new RuleContext().set(complaintConceptName, ["Fever"]).set("Sex", ["Male"]).set("Age", 10).set("Weight", 5.5).set("Paracheck", ["Positive PV"]));
+        expect(decisions.length).to.equal(1);
+    });
+
     var completeValue = function (decisions) {
         var message = "";
         for (var i = 0; i < decisions.length; i++)
