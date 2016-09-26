@@ -6,6 +6,10 @@
   "conceptUUID": "db7d9086-f5ce-4652-9925-741041b13a38",
   "questions": [
     {
+      "name": "Date of visit",
+      "default": "Today"
+    },
+    {
       "name": "Name"
     },
     {
@@ -66,6 +70,7 @@
     "Treatment"
   ],
   "summaryFields": [
+    "Date of visit",
     "Name",
     "Village"
   ]

@@ -34,15 +34,15 @@
     }
   },
   {
-    "name": "Date of Birth",
+    "name": "Date of visit",
     "uuid": "fc0dbe3b-9c4d-424f-ac13-fe9f563ae311",
     "conceptNames": [
       {
-        "name": "जन्मतिथि",
+        "name": "भेट तारीख",
         "locale": "mr_IN"
       },
       {
-        "name": "Date of Birth",
+        "name": "Date of visit",
         "locale": "en"
       }
     ],
