@@ -165,6 +165,14 @@ describe('Make Decision', function () {
         var decisions = decision.getDecision(new RuleContext().set(complaintConceptName, ["Cold", "Fever"]).set("Sex", ["Male"]).set("Age", 10).set("Weight", 8).set("Paracheck", ["Positive PV"]));
         expect((decisions[0].value.match(/क्लोरोक्विन/g) || []).length).to.equal(3, decisions[0].value);
     });
+    
+    it('Fever, Body Ache & Vomiting', () => {
+        var complaintConceptName = "Complaint";
+        var decisions = decision.getDecision(new RuleContext().set(complaintConceptName, ["Fever", "Body Ache", "Vomiting"]).set("Sex", ["Male"]).set("Age", 20).set("Weight", 18));
+        var message = completeValue(decisions);
+        expect((message.match(/पॅरासिटामॉल/g) || []).length).to.equal(1, message);
+        expect((message.match(/३ दिवस/g) || []).length).to.equal(3, message);
+    });
 
     var completeValue = function (decisions) {
         var message = "";

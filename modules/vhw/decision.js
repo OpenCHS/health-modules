@@ -1593,6 +1593,113 @@ var treatmentCodes = {
             ]
         }
     },
+    "Giddiness": {
+        "X1": {
+            "1-30": [
+                {
+                    "Medicine": "Iron Folic Acid",
+                    "Amount": 1,
+                    "Dose Unit": "Tablet",
+                    "Times": 2
+                },
+                {
+                    "Medicine": "ORS",
+                    "Amount": 0,
+                    "Dose Unit": "Powder",
+                    "Times": "Special Instruction"
+                }]
+        },
+        "X2": {
+            "1-30": [
+                {
+                    "Medicine": "Iron Folic Acid",
+                    "Amount": 1,
+                    "Dose Unit": "Tablet",
+                    "Times": 2
+                },
+                {
+                    "Medicine": "ORS",
+                    "Amount": 0,
+                    "Dose Unit": "Powder",
+                    "Times": "Special Instruction"
+                }]
+        },
+        "X3": {
+            "1-30": [
+                {
+                    "Medicine": "Iron Folic Acid",
+                    "Amount": 1,
+                    "Dose Unit": "Tablet",
+                    "Times": 2
+                },
+                {
+                    "Medicine": "ORS",
+                    "Amount": 0,
+                    "Dose Unit": "Powder",
+                    "Times": "Special Instruction"
+                }]
+        },
+        "X4": {
+            "1-30": [
+                {
+                    "Medicine": "Iron Folic Acid",
+                    "Amount": 1,
+                    "Dose Unit": "Tablet",
+                    "Times": 2
+                },
+                {
+                    "Medicine": "ORS",
+                    "Amount": 0,
+                    "Dose Unit": "Powder",
+                    "Times": "Special Instruction"
+                }]
+        },
+        "X5": {
+            "1-30": [
+                {
+                    "Medicine": "Iron Folic Acid",
+                    "Amount": 1,
+                    "Dose Unit": "Tablet",
+                    "Times": 2
+                },
+                {
+                    "Medicine": "ORS",
+                    "Amount": 0,
+                    "Dose Unit": "Powder",
+                    "Times": "Special Instruction"
+                }]
+        },
+        "X6": {
+            "1-30": [
+                {
+                    "Medicine": "Iron Folic Acid",
+                    "Amount": 1,
+                    "Dose Unit": "Tablet",
+                    "Times": 2
+                },
+                {
+                    "Medicine": "ORS",
+                    "Amount": 0,
+                    "Dose Unit": "Powder",
+                    "Times": "Special Instruction"
+                }]
+        },
+        "X7": {
+            "1-30": [
+                {
+                    "Medicine": "Iron Folic Acid",
+                    "Amount": 1,
+                    "Dose Unit": "Tablet",
+                    "Times": 2
+                },
+                {
+                    "Medicine": "ORS",
+                    "Amount": 0,
+                    "Dose Unit": "Powder",
+                    "Times": "Special Instruction"
+                }]
+        }
+    },
 };
 
 var defaultWeightRangesToCode = [
@@ -1648,7 +1755,7 @@ var englishWordsToMarathi = {
     "Before": "जेवणाआधी",
     "After": "जेवणानंतर",
     "": "",
-    "ORS": ""
+    "ORS": "ORS"
 };
 
 var dayInMarathi = {
@@ -1660,7 +1767,7 @@ var dayInMarathi = {
 var medicines = {
     "Abdek Syrup": {take: ""},
     "BC": {take: ""},
-    "Calcium": {take: "After"},
+    "Calcium": {take: "Before"},
     "Cetrizine": {take: "After"},
     "Cetrizine Syrup": {take: "After"},
     "Cifran": {take: "After"},
@@ -1704,7 +1811,7 @@ var dosageTimingToMarathi = function (complaint, times) {
     if (times === "Once Evening") return "रोज संध्याकाळी एकदा";
     if (times === "Special Instruction" && complaint === "Scabies") return "औषध मानेपासून संपूर्ण अंगास आंघोळीनंतर लावणे आणि कपडे १ तास गरम पाण्यात उकाडविणे";
     if (times === "Special Instruction" && complaint === "Ring Worm") return "गजकर्णाच्या जागेवर लावण्यास सांगावे";
-    if (times === "Special Instruction" && (complaint === "Vomiting" || complaint === "Diarrhoea")) return "";
+    if (times === "Special Instruction" && (complaint === "Vomiting" || complaint === "Diarrhoea" || complaint === "Giddiness")) return " पिण्यास सांगावे";
     console.error("Number of times " + times + " not supported yet");
 };
 
@@ -1824,7 +1931,6 @@ var getDecision = function (ruleContext) {
                 message += englishWordsToMarathi[medicines[daysPrescription.Medicine].take];
                 message += "\n";
             }
-            message += "\n";
         }
         decision.value = message;
 
