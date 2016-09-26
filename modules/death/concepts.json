@@ -212,6 +212,23 @@
     ]
   },
   {
+    "name": "Date of Death",
+    "uuid": "54b468c2-f8a2-4b7d-9ef9-a26674d1905f",
+    "conceptNames": [
+      {
+        "name": "",
+        "locale": "mr_IN"
+      },
+      {
+        "name": "Date of Death",
+        "locale": "en"
+      }
+    ],
+    "datatype": {
+      "name": "Date"
+    }
+  },
+  {
     "name": "Reason for Death",
     "uuid": "b6261d0a-fea4-4ac0-80fc-7e628afd4f79",
     "conceptNames": [
