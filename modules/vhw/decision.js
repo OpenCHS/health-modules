@@ -1734,6 +1734,11 @@ var getWeightRangeToCode = function (complaint, weight) {
     });
 };
 
+var hasMalaria = function (paracheckResult) {
+    return paracheckResult !== undefined && paracheckResult.length === 1 &&
+        paracheckResult[0].includes("Positive");
+};
+
 var getDecision = function (ruleContext) {
     var weight = ruleContext.getAnswerFor('Weight');
     var complaints = ruleContext.getAnswerFor('Complaint');
@@ -1741,6 +1746,9 @@ var getDecision = function (ruleContext) {
     var sex = ruleContext.getAnswerFor('Sex')[0];
     var paracheckResult = ruleContext.getAnswerFor('Paracheck');
 
+    if (complaints.indexOf("Fever") === -1 && hasMalaria(paracheckResult)) {
+        complaints.push("Fever");
+    }
     complaints = complaints.filter(function (item) {
         return item == 'Fever';
     }).concat(complaints.filter(function (item) {
@@ -1760,8 +1768,7 @@ var getDecision = function (ruleContext) {
         var prescriptionSet;
         if(potentiallyPregnant && ["Cough", "Boils", "Wound"].indexOf(complaints[complaintIndex]) !== -1) {
             prescriptionSet = treatmentCodes["Cifran-Special"];
-        } else if (complaints[complaintIndex] === "Fever" && paracheckResult !== undefined && paracheckResult.length === 1 &&
-                    paracheckResult[0].includes("Positive")) {
+        } else if (complaints[complaintIndex] === "Fever" && hasMalaria(paracheckResult)) {
             prescriptionSet = treatmentCodes["Malaria"];
         } else {
             prescriptionSet = treatmentCodes[complaints[complaintIndex]];

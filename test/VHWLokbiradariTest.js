@@ -154,6 +154,18 @@ describe('Make Decision', function () {
         expect(decisions.length).to.equal(1);
     });
 
+    it('Give malaria medicine based on paracheck being positive', () => {
+        var complaintConceptName = "Complaint";
+        var decisions = decision.getDecision(new RuleContext().set(complaintConceptName, ["Cold"]).set("Sex", ["Male"]).set("Age", 10).set("Weight", 5.5).set("Paracheck", ["Positive PV"]));
+        expect((decisions[0].value.match(/क्लोरोक्विन/g) || []).length).to.equal(3, decisions[0].value);
+    });
+
+    it('Give malaria medicine based on paracheck being positive - when fever is also specified', () => {
+        var complaintConceptName = "Complaint";
+        var decisions = decision.getDecision(new RuleContext().set(complaintConceptName, ["Cold", "Fever"]).set("Sex", ["Male"]).set("Age", 10).set("Weight", 8).set("Paracheck", ["Positive PV"]));
+        expect((decisions[0].value.match(/क्लोरोक्विन/g) || []).length).to.equal(3, decisions[0].value);
+    });
+
     var completeValue = function (decisions) {
         var message = "";
         for (var i = 0; i < decisions.length; i++)
