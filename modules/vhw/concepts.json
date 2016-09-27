@@ -964,7 +964,7 @@
     "uuid": "7c69b6cd-78cc-446d-9930-d3786c73f838",
     "conceptNames": [
       {
-        "name": "बोडंगे",
+        "name": "बोळन्गे",
         "locale": "mr_IN"
       },
       {
@@ -1253,7 +1253,7 @@
     "uuid": "0e9464f3-bf63-4b74-adac-118f25a8a029",
     "conceptNames": [
       {
-        "name": "आल्डण्डी",
+        "name": "आलदंडी",
         "locale": "mr_IN"
       },
       {
@@ -1270,11 +1270,11 @@
     "uuid": "65f732bc-9aec-4a14-a186-6e769ffd66f2",
     "conceptNames": [
       {
-        "name": "मोरादपुर",
+        "name": "मोरडपार",
         "locale": "mr_IN"
       },
       {
-        "name": "Other Village",
+        "name": "Moradpur",
         "locale": "en"
       }
     ],
@@ -1287,7 +1287,7 @@
     "uuid": "325f2af2-c870-4625-94e7-69c0cefad0eb",
     "conceptNames": [
       {
-        "name": "पारायनार",
+        "name": "परायनर",
         "locale": "mr_IN"
       },
       {
@@ -1304,7 +1304,7 @@
     "uuid": "f092fa51-a1a5-45ab-ba69-29e135267c41",
     "conceptNames": [
       {
-        "name": "मिडापल्ली",
+        "name": "मिडदापल्ली",
         "locale": "mr_IN"
       },
       {
@@ -1317,28 +1317,11 @@
     }
   },
   {
-    "name": "Other Village",
-    "uuid": "02caee40-501b-4184-b12c-674e2a4cdaf7",
-    "conceptNames": [
-      {
-        "name": "दूसरा गांव",
-        "locale": "mr_IN"
-      },
-      {
-        "name": "Other Village",
-        "locale": "en"
-      }
-    ],
-    "datatype": {
-      "name": "N/A"
-    }
-  },
-  {
     "name": "Nilgunda",
     "uuid": "7e6b7fd2-959a-42fc-b1bf-d6e4cef8da3b",
     "conceptNames": [
       {
-        "name": "निलगुंडा",
+        "name": "नेलगुंडा",
         "locale": "mr_IN"
       },
       {
@@ -1389,7 +1372,7 @@
     "uuid": "e540c9f6-b4d4-43ad-955b-5aca9a985bbb",
     "conceptNames": [
       {
-        "name": "मर्दमल्लेन्गा",
+        "name": "मर्दमलिंगा",
         "locale": "mr_IN"
       },
       {
@@ -1406,7 +1389,7 @@
     "uuid": "ee27f7d3-14a2-4fbf-ab9a-c3a5a6ef6aae",
     "conceptNames": [
       {
-        "name": "इत्ताल्वर",
+        "name": "हितलवारा",
         "locale": "mr_IN"
       },
       {
