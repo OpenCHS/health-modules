@@ -1,77 +1,67 @@
 {
   "uuid": "81ab405a-4c31-11e6-beb8-9e71128cae77",
-  "name": "vhw",
+  "encounterType": "outpatient",
   "display": "आरोग्य केंद्र",
   "description": "VHW app",
-  "conceptUUID": "db7d9086-f5ce-4652-9925-741041b13a38",
   "questions": [
     {
-      "name": "Date of visit",
-      "default": "Today"
-    },
-    {
-      "name": "Name"
-    },
-    {
-      "name": "Age"
-    },
-    {
-      "name": "Sex"
-    },
-    {
-      "name": "Village"
-    },
-    {
-      "name": "Weight"
+      "name": "Weight",
+      "conceptUUID": ""
     },
     {
       "name": "Temperature",
-      "mandatory": false
+      "mandatory": false,
+      "conceptUUID": ""
     },
     {
       "name": "Respiratory Rate",
-      "mandatory": false
+      "mandatory": false,
+      "conceptUUID": ""
     },
     {
       "name": "Pulse",
-      "mandatory": false
+      "mandatory": false,
+      "conceptUUID": ""
     },
     {
       "name": "Systolic",
-      "mandatory": false
+      "mandatory": false,
+      "conceptUUID": ""
     },
     {
       "name": "Diastolic",
-      "mandatory": false
+      "mandatory": false,
+      "conceptUUID": ""
     },
     {
       "name": "Pallor",
-      "mandatory": false
+      "mandatory": false,
+      "conceptUUID": ""
     },
     {
       "name": "Pedal Edema",
-      "mandatory": false
+      "mandatory": false,
+      "conceptUUID": ""
     },
     {
       "name": "Skin Condition",
       "mandatory": false,
-      "multiSelect" : true
+      "multiSelect" : true,
+      "conceptUUID": ""
     },
     {
       "name": "Paracheck",
-      "mandatory": false
+      "mandatory": false,
+      "conceptUUID": ""
     },
     {
       "name": "Complaint",
-      "multiSelect" : true
+      "multiSelect" : true,
+      "conceptUUID": ""
+    },
+    {
+      "name": "Treatment",
+      "conceptUUID": ""
     }
-  ],
-  "decisionKeys": [
-    "Treatment"
-  ],
-  "summaryFields": [
-    "Date of visit",
-    "Name",
-    "Village"
   ]
 }
