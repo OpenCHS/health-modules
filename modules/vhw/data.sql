@@ -3,7 +3,13 @@ CREATE OR REPLACE FUNCTION setupData()
   DECLARE motherEnrolmentFormId BIGINT;
   DECLARE motherEnrolmentFormDefaultFormGroup BIGINT;
   DECLARE formElementId BIGINT;
+  DECLARE foo RECORD;
 BEGIN
+    raise notice 'Starting....';
+
+    SELECT deleteMetaDataCascade('Mother Enrolment') INTO foo;
+    raise notice 'Old data deleted';
+
     SELECT create_form('Mother Enrolment', 'e1472f56-c057-4aea-9f46-0decd9d068fe', 'ProgramEnrolment') INTO motherEnrolmentFormId;
     raise notice 'Form Created';
 
@@ -21,4 +27,9 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-SELECT setupdata();
+INSERT INTO program (name, uuid, version, created_by_id, last_modified_by_id, created_date_time, last_modified_date_time)
+VALUES ('Mother', 'a663fd1c-72af-443b-92d9-4c8c3ca8baef', 1, 1, 1, current_timestamp, current_timestamp);
+INSERT INTO program (name, uuid, version, created_by_id, last_modified_by_id, created_date_time, last_modified_date_time)
+VALUES ('Child', 'f54533e4-5b3e-46f7-8f69-3ae1b1ce5172', 1, 1, 1, current_timestamp, current_timestamp);
+
+SELECT setupData();
