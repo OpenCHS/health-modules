@@ -8,4 +8,4 @@ deps:
 	npm install
 
 deploy-local:
-	cp modules/vhw/*.js ../openchs-server/external/modules/vhw/
+	cp js/*.js ../openchs-server/external/
