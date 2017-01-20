@@ -1,5 +1,5 @@
 var expect = require('chai').expect;
-var decision = require('../modules/vhw/decision');
+var decision = require('../js/encounterDecision');
 var RuleContext = require('./RuleContext');
 
 describe('Make Decision', function () {
