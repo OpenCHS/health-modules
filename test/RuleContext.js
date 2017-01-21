@@ -1,7 +1,7 @@
 function RuleContext() {
     this.questionAnswers = new Map();
 
-    this.getAnswerFor = function (questionName) {
+    this.getObservationValue = function (questionName) {
         return this.questionAnswers.get(questionName);
     };
 
@@ -15,7 +15,7 @@ function RuleContext() {
     };
 
     this.getDurationInMonths = function (questionName) {
-        var duration = this.questionAnswers.get(questionName);
+        const duration = this.questionAnswers.get(questionName);
         return duration.inMonths;
     }
 }

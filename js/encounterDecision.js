@@ -1,4 +1,4 @@
-var treatmentCodes = {
+const treatmentCodes = {
     "Malaria": {
         "X1": {
             "1": [
@@ -1702,7 +1702,7 @@ var treatmentCodes = {
     },
 };
 
-var defaultWeightRangesToCode = [
+const defaultWeightRangesToCode = [
     {start: 3.0, end: 5.5, code: "X1"},
     {start: 5.6, end: 8.0, code: "X2"},
     {start: 8.1, end: 13.0, code: "X3"},
@@ -1712,7 +1712,7 @@ var defaultWeightRangesToCode = [
     {start: 32.6, end: 1000, code: "X7"}
 ];
 
-var weightRangesToCodeForLonartForte = [
+const weightRangesToCodeForLonartForte = [
     {start: 3.0, end: 4.9, code: "X0"},
     {start: 5.0, end: 14.9, code: "X1"},
     {start: 15, end: 24.9, code: "X2"},
@@ -1720,11 +1720,11 @@ var weightRangesToCodeForLonartForte = [
     {start: 35, end: 1000, code: "X4"},
 ];
 
-var complaintToWeightRangesToCodeMap = {
+const complaintToWeightRangesToCodeMap = {
     "Chloroquine Resistant Malaria": weightRangesToCodeForLonartForte
 };
 
-var englishWordsToMarathi = {
+const englishWordsToMarathi = {
     "Chloroquin": "क्लोरोक्विन",
     "Chloroquin Syrup": "क्लोरोक्विन सायरप",
     "Paracetamol Syrup": "पॅरासिटामॉल सायरप",
@@ -1758,13 +1758,13 @@ var englishWordsToMarathi = {
     "ORS": "ORS"
 };
 
-var dayInMarathi = {
+const dayInMarathi = {
     "1": "पहिल्या दिवशी",
     "2": "दुसऱ्या दिवशी",
     "3": "तिसऱ्या दिवशी"
 };
 
-var medicines = {
+const medicines = {
     "Abdek Syrup": {take: ""},
     "BC": {take: ""},
     "Calcium": {take: "Before"},
@@ -1792,7 +1792,7 @@ var medicines = {
     "Septran Syrup": {take: "After"}
 };
 
-var doseQuantityToMarathi = function (doseQuantity, doseUnit) {
+const doseQuantityToMarathi = function (doseQuantity, doseUnit) {
     if (doseQuantity === 0.25) return "१/४";
     if (doseQuantity === 0.5 && doseUnit === "Spoon") return "अर्धा";
     if (doseQuantity === 0.5 && doseUnit === "Tablet") return "अर्धी";
@@ -1804,7 +1804,7 @@ var doseQuantityToMarathi = function (doseQuantity, doseUnit) {
     console.error("Dose quantity - " + doseQuantity + " for dose unit - " + doseUnit + " is not supported");
 };
 
-var dosageTimingToMarathi = function (complaint, times) {
+const dosageTimingToMarathi = function (complaint, times) {
     if (times === 1 || times === "1") return "दिवसातून एकदा";
     if (times === 2 || times === "2") return "दिवसातून दोन वेळा";
     if (times === 3 || times === "3") return "दिवसातून तीन वेळा";
@@ -1815,7 +1815,7 @@ var dosageTimingToMarathi = function (complaint, times) {
     console.error("Number of times " + times + " not supported yet");
 };
 
-var getDoseUnitMessage = function (daysPrescription) {
+const getDoseUnitMessage = function (daysPrescription) {
     if (daysPrescription["Dose Unit"] === "Spoon")
         return daysPrescription.Amount < 2 ? "चमचा" : "चमचे";
     else if (daysPrescription["Dose Unit"] === "ml")
@@ -1823,7 +1823,7 @@ var getDoseUnitMessage = function (daysPrescription) {
     return "टॅबलेट";
 };
 
-var getKeys = function (obj) {
+const getKeys = function (obj) {
     var keys = [];
     for (var key in obj) {
         keys.push(key);
@@ -1831,7 +1831,7 @@ var getKeys = function (obj) {
     return keys;
 };
 
-var getWeightRangeToCode = function (complaint, weight) {
+const getWeightRangeToCode = function (complaint, weight) {
     var weightRangeToCodeMap = complaintToWeightRangesToCodeMap[complaint];
     if (weightRangeToCodeMap === undefined || weightRangeToCodeMap === null)
         weightRangeToCodeMap = defaultWeightRangesToCode;
@@ -1841,17 +1841,17 @@ var getWeightRangeToCode = function (complaint, weight) {
     });
 };
 
-var hasMalaria = function (paracheckResult) {
+const hasMalaria = function (paracheckResult) {
     return paracheckResult !== undefined && paracheckResult.length === 1 &&
         paracheckResult[0].includes("Positive");
 };
 
-var getDecision = function (ruleContext) {
-    var weight = ruleContext.getAnswerFor('Weight');
-    var complaints = ruleContext.getAnswerFor('Complaint');
-    var age = ruleContext.getAnswerFor('Age');
-    var sex = ruleContext.getAnswerFor('Sex')[0];
-    var paracheckResult = ruleContext.getAnswerFor('Paracheck');
+const getDecision = function (encounter) {
+    const weight = encounter.getObservationValue('Weight');
+    var complaints = encounter.getObservationValue('Complaint');
+    const age = encounter.getObservationValue('Age');
+    const sex = encounter.getObservationValue('Sex')[0];
+    const paracheckResult = encounter.getObservationValue('Paracheck');
 
     if (complaints.indexOf("Fever") === -1 && hasMalaria(paracheckResult)) {
         complaints.push("Fever");
@@ -1862,18 +1862,18 @@ var getDecision = function (ruleContext) {
         return item != 'Fever'
     }));
 
-    var potentiallyPregnant = (sex === "Female" && (age >= 16 && age <= 40));
-    var decisions = [];
-    var prescribedMedicines = [];
+    const potentiallyPregnant = (sex === "Female" && (age >= 16 && age <= 40));
+    const decisions = [];
+    const prescribedMedicines = [];
 
     for (var complaintIndex = 0; complaintIndex < complaints.length; complaintIndex++) {
-        var weightRangeToCode = getWeightRangeToCode(complaints[complaintIndex], weight);
-        var decision = {};
+        const weightRangeToCode = getWeightRangeToCode(complaints[complaintIndex], weight);
+        const decision = {};
         decision.name = "Treatment";
         decision.code = weightRangeToCode.code;
 
         var prescriptionSet;
-        if(potentiallyPregnant && ["Cough", "Boils", "Wound"].indexOf(complaints[complaintIndex]) !== -1) {
+        if (potentiallyPregnant && ["Cough", "Boils", "Wound"].indexOf(complaints[complaintIndex]) !== -1) {
             prescriptionSet = treatmentCodes["Cifran-Special"];
         } else if (complaints[complaintIndex] === "Fever" && hasMalaria(paracheckResult)) {
             prescriptionSet = treatmentCodes["Malaria"];
@@ -1881,13 +1881,13 @@ var getDecision = function (ruleContext) {
             prescriptionSet = treatmentCodes[complaints[complaintIndex]];
         }
 
-        var prescription = prescriptionSet[weightRangeToCode.code];
+        const prescription = prescriptionSet[weightRangeToCode.code];
         if (prescription === null || prescription === undefined) {
             throw "No prescription defined for " + complaints[complaintIndex] + " for weight: " + weight + ", calculated code: " + weightRangeToCode.code;
         }
 
         var message = "";
-        var dayTokens = getKeys(prescription);
+        const dayTokens = getKeys(prescription);
         for (var token = 0; token < dayTokens.length; token++) {
             var firstToken = dayTokens[0];
 
@@ -1951,20 +1951,20 @@ var getDecision = function (ruleContext) {
     return decisions;
 };
 
-var validate = function (ruleContext) {
-    var complaints = ruleContext.getAnswerFor('Complaint');
-    var age = ruleContext.getDurationInYears('Age');
-    var sex = ruleContext.getAnswerFor('Sex')[0];
-    var weight = ruleContext.getAnswerFor('Weight');
-    var paracheckResult = ruleContext.getAnswerFor('Paracheck');
+const validate = function (encounter) {
+    const complaints = encounter.getObservationValue('Complaint');
+    const age = encounter.getDurationInYears('Age');
+    const sex = encounter.getObservationValue('Sex')[0];
+    const weight = encounter.getObservationValue('Weight');
+    const paracheckResult = encounter.getObservationValue('Paracheck');
 
-    var validationResult = {
+    const validationResult = {
         "passed": false,
         "message": ""
     };
 
     for (var complaintIndex = 0; complaintIndex < complaints.length; complaintIndex++) {
-        var weightRangeToCode = getWeightRangeToCode(complaints[complaintIndex], weight);
+        const weightRangeToCode = getWeightRangeToCode(complaints[complaintIndex], weight);
 
         if (sex === 'Male' && complaints.indexOf('Pregnancy') !== -1) {
             validationResult.passed = false;
