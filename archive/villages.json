@@ -1,0 +1,100 @@
+{
+  "name": "Village",
+  "uuid": "f24484b3-b9dd-4a06-a292-a21f4ca382f4",
+  "conceptNames": [
+    {
+      "name": "गाव",
+      "locale": "mr_IN"
+    },
+    {
+      "name": "Village",
+      "locale": "en"
+    }
+  ],
+  "datatype": {
+    "name": "Coded"
+  },
+  "answers": [
+    {
+      "name": "Pengunda"
+    },
+    {
+      "name": "Parenar"
+    },
+    {
+      "name": "Kucher"
+    },
+    {
+      "name": "Mahakapadi"
+    },
+    {
+      "name": "Ghotpadi"
+    },
+    {
+      "name": "Bodonge"
+    },
+    {
+      "name": "Bhatpar"
+    },
+    {
+      "name": "Darbha"
+    },
+    {
+      "name": "Juwi"
+    },
+    {
+      "name": "Mardmallenga"
+    },
+    {
+      "name": "Ittalvar"
+    },
+    {
+      "name": "Jinjagaon"
+    },
+    {
+      "name": "Maraampalli"
+    },
+    {
+      "name": "Gurnur"
+    },
+    {
+      "name": "Chichoda"
+    },
+    {
+      "name": "Boriya"
+    },
+    {
+      "name": "Rela"
+    },
+    {
+      "name": "Gopnar"
+    },
+    {
+      "name": "Hodri"
+    },
+    {
+      "name": "Lashkar"
+    },
+    {
+      "name": "Aaldandi"
+    },
+    {
+      "name": "Moradpur"
+    },
+    {
+      "name": "Midapalli"
+    },
+    {
+      "name": "Nilgunda"
+    },
+    {
+      "name": "Kavande"
+    },
+    {
+      "name": "Morometta"
+    },
+    {
+      "name": "Other Village"
+    }
+  ]
+},
