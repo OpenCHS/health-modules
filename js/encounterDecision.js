@@ -1847,47 +1847,43 @@ const hasMalaria = function (paracheckResult) {
 };
 
 const getDecision = function (encounter) {
-    const weight = encounter.getObservationValue('Weight');
-    var complaints = encounter.getObservationValue('Complaint');
-    const age = encounter.getObservationValue('Age');
-    const sex = encounter.getObservationValue('Sex')[0];
-    const paracheckResult = encounter.getObservationValue('Paracheck');
+    var params = getParameters(encounter);
 
-    if (complaints.indexOf("Fever") === -1 && hasMalaria(paracheckResult)) {
-        complaints.push("Fever");
+    if (params.complaints.indexOf("Fever") === -1 && hasMalaria(params.paracheckResult)) {
+        params.complaints.push("Fever");
     }
-    complaints = complaints.filter(function (item) {
+    params.complaints = params.complaints.filter(function (item) {
         return item == 'Fever';
-    }).concat(complaints.filter(function (item) {
+    }).concat(params.complaints.filter(function (item) {
         return item != 'Fever'
     }));
 
-    const potentiallyPregnant = (sex === "Female" && (age >= 16 && age <= 40));
-    const decisions = [];
-    const prescribedMedicines = [];
+    var potentiallyPregnant = (params.sex === "Female" && (params.age >= 16 && params.age <= 40));
+    var decisions = [];
+    var prescribedMedicines = [];
 
-    for (var complaintIndex = 0; complaintIndex < complaints.length; complaintIndex++) {
-        const weightRangeToCode = getWeightRangeToCode(complaints[complaintIndex], weight);
-        const decision = {};
+    for (var complaintIndex = 0; complaintIndex < params.complaints.length; complaintIndex++) {
+        var weightRangeToCode = getWeightRangeToCode(params.complaints[complaintIndex], params.weight);
+        var decision = {};
         decision.name = "Treatment";
         decision.code = weightRangeToCode.code;
 
         var prescriptionSet;
-        if (potentiallyPregnant && ["Cough", "Boils", "Wound"].indexOf(complaints[complaintIndex]) !== -1) {
+        if (potentiallyPregnant && ["Cough", "Boils", "Wound"].indexOf(params.complaints[complaintIndex]) !== -1) {
             prescriptionSet = treatmentCodes["Cifran-Special"];
-        } else if (complaints[complaintIndex] === "Fever" && hasMalaria(paracheckResult)) {
+        } else if (params.complaints[complaintIndex] === "Fever" && hasMalaria(params.paracheckResult)) {
             prescriptionSet = treatmentCodes["Malaria"];
         } else {
-            prescriptionSet = treatmentCodes[complaints[complaintIndex]];
+            prescriptionSet = treatmentCodes[params.complaints[complaintIndex]];
         }
 
-        const prescription = prescriptionSet[weightRangeToCode.code];
+        var prescription = prescriptionSet[weightRangeToCode.code];
         if (prescription === null || prescription === undefined) {
-            throw "No prescription defined for " + complaints[complaintIndex] + " for weight: " + weight + ", calculated code: " + weightRangeToCode.code;
+            throw "No prescription defined for " + params.complaints[complaintIndex] + " for weight: " + params.weight + ", calculated code: " + weightRangeToCode.code;
         }
 
         var message = "";
-        const dayTokens = getKeys(prescription);
+        var dayTokens = getKeys(prescription);
         for (var token = 0; token < dayTokens.length; token++) {
             var firstToken = dayTokens[0];
 
@@ -1926,7 +1922,7 @@ const getDecision = function (encounter) {
                     message += getDoseUnitMessage(daysPrescription);
                     message += " ";
                 }
-                message += dosageTimingToMarathi(complaints[complaintIndex], daysPrescription.Times);
+                message += dosageTimingToMarathi(params.complaints[complaintIndex], daysPrescription.Times);
                 message += " ";
                 message += englishWordsToMarathi[medicines[daysPrescription.Medicine].take];
                 message += "\n";
@@ -1934,14 +1930,14 @@ const getDecision = function (encounter) {
         }
         decision.value = message;
 
-        if (weight >= 13 && complaints[complaintIndex] === 'Malaria')
+        if (params.weight >= 13 && params.complaints[complaintIndex] === 'Malaria')
             decision.alert = "क्लोरोक्विन व पॅरासिटामॉल ही औषधे जेवल्यावर खायला सांगावी";
-        else if (complaints[complaintIndex] === 'Vomiting')
+        else if (params.complaints[complaintIndex] === 'Vomiting')
             decision.alert = "उलटी असल्यास आधी औषध द्यावे व अर्ध्या तासांनंतर जेवण, दुध द्यावे व अर्ध्या तासांनंतर इतर औषधे द्यावीत";
-        else if (complaints[complaintIndex] === 'Chloroquine Resistant Malaria' && (age >= 16 || age <= 40) && sex === "Female") {
+        else if (params.complaints[complaintIndex] === 'Chloroquine Resistant Malaria' && (params.age >= 16 || params.age <= 40) && params.sex === "Female") {
             decision.alert = "पुढे दवाखान्यात पाठवावे";
             decision.value = "";
-        } else if (complaints[complaintIndex] === 'Wound') {
+        } else if (params.complaints[complaintIndex] === 'Wound') {
             decision.alert = "ड्रेसिंग";
         }
 
@@ -1951,28 +1947,34 @@ const getDecision = function (encounter) {
     return decisions;
 };
 
-const validate = function (encounter) {
-    const complaints = encounter.getObservationValue('Complaint');
-    const age = encounter.getDurationInYears('Age');
-    const sex = encounter.getObservationValue('Sex')[0];
-    const weight = encounter.getObservationValue('Weight');
-    const paracheckResult = encounter.getObservationValue('Paracheck');
+function getParameters(encounter) {
+    const params = {};
+    params.complaints = encounter.getObservationValue('Complaint');
+    params.age = encounter.individual.getAgeInYears();
+    params.sex = encounter.individual.gender.name;
+    params.weight = encounter.getObservationValue('Weight');
+    params.paracheckResult = encounter.getObservationValue('Paracheck');
+    return params;
+}
 
-    const validationResult = {
+const validate = function (encounter) {
+    var params = getParameters(encounter);
+
+    var validationResult = {
         "passed": false,
         "message": ""
     };
 
-    for (var complaintIndex = 0; complaintIndex < complaints.length; complaintIndex++) {
-        const weightRangeToCode = getWeightRangeToCode(complaints[complaintIndex], weight);
+    for (var complaintIndex = 0; complaintIndex < params.complaints.length; complaintIndex++) {
+        var weightRangeToCode = getWeightRangeToCode(params.complaints[complaintIndex], params.weight);
 
-        if (sex === 'Male' && complaints.indexOf('Pregnancy') !== -1) {
+        if (params.sex === 'Male' && params.complaints.indexOf('Pregnancy') !== -1) {
             validationResult.passed = false;
             validationResult.message += "पुरुष गरोदर राहू शकत नाही. ";
-        } else if (complaints.indexOf('Pregnancy') !== -1 && age < 10) {
+        } else if (params.complaints.indexOf('Pregnancy') !== -1 && params.age < 10) {
             validationResult.passed = false;
             validationResult.message += "वय वर्ष १० च्या खाली महिला गरोदर राहू शकत नाही. ";
-        } else if (weightRangeToCode.code === "X0" || (complaints.indexOf('Acidity') !== -1 && weight < 13)) {
+        } else if (weightRangeToCode.code === "X0" || (params.complaints.indexOf('Acidity') !== -1 && params.weight < 13)) {
             validationResult.passed = false;
             validationResult.message += "५ किलो पेक्षा कमी वजनास लोनर्ट देऊ नये. ";
         } else {
