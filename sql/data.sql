@@ -35,6 +35,8 @@ BEGIN
     SELECT add_answer_to_concept('Complaint', 'Scabies', 14, '0d56334a-d1b0-4c85-b3e8-19d82ae328a0') INTO foo;
     SELECT add_answer_to_concept('Complaint', 'Ring Worm', 15, '61657b5c-81f2-453f-b960-8dc00767f8c9') INTO foo;
 
+    SELECT create_concept('Treatment', 'Text', '2125c14c-2de3-4978-aa89-82ab5fde825e') INTO foo;
+
     EXCEPTION WHEN others THEN
     raise notice '% %', SQLERRM, SQLSTATE;
 END;
