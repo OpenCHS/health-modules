@@ -1,0 +1,32 @@
+{
+  "mr_IN": {
+    "Treatment": "उपचार",
+    "Weight": "वजन",
+    "Temperature": "ताप",
+    "Respiratory Rate": "श्वसन दर",
+    "Pulse": "पल्स",
+    "Systolic": "वरचा बी पी",
+    "Diastolic": "खालचा बी पी",
+    "Pallor": "फिकेपणा",
+    "Pedal Edema": "पायावर सूज",
+    "Skin Condition": "चामडीचे रोग",
+    "Boils": "फोड",
+    "Wound": "जखम",
+    "Scabies": "खरूज",
+    "Ring Worm": "गजकरण",
+    "Paracheck": "पॅराचेक",
+    "Complaint": "तक्रार",
+    "Fever": "ताप",
+    "Chloroquine Resistant Malaria": "क्लोरोक्विनणे बरा न होणारा मलेरिया",
+    "Body Ache": "अंग दुखी",
+    "Headache": "डोकेदुखी",
+    "Giddiness": "चक्कर",
+    "Vomiting": "उलटी",
+    "Cough": "खोकला",
+    "Cold": "सर्दी",
+    "Acidity": "पोटात आग पडणे",
+    "Abdominal Pain": "पोटदुखी",
+    "Diarrhoea": "हगवण",
+    "Pregnancy": "गर्भवती"
+  }
+}
