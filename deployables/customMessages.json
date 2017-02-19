@@ -27,6 +27,8 @@
     "Acidity": "पोटात आग पडणे",
     "Abdominal Pain": "पोटदुखी",
     "Diarrhoea": "हगवण",
-    "Pregnancy": "गर्भवती"
+    "Pregnancy": "गर्भवती",
+    "Present": "आहे",
+    "Absent": "नाही"
   }
 }
