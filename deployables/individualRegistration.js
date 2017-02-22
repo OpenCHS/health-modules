@@ -1,12 +1,10 @@
 // TO BE MOVED TO WIKI ONCE WE COMPLETE ONE SAMPLE.
 // IF SOMETHING IN NOT CLEAR THEN EDIT IT
 
-// It is called just before displaying a view in the wizard.
+// It is called multiple times during the flow in which the user fills the data. Imaging this being called every time user does something on the view.
 // This output of this function is used to display either next button or register button.
 // If false is returned then Register button is shown, else Next button.
-// When the user is on the first page (that shows the core fields) then currentFormElementGroup will be passed as null
-// TIP: Since filterElements is called next, one shouldn't have to look at the formElements inside the group to return true or false
-const hasMoreFormElementGroups = function (individual, currentFormElementGroup) {
+const numberOfFormElementGroups = function (individual) {
 };
 
 // This is called when the user presses next so in the individual all the data filled by the user so far is available.
@@ -27,5 +25,5 @@ const validate = function (individual) {
 module.exports = {
     validate: validate,
     filterElements: filterElements,
-    hasMoreFormElementGroups: hasMoreFormElementGroups
+    numberOfFormElementGroups: numberOfFormElementGroups
 };

@@ -88,3 +88,8 @@ INSERT INTO program (name, uuid, version, created_by_id, last_modified_by_id, cr
 VALUES ('Mother', 'a663fd1c-72af-443b-92d9-4c8c3ca8baef', 1, 1, 1, current_timestamp, current_timestamp);
 INSERT INTO program (name, uuid, version, created_by_id, last_modified_by_id, created_date_time, last_modified_date_time)
 VALUES ('Child', 'f54533e4-5b3e-46f7-8f69-3ae1b1ce5172', 1, 1, 1, current_timestamp, current_timestamp);
+
+INSERT INTO form (name, form_type, uuid, version, created_by_id, last_modified_by_id, created_date_time, last_modified_date_time)
+    VALUES ('Mother Enrolment', 'ProgramEnrolment', '026e2f5c-8670-4e4b-9a54-cb03bbf3093d', 1, 1, 1, current_timestamp, current_timestamp);
+INSERT INTO form_mapping (form_id, uuid, entity_id, version, created_by_id, last_modified_by_id, created_date_time, last_modified_date_time)
+VALUES ((SELECT id from form where name = 'Mother Enrolment'), '74d12318-d659-4960-8cc5-14bf9011aa58', (SELECT id from program where name = 'Mother'), 1, 1, 1, current_timestamp, current_timestamp);
