@@ -1,5 +1,5 @@
 var expect = require('chai').expect;
-var decision = require('../js/encounterDecision');
+var decision = require('../deployables/encounterDecision');
 var Encounter = require('./Encounter');
 
 describe('Make Decision', function () {
