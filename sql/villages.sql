@@ -1,3 +1,5 @@
+DELETE from address_level;
+
 INSERT INTO address_level (title, level, uuid, version, created_by_id, last_modified_by_id, created_date_time, last_modified_date_time)
 VALUES ('Ghotpadi', 1, 'ccc938bf-7c53-4e41-836c-3ee65db09b9c', 1, 1, 1, current_timestamp, current_timestamp);
 INSERT INTO address_level (title, level, uuid, version, created_by_id, last_modified_by_id, created_date_time, last_modified_date_time)
