@@ -8,8 +8,6 @@ CREATE OR REPLACE FUNCTION setupEncounterForm()
 BEGIN
     raise notice 'Starting....';
 
-    SELECT deleteMetaDataCascade('encounter_form') INTO foo;
-
     SELECT create_form('encounter_form', 'e1472f56-c057-4aea-9f46-0decd9d068fe', 'Encounter', null, 'd5ed95fe-ae91-4a70-95eb-ee3d2e16b404') INTO encounterForm;
 
     SELECT create_form_element_group('Vitals', '52c7a463-3044-4ac6-8bfa-dae86fd20878', 1::SMALLINT, encounterForm) INTO vitals;
@@ -40,6 +38,6 @@ BEGIN
     SELECT create_concept('Treatment', 'Text', '2125c14c-2de3-4978-aa89-82ab5fde825e') INTO foo;
 
     EXCEPTION WHEN others THEN
-    raise notice '% %', SQLERRM, SQLSTATE;
+      raise notice '% %', SQLERRM, SQLSTATE;
 END;
 $$ LANGUAGE plpgsql;

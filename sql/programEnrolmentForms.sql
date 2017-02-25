@@ -10,11 +10,8 @@ CREATE OR REPLACE FUNCTION setupProgramEnrolmentForms()
 BEGIN
   raise notice 'Starting....';
 
-  DELETE FROM program WHERE name = 'Mother';
   INSERT INTO program (name, uuid, version, created_by_id, last_modified_by_id, created_date_time, last_modified_date_time)
   VALUES ('Mother', 'a663fd1c-72af-443b-92d9-4c8c3ca8baef', 1, 1, 1, current_timestamp, current_timestamp) RETURNING id INTO programId;
-
-  SELECT deleteMetaDataCascade('Mother Enrolment') INTO foo;
 
   SELECT create_form('Mother Enrolment', '026e2f5c-8670-4e4b-9a54-cb03bbf3093d', 'ProgramEnrolment', programId, '24c93700-c5d2-4ea8-91f5-2c46671dc79d') INTO enrolmentForm;
 
@@ -30,7 +27,7 @@ BEGIN
   SELECT create_form_element_for_concept('Number of male children', '0abd0e1e-484c-48c9-ab3a-ffa14b66c9c5', 4, FALSE, gynaeHistory, '[]', 'f7f9f8cc-dc45-42ba-a31f-a945c0b0c781', 'Numeric') INTO foo;
   SELECT create_form_element_for_concept('Number of female children', '8b7b54a0-6f07-40b4-b080-f2023ec2ee2f', 5, FALSE, gynaeHistory, '[]', 'f4e32ab1-bea3-4316-8f8e-2fbbc97c7878', 'Numeric') INTO foo;
   SELECT create_form_element_for_concept('Age of youngest child', 'd07f9fdc-2dbe-4b21-abce-eb79c30470b8', 6, FALSE, gynaeHistory, '[]', '8e4b427a-a854-4f06-9a19-2588a161cba1', 'Duration') INTO foo;
-  SELECT create_form_element_with_gender_answers('Gender of youngest child', '752b1d07-c87a-429f-8813-f660e489bcea', 7, FALSE , gynaeHistory, '[{"key": "Select", "value": "Single"}]') INTO foo;
+  SELECT create_form_element_with_gender_answers('Gender of youngest child', '752b1d07-c87a-429f-8813-f660e489bcea', 7, FALSE , gynaeHistory, '2bcfb991-3690-407e-be93-c18aac37c355', '[{"key": "Select", "value": "Single"}]', '["e3b0f446-b119-442a-b05a-724ec546518c", "26bec6a7-d319-477d-aaf0-cdc780fbd987", "013a6550-ebdb-4d1d-83d0-52168158e3f9"]') INTO foo;
 
   SELECT create_form_element_group('Obstetrics History', '50a2d045-88fe-44e3-86e0-0dba16f53818', 3::SMALLINT, enrolmentForm) INTO obstetricsHistory;
   SELECT create_form_element_for_concept('Ante Partum Haemorrhage', 'dfc86a35-bdc7-4b0f-a58b-92e5bf3c6301', 1, FALSE, obstetricsHistory, '[]', '5b5e974c-8aba-4ee3-982e-0f4e31460303', 'Boolean') INTO foo;
@@ -47,12 +44,9 @@ BEGIN
   SELECT create_form_element_for_concept('Prolonged labour', '4a27015c-2e39-4481-809a-7c9a898b4d65', 12, FALSE, obstetricsHistory, '[]', '67e21b44-77f7-4cf9-930b-36700262d918', 'Boolean') INTO foo;
   SELECT create_form_element_for_concept('Threatened abortion', 'da0582fb-7d4d-47ab-9fe7-07d097acd8bd', 13, FALSE, obstetricsHistory, '[]', '573e5b23-5576-40cf-a9c9-60d305e79e8e', 'Boolean') INTO foo;
 
-
-  DELETE FROM program WHERE name = 'Child';
   INSERT INTO program (name, uuid, version, created_by_id, last_modified_by_id, created_date_time, last_modified_date_time)
   VALUES ('Child', 'f54533e4-5b3e-46f7-8f69-3ae1b1ce5172', 1, 1, 1, current_timestamp, current_timestamp)  RETURNING id INTO programId;
 
-  SELECT deleteMetaDataCascade('Child Enrolment') INTO foo;
   SELECT create_form('Child Enrolment', '1608c2c0-0334-41a6-aab0-5c61ea1eb069', 'ProgramEnrolment', programId, 'ee0e5dcf-e873-4431-af32-81018e4ee062') INTO enrolmentForm;
 
   SELECT create_form_element_group('Default', '062ffc31-c311-485b-baf3-d5a95d10e97c', 1::SMALLINT, enrolmentForm) INTO defaultChildFormGroup;

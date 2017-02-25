@@ -8,8 +8,6 @@ DECLARE registrationForm BIGINT;
 BEGIN
   raise notice 'Starting....';
 
-  SELECT deleteMetaDataCascade('registration_form') INTO foo;
-
   SELECT create_form('registration_form', '881f0ddb-ce35-4372-abae-622fb04bc236', 'IndividualProfile', null, '14df9349-f191-48f6-ba7b-986f16b2f6e1') INTO registrationForm;
 
 
