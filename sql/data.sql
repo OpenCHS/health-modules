@@ -1,3 +1,4 @@
+-- run it from the current directory
 \i encounterForm.sql;
 \i individualRegistrationForm.sql;
 \i programEnrolmentForms.sql;
