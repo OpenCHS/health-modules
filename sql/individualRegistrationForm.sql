@@ -6,10 +6,9 @@ DECLARE registrationForm BIGINT;
   DECLARE medical BIGINT;
   DECLARE foo RECORD;
 BEGIN
-  raise notice 'Starting....';
+  raise notice 'Starting setupIndividualRegistrationForm...';
 
   SELECT create_form('registration_form', '881f0ddb-ce35-4372-abae-622fb04bc236', 'IndividualProfile', null, '14df9349-f191-48f6-ba7b-986f16b2f6e1') INTO registrationForm;
-
 
   SELECT create_form_element_group('Family', '3aa06f6b-ecba-4e20-a87a-15fabd495b6b', 1::SMALLINT, registrationForm) INTO family;
   SELECT create_form_element_for_concept('Husband Name', '34397241-8529-45c0-94c2-de523d052002', 1, FALSE, family, '[]', 'efc2665d-e36c-4974-a090-4ac0070f7291', 'Text') INTO foo;

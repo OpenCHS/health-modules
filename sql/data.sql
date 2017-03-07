@@ -1,8 +1,9 @@
--- run it from the current directory
-\i encounterForm.sql;
-\i individualRegistrationForm.sql;
-\i programEnrolmentForms.sql;
+\i sql/encounterForm.sql;
+\i sql/individualRegistrationForm.sql;
+\i sql/programEnrolmentForms.sql;
+\i sql/programExitForms.sql;
 SELECT setupEncounterForm();
 SELECT setupIndividualRegistrationForm();
 SELECT setupProgramEnrolmentForms();
-\i villages.sql;
+SELECT setupProgramExitForms();
+\i sql/villages.sql;
