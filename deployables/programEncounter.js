@@ -1,4 +1,5 @@
 const getDecision = function (programEncounter) {
+
     function checkForAnemia(programEncounter) {
         var observations = programEncounter.observations;
         for (var i = 0; i < programEncounter.observations.length; i++) {
