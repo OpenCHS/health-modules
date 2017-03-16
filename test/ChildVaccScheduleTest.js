@@ -1,10 +1,12 @@
 var expect = require('chai').expect;
 var assert = require('chai').assert;
 var getVaccSchedule = require('../deployables/childVaccSchedule');
+var getmotherVisitSchedule = require('../deployables/motherVisitSchedule');
 
 describe('Create Child Vaccincation Schedule', function () {
+    var progEnrolment;
     var date = new Date(2017, 3, 10);
-    var progEnrolment = {
+    progEnrolment = {
         individual: {
             gender: {name: 'Female'},
             dateofbirth: date

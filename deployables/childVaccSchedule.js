@@ -1,3 +1,5 @@
+var C = require('./common');
+
 var getVaccSchedule = function (programEnrolment) {
     var vaccSchedules = [];
     var dateOfBirth = programEnrolment.individual.dateofbirth;
@@ -37,23 +39,13 @@ var getVaccSchedule = function (programEnrolment) {
 
     return vaccSchedules;
 
-    function copyDate(date) {
-        return new Date(date.getFullYear(), date.getMonth(), date.getDate());
-    }
-
     function addVaccinationSchedule(nameOfVaccination, dueDateIncrement, maxDateIncrement) {
         var vaccSchedule = {
             vaccName: nameOfVaccination,
-            dueDate: addDays(dueDateIncrement),
-            maxDate: addDays(maxDateIncrement)
+            dueDate: C.addDays(dateOfBirth, dueDateIncrement),
+            maxDate: C.addDays(dateOfBirth, maxDateIncrement)
         };
         vaccSchedules.push(vaccSchedule);
-    }
-
-    function addDays(numberofDays) {
-        var copied = copyDate(dateOfBirth);
-        copied.setDate(copied.getDate() + numberofDays);
-        return copied;
     }
 };
 
