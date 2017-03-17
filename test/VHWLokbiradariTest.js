@@ -14,7 +14,7 @@ describe('Make Decision', function () {
                     encounter.setGender(gender);
                     encounter.setAge(10);
                     console.log("##### {complaint}, {weightRangeToCode.start}, {gender} ######".replace("{complaint}", complaint).replace("{weightRangeToCode.start}", weightRangeToCode.start).replace("{gender}", gender));
-                    if (decision.validate(encounter).passed) {
+                    if (decision.validate(encounter).success) {
                         const decisions = decision.getDecision(encounter);
                         expect(decisions.length).to.equal(1);
                         expect(decisions[0].value.includes("undefined")).to.equal(false, decisions[0].value);
@@ -27,19 +27,19 @@ describe('Make Decision', function () {
     it('Validate', function () {
         var complaintConceptName = "Complaint";
         var validationResult = decision.validate(new Encounter().setObservation(complaintConceptName, ["Pregnancy"]).setObservation("Weight", 40).setGender("Male").setAge(25));
-        expect(validationResult.passed).to.equal(false, validationResult.message);
+        expect(validationResult.success).to.equal(false, validationResult.message);
 
         validationResult = decision.validate(new Encounter().setObservation(complaintConceptName, ["Pregnancy"]).setAge(5).setGender("Female").setObservation("Weight", 40));
-        expect(validationResult.passed).to.equal(false, validationResult.message);
+        expect(validationResult.success).to.equal(false, validationResult.message);
 
         validationResult = decision.validate(new Encounter().setObservation(complaintConceptName, ["Pregnancy"]).setAge(3).setGender("Female").setObservation("Weight", 40));
-        expect(validationResult.passed).to.equal(false, validationResult.message);
+        expect(validationResult.success).to.equal(false, validationResult.message);
 
         validationResult = decision.validate(new Encounter().setObservation(complaintConceptName, ["Pregnancy"]).setAge(12).setGender("Female").setObservation("Weight", 40));
-        expect(validationResult.passed).to.equal(true, validationResult.message);
+        expect(validationResult.success).to.equal(true, validationResult.message);
 
         validationResult = decision.validate(new Encounter().setObservation(complaintConceptName, ["Chloroquine Resistant Malaria"]).setObservation("Weight", 3).setGender("Male"));
-        expect(validationResult.passed).to.equal(false, validationResult.message);
+        expect(validationResult.success).to.equal(false, validationResult.message);
     });
 
     it('Complaint which allows for prescription', function () {
@@ -131,13 +131,13 @@ describe('Make Decision', function () {
     it('Pick validation errors corresponding to all complaints', function () {
         var complaintConceptName = "Complaint";
         var validationResult = decision.validate(new Encounter().setObservation(complaintConceptName, ["Cold", "Acidity"]).setGender("Male").setAge(5).setObservation("Weight", 12));
-        expect(validationResult.passed).to.equal(false, validationResult.message);
+        expect(validationResult.success).to.equal(false, validationResult.message);
     });
 
     it('Multiple complaints and passing all validations', function () {
         var complaintConceptName = "Complaint";
         var validationResult = decision.validate(new Encounter().setObservation(complaintConceptName, ["Cold", "Acidity"]).setGender("Male").setAge(10).setObservation("Weight", 22));
-        expect(validationResult.passed).to.equal(true, validationResult.message);
+        expect(validationResult.success).to.equal(true, validationResult.message);
     });
 
     it('Alert should be only for the decision for the complaint', () => {

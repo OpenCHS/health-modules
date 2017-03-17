@@ -1971,7 +1971,7 @@ const validate = function (encounter) {
     var params = getParameters(encounter);
 
     var validationResult = {
-        "passed": false,
+        "success": false,
         "message": ""
     };
 
@@ -1979,16 +1979,16 @@ const validate = function (encounter) {
         var weightRangeToCode = getWeightRangeToCode(params.complaints[complaintIndex], params.weight);
 
         if (params.sex === 'Male' && params.complaints.indexOf('Pregnancy') !== -1) {
-            validationResult.passed = false;
+            validationResult.success = false;
             validationResult.message += "पुरुष गरोदर राहू शकत नाही. ";
         } else if (params.complaints.indexOf('Pregnancy') !== -1 && params.age < 10) {
-            validationResult.passed = false;
+            validationResult.success = false;
             validationResult.message += "वय वर्ष १० च्या खाली महिला गरोदर राहू शकत नाही. ";
         } else if (weightRangeToCode.code === "X0" || (params.complaints.indexOf('Acidity') !== -1 && params.weight < 13)) {
-            validationResult.passed = false;
+            validationResult.success = false;
             validationResult.message += "५ किलो पेक्षा कमी वजनास लोनर्ट देऊ नये. ";
         } else {
-            validationResult.passed = true;
+            validationResult.success = true;
         }
     }
 
