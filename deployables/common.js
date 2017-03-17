@@ -9,11 +9,11 @@ function C() {
         return new Date(date.getFullYear(), date.getMonth(), date.getDate());
     };
 
-    this.getDateFromObservation = function(observations, obsName) {
-        var lmpObservation = observations.find(function (obs) {
+    this.getDataFromObservation = function(observations, obsName) {
+        var matchingObservation = observations.find(function (obs) {
             return obs.concept.name === obsName;
         });
-        return lmpObservation.valueJSON.answer;
+        return matchingObservation.valueJSON.answer;
     };
 
     this.encounterTypeExists = function(encounters, name) {

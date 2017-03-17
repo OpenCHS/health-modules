@@ -17,7 +17,7 @@ var getNextScheduledVisit = function (programEnrolment) {
     var observations = programEnrolment.observations;
     var encounters = programEnrolment.encounters;
 
-    var lmpDate = C.getDateFromObservation(observations, 'Last Menstrual Period');
+    var lmpDate = C.getDataFromObservation(observations, 'Last Menstrual Period');
     var deliveryEncounter = programEnrolment.encounters.find(function (enc) {
         return enc.encounterType.name === 'Delivery';
     });

@@ -12,7 +12,8 @@ var getNextScheduledVisit = function (programEnrolment) {
     var observations = programEnrolment.observations;
     var encounters = programEnrolment.encounters;
 
-    var deliveryDate = observations !== undefined ? C.getDateFromObservation(observations, 'Date of Delivery') : undefined;
+
+    var deliveryDate = observations !== undefined ? C.getDataFromObservation(observations, 'Date of Delivery') : undefined;
 
     if (programEnrolment.program.name === 'Child' && C.observationExists(observations,'Date of Delivery')) {
         if (C.encounterTypeExists(encounters,'PNC 4')) return null;
@@ -20,6 +21,7 @@ var getNextScheduledVisit = function (programEnrolment) {
         if (C.encounterTypeExists(encounters,'PNC 2')) return createNextVisit(deliveryDate, 'PNC 3');
         if (C.encounterTypeExists(encounters,'PNC 1')) return createNextVisit(deliveryDate, 'PNC 2');
         return createNextVisit(deliveryDate, 'PNC 1');
+
     }
     return null;
 
