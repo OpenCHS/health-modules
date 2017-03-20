@@ -1992,6 +1992,9 @@ const validate = function (encounter) {
         }
     }
 
+    if (!validationResult.success)
+        console.log(validationResult);
+
     return validationResult;
 };
 
