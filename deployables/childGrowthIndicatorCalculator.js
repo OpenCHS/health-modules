@@ -1,56 +1,146 @@
-/*
-- from date of birth, get corresponding month
-- if programEncounter is empty, get height and weight from programEnrolment else take from last encounter
- */
-
 var C = require('./common');
-var femaleScores = require('../deployables/json/weightForAge');
+var weightForAgeScores = require('../deployables/json/weightForAge');
+var weightForHeightScores = require('../deployables/json/weightForHeight');
 
-var getGrowthIndicators = function (programEnrolment) {
+var getGrowthIndicators = function (programEnrolment, today) {
+    today = C.copyDate(today === undefined ? new Date() : today);
 
     var lastEncounter = programEnrolment.encounters.pop();
-    var observations = programEnrolment.observations;
     var dateOfBirth = programEnrolment.individual.dateOfBirth;
-    var ageInMonths = getAgeInMonths(dateOfBirth);
-    var weight;
+    var weightForAgeZScore;
+    var weightForHeightZScore;
 
-    if(programEnrolment.individual.Gender != undefined && programEnrolment.individual.Gender.name == 'Female'){
-        if(lastEncounter != undefined ){
-            weight = C.getDataFromObservation(lastEncounter.observations, 'Weight');
-            return getZScoreWeightForAge(weight, femaleScores, ageInMonths);
+    var zScoreGradeMappingWeightForAge = {
+        'sd0': function () {
+            return 1
+        },
+        'sd-1': function () {
+            return 1
+        },
+        'sd-2': function () {
+            return 2
+        },
+        'sd-3': function () {
+            return 3
         }
-        else {
-            weight = C.getDataFromObservation(observations, 'Weight');
-            return getZScoreWeightForAge(weight, femaleScores, ageInMonths);
+    };
+    var zScoreStatusMappingWeightForAge = {
+        'sd0': function () {
+            return 'Normal'
+        },
+        'sd-1': function () {
+            return 'Normal'
+        },
+        'sd-2': function () {
+            return 'Underweight'
+        },
+        'sd-3': function () {
+            return 'Severely Underweight'
         }
-    }
-    else return null; //this will change when we have male
+    };
+
+    var zScoreStatusMappingWeightForHeight = {
+        'sd3': function () {
+            return 'Obese'
+        },
+        'sd2': function () {
+            return 'Overweight'
+        },
+        'sd1': function () {
+            return 'Possible risk of overweight'
+        },
+        'sd0': function () {
+            return 'Normal'
+        },
+        'sd-1': function () {
+            return 'Normal'
+        },
+        'sd-2': function () {
+            return 'Wasted'
+        },
+        'sd-3': function () {
+            return 'Severely wasted'
+        }
+    };
+
+    var zScoreGradeMappingWeightForHeight = {
+        'sd3': function () {
+            return 1
+        },
+        'sd2': function () {
+            return 1
+        },
+        'sd1': function () {
+            return 1
+        },
+        'sd0': function () {
+            return 1
+        },
+        'sd-1': function () {
+            return 1
+        },
+        'sd-2': function () {
+            return 2
+        },
+        'sd-3': function () {
+            return 3
+        }
+    };
 
 
-    function getZScoreWeightForAge(weight, masterData, age){
-        return masterData.find(function (obs) {
+    var weightForAgeGenderValues = programEnrolment.individual.gender.name === 'Female' ? weightForAgeScores.female : weightForAgeScores.male;
+    var weightForHeightGenderValues = programEnrolment.individual.gender.name === 'Female' ? weightForHeightScores.female : weightForHeightScores.male;
+    
+    weightForAgeZScore = lastEncounter === undefined ? getZScore(C.getDataFromObservation(lastEncounter.observations, 'Weight'), weightForAgeGenderValues, getAgeInMonths(dateOfBirth, today)) : getZScore(C.getDataFromObservation(lastEncounter.observations, 'Weight'), weightForAgeGenderValues, getAgeInMonths(dateOfBirth, today));
+
+    weightForHeightZScore = lastEncounter === undefined ? getZScore(C.getDataFromObservation(lastEncounter.observations, 'Height'), weightForHeightGenderValues, getAgeInMonths(dateOfBirth, today)) : getZScore(C.getDataFromObservation(lastEncounter.observations, 'Height'), weightForHeightGenderValues, getAgeInMonths(dateOfBirth, today));
+
+    return {
+        weightForAgeZScore: weightForAgeZScore,
+        weightForAgeGrade: zScoreGradeMappingWeightForAge[weightForAgeZScore](),
+        weightForAgeStatus: zScoreStatusMappingWeightForAge[weightForAgeZScore](),
+        
+        weightForHeightZScore: weightForHeightZScore,
+        weightForHeightGrade: zScoreGradeMappingWeightForHeight[weightForHeightZScore](),
+        weightForHeightStatus: zScoreStatusMappingWeightForHeight[weightForHeightZScore]()
+    };
+
+    function getZScore(obsValue, masterData, age) {
+        var matchingObject = masterData.find(function (obs) {
             return obs.month === age;
         });
-    }
+        var keys = Object.keys(matchingObject);
+        for (var i = 0; i < keys.length; i++) {
+            if (keys[i] === 'month') continue;
 
-    function getAgeInMonths(dateOfBirth){
-        var birthDate = C.copyDate(dateOfBirth);
-        var today = C.copyDate(new Date());
-        var year1=birthDate.getFullYear();
-        var year2=today.getFullYear();
-        var month1=birthDate.getMonth();
-        var month2=today.getMonth();
-        if(month1===0){ //Have to take into account
-            month1++;
-            month2++;
+            var currentKeyDifference = Math.abs(obsValue - matchingObject[keys[i]]);
+            var nextKeyDifference = Math.abs(obsValue - matchingObject[keys[i + 1]]);
+
+            if (nextKeyDifference < currentKeyDifference) continue;
+
+            return keys[i];
         }
-        var numberOfMonths = numberOfMonths = (year2 - year1) * 12 + (month2 - month1);
-        return (numberOfMonths);
     }
+};
 
+var getAgeInMonths = function (dateOfBirth, today) {
+    today = C.copyDate(today === undefined ? new Date() : today);
+
+    var birthDate = C.copyDate(dateOfBirth);
+    var year1 = birthDate.getFullYear();
+    var year2 = today.getFullYear();
+    var month1 = birthDate.getMonth();
+    var month2 = today.getMonth();
+    if (month1 === 0) {
+        month1++;
+        month2++;
+    }
+    var numberOfMonths = (year2 - year1) * 12 + (month2 - month1);
+    return (numberOfMonths);
 };
 
 module.exports = {
-    getGrowthIndicators: getGrowthIndicators
+    getGrowthIndicators: getGrowthIndicators,
+    getAgeInMonths: getAgeInMonths
 };
 
