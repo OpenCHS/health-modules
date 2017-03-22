@@ -4,7 +4,6 @@ var getIndicators = require('../deployables/childGrowthIndicatorCalculator');
 var C = require('../deployables/common');
 
 describe('Get growth indicators - z-score, grade, status for a child', function () {
-
     var progEnrolment;
     beforeEach(function () {
         progEnrolment = {
@@ -39,7 +38,6 @@ describe('Get growth indicators - z-score, grade, status for a child', function 
     it('Calculate Weight-for-Age Z Score, grade and status for female', function () {
         progEnrolment.individual.gender = {name: 'Female'};
         var decisions = getIndicators.getGrowthIndicators(progEnrolment);
-        console.log(decisions);
         assert.equal('1', findValue(decisions, 'WeightForAge Grade'));
         assert.equal('sd-1', findValue(decisions,'WeightForAge Z-Score'));
         assert.equal('Normal', findValue(decisions, 'WeightForAge Status'));
@@ -68,5 +66,4 @@ describe('Get growth indicators - z-score, grade, status for a child', function 
         assert.equal('sd-2', findValue(decisions,'HeightForAge Z-Score'));
         assert.equal('Stunted', findValue(decisions,'HeightForAge Status'));
     });
-
 });

@@ -30,7 +30,7 @@ function C() {
     };
 
     this.calculateBMI = function(observations, age) {
-        if(age !== undefined && age > 24) {
+        if(age !== undefined) {
             var height = this.getDataFromObservation(observations, "Height");
             var weight = this.getDataFromObservation(observations, "Weight");
             return Math.floor((weight/Math.pow(height,2))*10000);
