@@ -1,6 +1,6 @@
 const female = [
     {
-        "month": 0,
+        "month": 24,
         "sd-3": 2.0,
         "sd-2": 2.4,
         "sd-1": 2.8,
@@ -10,7 +10,7 @@ const female = [
         "sd3": 4.8
     },
     {
-        "month": 1,
+        "month": 25,
         "sd-3": 2.7,
         "sd-2": 3.2,
         "sd-1": 3.6,
@@ -19,7 +19,7 @@ const female = [
         "sd2": 5.5,
         "sd3": 6.2
     },  {
-        "month": 2,
+        "month": 26,
         "sd-3": 3.4,
         "sd-2": 3.9,
         "sd-1": 4.5,
@@ -32,7 +32,7 @@ const female = [
 
 const male = [
     {
-        "month": 0,
+        "month": 24,
         "sd-3": 2.1,
         "sd-2": 2.5,
         "sd-1": 2.9,
@@ -42,7 +42,7 @@ const male = [
         "sd3": 5.0
     },
     {
-        "month": 1,
+        "month": 25,
         "sd-3": 2.9,
         "sd-2": 3.4,
         "sd-1": 3.9,
@@ -50,8 +50,9 @@ const male = [
         "sd1": 5.1,
         "sd2": 5.8,
         "sd3": 6.6
-    },  {
-        "month": 2,
+    },
+    {
+        "month": 26,
         "sd-3": 3.8,
         "sd-2": 4.3,
         "sd-1": 4.9,

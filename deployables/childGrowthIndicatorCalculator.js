@@ -1,6 +1,7 @@
 var C = require('./common');
 var weightForAgeScores = require('../deployables/json/weightForAge');
-var weightForHeightScores = require('../deployables/json/weightForHeight');
+var heightForAgeScores = require('../deployables/json/heightForAge');
+var bmiForAgeScores = require('../deployables/json/bmiForAge');
 
 var getGrowthIndicators = function (programEnrolment, today) {
     today = C.copyDate(today === undefined ? new Date() : today);
@@ -8,7 +9,7 @@ var getGrowthIndicators = function (programEnrolment, today) {
     var lastEncounter = programEnrolment.encounters.pop();
     var dateOfBirth = programEnrolment.individual.dateOfBirth;
     var weightForAgeZScore;
-    var weightForHeightZScore;
+    var heightForAgeZScore;
 
     var zScoreGradeMappingWeightForAge = {
         'sd0': function () {
@@ -39,15 +40,15 @@ var getGrowthIndicators = function (programEnrolment, today) {
         }
     };
 
-    var zScoreStatusMappingWeightForHeight = {
+    var zScoreStatusMappingHeightForAge = {
         'sd3': function () {
-            return 'Obese'
+            return 'Normal'
         },
         'sd2': function () {
-            return 'Overweight'
+            return 'Normal'
         },
         'sd1': function () {
-            return 'Possible risk of overweight'
+            return 'Normal'
         },
         'sd0': function () {
             return 'Normal'
@@ -56,14 +57,14 @@ var getGrowthIndicators = function (programEnrolment, today) {
             return 'Normal'
         },
         'sd-2': function () {
-            return 'Wasted'
+            return 'Stunted'
         },
         'sd-3': function () {
-            return 'Severely wasted'
+            return 'Severely stunted'
         }
     };
 
-    var zScoreGradeMappingWeightForHeight = {
+    var zScoreGradeMappingHeightForAge = {
         'sd3': function () {
             return 1
         },
@@ -87,26 +88,57 @@ var getGrowthIndicators = function (programEnrolment, today) {
         }
     };
 
+    var ZScoreStatusMappingBMIForAge = {
+        'sd3': function () {
+            return 'Obese'
+        },
+        'sd2': function () {
+            return 'Overweight'
+        },
+        'sd1': function () {
+            return 'Possible risk of overweight'
+        },
+        'sd0': function () {
+            return 'Normal'
+        },
+        'sd-1': function () {
+            return 'Normal'
+        },
+        'sd-2': function () {
+            return 'Wasted'
+        },
+        'sd-3': function () {
+            return 'Severely wasted'
+        }
+    };
 
     var weightForAgeGenderValues = programEnrolment.individual.gender.name === 'Female' ? weightForAgeScores.female : weightForAgeScores.male;
-    var weightForHeightGenderValues = programEnrolment.individual.gender.name === 'Female' ? weightForHeightScores.female : weightForHeightScores.male;
-    
-    weightForAgeZScore = lastEncounter === undefined ? getZScore(C.getDataFromObservation(lastEncounter.observations, 'Weight'), weightForAgeGenderValues, getAgeInMonths(dateOfBirth, today)) : getZScore(C.getDataFromObservation(lastEncounter.observations, 'Weight'), weightForAgeGenderValues, getAgeInMonths(dateOfBirth, today));
+    var heightForAgeGenderValues = programEnrolment.individual.gender.name === 'Female' ? heightForAgeScores.female : heightForAgeScores.male;
+    var bmiForAgeGenderValues = programEnrolment.individual.gender.name === 'Female' ? bmiForAgeScores.female : bmiForAgeScores.male;
+    var ageInMonths = C.getAgeInMonths(dateOfBirth, today);
 
-    weightForHeightZScore = lastEncounter === undefined ? getZScore(C.getDataFromObservation(lastEncounter.observations, 'Height'), weightForHeightGenderValues, getAgeInMonths(dateOfBirth, today)) : getZScore(C.getDataFromObservation(lastEncounter.observations, 'Height'), weightForHeightGenderValues, getAgeInMonths(dateOfBirth, today));
+    weightForAgeZScore = lastEncounter === undefined ? getZScore(C.getDataFromObservation(lastEncounter.observations, 'Weight'), weightForAgeGenderValues, ageInMonths) : getZScore(C.getDataFromObservation(lastEncounter.observations, 'Weight'), weightForAgeGenderValues, ageInMonths);
 
-    return {
-        weightForAgeZScore: weightForAgeZScore,
-        weightForAgeGrade: zScoreGradeMappingWeightForAge[weightForAgeZScore](),
-        weightForAgeStatus: zScoreStatusMappingWeightForAge[weightForAgeZScore](),
-        
-        weightForHeightZScore: weightForHeightZScore,
-        weightForHeightGrade: zScoreGradeMappingWeightForHeight[weightForHeightZScore](),
-        weightForHeightStatus: zScoreStatusMappingWeightForHeight[weightForHeightZScore]()
-    };
+    heightForAgeZScore = lastEncounter === undefined ? getZScore(C.getDataFromObservation(lastEncounter.observations, 'Height'), heightForAgeGenderValues, ageInMonths) : getZScore(C.getDataFromObservation(lastEncounter.observations, 'Height'), heightForAgeGenderValues, ageInMonths);
+
+    var BMI = C.calculateBMI(lastEncounter.observations, ageInMonths);//handle condition when BMI is returned as undefined
+
+    var bmiForAgeZscore = lastEncounter === undefined ? getZScore(BMI, bmiForAgeGenderValues, ageInMonths) : getZScore(BMI, bmiForAgeGenderValues, ageInMonths);
+
+    var gradeForWeightForAge = zScoreGradeMappingWeightForAge[weightForAgeZScore]();
+    return [
+        {name: 'WeightForAge Z-Score', value: weightForAgeZScore},
+        {name: 'WeightForAge Grade', value: gradeForWeightForAge},
+        {name: 'WeightForAge Status', value: zScoreStatusMappingWeightForAge[weightForAgeZScore]()},
+        {name: 'HeightForAge Z-Score', value: heightForAgeZScore},
+        {name: 'HeightForAge Grade', value: zScoreGradeMappingHeightForAge[heightForAgeZScore]()},
+        {name: 'HeightForAge Status', value: zScoreStatusMappingHeightForAge[heightForAgeZScore]()},
+        {name: 'BMIForAge Status', value: ZScoreStatusMappingBMIForAge[bmiForAgeZscore]()}
+    ];
 
     function getZScore(obsValue, masterData, age) {
         var matchingObject = masterData.find(function (obs) {
+
             return obs.month === age;
         });
         var keys = Object.keys(matchingObject);
@@ -123,24 +155,7 @@ var getGrowthIndicators = function (programEnrolment, today) {
     }
 };
 
-var getAgeInMonths = function (dateOfBirth, today) {
-    today = C.copyDate(today === undefined ? new Date() : today);
-
-    var birthDate = C.copyDate(dateOfBirth);
-    var year1 = birthDate.getFullYear();
-    var year2 = today.getFullYear();
-    var month1 = birthDate.getMonth();
-    var month2 = today.getMonth();
-    if (month1 === 0) {
-        month1++;
-        month2++;
-    }
-    var numberOfMonths = (year2 - year1) * 12 + (month2 - month1);
-    return (numberOfMonths);
-};
-
 module.exports = {
-    getGrowthIndicators: getGrowthIndicators,
-    getAgeInMonths: getAgeInMonths
+    getGrowthIndicators: getGrowthIndicators
 };
 

@@ -28,6 +28,30 @@ function C() {
             return observation.concept.name === name;
         });
     };
+
+    this.calculateBMI = function(observations, age) {
+        if(age !== undefined && age > 24) {
+            var height = this.getDataFromObservation(observations, "Height");
+            var weight = this.getDataFromObservation(observations, "Weight");
+            return Math.floor((weight/Math.pow(height,2))*10000);
+        }
+    };
+
+    this.getAgeInMonths = function (dateOfBirth, today) {
+        today = this.copyDate(today === undefined ? new Date() : today);
+
+        var birthDate = this.copyDate(dateOfBirth);
+        var year1 = birthDate.getFullYear();
+        var year2 = today.getFullYear();
+        var month1 = birthDate.getMonth();
+        var month2 = today.getMonth();
+        if (month1 === 0) {
+            month1++;
+            month2++;
+        }
+        var numberOfMonths = (year2 - year1) * 12 + (month2 - month1);
+        return (numberOfMonths);
+    };
 }
 
 module.exports = new C();
