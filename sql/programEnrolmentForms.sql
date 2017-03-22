@@ -13,7 +13,7 @@ BEGIN
   INSERT INTO program (name, uuid, version, created_by_id, last_modified_by_id, created_date_time, last_modified_date_time)
   VALUES ('Mother', 'a663fd1c-72af-443b-92d9-4c8c3ca8baef', 1, 1, 1, current_timestamp, current_timestamp) RETURNING id INTO programId;
 
-  SELECT create_form('Mother Enrolment', '026e2f5c-8670-4e4b-9a54-cb03bbf3093d', 'ProgramEnrolment', programId, '24c93700-c5d2-4ea8-91f5-2c46671dc79d') INTO enrolmentForm;
+  SELECT create_form('Mother Enrolment', '026e2f5c-8670-4e4b-9a54-cb03bbf3093d', 'ProgramEnrolment', programId, '24c93700-c5d2-4ea8-91f5-2c46671dc79d', NULL) INTO enrolmentForm;
 
   SELECT create_form_element_group('Default', '2dff8c09-bed3-4848-943f-b2240b70d7ed', 1::SMALLINT, enrolmentForm) INTO identification;
   SELECT create_form_element_for_concept('Mother card number', '54917f80-15ea-416b-8746-7f2717a0dc84', 1, FALSE, identification, '[]', 'c0cb6826-4b8a-4413-9337-ffce8c5f5054', 'Text') INTO foo;
@@ -47,7 +47,7 @@ BEGIN
   INSERT INTO program (name, uuid, version, created_by_id, last_modified_by_id, created_date_time, last_modified_date_time)
   VALUES ('Child', 'f54533e4-5b3e-46f7-8f69-3ae1b1ce5172', 1, 1, 1, current_timestamp, current_timestamp)  RETURNING id INTO programId;
 
-  SELECT create_form('Child Enrolment', '1608c2c0-0334-41a6-aab0-5c61ea1eb069', 'ProgramEnrolment', programId, 'ee0e5dcf-e873-4431-af32-81018e4ee062') INTO enrolmentForm;
+  SELECT create_form('Child Enrolment', '1608c2c0-0334-41a6-aab0-5c61ea1eb069', 'ProgramEnrolment', programId, 'ee0e5dcf-e873-4431-af32-81018e4ee062', NULL) INTO enrolmentForm;
 
   SELECT create_form_element_group('Default', '062ffc31-c311-485b-baf3-d5a95d10e97c', 1::SMALLINT, enrolmentForm) INTO defaultChildFormGroup;
   SELECT create_form_element_for_concept('Birth Weight', '03daf5f7-9689-4eaa-a1f3-c95b609329b5', 1, FALSE, defaultChildFormGroup, '[]', '9c2d005e-c1fb-4793-aacb-a1beea2eb392', 'Numeric') INTO foo;
