@@ -51,7 +51,6 @@ var ZScoreStatusMappingBMIForAge = {
 2. null checks
 3. Dont add to returning array if value is null
 4. Handle if age > 5 yrs
-5. calculate BMI for age < 2yrs
  */
 var getGrowthIndicators = function (programEnrolment, today) {
     today = C.copyDate(today === undefined ? new Date() : today);
