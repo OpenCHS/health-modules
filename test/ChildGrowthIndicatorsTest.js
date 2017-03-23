@@ -2,6 +2,7 @@ var expect = require('chai').expect;
 var assert = require('chai').assert;
 var getIndicators = require('../deployables/childGrowthIndicatorCalculator');
 var C = require('../deployables/common');
+var weightForHeightScores = require('../deployables/json/weightForHeight');
 
 describe('Get growth indicators - z-score, grade, status for a child', function () {
     var progEnrolment;
@@ -13,6 +14,13 @@ describe('Get growth indicators - z-score, grade, status for a child', function 
             }],
             individual: {dateOfBirth: new Date(2015, 1, 10)}
         };
+    });
+
+    it('Find closest Length from Z_Score table', function(){
+        progEnrolment.individual.gender = {name: 'Female'};
+        var weightForHeightGenderValues =  weightForHeightScores.female;
+        var matchingKey = C.getMatchingKey(48.4, weightForHeightGenderValues);
+        assert.equal(48.5,matchingKey);
     });
 
     it('Calculate BMI', function(){
@@ -65,5 +73,11 @@ describe('Get growth indicators - z-score, grade, status for a child', function 
         assert.equal('2', findValue(decisions,'HeightForAge Grade'));
         assert.equal('sd-2', findValue(decisions,'HeightForAge Z-Score'));
         assert.equal('Stunted', findValue(decisions,'HeightForAge Status'));
+    });
+
+    it('Calculate Weight-for-Height Z Score for female', function(){
+        progEnrolment.individual.gender = {name: 'Female'};
+        var decisions = getIndicators.getGrowthIndicators(progEnrolment);
+        assert.equal('sd0', findValue(decisions,'WeightForHeight Z-Score'));
     });
 });

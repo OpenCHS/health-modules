@@ -37,6 +37,9 @@ function C() {
         }
     };
 
+    /* todo
+    handle case to increment # of month if day of month > 20
+    */
     this.getAgeInMonths = function (dateOfBirth, today) {
         today = this.copyDate(today === undefined ? new Date() : today);
 
@@ -51,6 +54,18 @@ function C() {
         }
         var numberOfMonths = (year2 - year1) * 12 + (month2 - month1);
         return (numberOfMonths);
+    };
+
+    this.getMatchingKey = function (obsValue, masterData) {
+        var keys = Object.keys(masterData);
+        for (var i = 0; i < keys.length; i++) {
+            var currentLength = masterData[i].length;
+            var nextLength = masterData[i + 1].length;
+            var currentKeyDifference = Math.abs(obsValue - currentLength);
+            var nextKeyDifference = Math.abs(obsValue - nextLength);
+            if (nextKeyDifference < currentKeyDifference) continue;
+            else return currentLength;
+        }
     };
 }
 
