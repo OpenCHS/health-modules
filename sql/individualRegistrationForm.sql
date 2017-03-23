@@ -11,8 +11,8 @@ BEGIN
   SELECT create_form('registration_form', '881f0ddb-ce35-4372-abae-622fb04bc236', 'IndividualProfile', null, '14df9349-f191-48f6-ba7b-986f16b2f6e1', NULL) INTO registrationForm;
 
   SELECT create_form_element_group('Family', '3aa06f6b-ecba-4e20-a87a-15fabd495b6b', 1::SMALLINT, registrationForm) INTO family;
-  SELECT create_form_element_for_concept('Husband Name', '34397241-8529-45c0-94c2-de523d052002', 1, FALSE, family, '[]', 'efc2665d-e36c-4974-a090-4ac0070f7291', 'Text') INTO foo;
-  SELECT create_form_element_for_concept('Number of Members in House', 'ba602a8e-69d2-49d2-960c-3f130d616686', 2, FALSE , family, '[]', '21be71fe-0426-449c-aef9-e4ba35b50a46', 'Numeric') INTO foo;
+  SELECT create_form_element_for_concept('Husband Name', '34397241-8529-45c0-94c2-de523d052002', 1::SMALLINT, FALSE, family, '[]', 'efc2665d-e36c-4974-a090-4ac0070f7291', 'Text') INTO foo;
+  SELECT create_form_element_for_concept('Number of Members in House', 'ba602a8e-69d2-49d2-960c-3f130d616686', 2::SMALLINT, FALSE , family, '[]', '21be71fe-0426-449c-aef9-e4ba35b50a46', 'Numeric') INTO foo;
 
 
   SELECT create_form_element_group('Socio Economic', '2482522b-34e5-4c82-8e80-9a856425b227', 2::SMALLINT, registrationForm) INTO socioEconomic;

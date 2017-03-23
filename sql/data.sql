@@ -2,8 +2,10 @@
 \i sql/individualRegistrationForm.sql;
 \i sql/programEnrolmentForms.sql;
 \i sql/programExitForms.sql;
-SELECT setupEncounterForm();
-SELECT setupIndividualRegistrationForm();
-SELECT setupProgramEnrolmentForms();
-SELECT setupProgramExitForms();
+\i sql/programEncounterForms.sql;
+SELECT openchs.setupEncounterForm();
+SELECT openchs.setupIndividualRegistrationForm();
+SELECT openchs.setupProgramEnrolmentForms();
+SELECT openchs.setupProgramExitForms();
+SELECT openchs.setupProgramEncounterForms();
 \i sql/villages.sql;
