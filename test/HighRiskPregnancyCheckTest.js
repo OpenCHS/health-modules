@@ -1,5 +1,5 @@
 var expect = require('chai').expect;
-var getDecision = require('../deployables/programEncounter');
+var mother = require('../deployables/mother/programEncounterDecision');
 
 describe('Make Decision', function () {
     function createObservation(conceptName, value) {
@@ -16,7 +16,7 @@ describe('Make Decision', function () {
         var progEncounter = {};
         progEncounter.observations = observations;
 
-        var decisions = getDecision.getDecision(progEncounter);
+        var decisions = mother.getDecision(progEncounter);
 
         var riskFactorTypes = decisions.map(function (decision) {
             return decision.riskFactorType;
@@ -31,7 +31,7 @@ describe('Make Decision', function () {
         var progEncounter = {};
         progEncounter.observations = observations;
 
-        var decisions = getDecision.getDecision(progEncounter);
+        var decisions = mother.getDecision(progEncounter);
 
         var riskFactorTypes = decisions.map(function (decision) {
             return decision.riskFactorType;
@@ -45,7 +45,7 @@ describe('Make Decision', function () {
         var progEncounter = {};
         progEncounter.observations = observations;
 
-        var decisions = getDecision.getDecision(progEncounter);
+        var decisions = mother.getDecision(progEncounter);
         var messages = decisions.map(function (decision) {
             return decision.message;
         });
