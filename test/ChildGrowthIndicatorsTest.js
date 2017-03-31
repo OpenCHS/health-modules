@@ -1,6 +1,6 @@
 var expect = require('chai').expect;
 var assert = require('chai').assert;
-var getIndicators = require('../deployables/childGrowthIndicatorCalculator');
+var getIndicators = require('../deployables/child/childGrowthIndicatorCalculator');
 var C = require('../deployables/common');
 var weightForHeightScores = require('../deployables/json/weightForHeight');
 

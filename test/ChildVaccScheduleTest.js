@@ -1,7 +1,7 @@
 var expect = require('chai').expect;
 var assert = require('chai').assert;
-var getVaccSchedule = require('../deployables/childVaccSchedule');
-var getmotherVisitSchedule = require('../deployables/motherVisitSchedule');
+var getVaccSchedule = require('../deployables/child/childVaccSchedule');
+var getmotherVisitSchedule = require('../deployables/mother/motherVisitSchedule');
 
 describe('Create Child Vaccincation Schedule', function () {
     var progEnrolment;

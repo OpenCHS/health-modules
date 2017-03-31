@@ -1,8 +1,8 @@
-var C = require('./common');
-var weightForAgeScores = require('../deployables/json/weightForAge');
-var heightForAgeScores = require('../deployables/json/heightForAge');
-var weightForHeightScores = require('../deployables/json/weightForHeight');
-var bmiForAgeScores = require('../deployables/json/bmiForAge');
+var C = require('../common');
+var weightForAgeScores = require('../json/weightForAge');
+var heightForAgeScores = require('../json/heightForAge');
+var weightForHeightScores = require('../json/weightForHeight');
+var bmiForAgeScores = require('../json/bmiForAge');
 
 var zScoreGradeMappingWeightForAge = {
     'sd0': 1,

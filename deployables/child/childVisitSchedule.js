@@ -1,4 +1,4 @@
-var C = require('./common');
+var C = require('../common');
 
 //in days
 var visitSchedule = {

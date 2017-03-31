@@ -1,4 +1,4 @@
-var C = require('./common');
+var C = require('../common');
 
 var getVaccSchedule = function (programEnrolment) {
     var vaccSchedules = [];

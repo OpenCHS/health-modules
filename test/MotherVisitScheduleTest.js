@@ -1,5 +1,5 @@
 var expect = require('chai').expect;
-var getMotherVisitSchedule = require('../deployables/motherVisitSchedule');
+var getMotherVisitSchedule = require('../deployables/mother/motherVisitSchedule');
 
 describe('Create ANC/PNC Visit Schedule', function () {
     var progEnrolment = {
