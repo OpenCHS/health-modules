@@ -18,11 +18,11 @@ describe('Make Decision', function () {
 
         var decisions = mother.getDecision(progEncounter);
 
-        var riskFactorTypes = decisions.map(function (decision) {
-            return decision.riskFactorType;
+        var decisionValues = decisions.map(function (decision) {
+            return decision.value;
         });
-        expect(riskFactorTypes.indexOf("Moderate and Severe Anemia")).is.not.equal(-1);
-        expect(riskFactorTypes.indexOf("Convulsions")).is.not.equal(-1);
+        expect(decisionValues.indexOf("Moderate and Severe Anemia")).is.not.equal(-1);
+        expect(decisionValues.indexOf("Has convulsions. Continue to monitor. Refer to MO if condition not under control before 8th month")).is.not.equal(-1);
     });
 
     it('Check that decision for convulsions is correct', function () {
@@ -34,7 +34,7 @@ describe('Make Decision', function () {
         var decisions = mother.getDecision(progEncounter);
 
         var riskFactorTypes = decisions.map(function (decision) {
-            return decision.riskFactorType;
+            return decision.name;
         });
         expect(riskFactorTypes.indexOf("Convulsions")).is.equal(-1);
     });
@@ -46,9 +46,9 @@ describe('Make Decision', function () {
         progEncounter.observations = observations;
 
         var decisions = mother.getDecision(progEncounter);
-        var messages = decisions.map(function (decision) {
-            return decision.message;
+        var decisionValues = decisions.map(function (decision) {
+            return decision.value;
         });
-        expect(messages.indexOf("Severe Anemia. Please refer to FRU")).is.not.equal(-1);
+        expect(decisionValues.indexOf("Severe Anemia. Refer to FRU")).is.not.equal(-1);
     });
 });

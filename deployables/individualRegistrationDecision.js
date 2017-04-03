@@ -20,6 +20,7 @@ const filterElements = function (individual, formElementGroup) {
 // passed = boolean
 // message = string
 const validate = function (individual) {
+    return [];
 };
 
 module.exports = {

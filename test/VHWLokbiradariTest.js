@@ -26,19 +26,19 @@ describe('Make Decision', function () {
 
     it('Validate', function () {
         var complaintConceptName = "Complaint";
-        var validationResult = decision.validate(new Encounter().setObservation(complaintConceptName, ["Pregnancy"]).setObservation("Weight", 40).setGender("Male").setAge(25));
+        var validationResult = decision.validate(new Encounter().setObservation(complaintConceptName, ["Pregnancy"]).setObservation("Weight", 40).setGender("Male").setAge(25))[0];
         expect(validationResult.success).to.equal(false, validationResult.message);
 
-        validationResult = decision.validate(new Encounter().setObservation(complaintConceptName, ["Pregnancy"]).setAge(5).setGender("Female").setObservation("Weight", 40));
+        validationResult = decision.validate(new Encounter().setObservation(complaintConceptName, ["Pregnancy"]).setAge(5).setGender("Female").setObservation("Weight", 40))[0];
         expect(validationResult.success).to.equal(false, validationResult.message);
 
-        validationResult = decision.validate(new Encounter().setObservation(complaintConceptName, ["Pregnancy"]).setAge(3).setGender("Female").setObservation("Weight", 40));
+        validationResult = decision.validate(new Encounter().setObservation(complaintConceptName, ["Pregnancy"]).setAge(3).setGender("Female").setObservation("Weight", 40))[0];
         expect(validationResult.success).to.equal(false, validationResult.message);
 
-        validationResult = decision.validate(new Encounter().setObservation(complaintConceptName, ["Pregnancy"]).setAge(12).setGender("Female").setObservation("Weight", 40));
+        validationResult = decision.validate(new Encounter().setObservation(complaintConceptName, ["Pregnancy"]).setAge(12).setGender("Female").setObservation("Weight", 40))[0];
         expect(validationResult.success).to.equal(true, validationResult.message);
 
-        validationResult = decision.validate(new Encounter().setObservation(complaintConceptName, ["Chloroquine Resistant Malaria"]).setObservation("Weight", 3).setGender("Male"));
+        validationResult = decision.validate(new Encounter().setObservation(complaintConceptName, ["Chloroquine Resistant Malaria"]).setObservation("Weight", 3).setGender("Male"))[0];
         expect(validationResult.success).to.equal(false, validationResult.message);
     });
 
@@ -130,13 +130,13 @@ describe('Make Decision', function () {
 
     it('Pick validation errors corresponding to all complaints', function () {
         var complaintConceptName = "Complaint";
-        var validationResult = decision.validate(new Encounter().setObservation(complaintConceptName, ["Cold", "Acidity"]).setGender("Male").setAge(5).setObservation("Weight", 12));
+        var validationResult = decision.validate(new Encounter().setObservation(complaintConceptName, ["Cold", "Acidity"]).setGender("Male").setAge(5).setObservation("Weight", 12))[0];
         expect(validationResult.success).to.equal(false, validationResult.message);
     });
 
     it('Multiple complaints and passing all validations', function () {
         var complaintConceptName = "Complaint";
-        var validationResult = decision.validate(new Encounter().setObservation(complaintConceptName, ["Cold", "Acidity"]).setGender("Male").setAge(10).setObservation("Weight", 22));
+        var validationResult = decision.validate(new Encounter().setObservation(complaintConceptName, ["Cold", "Acidity"]).setGender("Male").setAge(10).setObservation("Weight", 22))[0];
         expect(validationResult.success).to.equal(true, validationResult.message);
     });
 

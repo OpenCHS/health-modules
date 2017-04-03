@@ -6,6 +6,8 @@ var weightForHeightScores = require('../deployables/json/weightForHeight');
 
 describe('Get growth indicators - z-score, grade, status for a child', function () {
     var progEnrolment;
+    const referenceDate = new Date(2017, 2, 20);
+
     beforeEach(function () {
         progEnrolment = {
             program: {name: 'Child'},
@@ -25,14 +27,14 @@ describe('Get growth indicators - z-score, grade, status for a child', function 
 
     it('Calculate BMI', function(){
         progEnrolment.individual.gender = {name: 'male'};
-        var ageInMonths = C.getAgeInMonths(progEnrolment.individual.dateOfBirth, new Date(2017, 2, 20));
+        var ageInMonths = C.getAgeInMonths(progEnrolment.individual.dateOfBirth, referenceDate);
         var lastEncounter = progEnrolment.encounters.pop();
         var BMI = C.calculateBMI(lastEncounter.observations, ageInMonths);
         assert.equal(13, BMI);
     });
 
     it('Calculate age from birthdate', function () {
-        var ageInMonths = C.getAgeInMonths(progEnrolment.individual.dateOfBirth, new Date(2017, 2, 20));
+        var ageInMonths = C.getAgeInMonths(progEnrolment.individual.dateOfBirth, referenceDate);
         expect(ageInMonths).is.equal(25);
     });
 
@@ -45,7 +47,7 @@ describe('Get growth indicators - z-score, grade, status for a child', function 
 
     it('Calculate Weight-for-Age Z Score, grade and status for female', function () {
         progEnrolment.individual.gender = {name: 'Female'};
-        var decisions = getIndicators.getGrowthIndicators(progEnrolment);
+        var decisions = getIndicators.getGrowthIndicators(progEnrolment, referenceDate);
         assert.equal('1', findValue(decisions, 'WeightForAge Grade'));
         assert.equal('sd-1', findValue(decisions,'WeightForAge Z-Score'));
         assert.equal('Normal', findValue(decisions, 'WeightForAge Status'));
@@ -53,7 +55,7 @@ describe('Get growth indicators - z-score, grade, status for a child', function 
 
     it('Calculate Weight-for-Age Z Score, grade and status for male', function(){
         progEnrolment.individual.gender = {name: 'male'};
-        var decisions = getIndicators.getGrowthIndicators(progEnrolment);
+        var decisions = getIndicators.getGrowthIndicators(progEnrolment, referenceDate);
         assert.equal('2', findValue(decisions, 'WeightForAge Grade'));
         assert.equal('sd-2', findValue(decisions,'WeightForAge Z-Score'));
         assert.equal('Underweight', findValue(decisions, 'WeightForAge Status'));
@@ -61,7 +63,7 @@ describe('Get growth indicators - z-score, grade, status for a child', function 
 
     it('Calculate Height-for-Age Z Score, grade and status for female', function(){
         progEnrolment.individual.gender = {name: 'Female'};
-        var decisions = getIndicators.getGrowthIndicators(progEnrolment);
+        var decisions = getIndicators.getGrowthIndicators(progEnrolment, referenceDate);
         assert.equal('2', findValue(decisions,'HeightForAge Grade'));
         assert.equal('sd-2', findValue(decisions, 'HeightForAge Z-Score'));
         assert.equal('Stunted', findValue(decisions,'HeightForAge Status'));
@@ -69,7 +71,7 @@ describe('Get growth indicators - z-score, grade, status for a child', function 
 
     it('Calculate Height-for-Age Z Score, grade and status for male', function(){
         progEnrolment.individual.gender = {name: 'male'};
-        var decisions = getIndicators.getGrowthIndicators(progEnrolment);
+        var decisions = getIndicators.getGrowthIndicators(progEnrolment, referenceDate);
         assert.equal('2', findValue(decisions,'HeightForAge Grade'));
         assert.equal('sd-2', findValue(decisions,'HeightForAge Z-Score'));
         assert.equal('Stunted', findValue(decisions,'HeightForAge Status'));
@@ -77,7 +79,7 @@ describe('Get growth indicators - z-score, grade, status for a child', function 
 
     it('Calculate Weight-for-Height Z Score for female', function(){
         progEnrolment.individual.gender = {name: 'Female'};
-        var decisions = getIndicators.getGrowthIndicators(progEnrolment);
+        var decisions = getIndicators.getGrowthIndicators(progEnrolment, referenceDate);
         assert.equal('sd0', findValue(decisions,'WeightForHeight Z-Score'));
     });
 });

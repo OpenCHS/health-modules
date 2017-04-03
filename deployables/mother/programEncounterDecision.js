@@ -1,10 +1,12 @@
+var getNextScheduledVisit = require('./motherVisitSchedule').getNextScheduledVisit;
+
 const getDecision = function (programEncounter) {
     function checkForAnemia(programEncounter, decisions) {
         var observations = programEncounter.observations;
         for (var i = 0; i < programEncounter.observations.length; i++) {
             if (observations[i].concept.name === 'Hb') {
                 if (observations[i].valueJSON.answer < 7) {
-                    decisions.push({name: 'Referral', value: "Refer to FRU"});
+                    decisions.push({name: 'Referral', value: "Severe Anemia. Refer to FRU"});
                     decisions.push({name: 'Pregnancy Risk', value: 'Moderate and Severe Anemia'});
                 } else if (observations[i].valueJSON.answer >= 7 || observations[i].valueJSON.answer <= 11) {
                     decisions.push({name: 'Pregnancy Risk', value: 'Moderate and Severe Anemia, requiring treatment'});
@@ -20,7 +22,7 @@ const getDecision = function (programEncounter) {
         var observations = programEncounter.observations;
         for (var i = 0; i < programEncounter.observations.length; i++) {
             if (observations[i].concept.name === 'Convulsions' && observations[i].valueJSON.answer) {
-                decisions.push({name: 'Pregnancy Risk', message: "Has convulsions. Continue to monitor. Refer to MO if condition not under control before 8th month"});
+                decisions.push({name: 'Pregnancy Risk', value: "Has convulsions. Continue to monitor. Refer to MO if condition not under control before 8th month"});
             }
         }
         return decisions;
@@ -31,5 +33,6 @@ const getDecision = function (programEncounter) {
 };
 
 module.exports = {
-    getDecision: getDecision
+    getDecision: getDecision,
+    getNextScheduledVisit: getNextScheduledVisit
 };
