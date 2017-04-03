@@ -1,5 +1,5 @@
 var expect = require('chai').expect;
-var mother = require('../deployables/mother/programEncounterDecision');
+var mother = require('../deployables/mother/motherProgramEncounterDecision');
 
 describe('Make Decision', function () {
     function createObservation(conceptName, value) {

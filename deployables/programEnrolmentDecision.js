@@ -1,5 +1,11 @@
-//Enrolment will also consist of the encounters that has happened so far
-//This function is invoked at the time of enrolment and whenever program encounter happens
-//This function will be invoked for all the programs
+const programExports = require('./programExports');
+
 const getNextScheduledDate = function (enrolment) {
+    const programEncounterExport = programExports.programEncounterExports[enrolment.program.name];
+    if (programEncounterExport === undefined) return null;
+    return programEncounterExport.getNextScheduledVisit();
+};
+
+module.exports = {
+    getNextScheduledDate: getNextScheduledDate
 };
