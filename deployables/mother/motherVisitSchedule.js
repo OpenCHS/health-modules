@@ -25,26 +25,27 @@ const getNextScheduledVisits = function (programEnrolment) {
     const deliveryDate = deliveryEncounter !== undefined ? deliveryEncounter.actualDateTime : undefined;
 
     if (_.observationExists(programEnrolment.observations, lmpConceptName) && !_.encounterTypeExists(encounters, 'Abortion')) {
-        if (_.encounterTypeExists(encounters, 'PNC 4')) return null;
-        if (_.encounterTypeExists(encounters, 'PNC 3')) return createNextVisit(deliveryDate, 'PNC 4');
-        if (_.encounterTypeExists(encounters, 'PNC 2')) return createNextVisit(deliveryDate, 'PNC 3');
-        if (_.encounterTypeExists(encounters, 'PNC 1')) return createNextVisit(deliveryDate, 'PNC 2');
-        if (_.encounterTypeExists(encounters, 'Delivery')) return createNextVisit(deliveryDate, 'PNC 1');
+        if (_.encounterTypeExists(encounters, 'PNC 4')) return [];
+        if (_.encounterTypeExists(encounters, 'PNC 3')) return createNextVisit(deliveryDate, 'PNC', 'PNC 4');
+        if (_.encounterTypeExists(encounters, 'PNC 2')) return createNextVisit(deliveryDate, 'PNC', 'PNC 3');
+        if (_.encounterTypeExists(encounters, 'PNC 1')) return createNextVisit(deliveryDate, 'PNC', 'PNC 2');
+        if (_.encounterTypeExists(encounters, 'Delivery')) return createNextVisit(deliveryDate, 'PNC', 'PNC 1');
         if (_.encounterTypeExists(encounters, 'ANC 4')) return createNextVisit(lmpDate, 'Delivery');
-        if (_.encounterTypeExists(encounters, 'ANC 3')) return createNextVisit(lmpDate, 'ANC 4');
-        if (_.encounterTypeExists(encounters, 'ANC 2')) return createNextVisit(lmpDate, 'ANC 3');
-        return createNextVisit(lmpDate, 'ANC 2');
+        if (_.encounterTypeExists(encounters, 'ANC 3')) return createNextVisit(lmpDate, 'ANC', 'ANC 4');
+        if (_.encounterTypeExists(encounters, 'ANC 2')) return createNextVisit(lmpDate, 'ANC', 'ANC 3');
+        return createNextVisit(lmpDate, 'ANC', 'ANC 2');
     }
 
-    return null;
+    return [];
 
-    function createNextVisit(baseDate, visitName) {
-        const schedule = visitSchedule[visitName];
-        return {
-            visitName: visitName,
+    function createNextVisit(baseDate, encounterType, name) {
+        const schedule = visitSchedule[name];
+        return [{
+            name: name,
+            encounterType: encounterType,
             dueDate: _.addDays(baseDate, schedule.due),
             maxDate: _.addDays(baseDate, schedule.max)
-        };
+        }];
     }
 };
 

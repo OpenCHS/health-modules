@@ -17,7 +17,7 @@ describe('Create PNC Visit Schedule for Child', function () {
         });
         var nextVisit = getchildVisitSchedule.getNextScheduledVisits(progEnrolment);
         console.log(nextVisit.dueDate);
-        expect(nextVisit.visitName).is.equal('PNC 3');
+        expect(nextVisit.name).is.equal('PNC 3');
         expect(matchDate(nextVisit.dueDate, new Date(2017, 0, 10))).is.equal(true);
     });
 

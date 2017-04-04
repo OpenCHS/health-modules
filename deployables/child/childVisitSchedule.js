@@ -25,10 +25,10 @@ var getNextScheduledVisits = function (programEnrolment) {
     }
     return null;
 
-    function createNextVisit(baseDate, visitName) {
-        var schedule = visitSchedule[visitName];
+    function createNextVisit(baseDate, name) {
+        var schedule = visitSchedule[name];
         return {
-            visitName: visitName,
+            name: name,
             dueDate: C.addDays(C.copyDate(baseDate), schedule.due),
             maxDate: C.addDays(C.copyDate(baseDate), schedule.max)
         };

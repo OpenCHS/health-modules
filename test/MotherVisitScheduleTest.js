@@ -19,8 +19,8 @@ describe('Create ANC/PNC Visit Schedule', function () {
         progEnrolment.encounters.push({
             encounterType: { name: 'ANC 3'}
         });
-        const nextVisit = getMotherVisitSchedule.getNextScheduledVisits(progEnrolment);
-        expect(nextVisit.visitName).is.equal('ANC 4');
+        const nextVisit = getMotherVisitSchedule.getNextScheduledVisits(progEnrolment)[0];
+        expect(nextVisit.name).is.equal('ANC 4');
         expect(matchDate(nextVisit.dueDate, new Date(2017, 8, 12))).is.equal(true);
     });
 
@@ -29,16 +29,16 @@ describe('Create ANC/PNC Visit Schedule', function () {
             encounterType: { name: 'Abortion'},
             actualDateTime: new Date(2017, 5, 20)
         });
-        const nextVisit = getMotherVisitSchedule.getNextScheduledVisits(progEnrolment);
-        expect(nextVisit).is.equal(null);
+        const nextVisits = getMotherVisitSchedule.getNextScheduledVisits(progEnrolment);
+        expect(nextVisits.length).is.equal(0);
     });
 
     it('Dont create next visit incase all visits are done', function(){
         progEnrolment.encounters.push({
             encounterType: { name: 'PNC 4'}
         });
-        const nextVisit = getMotherVisitSchedule.getNextScheduledVisits(progEnrolment);
-        expect(nextVisit).is.equal(null);
+        const nextVisits = getMotherVisitSchedule.getNextScheduledVisits(progEnrolment);
+        expect(nextVisits.length).is.equal(0);
     });
 });
 
