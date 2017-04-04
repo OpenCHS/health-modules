@@ -13,7 +13,7 @@ const visitSchedule = {
     "PNC 4": {due: 42, max: 42}
 };
 
-const getNextScheduledVisit = function (programEnrolment) {
+const getNextScheduledVisits = function (programEnrolment) {
     const lmpConceptName = 'Last Menstrual Period';
     
     const encounters = programEnrolment.encounters;
@@ -49,6 +49,6 @@ const getNextScheduledVisit = function (programEnrolment) {
 };
 
 module.exports = {
-    getNextScheduledVisit: getNextScheduledVisit
+    getNextScheduledVisits: getNextScheduledVisits
 };
 

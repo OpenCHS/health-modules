@@ -1,6 +1,6 @@
-var getNextScheduledVisit = require('./motherVisitSchedule').getNextScheduledVisit;
+var getNextScheduledVisits = require('./motherVisitSchedule').getNextScheduledVisits;
 
-const getDecision = function (programEncounter) {
+const getDecisions = function (programEncounter) {
     function checkForAnemia(programEncounter, decisions) {
         var observations = programEncounter.observations;
         for (var i = 0; i < programEncounter.observations.length; i++) {
@@ -33,6 +33,6 @@ const getDecision = function (programEncounter) {
 };
 
 module.exports = {
-    getDecision: getDecision,
-    getNextScheduledVisit: getNextScheduledVisit
+    getDecisions: getDecisions,
+    getNextScheduledVisits: getNextScheduledVisits
 };

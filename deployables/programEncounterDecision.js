@@ -1,21 +1,20 @@
-var exports = {};
-exports.Mother = require('./mother/programEncounterDecision');
+const allExports = require('./programExports');
 
-const getDecision = function (programEncounter) {
-    let programExports = exports[programEncounter.program.name];
+const getDecisions = function (programEncounter) {
+    const programExports = allExports[programEncounter.program.name];
     if (programExports !== undefined)
-        return programExports.getDecision(programEncounter);
+        return programExports.getDecisions(programEncounter);
     return [];
 };
 
-const getNextScheduledVisit = function (programEncounter) {
-    let programExports = exports[programEncounter.program.name];
+const getNextScheduledVisits = function (programEncounter) {
+    const programExports = allExports[programEncounter.program.name];
     if (programExports !== undefined)
-        return programExports.getNextScheduledVisit(programEncounter.programEnrolment);
+        return programExports.getNextScheduledVisits(programEncounter.programEnrolment);
     return [];
 };
 
 module.exports = {
-    getDecision: getDecision,
-    getNextScheduledVisit: getNextScheduledVisit
+    getDecisions: getDecisions,
+    getNextScheduledVisits: getNextScheduledVisits
 };

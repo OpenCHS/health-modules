@@ -1,11 +1,11 @@
 const programExports = require('./programExports');
 
-const getNextScheduledDate = function (enrolment) {
+const getNextScheduledVisits = function (enrolment) {
     const programEncounterExport = programExports.programEncounterExports[enrolment.program.name];
     if (programEncounterExport === undefined) return null;
-    return programEncounterExport.getNextScheduledVisit();
+    return programEncounterExport.getNextScheduledVisits();
 };
 
 module.exports = {
-    getNextScheduledDate: getNextScheduledDate
+    getNextScheduledVisits: getNextScheduledVisits
 };

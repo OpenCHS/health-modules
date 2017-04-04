@@ -1,9 +1,10 @@
 const programEncounterExports = {};
-programEncounterExports.Mother = require('./mother/programEncounterDecision');
+programEncounterExports.Mother = require('./mother/motherProgramEncounterDecision');
 
 const programEnrolmentExports = {};
-programEncounterExports.Mother = require('./mother/programEnrolDecision');
+programEnrolmentExports.Mother = require('./mother/motherProgramEnrolmentDecision');
 
 module.exports = {
-    programEncounterExports: programEncounterExports
+    programEncounterExports: programEncounterExports,
+    programEnrolmentExports: programEnrolmentExports
 };

@@ -16,7 +16,7 @@ describe('Make Decision', function () {
         var progEncounter = {};
         progEncounter.observations = observations;
 
-        var decisions = mother.getDecision(progEncounter);
+        var decisions = mother.getDecisions(progEncounter);
 
         var decisionValues = decisions.map(function (decision) {
             return decision.value;
@@ -31,7 +31,7 @@ describe('Make Decision', function () {
         var progEncounter = {};
         progEncounter.observations = observations;
 
-        var decisions = mother.getDecision(progEncounter);
+        var decisions = mother.getDecisions(progEncounter);
 
         var riskFactorTypes = decisions.map(function (decision) {
             return decision.name;
@@ -45,7 +45,7 @@ describe('Make Decision', function () {
         var progEncounter = {};
         progEncounter.observations = observations;
 
-        var decisions = mother.getDecision(progEncounter);
+        var decisions = mother.getDecisions(progEncounter);
         var decisionValues = decisions.map(function (decision) {
             return decision.value;
         });

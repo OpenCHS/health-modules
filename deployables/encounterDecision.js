@@ -1846,7 +1846,7 @@ const hasMalaria = function (paracheckResult) {
         paracheckResult[0].includes("Positive");
 };
 
-const getDecision = function (encounter) {
+const getDecisions = function (encounter) {
     var params = getParameters(encounter);
 
     if (params.complaints.indexOf("Fever") === -1 && hasMalaria(params.paracheckResult)) {
@@ -1999,7 +1999,7 @@ const validate = function (encounter) {
 };
 
 module.exports = {
-    getDecision: getDecision,
+    getDecisions: getDecisions,
     treatmentByComplaintAndCode: treatmentCodes,
     weightRangesToCode: defaultWeightRangesToCode,
     validate: validate

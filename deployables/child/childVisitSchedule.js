@@ -8,7 +8,7 @@ var visitSchedule = {
     "PNC 4" : {due: 42, max: 42}
 };
 
-var getNextScheduledVisit = function (programEnrolment) {
+var getNextScheduledVisits = function (programEnrolment) {
     var observations = programEnrolment.observations;
     var encounters = programEnrolment.encounters;
 
@@ -36,6 +36,6 @@ var getNextScheduledVisit = function (programEnrolment) {
 };
 
 module.exports = {
-    getNextScheduledVisit: getNextScheduledVisit
+    getNextScheduledVisits: getNextScheduledVisits
 };
 

@@ -1,5 +1,5 @@
 const motherVisitSchedule = require('./motherVisitSchedule');
 
-const getNextScheduledVisit = function (enrolment) {
-    return motherVisitSchedule.getNextScheduledVisit(enrolment);
+const getNextScheduledVisits = function (enrolment) {
+    return motherVisitSchedule.getNextScheduledVisits(enrolment);
 };
