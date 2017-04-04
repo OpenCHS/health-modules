@@ -66,7 +66,6 @@ var getGrowthIndicators = function (programEnrolment, today) {
     var bmiForAgeGenderValues = programEnrolment.individual.gender.name === 'Female' ? bmiForAgeScores.female : bmiForAgeScores.male;
     var ageInMonths = C.getAgeInMonths(dateOfBirth, today);
     var length = C.getMatchingKey(C.getDataFromObservation(workingObservations, 'Height'), weightForHeightGenderValues);
-    console.log(length);
 
     if (ageInMonths > 60) return null;
     else {
