@@ -10,13 +10,12 @@
   "scripts": {
     "start": "",
     "test": "find ./test -name '*Test.js' | xargs mocha ",
-    "concat": "browserify --node -e deployables/programEncounterDecision.js -o output/programEncounterDecision.js && browserify --node -e deployables/encounterDecision.js -o output/encounterDecision.js && browserify --node -e deployables/individualRegistrationDecision.js -o output/individualRegistrationDecision.js && browserify --node -e deployables/programEnrolmentDecision.js -o output/programEnrolmentDecision.js"
   },
   "dependencies": {
-    "browserify": "^14.1.0"
   },
   "devDependencies": {
     "chai": "3.5.0",
-    "mocha": "2.4.5"
+    "mocha": "2.4.5",
+    "webpack": "^2.3.3"
   }
 }

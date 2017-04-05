@@ -8,7 +8,11 @@ deps:
 	npm install
 
 deploy-local:
-	npm run concat
+	rm output/*.js
+	./node_modules/.bin/webpack deployables/programEncounterDecision.js output/programEncounterDecision.js
+	./node_modules/.bin/webpack deployables/encounterDecision.js output/encounterDecision.js
+	./node_modules/.bin/webpack deployables/individualRegistrationDecision.js output/individualRegistrationDecision.js
+	./node_modules/.bin/webpack deployables/programEnrolmentDecision.js output/programEnrolmentDecision.js
 	cp -r output/*.js ../openchs-server/external/
 	cp -r deployables/*.json ../openchs-server/external/
 

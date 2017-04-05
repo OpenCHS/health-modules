@@ -2,7 +2,7 @@ var C = require('../common');
 
 var getVaccSchedule = function (programEnrolment) {
     var vaccSchedules = [];
-    var dateOfBirth = programEnrolment.individual.dateofbirth;
+    var dateOfBirth = programEnrolment.individual.dateOfBirth;
 
     //at birth
     addVaccinationSchedule("BCG", 0, 15);

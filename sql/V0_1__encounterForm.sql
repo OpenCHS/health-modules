@@ -6,8 +6,16 @@ CREATE OR REPLACE FUNCTION setupEncounterForm()
   DECLARE Complaint BIGINT;
   DECLARE encounterTypeId BIGINT;
   DECLARE foo RECORD;
+  DECLARE metaDataVersionName VARCHAR(50) := 'V0_1__encounterForm';
 BEGIN
-    raise notice 'Starting setupEncounterForm...';
+    raise notice 'Starting %...', metaDataVersionName;
+    SELECT id INTO foo from openchs.health_metadata_version where name = metaDataVersionName;
+    IF foo is NULL THEN
+      INSERT INTO openchs.health_metadata_version (name) VALUES (metaDataVersionName);
+    ELSE
+      raise notice '% already run.', metaDataVersionName;
+      RETURN;
+    END IF;
 
     INSERT INTO encounter_type (name, uuid, version, created_by_id, last_modified_by_id, created_date_time, last_modified_date_time)
     VALUES ('Default', '8b6f558e-77ef-4193-92f4-3b6636d74b7e', 1, 1, 1, current_timestamp, current_timestamp) RETURNING id INTO encounterTypeId;
@@ -45,3 +53,5 @@ BEGIN
       raise notice '% %', SQLERRM, SQLSTATE;
 END;
 $$ LANGUAGE plpgsql;
+
+SELECT openchs.setupEncounterForm();

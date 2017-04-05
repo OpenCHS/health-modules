@@ -13,8 +13,16 @@ CREATE OR REPLACE FUNCTION setupProgramExitForms()
   DECLARE motherExitReasonConceptId BIGINT;
   DECLARE childExitReasonConceptId BIGINT;
   DECLARE foo RECORD;
+  DECLARE metaDataVersionName VARCHAR(50) := 'V0_4__programExitForms';
 BEGIN
-  raise notice 'Starting....';
+  raise notice 'Starting %...', metaDataVersionName;
+    SELECT id INTO foo from openchs.health_metadata_version where name = metaDataVersionName;
+    IF foo is NULL THEN
+      INSERT INTO openchs.health_metadata_version (name) VALUES (metaDataVersionName);
+    ELSE
+      raise notice '% already run.', metaDataVersionName;
+      RETURN;
+    END IF;
 
   SELECT id FROM program WHERE name = 'Mother' INTO programId;
 
@@ -55,3 +63,5 @@ BEGIN
   raise notice '% %', SQLERRM, SQLSTATE;
 END;
 $$ LANGUAGE plpgsql;
+
+SELECT openchs.setupProgramExitForms();

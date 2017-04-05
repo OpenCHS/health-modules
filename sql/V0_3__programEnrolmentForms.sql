@@ -7,8 +7,16 @@ CREATE OR REPLACE FUNCTION setupProgramEnrolmentForms()
   DECLARE obstetricsHistory BIGINT;
   DECLARE defaultChildFormGroup BIGINT;
   DECLARE foo RECORD;
+DECLARE metaDataVersionName VARCHAR(50) := 'V0_3__programEnrolmentForms';
 BEGIN
-  raise notice 'Starting....';
+    raise notice 'Starting %...', metaDataVersionName;
+    SELECT id INTO foo from openchs.health_metadata_version where name = metaDataVersionName;
+    IF foo is NULL THEN
+      INSERT INTO openchs.health_metadata_version (name) VALUES (metaDataVersionName);
+    ELSE
+      raise notice '% already run.', metaDataVersionName;
+      RETURN;
+    END IF;
 
   INSERT INTO program (name, uuid, version, created_by_id, last_modified_by_id, created_date_time, last_modified_date_time)
   VALUES ('Mother', 'a663fd1c-72af-443b-92d9-4c8c3ca8baef', 1, 1, 1, current_timestamp, current_timestamp) RETURNING id INTO programId;
@@ -58,3 +66,5 @@ BEGIN
   raise notice '% %', SQLERRM, SQLSTATE;
 END;
 $$ LANGUAGE plpgsql;
+
+SELECT openchs.setupProgramEnrolmentForms();

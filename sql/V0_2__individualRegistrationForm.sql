@@ -5,8 +5,16 @@ DECLARE registrationForm BIGINT;
   DECLARE socioEconomic BIGINT;
   DECLARE medical BIGINT;
   DECLARE foo RECORD;
+DECLARE metaDataVersionName VARCHAR(50) := 'V0_2__individualRegistrationForm';
 BEGIN
-  raise notice 'Starting setupIndividualRegistrationForm...';
+    raise notice 'Starting %...', metaDataVersionName;
+    SELECT id INTO foo from openchs.health_metadata_version where name = metaDataVersionName;
+    IF foo is NULL THEN
+      INSERT INTO openchs.health_metadata_version (name) VALUES (metaDataVersionName);
+    ELSE
+      raise notice '% already run.', metaDataVersionName;
+      RETURN;
+    END IF;
 
   SELECT create_form('registration_form', '881f0ddb-ce35-4372-abae-622fb04bc236', 'IndividualProfile', null, '14df9349-f191-48f6-ba7b-986f16b2f6e1', NULL) INTO registrationForm;
 
@@ -31,3 +39,5 @@ BEGIN
   raise notice '% %', SQLERRM, SQLSTATE;
 END;
 $$ LANGUAGE plpgsql;
+
+SELECT openchs.setupIndividualRegistrationForm();
