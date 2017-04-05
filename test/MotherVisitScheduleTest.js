@@ -1,19 +1,15 @@
 const expect = require('chai').expect;
 const getMotherVisitSchedule = require('../deployables/mother/motherVisitSchedule');
+const ProgramEnrolment = require("./Entities").ProgramEnrolment;
+const ProgramEncounter = require("./Entities").ProgramEncounter;
 
 describe('Create ANC/PNC Visit Schedule', function () {
     const matchDate = function (date1, date2) {
         return date1.getFullYear() === date2.getFullYear() && date1.getMonth() === date2.getMonth() && date1.getDate() === date2.getDate();
     };
 
-    const progEnrolment = {
-        program: {name: 'Mother'},
-        observations: [{concept: {name: 'Last Menstrual Period'}, valueJSON: {answer: new Date(2017, 0, 3)}}],
-        encounters: [{
-            encounterType: {name: 'ANC 1'},
-            actualDateTime: new Date(2017, 1, 3)
-        }]
-    };
+    const progEnrolment = new ProgramEnrolment('Mother', [new ProgramEncounter('ANC 1', new Date(2017, 1, 3))]);
+    progEnrolment.setObservation('Last Menstrual Period', new Date(2017, 0, 3));
 
     it('Decide next visit details for normal delivery', function(){
         progEnrolment.encounters.push({
@@ -27,7 +23,7 @@ describe('Create ANC/PNC Visit Schedule', function () {
     it('Dont create next visit incase of abortion', function(){
         progEnrolment.encounters.push({
             encounterType: { name: 'Abortion'},
-            actualDateTime: new Date(2017, 5, 20)
+            encounterDateTime: new Date(2017, 5, 20)
         });
         const nextVisits = getMotherVisitSchedule.getNextScheduledVisits(progEnrolment);
         expect(nextVisits.length).is.equal(0);

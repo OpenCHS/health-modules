@@ -1,15 +1,11 @@
 var expect = require('chai').expect;
 var getchildVisitSchedule = require('../deployables/child/childVisitSchedule');
+const ProgramEnrolment = require("./Entities").ProgramEnrolment;
+const ProgramEncounter = require("./Entities").ProgramEncounter;
 
 describe('Create PNC Visit Schedule for Child', function () {
-    var progEnrolment = {
-        program: {name: 'Child'},
-        observations: [{concept: {name:'Date of Delivery'}, valueJSON: {answer: new Date(2017, 0, 3)}}],
-        encounters: [{
-            encounterType: { name: 'PNC 1'},
-            actualDateTime: new Date(2017, 0, 4)
-        }]
-    };
+    var progEnrolment = new ProgramEnrolment('Child', [new ProgramEncounter('PNC 1', new Date(2017, 0, 4))]);
+    progEnrolment.setObservation('Date of Delivery', new Date(2017, 0, 3));
 
     it('Decide next visit details', function(){
         progEnrolment.encounters.push({
@@ -22,9 +18,6 @@ describe('Create PNC Visit Schedule for Child', function () {
     });
 
     var matchDate = function (date1, date2) {
-        /*console.log(date1.getFullYear());
-         console.log(date1.getMonth());
-         console.log(date1.getDate());*/
         return date1.getFullYear() === date2.getFullYear() && date1.getMonth() === date2.getMonth() && date1.getDate() === date2.getDate();
     };
 
@@ -35,7 +28,6 @@ describe('Create PNC Visit Schedule for Child', function () {
         var nextVisit = getchildVisitSchedule.getNextScheduledVisits(progEnrolment);
         expect(nextVisit).is.equal(null);
     });
-
 });
 
 

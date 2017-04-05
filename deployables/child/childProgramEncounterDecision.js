@@ -49,14 +49,14 @@ var ZScoreStatusMappingBMIForAge = {
  2. Refactor for - Height will not be calculated everytime. Need to get height from the last encounter that has it
  Same might be true for weight
  */
-var getGrowthIndicators = function (programEnrolment, today) {
+var getDecisions = function (programEnrolment, today) {
     today = C.copyDate(today === undefined ? new Date() : today);
 
-    var workingObservations;
+    var workingObservationHolder;
     if (programEnrolment.encounters === undefined || programEnrolment.encounters.length === 0)
-        workingObservations = programEnrolment.observations;
+        workingObservationHolder = programEnrolment;
     else
-        workingObservations = programEnrolment.encounters[programEnrolment.encounters.length - 1].observations;
+        workingObservationHolder = programEnrolment.encounters[programEnrolment.encounters.length - 1];
 
     var dateOfBirth = programEnrolment.individual.dateOfBirth;
 
@@ -65,25 +65,28 @@ var getGrowthIndicators = function (programEnrolment, today) {
     var weightForHeightGenderValues = programEnrolment.individual.gender.name === 'Female' ? weightForHeightScores.female : weightForHeightScores.male;
     var bmiForAgeGenderValues = programEnrolment.individual.gender.name === 'Female' ? bmiForAgeScores.female : bmiForAgeScores.male;
     var ageInMonths = C.getAgeInMonths(dateOfBirth, today);
-    var length = C.getMatchingKey(C.getDataFromObservation(workingObservations, 'Height'), weightForHeightGenderValues);
 
-    if (ageInMonths > 60) return null;
+    if (ageInMonths > 60 || !workingObservationHolder.observationExists('Height') || !workingObservationHolder.observationExists('Weight')) return [];
     else {
-        var weightForAgeZScore = getZScore(weightForAgeGenderValues, 'month', ageInMonths, C.getDataFromObservation(workingObservations, 'Weight'));
-        var heightForAgeZScore = getZScore(heightForAgeGenderValues, 'month', ageInMonths, C.getDataFromObservation(workingObservations, 'Height'));
-        var weightForHeightZScore = getZScore(weightForHeightGenderValues, 'length', length, C.getDataFromObservation(workingObservations, 'Weight'));
-        var bmiForAgeZscore = ageInMonths > 24 ? getZScore(bmiForAgeGenderValues, 'month', ageInMonths, C.calculateBMI(workingObservations, ageInMonths)) : null;
+        const weight = workingObservationHolder.getObservationValue('Weight');
+        const height = workingObservationHolder.getObservationValue('Height');
+        const length = C.getMatchingKey(height, weightForHeightGenderValues);
+
+        var weightForAgeZScore = getZScore(weightForAgeGenderValues, 'month', ageInMonths, weight);
+        var heightForAgeZScore = getZScore(heightForAgeGenderValues, 'month', ageInMonths, height);
+        var weightForHeightZScore = getZScore(weightForHeightGenderValues, 'length', length, weight);
+        var bmiForAgeZscore = ageInMonths > 24 ? getZScore(bmiForAgeGenderValues, 'month', ageInMonths, C.calculateBMI(weight, height, ageInMonths)) : null;
         var gradeForWeightForAge = zScoreGradeMappingWeightForAge[weightForAgeZScore];
         var bmiForAgeStatus = bmiForAgeZscore === null ? null : ZScoreStatusMappingBMIForAge[bmiForAgeZscore];
 
         var decisions = [];
-        decisions.push({name: 'WeightForAge Z-Score', value: weightForAgeZScore});
-        decisions.push({name: 'WeightForAge Grade', value: gradeForWeightForAge});
-        decisions.push({name: 'WeightForAge Status', value: zScoreStatusMappingWeightForAge[weightForAgeZScore]});
-        decisions.push({name: 'HeightForAge Z-Score', value: heightForAgeZScore});
-        decisions.push({name: 'HeightForAge Grade', value: zScoreGradeMappingHeightForAge[heightForAgeZScore]});
-        decisions.push({name: 'HeightForAge Status', value: zScoreStatusMappingHeightForAge[heightForAgeZScore]});
-        decisions.push({name: 'WeightForHeight Z-Score', value: weightForHeightZScore});
+        decisions.push({name: 'Weight for age z-score', value: weightForAgeZScore});
+        decisions.push({name: 'Weight for age grade', value: gradeForWeightForAge});
+        decisions.push({name: 'Weight for age status', value: zScoreStatusMappingWeightForAge[weightForAgeZScore]});
+        decisions.push({name: 'Height for age z-score', value: heightForAgeZScore});
+        decisions.push({name: 'Height for age grade', value: zScoreGradeMappingHeightForAge[heightForAgeZScore]});
+        decisions.push({name: 'Height for age status', value: zScoreStatusMappingHeightForAge[heightForAgeZScore]});
+        decisions.push({name: 'Weight for height z-score', value: weightForHeightZScore});
         if (bmiForAgeStatus === null) return decisions;
         else {
             decisions.push({name: 'BMIForAge Status', value: bmiForAgeStatus});
@@ -111,6 +114,6 @@ var getGrowthIndicators = function (programEnrolment, today) {
 };
 
 module.exports = {
-    getGrowthIndicators: getGrowthIndicators
+    getDecisions: getDecisions
 };
 

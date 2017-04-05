@@ -1,6 +1,6 @@
 var expect = require('chai').expect;
 var decision = require('../deployables/encounterDecision');
-var Encounter = require('./Encounter');
+var Encounter = require('./Entities').Encounter;
 
 describe('Make Decision', function () {
     it('Regression for all diseases, to ensure there are no exceptions and error messages', function () {

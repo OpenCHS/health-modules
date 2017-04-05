@@ -17,14 +17,14 @@ const getNextScheduledVisits = function (programEnrolment) {
     const lmpConceptName = 'Last Menstrual Period';
     
     const encounters = programEnrolment.encounters;
-    const lmpDate = _.getDataFromObservation(programEnrolment.observations, lmpConceptName);
+    const lmpDate = programEnrolment.getObservationValue(lmpConceptName);
     const deliveryEncounter = programEnrolment.encounters.find(function (enc) {
         return enc.encounterType.name === 'Delivery';
     });
 
-    const deliveryDate = deliveryEncounter !== undefined ? deliveryEncounter.actualDateTime : undefined;
+    const deliveryDate = deliveryEncounter !== undefined ? deliveryEncounter.encounterDateTime : undefined;
 
-    if (_.observationExists(programEnrolment.observations, lmpConceptName) && !_.encounterTypeExists(encounters, 'Abortion')) {
+    if (programEnrolment.observationExists(lmpConceptName) && !_.encounterTypeExists(encounters, 'Abortion')) {
         if (_.encounterTypeExists(encounters, 'PNC 4')) return [];
         if (_.encounterTypeExists(encounters, 'PNC 3')) return createNextVisit(deliveryDate, 'PNC', 'PNC 4');
         if (_.encounterTypeExists(encounters, 'PNC 2')) return createNextVisit(deliveryDate, 'PNC', 'PNC 3');
