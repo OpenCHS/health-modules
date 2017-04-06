@@ -8,7 +8,7 @@ deps:
 	npm install
 
 deploy-local:
-	rm output/*.js
+	rm -f output/*.js
 	./node_modules/.bin/webpack deployables/programEncounterDecision.js output/programEncounterDecision.js
 	./node_modules/.bin/webpack deployables/encounterDecision.js output/encounterDecision.js
 	./node_modules/.bin/webpack deployables/individualRegistrationDecision.js output/individualRegistrationDecision.js
