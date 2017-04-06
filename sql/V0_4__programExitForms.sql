@@ -47,17 +47,17 @@ BEGIN
 
   SELECT create_form('Mother Exit', 'e57e2f11-6684-456a-bd00-6511d9b06eaa', 'ProgramExit', programId, 'd82e272a-6519-4291-a4d8-6b9d45a82cd9', NULL) INTO exitForm;
   SELECT create_form_element_group('Default Mother Exit', '0f2c45e2-d5fa-40cc-855d-18deedd4e459', 1::SMALLINT, exitForm) INTO defaultMotherFormGroup;
-  SELECT create_form_element('Mother exit reason', 'fcb4209d-f752-4898-aa7a-b9be066dfb0d', 1, TRUE, defaultMotherFormGroup, motherExitReasonConceptId, '[{"key": "Select", "value": "Single"}]') INTO foo;
-  SELECT create_form_element('Death reason', '4876f1ce-28f0-4788-8d22-d8a3db617fd2', 2, FALSE, defaultMotherFormGroup, deathReasonConceptId, '[]') INTO foo;
-  SELECT create_form_element('Death place', '1ca19a30-1b67-4dd3-9994-c2048813aeff', 3, FALSE, defaultMotherFormGroup, deathPlaceConceptId, '[]') INTO foo;
+  SELECT create_form_element('Mother exit reason', 'fcb4209d-f752-4898-aa7a-b9be066dfb0d', 1::SMALLINT , TRUE, defaultMotherFormGroup, motherExitReasonConceptId, '[{"key": "Select", "value": "Single"}]') INTO foo;
+  SELECT create_form_element('Death reason', '4876f1ce-28f0-4788-8d22-d8a3db617fd2', 2::SMALLINT , FALSE, defaultMotherFormGroup, deathReasonConceptId, '[]') INTO foo;
+  SELECT create_form_element('Death place', '1ca19a30-1b67-4dd3-9994-c2048813aeff', 3::SMALLINT , FALSE, defaultMotherFormGroup, deathPlaceConceptId, '[]') INTO foo;
 
 
   SELECT id FROM program WHERE name = 'Child' INTO programId;
   SELECT create_form('Child Exit', '67165f46-890d-4747-ba9a-dbaa0cfa5353', 'ProgramExit', programId, '43931a65-290f-492b-ae66-1325e6de91c7', NULL) INTO exitForm;
   SELECT create_form_element_group('Default Child Exit', '4cda489f-1891-4533-a8c3-30b936ea866f', 1::SMALLINT, exitForm) INTO defaultChildFormGroup;
-  SELECT create_form_element('Child exit reason', '443462ad-4de0-4d6f-bfbc-bc8c1404b131', 1, TRUE, defaultChildFormGroup, childExitReasonConceptId, '[{"key": "Select", "value": "Single"}]') INTO foo;
-  SELECT create_form_element('Death reason', 'f6efd6e9-ea2d-4a8f-baeb-6fe12a86f7d8', 2, FALSE, defaultChildFormGroup, deathReasonConceptId, '[]') INTO foo;
-  SELECT create_form_element('Death place', '83e6cb7b-5f2d-4c5b-a9d1-0be071d6e956', 3, FALSE, defaultChildFormGroup, deathPlaceConceptId, '[]') INTO foo;
+  SELECT create_form_element('Child exit reason', '443462ad-4de0-4d6f-bfbc-bc8c1404b131', 1::SMALLINT , TRUE, defaultChildFormGroup, childExitReasonConceptId, '[{"key": "Select", "value": "Single"}]') INTO foo;
+  SELECT create_form_element('Death reason', 'f6efd6e9-ea2d-4a8f-baeb-6fe12a86f7d8', 2::SMALLINT , FALSE, defaultChildFormGroup, deathReasonConceptId, '[]') INTO foo;
+  SELECT create_form_element('Death place', '83e6cb7b-5f2d-4c5b-a9d1-0be071d6e956', 3::SMALLINT , FALSE, defaultChildFormGroup, deathPlaceConceptId, '[]') INTO foo;
 
   EXCEPTION WHEN others THEN
   raise notice '% %', SQLERRM, SQLSTATE;
