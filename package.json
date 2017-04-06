@@ -9,7 +9,7 @@
   "license": "AGPL-3.0",
   "scripts": {
     "start": "",
-    "test": "find ./test -name '*Test.js' | xargs mocha ",
+    "test": "find ./test -name '*Test.js' | xargs mocha "
   },
   "dependencies": {
   },
