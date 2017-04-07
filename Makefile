@@ -18,3 +18,4 @@ deploy-local:
 
 setup-db:
 	psql -h 0.0.0.0 -U openchs -a -f sql/data.sql
+	psql -h 0.0.0.0 -U openchs -a -f sql/lbp/villages.sql
