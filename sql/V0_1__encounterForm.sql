@@ -20,7 +20,7 @@ BEGIN
     INSERT INTO encounter_type (name, uuid, version, created_by_id, last_modified_by_id, created_date_time, last_modified_date_time)
     VALUES ('Default', '8b6f558e-77ef-4193-92f4-3b6636d74b7e', 1, 1, 1, current_timestamp, current_timestamp) RETURNING id INTO encounterTypeId;
 
-    SELECT create_form('encounter_form', 'e1472f56-c057-4aea-9f46-0decd9d068fe', 'Encounter', encounterTypeId, 'd5ed95fe-ae91-4a70-95eb-ee3d2e16b404', NULL) into encounterform;
+    SELECT create_form('encounter_form', 'e1472f56-c057-4aea-9f46-0decd9d068fe', 'Encounter', NULL::BIGINT, 'd5ed95fe-ae91-4a70-95eb-ee3d2e16b404', '844e4fa0-200b-45eb-b44e-260c6d3d1fbc') into encounterform;
 
     select create_form_element_group('Vitals', '52c7a463-3044-4ac6-8bfa-dae86fd20878', 1::SMALLINT, encounterForm) INTO vitals;
     SELECT create_form_element_for_concept('Weight', '7b7fd4ed-61b5-490e-be96-251dcfd9dda4', 1::SMALLINT, TRUE, vitals, '[]', '7907e658-d25e-4823-9c0d-b56843010232', 'Numeric') INTO foo;
