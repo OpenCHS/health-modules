@@ -12,6 +12,12 @@
           "uuid": "d6b5cb76-843b-48b7-a0f1-645caf9a178e",
           "name": "Is child having any of the following",
           "dataType": "Coded",
+          "keyValues": [
+            {
+              "key": "Select",
+              "value": "Multi"
+            }
+          ],
           "answers": ["Not passing urine", "Not passing stool", "Diarrhea", "Vomiting", "Looks blue", "Feels cold", "No problems", "Blood in stools", "Cries Continuously", "Does not feed well"]
         },
         {
@@ -23,6 +29,12 @@
           "uuid": "018f9968-79cf-4e40-988d-1befcdff73bb",
           "name": "Any activity problems",
           "dataType": "Coded",
+          "keyValues": [
+            {
+              "key": "Select",
+              "value": "Multi"
+            }
+          ],
           "answers": ["Convulsions", "Slow activity / lethargic", "Not feeding", "No problems"]
         },
         {
@@ -47,12 +59,24 @@
           "uuid": "37e5335a-42bc-4a25-840a-e82e820f4f15",
           "name": "Any breathing problems",
           "dataType": "Coded",
+          "keyValues": [
+            {
+              "key": "Select",
+              "value": "Single"
+            }
+          ],
           "answers": ["Rib indrawing", "Breathing too fast", "Breathing too slow", "Grunting noises while breathing", "No problems"]
         },
         {
           "uuid": "a489a772-08f7-49c9-8bbc-814cfdcf1525",
           "name": "Any skin problems",
           "dataType": "Coded",
+          "keyValues": [
+            {
+              "key": "Select",
+              "value": "Single"
+            }
+          ],
           "answers": ["Jaundice", "Umbilical cord is infected", "Skin blisters", "No problems"]
         }
       ]
