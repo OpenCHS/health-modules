@@ -1,0 +1,77 @@
+{
+  "name": "Child Default",
+  "uuid": "e09dddeb-ed72-40c4-ae8d-112d8893f18b",
+  "formType": "ProgramEncounter",
+  "programName": "Child",
+  "formElementGroups": [
+    {
+      "name": "Recent History",
+      "uuid": "00595000-54fb-40f2-9493-a57f01881aad",
+      "formElements": [
+        {
+          "uuid": "d6b5cb76-843b-48b7-a0f1-645caf9a178e",
+          "name": "Is child having any of the following",
+          "dataType": "Coded",
+          "answers": ["Not passing urine", "Not passing stool", "Diarrhea", "Vomiting", "Looks blue", "Feels cold", "No problems", "Blood in stools", "Cries Continuously", "Does not feed well"]
+        },
+        {
+          "uuid": "4849b8dd-cce8-4302-b77e-5bf28a555229",
+          "name": "Number of days of diarrhea",
+          "dataType": "Numeric"
+        },
+        {
+          "uuid": "018f9968-79cf-4e40-988d-1befcdff73bb",
+          "name": "Any activity problems",
+          "dataType": "Coded",
+          "answers": ["Convulsions", "Slow activity / lethargic", "Not feeding", "No problems"]
+        },
+        {
+          "uuid": "0dbaa2f0-080b-4657-b421-621943d4dd99",
+          "name": "Does child feel hot or have the chills",
+          "dataType": "Boolean",
+          "keyValues": [{"key": "TrueValue", "value": "Yes"}, {"key": "FalseValue", "value": "No"}]
+        },
+        {
+          "uuid": "0311c913-eb2b-4478-b435-dc142e7fe584",
+          "name": "Is baby exclusively breastfeeding",
+          "dataType": "Boolean",
+          "keyValues": [{"key": "TrueValue", "value": "Yes"}, {"key": "FalseValue", "value": "No"}]
+        }
+      ]
+    },
+    {
+      "name": "Child Examination",
+      "uuid": "4c5093dd-feb3-4f94-b930-b7168bb65c71",
+      "formElements": [
+        {
+          "uuid": "37e5335a-42bc-4a25-840a-e82e820f4f15",
+          "name": "Any breathing problems",
+          "dataType": "Coded",
+          "answers": ["Rib indrawing", "Breathing too fast", "Breathing too slow", "Grunting noises while breathing", "No problems"]
+        },
+        {
+          "uuid": "a489a772-08f7-49c9-8bbc-814cfdcf1525",
+          "name": "Any skin problems",
+          "dataType": "Coded",
+          "answers": ["Jaundice", "Umbilical cord is infected", "Skin blisters", "No problems"]
+        }
+      ]
+    },
+    {
+      "uuid": "550cc969-4021-4d13-8ad3-d8759388205b",
+      "name": "Anthropometry",
+      "formElements": [
+        {
+          "uuid": "94a659ce-dd98-44a1-a3ea-2a8abc622990",
+          "name": "Height",
+          "dataType": "Numeric"
+        },
+        {
+          "uuid": "786fa276-8baa-4315-8f72-1da2e0c888a6",
+          "name": "Weight",
+          "dataType": "Numeric"
+        }
+      ]
+    }
+  ]
+}
