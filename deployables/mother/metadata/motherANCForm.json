@@ -1,0 +1,182 @@
+{
+  "name": "ANC",
+  "uuid": "3a95e9b0-731a-4714-ae7c-10e1d03cebfe",
+  "formType": "ProgramEncounter",
+  "programName": "Mother",
+  "userUUID": "5fed2907-df3a-4867-aef5-c87f4c78a31a",
+  "formElementGroups": [
+    {
+      "uuid": "36debb83-db66-4da1-88c7-23c0dfc47649",
+      "name": "Physical Examination",
+      "displayOrder": 1,
+      "formElements": [
+        {
+          "name": "Pedal Edema",
+          "uuid": "32bed768-4074-45c4-92a6-4bc27f43bbdc",
+          "keyValues": [
+            {
+              "key": "TrueValue",
+              "value": "Present"
+            },
+            {
+              "key": "FalseValue",
+              "value": "Absent"
+            }
+          ],
+          "dataType": "Boolean",
+          "displayOrder": 1,
+          "mandatory": false
+        },
+        {
+          "name": "Pallor",
+          "uuid": "6b5f0898-6ea3-4395-91e2-6e415cada5ff",
+          "keyValues": [
+            {
+              "key": "TrueValue",
+              "value": "Present"
+            },
+            {
+              "key": "FalseValue",
+              "value": "Absent"
+            }
+          ],
+          "dataType": "Boolean",
+          "displayOrder": 2,
+          "mandatory": false
+        },
+        {
+          "name": "Fits/Convulsion",
+          "uuid": "b0f2fead-9d1d-4bef-bb24-4db2aa94f5e0",
+          "keyValues": [
+            {
+              "key": "TrueValue",
+              "value": "Present"
+            },
+            {
+              "key": "FalseValue",
+              "value": "Absent"
+            }
+          ],
+          "dataType": "Boolean",
+          "displayOrder": 3,
+          "mandatory": false
+        },
+        {
+          "name": "Jaundice",
+          "uuid": "a9a50a04-6e62-4398-b0ed-1039f82fe323",
+          "keyValues": [
+            {
+              "key": "TrueValue",
+              "value": "Present"
+            },
+            {
+              "key": "FalseValue",
+              "value": "Absent"
+            }
+          ],
+          "dataType": "Boolean",
+          "displayOrder": 4,
+          "mandatory": false
+        },
+        {
+          "name": "No risk symptoms observed",
+          "uuid": "330a0b93-91ed-4ef9-91bc-d7d5613ffec1",
+          "keyValues": [
+            {
+              "key": "TrueValue",
+              "value": "Present"
+            },
+            {
+              "key": "FalseValue",
+              "value": "Absent"
+            }
+          ],
+          "dataType": "Boolean",
+          "displayOrder": 5,
+          "mandatory": false
+        },
+        {
+          "name": "Weight",
+          "uuid": "35868c08-7c14-4c1f-beed-b0a4c4ea11f8",
+          "keyValues": [],
+          "dataType": "Numeric",
+          "displayOrder": 6,
+          "mandatory": false
+        },
+        {
+          "name": "Height",
+          "uuid": "695fdfda-4c0d-44b2-8a46-62d79fe966b0",
+          "keyValues": [],
+          "dataType": "Numeric",
+          "displayOrder": 7,
+          "mandatory": false
+        },
+        {
+          "name": "Foetal presentation",
+          "uuid": "689a1fc1-08cc-442b-9266-b7e147e7c8fa",
+          "keyValues": [
+            {
+              "key": "Select",
+              "value": "Single"
+            }
+          ],
+          "dataType": "Coded",
+          "displayOrder": 8,
+          "answers": [
+            "Cephalic",
+            "Breach",
+            "Transverse"
+          ],
+          "mandatory": false
+        }
+      ]
+    },
+    {
+      "uuid": "cb8b6812-b58b-428d-afbd-7f53748c684d",
+      "name": "Vitals",
+      "displayOrder": 2,
+      "formElements": [
+        {
+          "name": "Diastolic",
+          "uuid": "c253083f-a2f9-4bec-a07f-8883637125db",
+          "keyValues": [],
+          "dataType": "Numeric",
+          "displayOrder": 1,
+          "mandatory": false
+        },
+        {
+          "name": "Systolic",
+          "uuid": "972a7890-4fa9-42c8-b4b8-fe8583c5ae80",
+          "keyValues": [],
+          "dataType": "Numeric",
+          "displayOrder": 2,
+          "mandatory": false
+        },
+        {
+          "name": "Pulse",
+          "uuid": "099dd8f5-ed61-4195-ba8c-2a9f26317642",
+          "keyValues": [],
+          "dataType": "Numeric",
+          "displayOrder": 3,
+          "mandatory": false
+        },
+        {
+          "name": "Respiratory Rate",
+          "uuid": "407b2857-e5cd-4805-9b2c-c43c2e819b04",
+          "keyValues": [],
+          "dataType": "Numeric",
+          "displayOrder": 4,
+          "mandatory": false
+        },
+        {
+          "name": "Temperature",
+          "uuid": "86d906d2-f44f-4743-9044-f7b23df6d5d8",
+          "keyValues": [],
+          "dataType": "Numeric",
+          "displayOrder": 5,
+          "mandatory": false
+        }
+      ]
+    }
+  ]
+}

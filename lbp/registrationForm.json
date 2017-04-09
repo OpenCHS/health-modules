@@ -1,0 +1,185 @@
+{
+  "name": "registration_form",
+  "uuid": "881f0ddb-ce35-4372-abae-622fb04bc236",
+  "formType": "IndividualProfile",
+  "userUUID": "5fed2907-df3a-4867-aef5-c87f4c78a31a",
+  "formElementGroups": [
+    {
+      "uuid": "3aa06f6b-ecba-4e20-a87a-15fabd495b6b",
+      "name": "Family",
+      "displayOrder": 1,
+      "formElements": [
+        {
+          "name": "Husband Name",
+          "uuid": "34397241-8529-45c0-94c2-de523d052002",
+          "keyValues": [],
+          "dataType": "Text",
+          "displayOrder": 1,
+          "mandatory": false
+        },
+        {
+          "name": "Number of Members in House",
+          "uuid": "ba602a8e-69d2-49d2-960c-3f130d616686",
+          "keyValues": [],
+          "dataType": "Numeric",
+          "displayOrder": 2,
+          "mandatory": false
+        }
+      ]
+    },
+    {
+      "uuid": "2482522b-34e5-4c82-8e80-9a856425b227",
+      "name": "Socio Economic",
+      "displayOrder": 2,
+      "formElements": [
+        {
+          "name": "Education",
+          "uuid": "9035da14-ec2f-489f-89c8-a776c986d968",
+          "keyValues": [
+            {
+              "key": "Select",
+              "value": "Single"
+            }
+          ],
+          "dataType": "Coded",
+          "displayOrder": 1,
+          "answers": [
+            "Illiterate",
+            "Literate without schooling",
+            "1-5",
+            "6-7",
+            "8-10",
+            "11-12",
+            "Graduations",
+            "Post Graduation and above"
+          ],
+          "mandatory": false
+        },
+        {
+          "name": "Religion",
+          "uuid": "5a913f85-8707-4051-b4e2-009fc1ffa3f9",
+          "keyValues": [
+            {
+              "key": "Select",
+              "value": "Single"
+            }
+          ],
+          "dataType": "Coded",
+          "displayOrder": 2,
+          "answers": [
+            "Hindu",
+            "Muslim",
+            "Christian",
+            "Sikh",
+            "Jain",
+            "Other"
+          ],
+          "mandatory": false
+        },
+        {
+          "name": "Caste Categories",
+          "uuid": "8b8f58d9-0a81-49ff-8310-81118507f81e",
+          "keyValues": [
+            {
+              "key": "Select",
+              "value": "Single"
+            }
+          ],
+          "dataType": "Coded",
+          "displayOrder": 3,
+          "answers": [
+            "SC",
+            "ST",
+            "OBC",
+            "General"
+          ],
+          "mandatory": false
+        },
+        {
+          "name": "Caste",
+          "uuid": "f9025528-31a5-4800-a34d-3670f0e612d2",
+          "keyValues": [
+            {
+              "key": "Select",
+              "value": "Single"
+            }
+          ],
+          "dataType": "Coded",
+          "displayOrder": 4,
+          "answers": [
+            "Madia",
+            "Gond"
+          ],
+          "mandatory": false
+        },
+        {
+          "name": "Economic Status",
+          "uuid": "162b31fc-5ab5-4aa9-b368-dcc4ba183f93",
+          "keyValues": [
+            {
+              "key": "Select",
+              "value": "Single"
+            }
+          ],
+          "dataType": "Coded",
+          "displayOrder": 5,
+          "answers": [
+            "White Card",
+            "Orange Card",
+            "Yellow Card"
+          ],
+          "mandatory": false
+        }
+      ]
+    },
+    {
+      "uuid": "f0733466-7d78-41e7-b864-20d421da5b41",
+      "name": "Medical",
+      "displayOrder": 3,
+      "formElements": [
+        {
+          "name": "Blood group",
+          "uuid": "c0a869e1-8c00-4815-9e40-be3835fb5595",
+          "keyValues": [
+            {
+              "key": "Select",
+              "value": "Single"
+            }
+          ],
+          "dataType": "Coded",
+          "displayOrder": 1,
+          "answers": [
+            "A+",
+            "A-",
+            "B+",
+            "B-",
+            "AB+",
+            "AB-",
+            "O+",
+            "O-"
+          ],
+          "mandatory": false
+        },
+        {
+          "name": "Medical history",
+          "uuid": "3c748287-5529-4412-8cca-f3aa6744ea8b",
+          "keyValues": [
+            {
+              "key": "Select",
+              "value": "Single"
+            }
+          ],
+          "dataType": "Coded",
+          "displayOrder": 2,
+          "answers": [
+            "Hypertension",
+            "Diabetes",
+            "Heart-related Diseases",
+            "TB"
+          ],
+          "mandatory": false
+        }
+      ]
+    }
+  ]
+}

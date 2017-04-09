@@ -17,5 +17,13 @@ deploy-local:
 	cp -r deployables/*.json ../openchs-server/external/
 
 setup-db:
-	psql -h 0.0.0.0 -U openchs -a -f sql/data.sql
-	psql -h 0.0.0.0 -U openchs -a -f sql/lbp/villages.sql
+	curl -vX POST http://192.168.73.1:8080/forms -d @lbp/registrationForm.json -H "Content-Type: application/json"
+	curl -vX POST http://192.168.73.1:8080/forms -d @deployables/encounterForm.json -H "Content-Type: application/json"
+	curl -vX POST http://192.168.73.1:8080/forms -d @deployables/mother/metadata/motherProgramEnrolmentForm.json -H "Content-Type: application/json"
+	curl -vX POST http://192.168.73.1:8080/forms -d @deployables/mother/metadata/motherANCForm.json -H "Content-Type: application/json"
+	curl -vX POST http://192.168.73.1:8080/forms -d @deployables/mother/metadata/motherAbortionForm.json -H "Content-Type: application/json"
+	curl -vX POST http://192.168.73.1:8080/forms -d @deployables/mother/metadata/motherProgramExitForm.json -H "Content-Type: application/json"
+	curl -vX POST http://192.168.73.1:8080/forms -d @deployables/child/metadata/childProgramEnrolmentForm.json -H "Content-Type: application/json"
+	curl -vX POST http://192.168.73.1:8080/forms -d @deployables/child/metadata/childDefaultProgramEncounterForm.json -H "Content-Type: application/json"
+	curl -vX POST http://192.168.73.1:8080/forms -d @deployables/child/metadata/childDefaultProgramExitForm.json -H "Content-Type: application/json"
+	psql -h 0.0.0.0 -U openchs -a -f lbp/villages.sql
