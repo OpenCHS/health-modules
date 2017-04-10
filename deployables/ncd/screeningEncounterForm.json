@@ -22,6 +22,12 @@
           "answers": ["Weakness of one side of body", "Inability to speak or understand", "Numbness or clumsiness of one side of body", "Loss of vision", "Unsteadiness of walking"]
         },
         {
+          "uuid": "bce0867c-8604-4dff-b9b5-67a306c392c8",
+          "name": "How long did the symptoms last",
+          "dataType": "Coded",
+          "answers": ["Lasted few minutes", "Days, weeks or still persisting"]
+        },
+        {
           "uuid": "5065a0ae-58b3-4d91-8a91-aaad180b8a90",
           "name": "Suffering from diabetes",
           "dataType": "Boolean",
@@ -76,7 +82,12 @@
           "name": "Waist circumference",
           "dataType": "Numeric"
         },
-
+        {
+          "uuid": "41708514-eec0-47be-90e2-066ee8f240f4",
+          "name": "Fasting glucose (mg/dl)",
+          "conceptName": "Fasting glucose",
+          "dataType": "Numeric"
+        }
       ]
     },
     {
