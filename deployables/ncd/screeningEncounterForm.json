@@ -85,9 +85,21 @@
         {
           "uuid": "41708514-eec0-47be-90e2-066ee8f240f4",
           "name": "Fasting glucose (mg/dl)",
-          "conceptName": "Fasting glucose",
+          "conceptName": "Fasting glucose level",
           "dataType": "Numeric"
-        }
+        },
+        {
+          "uuid": "26c71549-18f4-4447-ad1a-7a50a6764bac",
+          "name": "2 hour post glucose load (mg/dl)",
+          "conceptName": "Non-fasting glucose level",
+          "dataType": "Numeric"
+        },
+        {
+          "uuid": "04fd811e-c111-4fc9-87f8-e74784931a74",
+          "name": "Feet examination",
+          "dataType": "Coded",
+          "answers": ["Calluses", "Ulcers", "Prominent veins", "Edema", "Injuries"]
+        },
       ]
     },
     {
