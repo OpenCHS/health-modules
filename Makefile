@@ -17,6 +17,8 @@ deploy-local:
 	cp -r deployables/*.json ../openchs-server/external/
 
 setup-db:
+	flyway -X -user=openchs -password=password -url=jdbc:postgresql://localhost:5432/openchs -schemas=openchs clean
+	flyway -X -user=openchs -password=password -url=jdbc:postgresql://localhost:5432/openchs -schemas=openchs -locations=filesystem:../openchs-server/src/main/resources/db/migration/ migrate
 	curl -vX POST http://192.168.73.1:8080/forms -d @lbp/registrationForm.json -H "Content-Type: application/json"
 	curl -vX POST http://192.168.73.1:8080/forms -d @deployables/encounterForm.json -H "Content-Type: application/json"
 	curl -vX POST http://192.168.73.1:8080/forms -d @deployables/mother/metadata/motherProgramEnrolmentForm.json -H "Content-Type: application/json"
