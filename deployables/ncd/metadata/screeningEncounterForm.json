@@ -30,7 +30,7 @@
         {
           "uuid": "e90908be-e088-44ac-84fc-82a2a96108ae",
           "name": "Any other symptoms",
-          "conceptName": "NCD Screening Other Symptoms"
+          "conceptName": "NCD Screening Other Symptoms",
           "answers": ["Breathing difficulty particularly on exertion", "Swelling of feet", "Urinary difficulties", "History of passing stones"],
           "dataType": "Coded"
         },
@@ -56,7 +56,7 @@
         {
           "name": "Smoking (Current or in last one year)",
           "uuid": "1ee0adc9-b58e-4fe3-b547-bd058a654562",
-          "datatype": "Boolean",
+          "dataType": "Boolean",
           "keyValues": [{"key": "TrueValue", "value": "Yes"}, {"key": "FalseValue", "value": "No"}]
         },
         {
@@ -130,12 +130,12 @@
         {
           "name": "Total Cholesterol",
           "uuid": "47943edb-c498-4067-96bb-2f01a82c0ab6",
-          "datatype": "Numeric"
+          "dataType": "Numeric"
         },
         {
           "name": "Systolic",
           "uuid": "9bfae53b-d81e-4fed-acd9-c42b791cab1a",
-          "datatype": "Numeric"
+          "dataType": "Numeric"
         }
       ]
     }
