@@ -99,7 +99,7 @@
           "name": "Feet examination",
           "dataType": "Coded",
           "answers": ["Calluses", "Ulcers", "Prominent veins", "Edema", "Injuries"]
-        },
+        }
       ]
     },
     {
