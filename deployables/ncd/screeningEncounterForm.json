@@ -19,7 +19,7 @@
               "value": "Multi"
             }
           ],
-          "answers": ["Weakness of one side of body", "Inability to speak or understand", "Numbness or clumsiness of one side of body", "Loss of vision", "Unsteadiness of walking"]
+          "answers": ["Weakness of one side of body", "Inability to speak or understand", "Numbness or clumsiness of one side of body", "Loss of vision", "Unsteadiness of walking", "Severe headache", "Seizures", "Loss of consciousness"]
         },
         {
           "uuid": "bce0867c-8604-4dff-b9b5-67a306c392c8",
@@ -28,10 +28,24 @@
           "answers": ["Lasted few minutes", "Days, weeks or still persisting"]
         },
         {
+          "uuid": "e90908be-e088-44ac-84fc-82a2a96108ae",
+          "name": "Any other symptoms",
+          "conceptName": "NCD Screening Other Symptoms"
+          "answers": ["Breathing difficulty particularly on exertion", "Swelling of feet", "Urinary difficulties", "History of passing stones"],
+          "dataType": "Coded"
+        },
+        {
           "uuid": "5065a0ae-58b3-4d91-8a91-aaad180b8a90",
           "name": "Suffering from diabetes",
           "dataType": "Boolean",
           "keyValues": [{"key": "TrueValue", "value": "Yes"}, {"key": "FalseValue", "value": "No"}]
+        },
+        {
+          "uuid": "4ebc7a4f-c10c-4139-92c7-3677c9486fda",
+          "name": "Medications",
+          "dataType": "Coded",
+          "keyValues": [{"key": "Select", "value": "Multi"}],
+          "answers": ["Frequent intake of pain relieving drugs", "Steroid intake for asthma"]
         }
       ]
     },
@@ -50,6 +64,13 @@
           "name": "High intake of alcohol",
           "dataType": "Boolean",
           "keyValues": [{"key": "TrueValue", "value": "Yes"}, {"key": "FalseValue", "value": "No"}]
+        },
+        {
+          "uuid": "238a8d29-b912-437e-9428-58801a4cd4db",
+          "name": "Lifestyle",
+          "dataType": "Coded",
+          "keyValues": [{"key": "Select", "value": "Multi"}],
+          "answers": ["Lack of physical activity", "High sodium intake/high salt intake"]
         }
       ]
     },
@@ -85,13 +106,13 @@
         {
           "uuid": "41708514-eec0-47be-90e2-066ee8f240f4",
           "name": "Fasting glucose (mg/dl)",
-          "conceptName": "Fasting glucose level",
+          "conceptName": "Fasting blood glucose",
           "dataType": "Numeric"
         },
         {
           "uuid": "26c71549-18f4-4447-ad1a-7a50a6764bac",
-          "name": "2 hour post glucose load (mg/dl)",
-          "conceptName": "Non-fasting glucose level",
+          "name": "Post meal blood glucose, after 2 hours (mg/dl)",
+          "conceptName": "Post meal blood glucose",
           "dataType": "Numeric"
         },
         {
