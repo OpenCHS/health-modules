@@ -1847,6 +1847,8 @@ const hasMalaria = function (paracheckResult) {
 };
 
 const getDecisions = function (encounter) {
+    if (encounter.encounterType.name !== "Outpatient") return [];
+
     var params = getParameters(encounter);
 
     if (params.complaints.indexOf("Fever") === -1 && hasMalaria(params.paracheckResult)) {
@@ -1959,6 +1961,8 @@ function getParameters(encounter) {
 }
 
 const validate = function (encounter) {
+    if (encounter.encounterType.name !== "Outpatient") return [{success: true}];
+
     var params = getParameters(encounter);
 
     var validationResult = {

@@ -11,9 +11,10 @@ const observationExists = function (conceptName) {
     return this.observations.has(conceptName);
 };
 
-function Encounter() {
+function Encounter(encounterTypeName) {
     this.observations = new Map();
     this.individual = new Individual();
+    this.encounterType = {name: encounterTypeName};
 
     this.setAge = function (years) {
         this.individual.setAge(years);
