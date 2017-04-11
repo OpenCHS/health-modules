@@ -2,7 +2,6 @@
   "name": "Screening",
   "uuid": "a5e99c9e-5b3a-4730-b24b-80662e79689c",
   "formType": "Encounter",
-  "programName": "NCD Screening",
   "formElementGroups": [
     {
       "name": "Symptoms",
