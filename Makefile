@@ -25,6 +25,7 @@ setup-db:
 	curl -X POST http://192.168.73.1:8080/forms -d @deployables/mother/metadata/motherANCForm.json -H "Content-Type: application/json"
 	curl -X POST http://192.168.73.1:8080/forms -d @deployables/mother/metadata/motherAbortionForm.json -H "Content-Type: application/json"
 	curl -X POST http://192.168.73.1:8080/forms -d @deployables/mother/metadata/motherProgramExitForm.json -H "Content-Type: application/json"
+	curl -X POST http://192.168.73.1:8080/concepts -d @deployables/child/metadata/concepts.json -H "Content-Type: application/json"
 	curl -X POST http://192.168.73.1:8080/forms -d @deployables/child/metadata/childProgramEnrolmentForm.json -H "Content-Type: application/json"
 	curl -X POST http://192.168.73.1:8080/forms -d @deployables/child/metadata/childDefaultProgramEncounterForm.json -H "Content-Type: application/json"
 	curl -X POST http://192.168.73.1:8080/forms -d @deployables/child/metadata/childProgramExitForm.json -H "Content-Type: application/json"

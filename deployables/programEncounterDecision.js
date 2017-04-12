@@ -1,16 +1,16 @@
-const allExports = require('./programExports');
+const allImports = require('./programExports');
 
 const getDecisions = function (programEncounter) {
-    const programExports = allExports.programEncounterExports[programEncounter.programEnrolment.program.name];
-    if (programExports !== undefined)
-        return programExports.getDecisions(programEncounter);
+    const programImport = allImports.programEncounterExports[programEncounter.programEnrolment.program.name];
+    if (programImport !== undefined)
+        return programImport.getDecisions(programEncounter);
     return [];
 };
 
 const getNextScheduledVisits = function (programEncounter) {
-    const programExports = allExports.programEncounterExports[programEncounter.programEnrolment.program.name];
-    if (programExports !== undefined)
-        return programExports.getNextScheduledVisits(programEncounter.programEnrolment);
+    const programImport = allImports.programEncounterExports[programEncounter.programEnrolment.program.name];
+    if (programImport !== undefined)
+        return programImport.getNextScheduledVisits(programEncounter.programEnrolment);
     return [];
 };
 

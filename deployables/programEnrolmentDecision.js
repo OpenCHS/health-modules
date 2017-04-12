@@ -1,12 +1,19 @@
-const programExports = require('./programExports');
+const programImports = require('./programExports');
 
 const getNextScheduledVisits = function (enrolment) {
-    const programEnrolmentExports = programExports.programEnrolmentExports[enrolment.program.name];
-    if (programEnrolmentExports === undefined) return null;
-    const nextScheduledVisits = programEnrolmentExports.getNextScheduledVisits();
+    const programEnrolmentImport = programImports.programEnrolmentExports[enrolment.program.name];
+    if (programEnrolmentImport === undefined || programEnrolmentImport.getNextScheduledVisits === undefined) return [];
+    const nextScheduledVisits = programEnrolmentImport.getNextScheduledVisits();
     console.log('' + nextScheduledVisits.length + ' scheduled visits returned');
 };
 
+const getChecklists = function (enrolment) {
+    const programEnrolmentImport = programImports.programEnrolmentExports[enrolment.program.name];
+    if (programEnrolmentImport === undefined || programEnrolmentImport.getChecklists === undefined) return [];
+    return programEnrolmentImport.getChecklists(enrolment);
+};
+
 module.exports = {
-    getNextScheduledVisits: getNextScheduledVisits
+    getNextScheduledVisits: getNextScheduledVisits,
+    getChecklists: getChecklists
 };

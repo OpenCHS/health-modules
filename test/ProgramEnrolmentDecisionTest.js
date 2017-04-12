@@ -1,8 +1,9 @@
-var expect = require('chai').expect;
+const expect = require('chai').expect;
 
 describe('ProgramEncounterDecisionTest', () => {
     it('wiring', () => {
-        var exports = require('../deployables/programEnrolmentDecision');
-        expect(exports.getNextScheduledVisits).is.not.undefined;
+        const imports = require('../deployables/programEnrolmentDecision');
+        expect(imports.getNextScheduledVisits).is.not.undefined;
+        expect(imports.getChecklists).is.not.undefined;
     });
 });

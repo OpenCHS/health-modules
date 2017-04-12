@@ -13,18 +13,17 @@ describe('Create Child Vaccincation Schedule', function () {
     };
 
     it('Get Vacc Schedule for a new born', function () {
-
-        var vaccSchedules = getVaccSchedule.getVaccSchedule(progEnrolment);
+        var vaccSchedules = getVaccSchedule.getVaccSchedule(progEnrolment).items;
         var vaccNames = vaccSchedules.map(function (vaccSchedule) {
-            return vaccSchedule.vaccName;
+            return vaccSchedule.name;
         });
         expect(vaccNames.indexOf("BCG")).is.not.equal(-1);
-        expect(vaccNames.indexOf("OPV0")).is.not.equal(-1);
-        expect(vaccNames.indexOf("OPV1")).is.not.equal(-1);
+        expect(vaccNames.indexOf("OPV 0")).is.not.equal(-1);
+        expect(vaccNames.indexOf("OPV 1")).is.not.equal(-1);
     });
 
     it('Check vacc date for OPV3 vaccination', function () {
-        var vaccSchedules = getVaccSchedule.getVaccSchedule(progEnrolment);
+        var vaccSchedules = getVaccSchedule.getVaccSchedule(progEnrolment).items;
         var OPV3 = vaccSchedules[7];
         assert.equal(true, matchDate(OPV3.dueDate, new Date(2017, 6, 17)), OPV3.dueDate);
     });

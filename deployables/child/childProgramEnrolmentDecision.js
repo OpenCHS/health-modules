@@ -1,9 +1,15 @@
 const childAnthroImports = require('./childAnthropometrics');
+const childVaccinationSchedule = require('./childVaccSchedule');
 
-var getDecisions = function (programEnrolment, today) {
+const getDecisions = function (programEnrolment, today) {
     return childAnthroImports.getDecisions(programEnrolment, programEnrolment.individual, today);
 };
 
+const getChecklists = function (programEnrolment) {
+    return [childVaccinationSchedule.getVaccSchedule(programEnrolment)];
+};
+
 module.exports = {
-    getDecisions: getDecisions
+    getDecisions: getDecisions,
+    getChecklists: getChecklists
 };
