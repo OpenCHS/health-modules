@@ -11,6 +11,7 @@ const numberOfFormElementGroups = function (individual) {
 // Remove form elements that are not applicable based on the data in individual.
 // If you return a formElementGroup after removing all the form elements for it then, the filter elements will be automatically be called for nextFormElementGroup.
 const filterElements = function (individual, formElementGroup) {
+
 };
 
 // This is called before Register is pressed
@@ -22,6 +23,7 @@ const filterElements = function (individual, formElementGroup) {
 const validate = function (individual) {
     return [];
 };
+
 
 module.exports = {
     validate: validate,
