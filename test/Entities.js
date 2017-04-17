@@ -27,6 +27,12 @@ function Encounter(encounterTypeName) {
     };
 }
 
+function Form() {
+    this.findFormElement = function (formElementName) {
+        return {name: formElementName, uuid: '299eae98-8582-4b1d-9595-35809531c255'};
+    }
+}
+
 function Individual() {
     this.setAge = function (years) {
         this.years = years;
@@ -65,5 +71,6 @@ prototypes.forEach(function (currentPrototype) {
 module.exports = {
     Encounter: Encounter,
     ProgramEncounter: ProgramEncounter,
-    ProgramEnrolment: ProgramEnrolment
+    ProgramEnrolment: ProgramEnrolment,
+    Form: Form
 };

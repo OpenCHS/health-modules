@@ -1960,37 +1960,37 @@ function getParameters(encounter) {
     return params;
 }
 
-const validate = function (encounter) {
+const validate = function (encounter, form) {
     if (encounter.encounterType.name !== "Outpatient") return [{success: true}];
 
     var params = getParameters(encounter);
-
-    var validationResult = {
-        "success": false,
-        "message": ""
-    };
+    const validationResults = [];
 
     for (var complaintIndex = 0; complaintIndex < params.complaints.length; complaintIndex++) {
-        var weightRangeToCode = getWeightRangeToCode(params.complaints[complaintIndex], params.weight);
+        const weightRangeToCode = getWeightRangeToCode(params.complaints[complaintIndex], params.weight);
+        const validationResult = {
+            "success": false,
+            "message": ""
+        };
+
+        validationResult.formIdentifier = form.findFormElement('Complaint');
 
         if (params.sex === 'Male' && params.complaints.indexOf('Pregnancy') !== -1) {
             validationResult.success = false;
-            validationResult.message += "पुरुष गरोदर राहू शकत नाही. ";
+            validationResult.messageKey = "maleCannotBePregnant";
         } else if (params.complaints.indexOf('Pregnancy') !== -1 && params.age < 10) {
             validationResult.success = false;
-            validationResult.message += "वय वर्ष १० च्या खाली महिला गरोदर राहू शकत नाही. ";
+            validationResult.message = "lessThanTenCannotBePregnant";
         } else if (weightRangeToCode.code === "X0" || (params.complaints.indexOf('Acidity') !== -1 && params.weight < 13)) {
             validationResult.success = false;
-            validationResult.message += "५ किलो पेक्षा कमी वजनास लोनर्ट देऊ नये. ";
+            validationResult.message = "lonartNotToBeGivenToChildren";
         } else {
             validationResult.success = true;
         }
+        validationResults.push(validationResult);
     }
 
-    if (!validationResult.success)
-        console.log(validationResult);
-
-    return [validationResult];
+    return validationResults;
 };
 
 module.exports = {

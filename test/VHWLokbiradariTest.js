@@ -1,6 +1,6 @@
 var expect = require('chai').expect;
 var decision = require('../deployables/encounterDecision');
-var Encounter = require('./Entities').Encounter;
+var {Encounter, Form} = require('./Entities');
 
 describe('Make Decision', function () {
     it('Regression for all diseases, to ensure there are no exceptions and error messages', function () {
@@ -13,7 +13,7 @@ describe('Make Decision', function () {
                     encounter.setGender(gender);
                     encounter.setAge(10);
                     console.log("##### {complaint}, {weightRangeToCode.start}, {gender} ######".replace("{complaint}", complaint).replace("{weightRangeToCode.start}", weightRangeToCode.start).replace("{gender}", gender));
-                    if (decision.validate(encounter).success) {
+                    if (decision.validate(encounter, new Form()).success) {
                         const decisions = decision.getDecisions(encounter);
                         expect(decisions.length).to.equal(1);
                         expect(decisions[0].value.includes("undefined")).to.equal(false, decisions[0].value);
@@ -25,19 +25,19 @@ describe('Make Decision', function () {
 
     it('Validate', function () {
         var complaintConceptName = "Complaint";
-        var validationResult = decision.validate(new Encounter('Outpatient').setObservation(complaintConceptName, ["Pregnancy"]).setObservation("Weight", 40).setGender("Male").setAge(25))[0];
+        var validationResult = decision.validate(new Encounter('Outpatient').setObservation(complaintConceptName, ["Pregnancy"]).setObservation("Weight", 40).setGender("Male").setAge(25), new Form())[0];
         expect(validationResult.success).to.equal(false, validationResult.message);
 
-        validationResult = decision.validate(new Encounter('Outpatient').setObservation(complaintConceptName, ["Pregnancy"]).setAge(5).setGender("Female").setObservation("Weight", 40))[0];
+        validationResult = decision.validate(new Encounter('Outpatient').setObservation(complaintConceptName, ["Pregnancy"]).setAge(5).setGender("Female").setObservation("Weight", 40), new Form())[0];
         expect(validationResult.success).to.equal(false, validationResult.message);
 
-        validationResult = decision.validate(new Encounter('Outpatient').setObservation(complaintConceptName, ["Pregnancy"]).setAge(3).setGender("Female").setObservation("Weight", 40))[0];
+        validationResult = decision.validate(new Encounter('Outpatient').setObservation(complaintConceptName, ["Pregnancy"]).setAge(3).setGender("Female").setObservation("Weight", 40), new Form())[0];
         expect(validationResult.success).to.equal(false, validationResult.message);
 
-        validationResult = decision.validate(new Encounter('Outpatient').setObservation(complaintConceptName, ["Pregnancy"]).setAge(12).setGender("Female").setObservation("Weight", 40))[0];
+        validationResult = decision.validate(new Encounter('Outpatient').setObservation(complaintConceptName, ["Pregnancy"]).setAge(12).setGender("Female").setObservation("Weight", 40), new Form())[0];
         expect(validationResult.success).to.equal(true, validationResult.message);
 
-        validationResult = decision.validate(new Encounter('Outpatient').setObservation(complaintConceptName, ["Chloroquine Resistant Malaria"]).setObservation("Weight", 3).setGender("Male"))[0];
+        validationResult = decision.validate(new Encounter('Outpatient').setObservation(complaintConceptName, ["Chloroquine Resistant Malaria"]).setObservation("Weight", 3).setGender("Male"), new Form())[0];
         expect(validationResult.success).to.equal(false, validationResult.message);
     });
 
@@ -129,13 +129,13 @@ describe('Make Decision', function () {
 
     it('Pick validation errors corresponding to all complaints', function () {
         var complaintConceptName = "Complaint";
-        var validationResult = decision.validate(new Encounter('Outpatient').setObservation(complaintConceptName, ["Cold", "Acidity"]).setGender("Male").setAge(5).setObservation("Weight", 12))[0];
+        var validationResult = decision.validate(new Encounter('Outpatient').setObservation(complaintConceptName, ["Cold", "Acidity"]).setGender("Male").setAge(5).setObservation("Weight", 12), new Form())[0];
         expect(validationResult.success).to.equal(false, validationResult.message);
     });
 
     it('Multiple complaints and passing all validations', function () {
         var complaintConceptName = "Complaint";
-        var validationResult = decision.validate(new Encounter('Outpatient').setObservation(complaintConceptName, ["Cold", "Acidity"]).setGender("Male").setAge(10).setObservation("Weight", 22))[0];
+        var validationResult = decision.validate(new Encounter('Outpatient').setObservation(complaintConceptName, ["Cold", "Acidity"]).setGender("Male").setAge(10).setObservation("Weight", 22), new Form())[0];
         expect(validationResult.success).to.equal(true, validationResult.message);
     });
 

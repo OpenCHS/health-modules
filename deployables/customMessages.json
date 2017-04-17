@@ -56,6 +56,14 @@
     "Kavande": "कावंडे",
     "Morometta": "मोरोमेट्टा",
     "Mardmallenga": "मर्दमलिंगा",
-    "Ittalvar": "हितलवारा"
+    "Ittalvar": "हितलवारा",
+    "maleCannotBePregnant": "पुरुष गरोदर राहू शकत नाही",
+    "lessThanTenCannotBePregnant": "वय वर्ष १० च्या खाली महिला गरोदर राहू शकत नाही",
+    "lonartNotToBeGivenToChildren": "५ किलो पेक्षा कमी वजनास लोनर्ट देऊ नये"
+  },
+  "en": {
+    "maleCannotBePregnant": "Male cannot be pregnant",
+    "lessThanTenCannotBePregnant": "Less than 10 year old cannot be pregnant",
+    "lonartNotToBeGivenToChildren": "Lonart should not be given to children"
   }
 }
