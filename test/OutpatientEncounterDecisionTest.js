@@ -25,20 +25,20 @@ describe('Make Decision', function () {
 
     it('Validate', function () {
         var complaintConceptName = "Complaint";
-        var validationResult = decision.validate(new Encounter('Outpatient').setObservation(complaintConceptName, ["Pregnancy"]).setObservation("Weight", 40).setGender("Male").setAge(25), new Form())[0];
-        expect(validationResult.success).to.equal(false, validationResult.message);
+        var validationResults = decision.validate(new Encounter('Outpatient').setObservation(complaintConceptName, ["Pregnancy"]).setObservation("Weight", 40).setGender("Male").setAge(25), new Form());
+        expect(validationResults[0].success).to.equal(false, validationResults[0].message);
 
-        validationResult = decision.validate(new Encounter('Outpatient').setObservation(complaintConceptName, ["Pregnancy"]).setAge(5).setGender("Female").setObservation("Weight", 40), new Form())[0];
-        expect(validationResult.success).to.equal(false, validationResult.message);
+        validationResults = decision.validate(new Encounter('Outpatient').setObservation(complaintConceptName, ["Pregnancy"]).setAge(5).setGender("Female").setObservation("Weight", 40), new Form());
+        expect(validationResults[0].success).to.equal(false, validationResults[0].message);
 
-        validationResult = decision.validate(new Encounter('Outpatient').setObservation(complaintConceptName, ["Pregnancy"]).setAge(3).setGender("Female").setObservation("Weight", 40), new Form())[0];
-        expect(validationResult.success).to.equal(false, validationResult.message);
+        validationResults = decision.validate(new Encounter('Outpatient').setObservation(complaintConceptName, ["Pregnancy"]).setAge(3).setGender("Female").setObservation("Weight", 40), new Form());
+        expect(validationResults[0].success).to.equal(false, validationResults[0].message);
 
-        validationResult = decision.validate(new Encounter('Outpatient').setObservation(complaintConceptName, ["Pregnancy"]).setAge(12).setGender("Female").setObservation("Weight", 40), new Form())[0];
-        expect(validationResult.success).to.equal(true, validationResult.message);
+        validationResults = decision.validate(new Encounter('Outpatient').setObservation(complaintConceptName, ["Pregnancy"]).setAge(12).setGender("Female").setObservation("Weight", 40), new Form());
+        expect(validationResults.length).to.equal(0, validationResults);
 
-        validationResult = decision.validate(new Encounter('Outpatient').setObservation(complaintConceptName, ["Chloroquine Resistant Malaria"]).setObservation("Weight", 3).setGender("Male"), new Form())[0];
-        expect(validationResult.success).to.equal(false, validationResult.message);
+        validationResults = decision.validate(new Encounter('Outpatient').setObservation(complaintConceptName, ["Chloroquine Resistant Malaria"]).setObservation("Weight", 3).setGender("Male"), new Form());
+        expect(validationResults[0].success).to.equal(false, validationResults[0].message);
     });
 
     it('Complaint which allows for prescription', function () {
@@ -134,9 +134,9 @@ describe('Make Decision', function () {
     });
 
     it('Multiple complaints and passing all validations', function () {
-        var complaintConceptName = "Complaint";
-        var validationResult = decision.validate(new Encounter('Outpatient').setObservation(complaintConceptName, ["Cold", "Acidity"]).setGender("Male").setAge(10).setObservation("Weight", 22), new Form())[0];
-        expect(validationResult.success).to.equal(true, validationResult.message);
+        const complaintConceptName = "Complaint";
+        const validationResults = decision.validate(new Encounter('Outpatient').setObservation(complaintConceptName, ["Cold", "Acidity"]).setGender("Male").setAge(10).setObservation("Weight", 22), new Form());
+        expect(validationResults.length).to.equal(0, validationResults.message);
     });
 
     it('Alert should be only for the decision for the complaint', () => {

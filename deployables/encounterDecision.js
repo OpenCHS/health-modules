@@ -1961,33 +1961,28 @@ function getParameters(encounter) {
 }
 
 const validate = function (encounter, form) {
-    if (encounter.encounterType.name !== "Outpatient") return [{success: true}];
+    if (encounter.encounterType.name !== "Outpatient") return [];
 
-    var params = getParameters(encounter);
+    const params = getParameters(encounter);
     const validationResults = [];
 
     for (var complaintIndex = 0; complaintIndex < params.complaints.length; complaintIndex++) {
-        const weightRangeToCode = getWeightRangeToCode(params.complaints[complaintIndex], params.weight);
-        const validationResult = {
-            "success": false,
-            "message": ""
-        };
+        const complaint = params.complaints[complaintIndex];
+        const weightRangeToCode = getWeightRangeToCode(complaint, params.weight);
 
-        validationResult.formIdentifier = form.findFormElement('Complaint');
-
-        if (params.sex === 'Male' && params.complaints.indexOf('Pregnancy') !== -1) {
-            validationResult.success = false;
-            validationResult.messageKey = "maleCannotBePregnant";
-        } else if (params.complaints.indexOf('Pregnancy') !== -1 && params.age < 10) {
-            validationResult.success = false;
-            validationResult.message = "lessThanTenCannotBePregnant";
-        } else if (weightRangeToCode.code === "X0" || (params.complaints.indexOf('Acidity') !== -1 && params.weight < 13)) {
-            validationResult.success = false;
-            validationResult.message = "lonartNotToBeGivenToChildren";
-        } else {
-            validationResult.success = true;
+        if (params.sex === 'Male' && complaint === 'Pregnancy') {
+            addValidationError("maleCannotBePregnant");
         }
-        validationResults.push(validationResult);
+        if (complaint === 'Pregnancy' && params.age < 10) {
+            addValidationError("lessThanTenCannotBePregnant");
+        }
+        if (weightRangeToCode.code === "X0" || (complaint === 'Acidity' && params.weight < 13)) {
+            addValidationError("lonartNotToBeGivenToChildren");
+        }
+    }
+
+    function addValidationError(messageKey) {
+        validationResults.push({success: false, messageKey: messageKey});
     }
 
     return validationResults;
