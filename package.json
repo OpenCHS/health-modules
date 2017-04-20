@@ -9,9 +9,11 @@
   "license": "AGPL-3.0",
   "scripts": {
     "start": "",
-    "test": "find ./test -name '*Test.js' | xargs mocha "
+    "test": "find ./test -name '*Test.js' | xargs mocha ",
+    "watch": "find ./test -name '*Test.js' | xargs mocha -w"
   },
   "dependencies": {
+    "moment": "^2.18.1"
   },
   "devDependencies": {
     "chai": "3.5.0",

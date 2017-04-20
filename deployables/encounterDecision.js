@@ -1956,7 +1956,6 @@ function getParameters(encounter) {
     params.sex = encounter.individual.gender.name;
     params.weight = encounter.getObservationValue('Weight');
     params.paracheckResult = encounter.getObservationValue('Paracheck');
-    console.log('Received: ' + JSON.stringify(params));
     return params;
 }
 
