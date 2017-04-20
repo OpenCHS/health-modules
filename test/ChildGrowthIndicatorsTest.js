@@ -78,9 +78,16 @@ describe('Get growth indicators - z-score, grade, status for a child', function 
         assert.equal('Stunted', findValue(decisions,'Height for age status'));
     });
 
-    it('Calculate Weight-for-Height Z Score for female', function(){
+    it('Calculate Weight-for-Height Z Score for female', function() {
         enrolment.individual.gender = {name: 'Female'};
         var decisions = getDecisions.getDecisions(programEncounter, referenceDate);
-        assert.equal('sd0', findValue(decisions,'Weight for height z-score'));
+        assert.equal('sd0', findValue(decisions, 'Weight for height z-score'));
+    });
+
+    it('Calculate Weight-for-Height Z Score and status for female', function(){
+        enrolment.individual.gender = {name: 'Female'};
+        var decisions = getDecisions.getDecisions(programEncounter, referenceDate);
+        assert.equal('sd0', findValue(decisions,'Weight for height z-Score'));
+        assert.equal('Normal', findValue(decisions,'Weight for height status'));
     });
 });

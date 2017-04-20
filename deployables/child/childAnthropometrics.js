@@ -81,6 +81,7 @@ var getDecisions = function (observationsHolder, individual, today) {
         decisions.push({name: 'Height for age grade', value: zScoreGradeMappingHeightForAge[heightForAgeZScore]});
         decisions.push({name: 'Height for age status', value: zScoreStatusMappingHeightForAge[heightForAgeZScore]});
         decisions.push({name: 'Weight for height z-score', value: weightForHeightZScore});
+        decisions.push({name: 'Weight for height status', value: zScoreStatusMappingWeightForHeight[weightForHeightZScore]});
         if (bmiForAgeStatus === null) return decisions;
         else {
             decisions.push({name: 'BMIForAge Status', value: bmiForAgeStatus});
