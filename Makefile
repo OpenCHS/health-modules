@@ -20,8 +20,10 @@ recreate-db:
 	flyway -user=openchs -password=password -url=jdbc:postgresql://localhost:5432/openchs -schemas=openchs clean
 	flyway -user=openchs -password=password -url=jdbc:postgresql://localhost:5432/openchs -schemas=openchs -locations=filesystem:../openchs-server/src/main/resources/db/migration/ migrate
 
-setup-db: recreate-db setup-health-modules
+setup-impl-db:
 	psql -h 0.0.0.0 -U openchs -q -f lbp/villages.sql
+
+setup-db: recreate-db setup-health-modules setup-impl-db
 	
 setup-health-modules:
 	curl -X POST http://$(server):8080/forms -d @lbp/registrationForm.json -H "Content-Type: application/json"
