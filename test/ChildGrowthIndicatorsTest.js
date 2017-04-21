@@ -15,7 +15,7 @@ describe('Get growth indicators - z-score, grade, status for a child', function 
         enrolment = new ProgramEnrolment('Child', [programEncounter], new Date(2015, 1, 10));
 
         programEncounter = new ProgramEncounter();
-        programEncounter.setObservation('Weight', 3.5).setObservation('Height', 50.1);
+        programEncounter.setObservation('Weight', 8.5).setObservation('Height', 81.1);
         programEncounter.programEnrolment = enrolment;
     });
 
@@ -46,48 +46,42 @@ describe('Get growth indicators - z-score, grade, status for a child', function 
         return matchingDecision.value;
     };
 
-    it('Calculate Weight-for-Age Z Score, grade and status for female', function () {
+    it('Calculate Weight-for-Age Z Score, grade and status for girls', function () {
         enrolment.individual.gender = {name: 'Female'};
         var decisions = getDecisions.getDecisions(programEncounter, referenceDate);
-        assert.equal('1', findValue(decisions, 'Weight for age grade'));
-        assert.equal('sd-1', findValue(decisions,'Weight for age z-score'));
-        assert.equal('Normal', findValue(decisions, 'Weight for age status'));
+        assert.equal('3', findValue(decisions, 'Weight for age grade'));
+        assert.equal('SD3neg', findValue(decisions,'Weight for age z-score'));
+        assert.equal('Severely Underweight', findValue(decisions, 'Weight for age status'));
     });
 
-    it('Calculate Weight-for-Age Z Score, grade and status for male', function(){
+    it('Calculate Weight-for-Age Z Score, grade and status for boys', function(){
         enrolment.individual.gender = {name: 'male'};
         var decisions = getDecisions.getDecisions(programEncounter, referenceDate);
-        assert.equal('2', findValue(decisions, 'Weight for age grade'));
-        assert.equal('sd-2', findValue(decisions,'Weight for age z-score'));
-        assert.equal('Underweight', findValue(decisions, 'Weight for age status'));
+        assert.equal('3', findValue(decisions, 'Weight for age grade'));
+        assert.equal('SD3neg', findValue(decisions,'Weight for age z-score'));
+        assert.equal('Severely Underweight', findValue(decisions, 'Weight for age status'));
     });
 
-    it('Calculate Height-for-Age Z Score, grade and status for female', function(){
+    it('Calculate Height-for-Age Z Score, grade and status for girls', function(){
         enrolment.individual.gender = {name: 'Female'};
         var decisions = getDecisions.getDecisions(programEncounter, referenceDate);
         assert.equal('2', findValue(decisions,'Height for age grade'));
-        assert.equal('sd-2', findValue(decisions, 'Height for age z-score'));
+        assert.equal('SD2neg', findValue(decisions, 'Height for age z-score'));
         assert.equal('Stunted', findValue(decisions,'Height for age status'));
     });
 
-    it('Calculate Height-for-Age Z Score, grade and status for male', function(){
+    it('Calculate Height-for-Age Z Score, grade and status for boys', function(){
         enrolment.individual.gender = {name: 'male'};
         var decisions = getDecisions.getDecisions(programEncounter, referenceDate);
         assert.equal('2', findValue(decisions,'Height for age grade'));
-        assert.equal('sd-2', findValue(decisions,'Height for age z-score'));
+        assert.equal('SD2neg', findValue(decisions,'Height for age z-score'));
         assert.equal('Stunted', findValue(decisions,'Height for age status'));
     });
 
-    it('Calculate Weight-for-Height Z Score for female', function() {
+    it('Calculate Weight-for-Height Z Score and status for girls', function() {
         enrolment.individual.gender = {name: 'Female'};
         var decisions = getDecisions.getDecisions(programEncounter, referenceDate);
-        assert.equal('sd0', findValue(decisions, 'Weight for height z-score'));
-    });
-
-    it('Calculate Weight-for-Height Z Score and status for female', function(){
-        enrolment.individual.gender = {name: 'Female'};
-        var decisions = getDecisions.getDecisions(programEncounter, referenceDate);
-        assert.equal('sd0', findValue(decisions,'Weight for height z-Score'));
-        assert.equal('Normal', findValue(decisions,'Weight for height status'));
+        assert.equal('SD2neg', findValue(decisions, 'Weight for height z-score'));
+        assert.equal('Wasted', findValue(decisions,'Weight for height status'));
     });
 });

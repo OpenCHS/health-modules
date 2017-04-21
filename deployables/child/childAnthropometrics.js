@@ -1,48 +1,69 @@
 var C = require('../common');
-var weightForAgeScores = require('../json/weightForAge');
-var heightForAgeScores = require('../json/heightForAge');
-var weightForHeightScores = require('../json/weightForHeight');
+
+var weightForAgeScoresGirls = require('./anthropometricReference/wfa_girls_0_5_zscores');
+var weightForAgeScoresBoys = require('./anthropometricReference/wfa_boys_0_5_zscores');
+
+var heightForAgeScoresGirls0_2 = require('./anthropometricReference/lhfa_girls_0_2_zscores');
+var heightForAgeScoresBoys0_2 = require('./anthropometricReference/lhfa_boys_0_2_zscores');
+var heightForAgeScoresGirls2_5 = require('./anthropometricReference/lhfa_girls_2_5_zscores');
+var heightForAgeScoresBoys2_5 = require('./anthropometricReference/lhfa_boys_2_5_zscores');
+
+var weightForHeightScoresGirls0_2 = require('./anthropometricReference/wfl_girls_0_2_zscores');
+var weightForHeightScoresBoys0_2 = require('./anthropometricReference/wfl_boys_0_2_zscores');
+var weightForHeightScoresGirls2_5 = require('./anthropometricReference/wfh_girls_2_5_zscores');
+var weightForHeightScoresBoys2_5 = require('./anthropometricReference/wfh_boys_2_5_zscores');
+
 var bmiForAgeScores = require('../json/bmiForAge');
 
 var zScoreGradeMappingWeightForAge = {
-    'sd0': 1,
-    'sd-1': 1,
-    'sd-2': 2,
-    'sd-3': 3
+    'SD0': 1,
+    'SD1neg': 1,
+    'SD2neg': 2,
+    'SD3neg': 3
 };
 var zScoreStatusMappingWeightForAge = {
-    'sd0': 'Normal',
-    'sd-1': 'Normal',
-    'sd-2': 'Underweight',
-    'sd-3': 'Severely Underweight'
+    'SD0': 'Normal',
+    'SD1neg': 'Normal',
+    'SD2neg': 'Underweight',
+    'SD3neg': 'Severely Underweight'
 };
 var zScoreStatusMappingHeightForAge = {
-    'sd3': 'Normal',
-    'sd2': 'Normal',
-    'sd1': 'Normal',
-    'sd0': 'Normal',
-    'sd-1': 'Normal',
-    'sd-2': 'Stunted',
-    'sd-3': 'Severely stunted'
+    'SD3': 'Normal',
+    'SD2': 'Normal',
+    'SD1': 'Normal',
+    'SD0': 'Normal',
+    'SD1neg': 'Normal',
+    'SD2neg': 'Stunted',
+    'SD3neg': 'Severely stunted'
 };
 var zScoreGradeMappingHeightForAge = {
-    'sd3': 1,
-    'sd2': 1,
-    'sd1': 1,
-    'sd0': 1,
-    'sd-1': 1,
-    'sd-2': 2,
-    'sd-3': 3
+    'SD3': 1,
+    'SD2': 1,
+    'SD1': 1,
+    'SD0': 1,
+    'SD1neg': 1,
+    'SD2neg': 2,
+    'SD3neg': 3
 };
-var ZScoreStatusMappingBMIForAge = {
-    'sd3': 'Obese',
-    'sd2': 'Overweight',
-    'sd1': 'Possible risk of overweight',
-    'sd0': 'Normal',
-    'sd-1': 'Normal',
-    'sd-2': 'Wasted',
-    'sd-3': 'Severely wasted'
+var zScoreStatusMappingBMIForAge = {
+    'SD3': 'Obese',
+    'SD2': 'Overweight',
+    'SD1': 'Possible risk of overweight',
+    'SD0': 'Normal',
+    'SD1neg': 'Normal',
+    'SD2neg': 'Wasted',
+    'SD3neg': 'Severely wasted'
 };
+var zScoreStatusMappingWeightForHeight = {
+    'SD3': 'Obese',
+    'SD2': 'Overweight',
+    'SD1': 'Possible risk of overweight',
+    'SD0': 'Normal',
+    'SD1neg': 'Normal',
+    'SD2neg': 'Wasted',
+    'SD3neg': 'Severely wasted'
+};
+
 
 /* Todo
  1. null checks
@@ -53,50 +74,91 @@ var getDecisions = function (observationsHolder, individual, today) {
     today = C.copyDate(today === undefined ? new Date() : today);
 
     var dateOfBirth = individual.dateOfBirth;
-
-    var weightForAgeGenderValues = individual.gender.name === 'Female' ? weightForAgeScores.female : weightForAgeScores.male;
-    var heightForAgeGenderValues = individual.gender.name === 'Female' ? heightForAgeScores.female : heightForAgeScores.male;
-    var weightForHeightGenderValues = individual.gender.name === 'Female' ? weightForHeightScores.female : weightForHeightScores.male;
-    var bmiForAgeGenderValues = individual.gender.name === 'Female' ? bmiForAgeScores.female : bmiForAgeScores.male;
     var ageInMonths = C.getAgeInMonths(dateOfBirth, today);
 
+    var weightForAgeGenderValues = individual.gender.name === 'Female' ? weightForAgeScoresGirls : weightForAgeScoresBoys;
+
+    var heightForAgeGenderValues;
+    var weightForHeightGenderValues;
+
     if (ageInMonths > 60 || !observationsHolder.observationExists('Height') || !observationsHolder.observationExists('Weight')) return [];
+    else if (ageInMonths <= 24) {
+        heightForAgeGenderValues = individual.gender.name === 'Female' ? heightForAgeScoresGirls0_2 : heightForAgeScoresBoys0_2;
+        weightForHeightGenderValues = individual.gender.name === 'Female' ? weightForHeightScoresGirls0_2 : weightForHeightScoresBoys0_2;
+    }
     else {
-        const weight = observationsHolder.getObservationValue('Weight');
-        const height = observationsHolder.getObservationValue('Height');
-        const length = C.getMatchingKey(height, weightForHeightGenderValues);
+        heightForAgeGenderValues = individual.gender.name === 'Female' ? heightForAgeScoresGirls2_5 : heightForAgeScoresBoys2_5;
+        weightForHeightGenderValues = individual.gender.name === 'Female' ? weightForHeightScoresGirls2_5 : weightForHeightScoresBoys2_5;
+    }
 
-        const weightForAgeZScore = getZScore(weightForAgeGenderValues, 'month', ageInMonths, weight);
-        const heightForAgeZScore = getZScore(heightForAgeGenderValues, 'month', ageInMonths, height);
-        const weightForHeightZScore = getZScore(weightForHeightGenderValues, 'length', length, weight);
-        const bmiForAgeZscore = ageInMonths > 24 ? getZScore(bmiForAgeGenderValues, 'month', ageInMonths, C.calculateBMI(weight, height, ageInMonths)) : null;
-        const gradeForWeightForAge = zScoreGradeMappingWeightForAge[weightForAgeZScore];
-        const bmiForAgeStatus = bmiForAgeZscore === null ? null : ZScoreStatusMappingBMIForAge[bmiForAgeZscore];
+    //var bmiForAgeGenderValues = individual.gender.name === 'Female' ? bmiForAgeScores.female : bmiForAgeScores.male;
 
-        const decisions = [];
-        decisions.push({name: 'Weight for age z-score', value: weightForAgeZScore});
-        decisions.push({name: 'Weight for age grade', value: gradeForWeightForAge});
-        decisions.push({name: 'Weight for age status', value: zScoreStatusMappingWeightForAge[weightForAgeZScore]});
-        decisions.push({name: 'Height for age z-score', value: heightForAgeZScore});
-        decisions.push({name: 'Height for age grade', value: zScoreGradeMappingHeightForAge[heightForAgeZScore]});
-        decisions.push({name: 'Height for age status', value: zScoreStatusMappingHeightForAge[heightForAgeZScore]});
-        decisions.push({name: 'Weight for height z-score', value: weightForHeightZScore});
-        decisions.push({name: 'Weight for height status', value: zScoreStatusMappingWeightForHeight[weightForHeightZScore]});
-        if (bmiForAgeStatus === null) return decisions;
-        else {
-            decisions.push({name: 'BMIForAge Status', value: bmiForAgeStatus});
-            return decisions;
+    const weight = observationsHolder.getObservationValue('Weight');
+    const height = observationsHolder.getObservationValue('Height');
+    const length = height;
+
+    const weightForAgeZScore = getZScore(findRowByEquality(weightForAgeGenderValues, 'Month', ageInMonths), weight);
+    const heightForAgeZScore = getZScore(findRowByEquality(heightForAgeGenderValues, 'Month', ageInMonths), height);
+    const weightForHeightZScore = ageInMonths > 24 ? getZScore(findNearestMatchingRow(weightForHeightGenderValues, 'Height', height), weight): getZScore(findNearestMatchingRow(weightForHeightGenderValues, 'Length', length), weight);
+    const gradeForWeightForAge = zScoreGradeMappingWeightForAge[weightForAgeZScore];
+
+ /*   const bmiForAgeZscore = ageInMonths > 24 ? getZScore(bmiForAgeGenderValues, 'Month', ageInMonths, C.calculateBMI(weight, height, ageInMonths)) : null;
+    const bmiForAgeStatus = bmiForAgeZscore === null ? null : zScoreStatusMappingBMIForAge[bmiForAgeZscore];*/
+
+    const decisions = [];
+    decisions.push({name: 'Weight for age z-score', value: weightForAgeZScore});
+    decisions.push({name: 'Weight for age grade', value: gradeForWeightForAge});
+    decisions.push({name: 'Weight for age status', value: zScoreStatusMappingWeightForAge[weightForAgeZScore]});
+    decisions.push({name: 'Height for age z-score', value: heightForAgeZScore});
+    decisions.push({name: 'Height for age grade', value: zScoreGradeMappingHeightForAge[heightForAgeZScore]});
+    decisions.push({name: 'Height for age status', value: zScoreStatusMappingHeightForAge[heightForAgeZScore]});
+    decisions.push({name: 'Weight for height z-score', value: weightForHeightZScore});
+    decisions.push({
+        name: 'Weight for height status',
+        value: zScoreStatusMappingWeightForHeight[weightForHeightZScore]
+    });
+    return decisions;
+   /* if (bmiForAgeStatus === null) return decisions;
+    else {
+        decisions.push({name: 'BMI for age status', value: bmiForAgeStatus});
+
+    }*/
+
+    function findRowByEquality(masterTable, key, value) {
+        return masterTable.find(function (row) {
+            return row[key] === value;
+        });
+    }
+
+    function findNearestMatchingRow(masterTable, key, value) {
+        var valuesForComparison = getFields(masterTable, key);
+
+        function getFields(masterTable, key){
+            var output = [];
+            for (var i=0; i < masterTable.length ; ++i)
+                output.push(masterTable[i][key]);
+            return output;
+        }
+
+        for (var i = 0; i < valuesForComparison.length; i++) {
+            var currentKeyDifference = Math.abs(value - valuesForComparison[i]);
+            var nextKeyDifference = Math.abs(value - valuesForComparison[i + 1]);
+
+            if (nextKeyDifference < currentKeyDifference) continue;
+
+            return masterTable[i];
         }
     }
 
-    function getZScore(masterTable, key, value, obsValue) {
-        var matchingRow = masterTable.find(function (masterRow) {
-            return masterRow[key] === value;
-        });
-
+    function getZScore(matchingRow, obsValue) {
         var keys = Object.keys(matchingRow);
         for (var i = 0; i < keys.length; i++) {
-            if (keys[i] === 'month' || keys[i] === 'length') continue;
+            var ignoredKeys = ['Month', 'Length', 'L', 'M', 'S'];
+
+            var findOne = ignoredKeys.some(function (ignoredKey) {
+                return keys[i] === ignoredKey;
+            });
+            if (findOne) continue;
 
             var currentKeyDifference = Math.abs(obsValue - matchingRow[keys[i]]);
             var nextKeyDifference = Math.abs(obsValue - matchingRow[keys[i + 1]]);
@@ -106,6 +168,7 @@ var getDecisions = function (observationsHolder, individual, today) {
             return keys[i];
         }
     }
+
 };
 
 module.exports = {
