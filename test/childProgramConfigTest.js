@@ -12,7 +12,7 @@ describe('Child Program Config', function () {
                 return function (conceptName) {
                     var result = null;
                     switch (conceptName) {
-                        case "Weight": result = weight;
+                        case "Weight": result = weight; break;
                         case "Height": result = height;
                     }
                     return result;
@@ -28,19 +28,19 @@ describe('Child Program Config', function () {
                 encounters: [
                     {
                         encounterDatetime: moment().subtract(35, 'months'),
-                        getObservationValue: weightAndHeight(3.5, 14)
+                        getObservationValue: weightAndHeight(14, 110)
                     },
                     {
                         encounterDatetime: moment().subtract(24, 'months'),
-                        getObservationValue: weightAndHeight(9.8, 12)
+                        getObservationValue: weightAndHeight(11.2, 98)
                     },
                     {
                         encounterDatetime: moment().subtract(18, 'months'),
-                        getObservationValue: weightAndHeight(11.2, 10)
+                        getObservationValue: weightAndHeight(9.8, 90)
                     },
                     {
                         encounterDatetime: moment().subtract(2, 'months'),
-                        getObservationValue: weightAndHeight(14, 9)
+                        getObservationValue: weightAndHeight(3.5, 60)
                     }
                 ]
             };
@@ -65,10 +65,11 @@ describe('Child Program Config', function () {
         });
 
         it("that is mapped to a line chart for weight for height", function () {
-            var heightForAgeWidget = childProgramConfig.programDashboardButtons[0].openOnClick.widgets[1];
-            expect(heightForAgeWidget.type).to.equal('lineChart');
-            var weightForAgeData = heightForAgeWidget.data(individualStub);
-            expect(weightForAgeData.length).to.equal(6);
+            var weightForHeightWidget = childProgramConfig.programDashboardButtons[0].openOnClick.widgets[2];
+            expect(weightForHeightWidget.type).to.equal('lineChart');
+            var weightForHeightData = weightForHeightWidget.data(individualStub);
+            expect(weightForHeightData.length).to.equal(6);
+            console.log(weightForHeightData);
         });
     });
 });

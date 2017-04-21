@@ -6,17 +6,16 @@ const heightForAgeBoysBelow5ZScores = require('./anthropometricReference/lhfa_bo
 const heightForAgeGirlsBelow5ZScores = require('./anthropometricReference/lhfa_girls_2_5_zscores');
 const weightForHeightGirlsBelow5ZScores = require('./anthropometricReference/wfh_girls_2_5_zscores');
 const weightForHeightBoysBelow5ZScores = require('./anthropometricReference/wfh_boys_2_5_zscores');
+const weightForHeightGirlsBelow2ZScores = require('./anthropometricReference/wfl_girls_0_2_zscores.json');
+const weightForHeightBoysBelow2ZScores = require('./anthropometricReference/wfl_boys_0_2_zscores.json');
 
 const _ = require("lodash");
 
 function chartByAgeForConcept(conceptName, individual) {
     return function (encounter) {
-        var obsValue = encounter.getObservationValue(conceptName);
-        return obsValue ? {
-                x: individual.getAgeInMonths(encounter.encounterDateTime),
-                y: obsValue
-            }
-            : null;
+        var obsValue = encounter.getObservationValue(conceptName),
+            ageInMonths = individual.getAgeInMonths(encounter.encounterDateTime);
+        return obsValue ? {x: ageInMonths, y: obsValue} : null;
     }
 }
 
@@ -24,25 +23,20 @@ function chartForConcepts(xAxisConcept, yAxisConcept) {
     return function (encounter) {
         var xValue = encounter.getObservationValue(xAxisConcept),
             yValue = encounter.getObservationValue(yAxisConcept);
-        return (xValue && yValue) ? {
-                x: xValue,
-                y: yValue
-            }
-            : null;
+        return (xValue && yValue) ? {x: xValue, y: yValue} : null;
     }
 }
 
 function createZScoreData(zScoreFile, xAxis) {
     xAxis = xAxis || "Month";
-    return _.unzip(_.map(zScoreFile, function (item) {
-        return [
-            {x: item[xAxis], y: item.SD0},
-            {x: item[xAxis], y: item.SD1},
-            {x: item[xAxis], y: item.SD3},
-            {x: item[xAxis], y: item.SD2neg},
-            {x: item[xAxis], y: item.SD3neg}
-        ]
-    }));
+    return _.unzip(_.map(zScoreFile,
+        function (item) {
+            return _.map(['SD0', 'SD1', 'SD3', 'SD2neg', 'SD3neg'],
+                function (key) {
+                    return {x: item[xAxis], y: item[key]}
+                })
+        })
+    );
 }
 
 function weightForAgeZScores(individual) {
@@ -64,8 +58,13 @@ function heightForAgeZScores(individual) {
 
 function weightForHeightZScores(individual) {
     return individual.isGender('Male') ?
-        createZScoreData(weightForHeightBoysBelow5ZScores) :
-        createZScoreData(weightForHeightGirlsBelow5ZScores);
+        individual.getAgeInMonths() < 25 ?
+            createZScoreData(weightForHeightBoysBelow2ZScores, "Length") :
+            createZScoreData(weightForHeightBoysBelow5ZScores, "Height")
+        :
+        individual.getAgeInMonths() < 25 ?
+            createZScoreData(weightForHeightGirlsBelow2ZScores, "Length") :
+            createZScoreData(weightForHeightGirlsBelow5ZScores, "Height");
 }
 
 function conceptForAge(individual, concept) {
@@ -93,7 +92,7 @@ function heightForAge(individual) {
 }
 
 function weightForHeight(individual) {
-    return conceptForConcept(individual, "Weight", "Height");
+    return conceptForConcept(individual, "Height", "Weight");
 }
 
 var config = {
