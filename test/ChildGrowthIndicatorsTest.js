@@ -12,9 +12,8 @@ describe('Get growth indicators - z-score, grade, status for a child', function 
     const referenceDate = new Date(2017, 2, 20);
 
     beforeEach(function () {
-        enrolment = new ProgramEnrolment('Child', [programEncounter], new Date(2015, 1, 10));
-
         programEncounter = new ProgramEncounter();
+        enrolment = new ProgramEnrolment('Child', [programEncounter], new Date(2015, 1, 10));
         programEncounter.setObservation('Weight', 8.5).setObservation('Height', 81.1);
         programEncounter.programEnrolment = enrolment;
     });
@@ -29,7 +28,6 @@ describe('Get growth indicators - z-score, grade, status for a child', function 
     it('Calculate BMI', function(){
         enrolment.individual.gender = {name: 'male'};
         var ageInMonths = C.getAgeInMonths(enrolment.individual.dateOfBirth, referenceDate);
-        var lastEncounter = enrolment.encounters.pop();
         var BMI = C.calculateBMI(3.5, 50.1, ageInMonths);
         assert.equal(13, BMI);
     });
@@ -52,6 +50,7 @@ describe('Get growth indicators - z-score, grade, status for a child', function 
         assert.equal('3', findValue(decisions, 'Weight for age grade'));
         assert.equal('SD3neg', findValue(decisions,'Weight for age z-score'));
         assert.equal('Severely Underweight', findValue(decisions, 'Weight for age status'));
+        expectAllValuesAreDefined(decisions);
     });
 
     it('Calculate Weight-for-Age Z Score, grade and status for boys', function(){
@@ -60,6 +59,7 @@ describe('Get growth indicators - z-score, grade, status for a child', function 
         assert.equal('3', findValue(decisions, 'Weight for age grade'));
         assert.equal('SD3neg', findValue(decisions,'Weight for age z-score'));
         assert.equal('Severely Underweight', findValue(decisions, 'Weight for age status'));
+        expectAllValuesAreDefined(decisions);
     });
 
     it('Calculate Height-for-Age Z Score, grade and status for girls', function(){
@@ -68,6 +68,7 @@ describe('Get growth indicators - z-score, grade, status for a child', function 
         assert.equal('2', findValue(decisions,'Height for age grade'));
         assert.equal('SD2neg', findValue(decisions, 'Height for age z-score'));
         assert.equal('Stunted', findValue(decisions,'Height for age status'));
+        expectAllValuesAreDefined(decisions);
     });
 
     it('Calculate Height-for-Age Z Score, grade and status for boys', function(){
@@ -76,6 +77,7 @@ describe('Get growth indicators - z-score, grade, status for a child', function 
         assert.equal('2', findValue(decisions,'Height for age grade'));
         assert.equal('SD2neg', findValue(decisions,'Height for age z-score'));
         assert.equal('Stunted', findValue(decisions,'Height for age status'));
+        expectAllValuesAreDefined(decisions);
     });
 
     it('Calculate Weight-for-Height Z Score and status for girls', function() {
@@ -83,5 +85,23 @@ describe('Get growth indicators - z-score, grade, status for a child', function 
         var decisions = getDecisions.getDecisions(programEncounter, referenceDate);
         assert.equal('SD2neg', findValue(decisions, 'Weight for height z-score'));
         assert.equal('Wasted', findValue(decisions,'Weight for height status'));
+        expectAllValuesAreDefined(decisions);
     });
+
+    it('Scenario - 1', () => {
+        programEncounter = new ProgramEncounter();
+        enrolment = new ProgramEnrolment('Child', [programEncounter], new Date(2017, 2, 3));
+        programEncounter.setObservation('Weight', 3).setObservation('Height', 45);
+        programEncounter.programEnrolment = enrolment;
+        enrolment.individual.gender = {name: 'Female'};
+
+        var decisions = getDecisions.getDecisions(programEncounter, referenceDate);
+        expectAllValuesAreDefined(decisions);
+    });
+
+    function expectAllValuesAreDefined(decisions) {
+        decisions.forEach(function (decision) {
+            expect(decision.value).to.not.equal(undefined, decision.name);
+        });
+    }
 });
