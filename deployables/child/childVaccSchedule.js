@@ -37,7 +37,7 @@ var getVaccSchedule = function (programEnrolment) {
     addVaccinationSchedule("Vitamin A 8", 1643, 1643);
     addVaccinationSchedule("Vitamin A 9", 1825, 1825);
 
-    return {name: 'Vaccination Schedule', items: vaccScheduleItems};
+    return {name: 'Vaccination Schedule', items: vaccScheduleItems, baseDate: dateOfBirth};
 
     function addVaccinationSchedule(nameOfVaccination, dueDateIncrement, maxDateIncrement) {
         const vaccScheduleItem = {
