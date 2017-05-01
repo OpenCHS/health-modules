@@ -1,38 +1,83 @@
-var getNextScheduledVisits = require('./motherVisitSchedule').getNextScheduledVisits;
+//var getNextScheduledVisits = require('./motherVisitSchedule').getNextScheduledVisits;
+var C = require('../common');
 
-const getDecisions = function (programEncounter) {
-    function checkForAnemia(programEncounter, decisions) {
-        var observations = programEncounter.observations;
-        for (var i = 0; i < programEncounter.observations.length; i++) {
-            if (observations[i].concept.name === 'Hb') {
-                if (observations[i].valueJSON.answer < 7) {
-                    decisions.push({name: 'Referral', value: "Severe Anemia. Refer to FRU"});
-                    decisions.push({name: 'Pregnancy Risk', value: 'Moderate and Severe Anemia'});
-                } else if (observations[i].valueJSON.answer >= 7 || observations[i].valueJSON.answer <= 11) {
-                    decisions.push({name: 'Pregnancy Risk', value: 'Moderate and Severe Anemia, requiring treatment'});
-                } else {
-                    decisions.push({name: 'Pregnancy Risk', value: "Hb normal. Proceed with IFA tablets"});
-                }
-            }
-        }
+const getDecisions = function (programEncounter, today) {
+
+    var decisions = [];
+    const pregnancyComplications = [];
+    const lmpDate = programEncounter.programEnrolment.getObservationValue('Last Menstrual Period');
+    const pregnancyPeriodInWeeks = C.getWeeks(lmpDate, today);
+
+    manageHypertensiveRisks(programEncounter);
+    manageAnemia(programEncounter);
+    if (pregnancyComplications.length >= 0){
+        decisions.push({name: 'Pregnancy Complications', value: pregnancyComplications});
         return decisions;
     }
 
-    function checkForConvulsions(programEncounter, decisions) {
-        var observations = programEncounter.observations;
-        for (var i = 0; i < programEncounter.observations.length; i++) {
-            if (observations[i].concept.name === 'Convulsions' && observations[i].valueJSON.answer) {
-                decisions.push({name: 'Pregnancy Risk', value: "Has convulsions. Continue to monitor. Refer to MO if condition not under control before 8th month"});
+    function manageHypertensiveRisks(progEncounter) {
+
+        const systolic = programEncounter.getObservationValue('Systolic');
+        const diastolic = programEncounter.getObservationValue('Diastolic');
+        const urineAlbumen = progEncounter.getObservationValue('Urine Albumen');
+        const mildPreEclempsiaUrineAlbumenValues = ['Trace', '+1', '+2'];
+        const severePreEclempsiaUrineAlbumenValues = ['+3', '+4'];
+
+        if (urineAlbumen === undefined)
+            decisions.push(C.decision('Investigation Advice', 'Send patient to FRU immediately for Urine Albumen Test'));
+
+        const isBloodPressureHigh = (systolic >= 140) || (diastolic >= 90);
+        const urineAlbumenIsMild = C.contains(mildPreEclempsiaUrineAlbumenValues, urineAlbumen);
+        const urineAlbumenIsSevere = C.contains(severePreEclempsiaUrineAlbumenValues, urineAlbumen);
+        const pregnancyInducedHypertension = progEncounter.observationExists('Pregnancy Induced Hypertension');
+        const hasConvulsions = progEncounter.getObservationValue('Convulsions');
+        const isChronicHypertensive = progEncounter.observationExists('Chronic Hypertension');
+
+        if (pregnancyPeriodInWeeks <= 20 && isBloodPressureHigh) {
+            if (urineAlbumen === 'Absent') pregnancyComplications.push('Chronic Hypertension');
+            if (urineAlbumenIsMild || urineAlbumenIsSevere) {
+                pregnancyComplications.push('Chronic Hypertension with Superimposed Pre-Eclampsia');
+                decisions.push(C.decision('Delivery Recommendation', 'Hospital', 'ProgramEnrolment'))
+            }
+        } else if (pregnancyPeriodInWeeks > 20 && !isChronicHypertensive) {
+            if (!pregnancyInducedHypertension && isBloodPressureHigh){
+                pregnancyComplications.push('Pregnancy Induced Hypertension');
+                if (hasConvulsions && (urineAlbumenIsMild || urineAlbumenIsSevere))
+                    pregnancyComplications.push('Eclampsia');
+                else if (!hasConvulsions && urineAlbumenIsMild) pregnancyComplications.push('Mild Pre-Eclampsia');
+                else if (!hasConvulsions && urineAlbumenIsSevere) pregnancyComplications.push('Severe Pre-Eclampsia');
             }
         }
-        return decisions;
     }
 
-    var decisions = checkForAnemia(programEncounter, []);
-    return checkForConvulsions(programEncounter, decisions);
+    function manageAnemia(programEncounter) {
+        var hemoglobin = programEncounter.getObservationValue('Hb');
+        if (hemoglobin === undefined) decisions.push({name: 'Investigation Advice', value: 'Send patient to FRU immediately for Hemoglobin Test'});
+        else if (hemoglobin < 7) {
+            decisions.push({name: 'Referral', value: "Severe Anemia. Refer to FRU for further checkup and possible transfusion"});
+            decisions.push(C.decision('Delivery Recommendation', 'Hospital', 'ProgramEnrolment'));
+            pregnancyComplications.push('Severe Anemia');
+        } else if (hemoglobin  >= 7 || hemoglobin <= 11){
+            pregnancyComplications.push('Moderate Anemia, requiring treatment');
+            decisions.push({name: 'Treatment Advice', value: "Moderate Anemia. Start therapeutic dose of IFA"});
+        } else if ( hemoglobin  > 11)
+            decisions.push({name: 'Treatment Advice', value: "Hb normal. Proceed with Prophylactic treatment against anaemia"});
+    }
+
+    function manageVaginalBleeding(programEncounter) {
+        var vaginalBleeding = programEncounter.getObservationValue('Vaginal Bleeding');
+        if (vaginalBleeding !== undefined && pregnancyPeriodInWeeks > 20) decisions.push({name: 'Referral', value: 'Send patient to FRU immediately'});
+        else if (vaginalBleeding && pregnancyPeriodInWeeks <= 20) {
+            decisions.push({name: 'Referral', value: "Severe Anemia. Refer to FRU for test"});
+            decisions.push(C.decision('Delivery Recommendation', 'Hospital', 'ProgramEnrolment'));
+            pregnancyComplications.push('Moderate Anemia');
+        }
+    }
+
+
 };
 
 module.exports = {
-    getDecisions: getDecisions,
-    getNextScheduledVisits: getNextScheduledVisits
+    getDecisions: getDecisions
+    //getNextScheduledVisits: getNextScheduledVisits
 };

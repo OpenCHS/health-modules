@@ -41,6 +41,13 @@ function C() {
         return (numberOfMonths);
     };
 
+    this.getWeeks = function (lmpDate, today){
+        today = this.copyDate(today === undefined ? new Date() : today);
+        var lmpDate = this.copyDate(lmpDate === undefined? new Date(): lmpDate);
+        return (Math.round((today - lmpDate)/ 604800000));
+    };
+
+
     this.getMatchingKey = function (obsValue, masterData) {
         var keys = Object.keys(masterData);
         for (var i = 0; i < keys.length; i++) {
@@ -51,6 +58,23 @@ function C() {
             if (nextKeyDifference < currentKeyDifference) continue;
             else return currentLength;
         }
+    };
+
+    this.contains = function (array, value) {
+        return array.some(function (arrayItem) {
+            return arrayItem === value;
+        });
+    };
+
+    this.decision = function (name, value, scope) {
+        return {name: name, value: value};
+    };
+
+    this.findValue = function(decisions, name) {
+        var matchingDecision = decisions.find(function (decision) {
+            return decision.name === name;
+        });
+        return matchingDecision.value;
     };
 }
 
