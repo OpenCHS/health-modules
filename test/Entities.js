@@ -57,7 +57,8 @@ function ProgramEncounter(encounterTypeName, encounterDateTime) {
 function ProgramEnrolment(programName, encounters, individualDateOfBirth) {
     this.program = {name: programName};
     this.encounters = encounters;
-    this.individual = {dateOfBirth: individualDateOfBirth};
+    this.individual = new Individual();
+    this.individual.dateOfBirth = individualDateOfBirth;
     this.observations = new Map();
 }
 
@@ -72,5 +73,6 @@ module.exports = {
     Encounter: Encounter,
     ProgramEncounter: ProgramEncounter,
     ProgramEnrolment: ProgramEnrolment,
+    Individual: Individual,
     Form: Form
 };
