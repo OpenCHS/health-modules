@@ -6,11 +6,11 @@ const programEnrolmentExports = {};
 programEnrolmentExports.Mother = require('./mother/motherProgramEnrolmentDecision');
 programEnrolmentExports.Child = require('./child/childProgramEnrolmentDecision');
 
-const programMetadataExports = {};
-programMetadataExports.Child = require('./child/childProgramConfig');
+const programConfigExports = {};
+programConfigExports.Child = require('./child/childProgramConfig');
 
 module.exports = {
     programEncounterExports: programEncounterExports,
     programEnrolmentExports: programEnrolmentExports,
-    programMetadataExports: programMetadataExports
+    programConfig: programConfigExports
 };

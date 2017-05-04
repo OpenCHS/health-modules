@@ -13,6 +13,7 @@ deploy-local:
 	./node_modules/.bin/webpack deployables/encounterDecision.js output/encounterDecision.js
 	./node_modules/.bin/webpack deployables/individualRegistrationDecision.js output/individualRegistrationDecision.js
 	./node_modules/.bin/webpack deployables/programEnrolmentDecision.js output/programEnrolmentDecision.js
+	./node_modules/.bin/webpack deployables/programConfig.js output/programConfig.js
 	cp -r output/*.js ../openchs-server/external/
 	cp -r deployables/*.json ../openchs-server/external/
 

@@ -15,6 +15,7 @@ function chartByAgeForConcept(conceptName, individual) {
     return function (encounter) {
         var obsValue = encounter.getObservationValue(conceptName),
             ageInMonths = individual.getAgeInMonths(encounter.encounterDateTime);
+        console.log("Found value for " + conceptName + "to be " + obsValue);
         return obsValue ? {x: ageInMonths, y: obsValue} : null;
     }
 }
@@ -76,6 +77,8 @@ function conceptForAge(individual, concept) {
 }
 
 function conceptForConcept(individual, xAxisConcept, yAxisConcept) {
+    console.log("Encounters are");
+    console.log(individual.encounters);
     return _.chain(individual.encounters)
         .map(chartForConcepts(xAxisConcept, yAxisConcept))
         .compact()
