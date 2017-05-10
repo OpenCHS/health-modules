@@ -17,21 +17,21 @@ const getDecisions = function (programEncounter, today) {
 
     function manageHypertensiveRisks(progEncounter) {
 
-        const systolic = programEncounter.getObservationValue('Systolic');
-        const diastolic = programEncounter.getObservationValue('Diastolic');
-        const urineAlbumen = progEncounter.getObservationValue('Urine Albumen');
+        const systolic = programEncounter.getObservationValueFromEntireEnrolment('Systolic');
+        const diastolic = programEncounter.getObservationValueFromEntireEnrolment('Diastolic');
+        const urineAlbumen = progEncounter.getObservationValueFromEntireEnrolment('Urine Albumen');
         const mildPreEclempsiaUrineAlbumenValues = ['Trace', '+1', '+2'];
         const severePreEclempsiaUrineAlbumenValues = ['+3', '+4'];
 
         if (urineAlbumen === undefined)
             decisions.push(C.decision('Investigation Advice', 'Send patient to FRU immediately for Urine Albumen Test'));
 
-        const isBloodPressureHigh = (systolic >= 140) || (diastolic >= 90);
+        const isBloodPressureHigh = (systolic >= 140) || (diastolic >= 90); //can go in high risk category
         const urineAlbumenIsMild = C.contains(mildPreEclempsiaUrineAlbumenValues, urineAlbumen);
         const urineAlbumenIsSevere = C.contains(severePreEclempsiaUrineAlbumenValues, urineAlbumen);
-        const pregnancyInducedHypertension = progEncounter.observationExists('Pregnancy Induced Hypertension');
-        const hasConvulsions = progEncounter.getObservationValue('Convulsions');
-        const isChronicHypertensive = progEncounter.observationExists('Chronic Hypertension');
+        const pregnancyInducedHypertension = progEncounter.observationExistsInEntireEnrolment('Pregnancy Induced Hypertension');
+        const hasConvulsions = progEncounter.getObservationValueFromEntireEnrolment('Convulsions'); //will be identified in hospital
+        const isChronicHypertensive = progEncounter.observationExistsInEntireEnrolment('Chronic Hypertension');
 
         if (pregnancyPeriodInWeeks <= 20 && isBloodPressureHigh) {
             if (urineAlbumen === 'Absent') pregnancyComplications.push('Chronic Hypertension');
@@ -50,8 +50,8 @@ const getDecisions = function (programEncounter, today) {
         }
     }
 
-    function manageAnemia(programEncounter) {
-        var hemoglobin = programEncounter.getObservationValue('Hb');
+    function manageAnemia(programEncounter) { //anm also does this test
+        var hemoglobin = programEncounter.getObservationValueFromEntireEnrolment('Hb');
         if (hemoglobin === undefined) decisions.push({name: 'Investigation Advice', value: 'Send patient to FRU immediately for Hemoglobin Test'});
         else if (hemoglobin < 7) {
             decisions.push({name: 'Referral', value: "Severe Anemia. Refer to FRU for further checkup and possible transfusion"});
@@ -65,7 +65,7 @@ const getDecisions = function (programEncounter, today) {
     }
 
     function manageVaginalBleeding(programEncounter) {
-        var vaginalBleeding = programEncounter.getObservationValue('Vaginal Bleeding');
+        var vaginalBleeding = programEncounter.getObservationValueFromEntireEnrolment('Vaginal Bleeding'); // provided this has been informed. during the delivery is difficult.
         if (vaginalBleeding !== undefined && pregnancyPeriodInWeeks > 20) decisions.push({name: 'Referral', value: 'Send patient to FRU immediately'});
         else if (vaginalBleeding && pregnancyPeriodInWeeks <= 20) {
             decisions.push({name: 'Referral', value: "Severe Anemia. Refer to FRU for test"});
@@ -73,8 +73,6 @@ const getDecisions = function (programEncounter, today) {
             pregnancyComplications.push('Moderate Anemia');
         }
     }
-
-
 };
 
 module.exports = {

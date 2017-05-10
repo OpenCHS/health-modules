@@ -1,6 +1,9 @@
 const getObservationValue = function (conceptName) {
     return this.observations.get(conceptName);
 };
+const getObservationValueFromEntireEnrolment = function (conceptName) {
+    return this.observations.get(conceptName);
+};
 
 const setObservation = function (conceptName, value) {
     this.observations.set(conceptName, value);
@@ -8,6 +11,10 @@ const setObservation = function (conceptName, value) {
 };
 
 const observationExists = function (conceptName) {
+    return this.observations.has(conceptName);
+};
+
+const observationExistsInEntireEnrolment = function (conceptName) {
     return this.observations.has(conceptName);
 };
 
@@ -67,6 +74,8 @@ prototypes.forEach(function (currentPrototype) {
     currentPrototype.getObservationValue = getObservationValue;
     currentPrototype.setObservation = setObservation;
     currentPrototype.observationExists = observationExists;
+    currentPrototype.observationExistsInEntireEnrolment = observationExistsInEntireEnrolment;
+    currentPrototype.getObservationValueFromEntireEnrolment = getObservationValueFromEntireEnrolment;
 });
 
 module.exports = {
