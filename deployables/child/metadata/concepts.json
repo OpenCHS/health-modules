@@ -160,11 +160,6 @@
     "dataType": "N/A"
   },
   {
-    "name": "Normal",
-    "uuid": "de213aac-33ae-4480-a932-bec6deed6cff",
-    "dataType": "N/A"
-  },
-  {
     "name": "Underweight",
     "uuid": "41b2db08-99a4-428c-a908-641330858b8a",
     "dataType": "N/A"
