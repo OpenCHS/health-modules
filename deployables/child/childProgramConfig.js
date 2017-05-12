@@ -15,7 +15,6 @@ function chartByAgeForConcept(conceptName, individual) {
     return function (encounter) {
         var obsValue = encounter.getObservationValue(conceptName),
             ageInMonths = individual.getAgeInMonths(encounter.encounterDateTime);
-        console.log("Found value for " + conceptName + "to be " + obsValue);
         return obsValue ? {x: ageInMonths, y: obsValue} : null;
     }
 }
@@ -68,34 +67,34 @@ function weightForHeightZScores(individual) {
             createZScoreData(weightForHeightGirlsBelow5ZScores, "Height");
 }
 
-function conceptForAge(individual, concept) {
-    return _.chain(individual.encounters)
-        .map(chartByAgeForConcept(concept, individual))
+function conceptForAge(enrolment, concept) {
+    return _.chain(enrolment.encounters)
+        .values()
+        .map(chartByAgeForConcept(concept, enrolment.individual))
         .compact()
         .sortBy('x')
         .value();
 }
 
-function conceptForConcept(individual, xAxisConcept, yAxisConcept) {
-    console.log("Encounters are");
-    console.log(individual.encounters);
-    return _.chain(individual.encounters)
+function conceptForConcept(enrolment, xAxisConcept, yAxisConcept) {
+    return _.chain(enrolment.encounters)
+        .values()
         .map(chartForConcepts(xAxisConcept, yAxisConcept))
         .compact()
         .sortBy('x')
         .value();
 }
 
-function weightForAge(individual) {
-    return conceptForAge(individual, "Weight");
+function weightForAge(enrolment) {
+    return conceptForAge(enrolment, "Weight");
 }
 
-function heightForAge(individual) {
-    return conceptForAge(individual, "Height");
+function heightForAge(enrolment) {
+    return conceptForAge(enrolment, "Height");
 }
 
-function weightForHeight(individual) {
-    return conceptForConcept(individual, "Height", "Weight");
+function weightForHeight(enrolment) {
+    return conceptForConcept(enrolment, "Height", "Weight");
 }
 
 var config = {
@@ -105,25 +104,25 @@ var config = {
             widgets: [{
                 type: "lineChart",
                 title: "Weight for age",
-                data: function (individual) {
-                    var data = weightForAgeZScores(individual);
-                    data.push(weightForAge(individual));
+                data: function (enrolment) {
+                    var data = weightForAgeZScores(enrolment.individual);
+                    data.push(weightForAge(enrolment));
                     return data;
                 }
             }, {
                 type: "lineChart",
                 title: "Height for age",
-                data: function (individual) {
-                    var data = heightForAgeZScores(individual);
-                    data.push(heightForAge(individual));
+                data: function (enrolment) {
+                    var data = heightForAgeZScores(enrolment.individual);
+                    data.push(heightForAge(enrolment));
                     return data;
                 }
             }, {
                 type: "lineChart",
                 title: "Weight for Height",
-                data: function (individual) {
-                    var data = weightForHeightZScores(individual);
-                    data.push(weightForHeight(individual));
+                data: function (enrolment) {
+                    var data = weightForHeightZScores(enrolment.individual);
+                    data.push(weightForHeight(enrolment));
                     return data;
                 }
             }]
