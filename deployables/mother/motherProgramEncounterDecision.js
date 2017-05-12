@@ -1,8 +1,7 @@
-//var getNextScheduledVisits = require('./motherVisitSchedule').getNextScheduledVisits;
+var getNextScheduledVisits = require('./motherVisitSchedule').getNextScheduledVisits;
 var C = require('../common');
 
 const getDecisions = function (programEncounter, today) {
-
     var decisions = [];
     const pregnancyComplications = [];
     const lmpDate = programEncounter.programEnrolment.getObservationValue('Last Menstrual Period');
@@ -12,11 +11,10 @@ const getDecisions = function (programEncounter, today) {
     manageAnemia(programEncounter);
     if (pregnancyComplications.length >= 0){
         decisions.push({name: 'Pregnancy Complications', value: pregnancyComplications});
-        return decisions;
     }
+    return decisions;
 
     function manageHypertensiveRisks(progEncounter) {
-
         const systolic = programEncounter.getObservationValueFromEntireEnrolment('Systolic');
         const diastolic = programEncounter.getObservationValueFromEntireEnrolment('Diastolic');
         const urineAlbumen = progEncounter.getObservationValueFromEntireEnrolment('Urine Albumen');
@@ -37,7 +35,6 @@ const getDecisions = function (programEncounter, today) {
             if (urineAlbumen === 'Absent') pregnancyComplications.push('Chronic Hypertension');
             if (urineAlbumenIsMild || urineAlbumenIsSevere) {
                 pregnancyComplications.push('Chronic Hypertension with Superimposed Pre-Eclampsia');
-                decisions.push(C.decision('Delivery Recommendation', 'Hospital', 'ProgramEnrolment'))
             }
         } else if (pregnancyPeriodInWeeks > 20 && !isChronicHypertensive) {
             if (!pregnancyInducedHypertension && isBloodPressureHigh){
@@ -54,11 +51,10 @@ const getDecisions = function (programEncounter, today) {
         var hemoglobin = programEncounter.getObservationValueFromEntireEnrolment('Hb');
         if (hemoglobin === undefined) decisions.push({name: 'Investigation Advice', value: 'Send patient to FRU immediately for Hemoglobin Test'});
         else if (hemoglobin < 7) {
-            decisions.push({name: 'Referral', value: "Severe Anemia. Refer to FRU for further checkup and possible transfusion"});
-            decisions.push(C.decision('Delivery Recommendation', 'Hospital', 'ProgramEnrolment'));
+            decisions.push({name: 'Treatment Advice', value: "Severe Anemia. Refer to FRU for further checkup and possible transfusion"});
             pregnancyComplications.push('Severe Anemia');
         } else if (hemoglobin  >= 7 || hemoglobin <= 11){
-            pregnancyComplications.push('Moderate Anemia, requiring treatment');
+            pregnancyComplications.push('Moderate Anemia');
             decisions.push({name: 'Treatment Advice', value: "Moderate Anemia. Start therapeutic dose of IFA"});
         } else if ( hemoglobin  > 11)
             decisions.push({name: 'Treatment Advice', value: "Hb normal. Proceed with Prophylactic treatment against anaemia"});
@@ -66,16 +62,15 @@ const getDecisions = function (programEncounter, today) {
 
     function manageVaginalBleeding(programEncounter) {
         var vaginalBleeding = programEncounter.getObservationValueFromEntireEnrolment('Vaginal Bleeding'); // provided this has been informed. during the delivery is difficult.
-        if (vaginalBleeding !== undefined && pregnancyPeriodInWeeks > 20) decisions.push({name: 'Referral', value: 'Send patient to FRU immediately'});
+        if (vaginalBleeding !== undefined && pregnancyPeriodInWeeks > 20) decisions.push({name: 'Referral Advice', value: 'Send patient to FRU immediately'});
         else if (vaginalBleeding && pregnancyPeriodInWeeks <= 20) {
-            decisions.push({name: 'Referral', value: "Severe Anemia. Refer to FRU for test"});
-            decisions.push(C.decision('Delivery Recommendation', 'Hospital', 'ProgramEnrolment'));
+            decisions.push({name: 'Referral Advice', value: "Severe Anemia. Refer to FRU for test"});
             pregnancyComplications.push('Moderate Anemia');
         }
     }
 };
 
 module.exports = {
-    getDecisions: getDecisions
-    //getNextScheduledVisits: getNextScheduledVisits
+    getDecisions: getDecisions,
+    getNextScheduledVisits: getNextScheduledVisits
 };

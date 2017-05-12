@@ -74,7 +74,7 @@ function C() {
         var matchingDecision = decisions.find(function (decision) {
             return decision.name === name;
         });
-        return matchingDecision.value;
+        return matchingDecision ? matchingDecision.value : null;
     };
 }
 

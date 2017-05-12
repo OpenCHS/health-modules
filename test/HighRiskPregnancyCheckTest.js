@@ -49,6 +49,5 @@ describe('Make Decision', function () {
         var decisions = mother.getDecisions(programEncounter, referenceDate);
         var complicationValues = C.findValue(decisions, 'Pregnancy Complications');
         expect(complicationValues.indexOf("Severe Anemia")).is.not.equal(-1);
-        assert.equal('Severe Anemia. Refer to FRU for further checkup and possible transfusion', C.findValue(decisions, 'Referral'));
     });
 });
