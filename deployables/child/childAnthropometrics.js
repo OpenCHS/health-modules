@@ -153,7 +153,7 @@ var getDecisions = function (observationsHolder, individual, today) {
     function getZScore(matchingRow, obsValue) {
         var keys = Object.keys(matchingRow);
         for (var i = 0; i < keys.length; i++) {
-            var ignoredKeys = ['Month', 'Length', 'L', 'M', 'S'];
+            var ignoredKeys = ['Month', 'Length', 'L', 'M', 'S', 'SD'];
 
             var findOne = ignoredKeys.some(function (ignoredKey) {
                 return keys[i] === ignoredKey;
