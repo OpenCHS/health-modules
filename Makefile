@@ -23,6 +23,7 @@ recreate-db:
 
 setup-impl-db:
 	psql -h 0.0.0.0 -U openchs -q -f lbp/villages.sql
+	psql -h 0.0.0.0 -U openchs -q -f lbp/catchments.sql
 
 setup-db: recreate-db setup-health-modules setup-impl-db
 	
