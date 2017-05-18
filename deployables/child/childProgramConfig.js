@@ -103,7 +103,9 @@ var config = {
         openOnClick: {
             widgets: [{
                 type: "lineChart",
-                title: "Weight for age",
+                title: "Weight (kg) for age (months)",
+                xAxisTitle: "Age (Months)",
+                yAxisTitle: "Weight (kg)",
                 data: function (enrolment) {
                     var data = weightForAgeZScores(enrolment.individual);
                     data.push(weightForAge(enrolment));
@@ -111,7 +113,9 @@ var config = {
                 }
             }, {
                 type: "lineChart",
-                title: "Height for age",
+                title: "Height (cm) for age (months)",
+                xAxisTitle: "Age (Months)",
+                yAxisTitle: "Height (kg)",
                 data: function (enrolment) {
                     var data = heightForAgeZScores(enrolment.individual);
                     data.push(heightForAge(enrolment));
@@ -119,7 +123,9 @@ var config = {
                 }
             }, {
                 type: "lineChart",
-                title: "Weight for Height",
+                title: "Weight (kg) for Height (cm)",
+                xAxisTitle: "Height (cm)",
+                yAxisTitle: "Weight (kg)",
                 data: function (enrolment) {
                     var data = weightForHeightZScores(enrolment.individual);
                     data.push(weightForHeight(enrolment));
