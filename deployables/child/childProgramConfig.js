@@ -31,7 +31,7 @@ function createZScoreData(zScoreFile, xAxis) {
     xAxis = xAxis || "Month";
     return _.unzip(_.map(zScoreFile,
         function (item) {
-            return _.map(['SD0', 'SD1', 'SD3', 'SD2neg', 'SD3neg'],
+            return _.map(['SD3', 'SD1', 'SD0', 'SD2neg', 'SD3neg'],
                 function (key) {
                     return {x: item[xAxis], y: item[key]}
                 })
