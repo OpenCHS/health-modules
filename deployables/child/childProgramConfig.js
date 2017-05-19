@@ -1,7 +1,5 @@
-const weightForAgeGirlsBelow2ZScores = require('./anthropometricReference/wfa_girls_0_2');
-const weightForAgeGirlsBelow5ZScores = require('./anthropometricReference/wfa_girls_2_5');
-const weightForAgeBoysBelow2ZScores = require('./anthropometricReference/wfa_boys_0_2');
-const weightForAgeBoysBelow5ZScores = require('./anthropometricReference/wfa_boys_2_5');
+const weightForAgeGirlsBelow5ZScores = require('./anthropometricReference/wfa_girls_0_5_zscores');
+const weightForAgeBoysBelow5ZScores = require('./anthropometricReference/wfa_boys_0_5_zscores');
 const heightForAgeBoysBelow2ZScores = require('./anthropometricReference/lhfa_boys_0_2_zscores');
 const heightForAgeGirlsBelow2ZScores = require('./anthropometricReference/lhfa_girls_0_2_zscores');
 const heightForAgeBoysBelow5ZScores = require('./anthropometricReference/lhfa_boys_2_5_zscores');
@@ -43,13 +41,8 @@ function createZScoreData(zScoreFile, xAxis) {
 
 function weightForAgeZScores(individual) {
     return individual.isGender('Male') ?
-        individual.getAgeInMonths() < 25 ?
-            createZScoreData(weightForAgeBoysBelow2ZScores) :
-            createZScoreData(weightForAgeBoysBelow5ZScores)
-        :
-        individual.getAgeInMonths() < 25 ?
-            createZScoreData(weightForAgeGirlsBelow2ZScores) :
-            createZScoreData(weightForAgeGirlsBelow5ZScores);
+        createZScoreData(weightForAgeBoysBelow5ZScores) :
+        createZScoreData(weightForAgeGirlsBelow5ZScores);
 }
 
 function heightForAgeZScores(individual) {

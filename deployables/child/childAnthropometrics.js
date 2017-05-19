@@ -1,7 +1,7 @@
 var C = require('../common');
 
-var weightForAgeScoresGirls = require('./anthropometricReference/wfa_girls_0_2_zscores');
-var weightForAgeScoresBoys = require('./anthropometricReference/wfa_boys_0_2_zscores');
+var weightForAgeScoresGirls = require('./anthropometricReference/wfa_girls_0_5_zscores');
+var weightForAgeScoresBoys = require('./anthropometricReference/wfa_boys_0_5_zscores');
 
 var heightForAgeScoresGirls0_2 = require('./anthropometricReference/lhfa_girls_0_2_zscores');
 var heightForAgeScoresBoys0_2 = require('./anthropometricReference/lhfa_boys_0_2_zscores');
