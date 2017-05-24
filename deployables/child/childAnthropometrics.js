@@ -16,12 +16,18 @@ var weightForHeightScoresBoys2_5 = require('./anthropometricReference/wfh_boys_2
 var bmiForAgeScores = require('../json/bmiForAge');
 
 var zScoreGradeMappingWeightForAge = {
+    'SD3': 1,
+    'SD2': 1,
+    'SD1': 1,
     'SD0': 1,
     'SD1neg': 1,
     'SD2neg': 2,
     'SD3neg': 3
 };
 var zScoreStatusMappingWeightForAge = {
+    'SD3': 'Normal',
+    'SD2': 'Normal',
+    'SD1': 'Normal',
     'SD0': 'Normal',
     'SD1neg': 'Normal',
     'SD2neg': 'Underweight',
