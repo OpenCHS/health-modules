@@ -22,8 +22,8 @@ recreate-db:
 	flyway -user=openchs -password=password -url=jdbc:postgresql://localhost:5432/openchs -schemas=openchs -locations=filesystem:../openchs-server/src/main/resources/db/migration/ migrate
 
 setup-impl-db:
-	psql -h 0.0.0.0 -U openchs -q -f lbp/villages.sql
-	psql -h 0.0.0.0 -U openchs -q -f lbp/catchments.sql
+	psql -h $(server) -U openchs -q -f lbp/villages.sql
+	psql -h $(server) -U openchs -q -f lbp/catchments.sql
 
 setup-db: recreate-db setup-health-modules setup-impl-db
 	
