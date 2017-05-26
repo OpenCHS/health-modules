@@ -26,57 +26,56 @@ describe('Child Program Config', function () {
                     getAgeInMonths: function () {
                         return moment().subtract(3, 'years');
                     },
-                    isGender: function (gender) {
-                        return gender === 'Female'
+                    getAgeInWeeks: function () {
+                        return moment().subtract(156, 'weeks');
                     },
+                    gender: {name: "Female"}
                 },
                 encounters: {
                     '0': {
                         encounterDatetime: moment().subtract(35, 'months'),
-                        getObservationValue: weightAndHeight(14, 110)
+                        getObservationValue: weightAndHeight(12, 88)
                     }
                     ,
                     '1': {
                         encounterDatetime: moment().subtract(24, 'months'),
-                        getObservationValue: weightAndHeight(11.2, 98)
+                        getObservationValue: weightAndHeight(11.7, 87)
                     }
                     ,
                     '2': {
                         encounterDatetime: moment().subtract(18, 'months'),
-                        getObservationValue: weightAndHeight(9.8, 90)
+                        getObservationValue: weightAndHeight(10.2, 80)
                     }
                     ,
                     '3': {
                         encounterDatetime: moment().subtract(2, 'months'),
-                        getObservationValue: weightAndHeight(3.5, 60)
+                        getObservationValue: weightAndHeight(5.1, 57)
                     }
                 }
             };
 
 
-        it("called Growth Chart", function () {
-            expect(childProgramConfig.programDashboardButtons[0].label).to.equal('Growth Chart');
-        });
-
-        it("that is mapped to a line chart for weight for Age", function () {
-            var weightForAgeWidget = childProgramConfig.programDashboardButtons[0].openOnClick.widgets[0];
-            expect(weightForAgeWidget.type).to.equal('lineChart');
-            var weightForAgeData = weightForAgeWidget.data(enrolmentStub);
-            expect(weightForAgeData.length).to.equal(6);
-        });
-
-        it("that is mapped to a line chart for height for Age", function () {
-            var heightForAgeWidget = childProgramConfig.programDashboardButtons[0].openOnClick.widgets[1];
-            expect(heightForAgeWidget.type).to.equal('lineChart');
-            var weightForAgeData = heightForAgeWidget.data(enrolmentStub);
-            expect(weightForAgeData.length).to.equal(6);
-        });
+        // it("called Growth Chart", function () {
+        //     expect(childProgramConfig.programDashboardButtons[0].label).to.equal('Growth Chart');
+        // });
+        //
+        // it("that is mapped to a line chart for weight for Age", function () {
+        //     var weightForAgeWidget = childProgramConfig.programDashboardButtons[0].openOnClick.data.graphsBelow5Years[0];
+        //     var weightForAgeData = weightForAgeWidget.data(enrolmentStub);
+        //     expect(weightForAgeData.length).to.equal(6);
+        // });
+        //
+        // it("that is mapped to a line chart for height for Age", function () {
+        //     var heightForAgeWidget = childProgramConfig.programDashboardButtons[0].openOnClick.data.graphsBelow5Years[1];
+        //     var heightForAgeData = heightForAgeWidget.data(enrolmentStub);
+        //     expect(heightForAgeData.length).to.equal(6);
+        // });
 
         it("that is mapped to a line chart for weight for height", function () {
-            var weightForHeightWidget = childProgramConfig.programDashboardButtons[0].openOnClick.widgets[2];
-            expect(weightForHeightWidget.type).to.equal('lineChart');
+            var weightForHeightWidget = childProgramConfig.programDashboardButtons[0].openOnClick.data.graphsBelow5Years[2];
             var weightForHeightData = weightForHeightWidget.data(enrolmentStub);
             expect(weightForHeightData.length).to.equal(6);
+            console.log(weightForHeightData[5]);
         });
     });
 });

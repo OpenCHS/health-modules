@@ -1,121 +1,321 @@
-const weightForAgeGirlsBelow5ZScores = require('./anthropometricReference/wfa_girls_0_5_zscores');
-const weightForAgeBoysBelow5ZScores = require('./anthropometricReference/wfa_boys_0_5_zscores');
-const heightForAgeBoysBelow2ZScores = require('./anthropometricReference/lhfa_boys_0_2_zscores');
-const heightForAgeGirlsBelow2ZScores = require('./anthropometricReference/lhfa_girls_0_2_zscores');
-const heightForAgeBoysBelow5ZScores = require('./anthropometricReference/lhfa_boys_2_5_zscores');
-const heightForAgeGirlsBelow5ZScores = require('./anthropometricReference/lhfa_girls_2_5_zscores');
-const weightForHeightGirlsBelow5ZScores = require('./anthropometricReference/wfh_girls_2_5_zscores');
-const weightForHeightBoysBelow5ZScores = require('./anthropometricReference/wfh_boys_2_5_zscores');
-const weightForHeightGirlsBelow2ZScores = require('./anthropometricReference/wfl_girls_0_2_zscores.json');
-const weightForHeightBoysBelow2ZScores = require('./anthropometricReference/wfl_boys_0_2_zscores.json');
-
 const _ = require("lodash");
 
-function chartByAgeForConcept(conceptName, individual) {
+const heightForAgeGirlsBelow13Weeks = require('./anthropometricReference/lhfa_girls_p_0_13');
+const heightForAgeGirlsBelow2Years = require('./anthropometricReference/lhfa_girls_p_0_2');
+const heightForAgeGirlsBelow5Years = require('./anthropometricReference/lhfa_girls_p_2_5');
+const heightForAgeBoysBelow13Weeks = require('./anthropometricReference/lhfa_boys_p_0_13');
+const heightForAgeBoysBelow2Years = require('./anthropometricReference/lhfa_boys_p_0_2');
+const heightForAgeBoysBelow5Years = require('./anthropometricReference/lhfa_boys_p_2_5');
+
+const weightForAgeGirlsBelow13Weeks = require('./anthropometricReference/wfa_girls_p_0_13');
+const weightForAgeGirlsBelow2Years = require('./anthropometricReference/wfa_girls_p_0_2');
+const weightForAgeGirlsBelow5Years = require('./anthropometricReference/wfa_girls_p_2_5');
+const weightForAgeBoysBelow13Weeks = require('./anthropometricReference/wfa_boys_p_0_13');
+const weightForAgeBoysBelow2Years = require('./anthropometricReference/wfa_boys_p_0_2');
+const weightForAgeBoysBelow5Years = require('./anthropometricReference/wfa_boys_p_2_5');
+
+
+const weightForHeightGirlsBelow2Years = require('./anthropometricReference/wfh_girls_p_0_2');
+const weightForHeightGirlsBelow5Years = require('./anthropometricReference/wfh_girls_p_2_5');
+const weightForHeightBoysBelow2Years = require('./anthropometricReference/wfh_boys_p_0_2');
+const weightForHeightBoysBelow5Years = require('./anthropometricReference/wfh_boys_p_2_5');
+
+function obsFor(concept) {
     return function (encounter) {
-        var obsValue = encounter.getObservationValue(conceptName),
-            ageInMonths = individual.getAgeInMonths(encounter.encounterDateTime);
-        return obsValue ? {x: ageInMonths, y: obsValue} : null;
+        return encounter.getObservationValue(concept);
     }
 }
 
-function chartForConcepts(xAxisConcept, yAxisConcept) {
+function ageInMonths(encounter, individual) {
+    return individual.getAgeInMonths(encounter.encounterDateTime);
+}
+
+function ageInWeeks(encounter, individual) {
+    return individual.getAgeInWeeks(encounter.encounterDateTime);
+}
+
+const types = {
+    WEIGHT_FOR_AGE: "weightForAge",
+    HEIGHT_FOR_AGE: "heightForAge",
+    WEIGHT_FOR_HEIGHT: "weightForHeight"
+};
+
+const ageGroups = {
+    LESS_THAN_5_YEARS: "<5years",
+    LESS_THAN_2_YEARS: "<2years",
+    LESS_THAN_13_WEEKS: "<12weeks"
+};
+
+const configs = [
+    {
+        gender: "Female",
+        age: ageGroups.LESS_THAN_5_YEARS,
+        referenceKey: "Month",
+        xAxis: obsFor("Weight"),
+        type: types.WEIGHT_FOR_AGE,
+        file: weightForAgeGirlsBelow5Years,
+        yAxis: ageInMonths
+    },
+    {
+        gender: "Female",
+        age: ageGroups.LESS_THAN_2_YEARS,
+        referenceKey: "Month",
+        xAxis: obsFor("Weight"),
+        type: types.WEIGHT_FOR_AGE,
+        file: weightForAgeGirlsBelow2Years,
+        yAxis: ageInMonths
+    },
+    {
+        gender: "Female",
+        age: ageGroups.LESS_THAN_13_WEEKS,
+        referenceKey: "Week",
+        xAxis: obsFor("Weight"),
+        type: types.WEIGHT_FOR_AGE,
+        file: weightForAgeGirlsBelow13Weeks,
+        yAxis: ageInWeeks
+    },
+    {
+        gender: "Male",
+        age: ageGroups.LESS_THAN_5_YEARS,
+        referenceKey: "Month",
+        xAxis: obsFor("Weight"),
+        type: types.WEIGHT_FOR_AGE,
+        file: weightForAgeBoysBelow5Years,
+        yAxis: ageInMonths
+    },
+    {
+        gender: "Male",
+        age: ageGroups.LESS_THAN_2_YEARS,
+        referenceKey: "Month",
+        xAxis: obsFor("Weight"),
+        type: types.WEIGHT_FOR_AGE,
+        file: weightForAgeBoysBelow2Years,
+        yAxis: ageInMonths
+    },
+    {
+        gender: "Male",
+        age: ageGroups.LESS_THAN_13_WEEKS,
+        referenceKey: "Week",
+        xAxis: obsFor("Weight"),
+        type: types.WEIGHT_FOR_AGE,
+        file: weightForAgeBoysBelow13Weeks,
+        yAxis: ageInWeeks
+    },
+
+    {
+        gender: "Female",
+        age: ageGroups.LESS_THAN_5_YEARS,
+        referenceKey: "Month",
+        xAxis: obsFor("Height"),
+        type: types.HEIGHT_FOR_AGE,
+        file: heightForAgeGirlsBelow5Years,
+        yAxis: ageInMonths
+    },
+    {
+        gender: "Female",
+        age: ageGroups.LESS_THAN_2_YEARS,
+        referenceKey: "Month",
+        xAxis: obsFor("Height"),
+        type: types.HEIGHT_FOR_AGE,
+        file: heightForAgeGirlsBelow2Years,
+        yAxis: ageInMonths
+    },
+    {
+        gender: "Female",
+        age: ageGroups.LESS_THAN_13_WEEKS,
+        referenceKey: "Week",
+        xAxis: obsFor("Height"),
+        type: types.HEIGHT_FOR_AGE,
+        file: heightForAgeGirlsBelow13Weeks,
+        yAxis: ageInWeeks
+    },
+    {
+        gender: "Male",
+        age: ageGroups.LESS_THAN_5_YEARS,
+        referenceKey: "Month",
+        xAxis: obsFor("Height"),
+        type: types.HEIGHT_FOR_AGE,
+        file: heightForAgeBoysBelow5Years,
+        yAxis: ageInMonths
+    },
+    {
+        gender: "Male",
+        age: ageGroups.LESS_THAN_2_YEARS,
+        referenceKey: "Month",
+        xAxis: obsFor("Height"),
+        type: types.HEIGHT_FOR_AGE,
+        file: heightForAgeBoysBelow2Years,
+        yAxis: ageInMonths
+    },
+    {
+        gender: "Male",
+        age: ageGroups.LESS_THAN_13_WEEKS,
+        referenceKey: "Week",
+        xAxis: obsFor("Height"),
+        type: types.HEIGHT_FOR_AGE,
+        file: heightForAgeBoysBelow13Weeks,
+        yAxis: ageInWeeks
+    },
+
+    {
+        gender: "Female",
+        age: ageGroups.LESS_THAN_5_YEARS,
+        referenceKey: "Height",
+        xAxis: obsFor("Height"),
+        type: types.WEIGHT_FOR_HEIGHT,
+        file: weightForHeightGirlsBelow5Years,
+        yAxis: obsFor("Weight")
+    },
+    {
+        gender: "Female",
+        age: ageGroups.LESS_THAN_2_YEARS,
+        referenceKey: "Length",
+        xAxis: obsFor("Height"),
+        type: types.WEIGHT_FOR_HEIGHT,
+        file: weightForHeightGirlsBelow2Years,
+        yAxis: obsFor("Weight")
+    },
+    {
+        gender: "Male",
+        age: ageGroups.LESS_THAN_5_YEARS,
+        referenceKey: "Height",
+        xAxis: obsFor("Height"),
+        type: types.WEIGHT_FOR_HEIGHT,
+        file: weightForHeightBoysBelow5Years,
+        yAxis: obsFor("Weight")
+    },
+    {
+        gender: "Male",
+        age: ageGroups.LESS_THAN_2_YEARS,
+        referenceKey: "Length",
+        xAxis: obsFor("Height"),
+        type: types.WEIGHT_FOR_HEIGHT,
+        file: weightForHeightBoysBelow2Years,
+        yAxis: obsFor("Weight")
+    }
+];
+
+function createChart(individual, xAxis, yAxis) {
     return function (encounter) {
-        var xValue = encounter.getObservationValue(xAxisConcept),
-            yValue = encounter.getObservationValue(yAxisConcept);
-        return (xValue && yValue) ? {x: xValue, y: yValue} : null;
+        const x = xAxis(encounter, individual),
+            y = yAxis(encounter, individual);
+        return x ? {x: x, y: y} : null;
     }
 }
 
-function createZScoreData(zScoreFile, xAxis) {
-    xAxis = xAxis || "Month";
-    return _.unzip(_.map(zScoreFile,
+function createReferenceLines(config) {
+    return _.unzip(_.map(config.file,
         function (item) {
-            return _.map(['SD3', 'SD1', 'SD0', 'SD2neg', 'SD3neg'],
+            return _.map(['P10', 'P25', 'P50', 'P75', 'P90'],
                 function (key) {
-                    return {x: item[xAxis], y: item[key]}
+                    return {x: item[config.referenceKey], y: item[key]}
                 })
         })
     );
 }
 
-function weightForAgeZScores(individual) {
-    return individual.isGender('Male') ?
-        createZScoreData(weightForAgeBoysBelow5ZScores) :
-        createZScoreData(weightForAgeGirlsBelow5ZScores);
+function findConfig(type, gender, age) {
+    return _.find(configs, function (config) {
+        return config.type === type && config.gender === gender.name && config.age === age
+    });
 }
 
-function heightForAgeZScores(individual) {
-    return individual.isGender('Male') ?
-        individual.getAgeInMonths() < 25 ?
-            createZScoreData(heightForAgeBoysBelow2ZScores) :
-            createZScoreData(heightForAgeBoysBelow5ZScores)
-        :
-        individual.getAgeInMonths() < 25 ?
-            createZScoreData(heightForAgeGirlsBelow2ZScores) :
-            createZScoreData(heightForAgeGirlsBelow5ZScores);
-}
-
-function weightForHeightZScores(individual) {
-    return individual.isGender('Male') ?
-        individual.getAgeInMonths() < 25 ?
-            createZScoreData(weightForHeightBoysBelow2ZScores, "Length") :
-            createZScoreData(weightForHeightBoysBelow5ZScores, "Height")
-        :
-        individual.getAgeInMonths() < 25 ?
-            createZScoreData(weightForHeightGirlsBelow2ZScores, "Length") :
-            createZScoreData(weightForHeightGirlsBelow5ZScores, "Height");
-}
-
-function conceptForAge(enrolment, concept) {
+function createChartFor(config, enrolment, minX, maxX) {
     return _.chain(enrolment.encounters)
         .values()
-        .map(chartByAgeForConcept(concept, enrolment.individual))
+        .map(createChart(enrolment.individual, config.xAxis, config.yAxis))
         .compact()
         .sortBy('x')
+        .filter(function (item) {
+            return item.x >= minX && item.x <= maxX;
+        })
         .value();
 }
 
-function conceptForConcept(enrolment, xAxisConcept, yAxisConcept) {
-    return _.chain(enrolment.encounters)
-        .values()
-        .map(chartForConcepts(xAxisConcept, yAxisConcept))
-        .compact()
-        .sortBy('x')
-        .value();
+function createConfigWithData(type, age, enrolment) {
+    var config = findConfig(type, enrolment.individual.gender, age),
+        data = createReferenceLines(config),
+        allX = _.chain(data)
+            .flatten()
+            .map('x')
+            .sortBy()
+            .value(),
+        minX = _.first(allX),
+        maxX = _.last(allX),
+        obsData = createChartFor(config, enrolment, minX, maxX);
+    data = createReferenceLines(config);
+    data.push(obsData);
+    return data;
 }
 
-function weightForAge(enrolment) {
-    return conceptForAge(enrolment, "Weight");
-}
-
-function heightForAge(enrolment) {
-    return conceptForAge(enrolment, "Height");
-}
-
-function weightForHeight(enrolment) {
-    return conceptForConcept(enrolment, "Height", "Weight");
-}
-
-var config = {
+const config = {
     programDashboardButtons: [{
         label: "Growth Chart",
         openOnClick: {
             type: "growthChart",
             data: {
-                weightForAge: function (enrolment) {
-                    var data = weightForAgeZScores(enrolment.individual);
-                    data.push(weightForAge(enrolment));
-                    return data;
-                }, heightForAge: function (enrolment) {
-                    var data = heightForAgeZScores(enrolment.individual);
-                    data.push(heightForAge(enrolment));
-                    return data;
-                }, weightForHeight: function (enrolment) {
-                    var data = weightForHeightZScores(enrolment.individual);
-                    data.push(weightForHeight(enrolment));
-                    return data;
-                }
+                graphsBelow5Years: [
+                    {
+                        title: "Weight (kg) for Age (months)",
+                        xAxisLabel: "Age (Months)",
+                        data: function (enrolment) {
+                            return createConfigWithData(types.WEIGHT_FOR_AGE, ageGroups.LESS_THAN_5_YEARS, enrolment);
+                        }
+                    },
+                    {
+                        title: "Height (cm) for Age (months)",
+                        xAxisLabel: "Age (Months)",
+                        data: function (enrolment) {
+                            return createConfigWithData(types.HEIGHT_FOR_AGE, ageGroups.LESS_THAN_5_YEARS, enrolment);
+                        }
+                    },
+                    {
+                        title: "Weight (kg) for Height (cm)",
+                        xAxisLabel: "Age (Months)",
+                        data: function (enrolment) {
+                            return createConfigWithData(types.WEIGHT_FOR_HEIGHT, ageGroups.LESS_THAN_5_YEARS, enrolment);
+                        }
+                    }
+                ],
+                graphsBelow2Years: [
+                    {
+                        title: "Weight (kg) for Age (months)",
+                        xAxisLabel: "Age (Months)",
+                        data: function (enrolment) {
+                            return createConfigWithData(types.WEIGHT_FOR_AGE, ageGroups.LESS_THAN_2_YEARS, enrolment);
+                        }
+                    },
+                    {
+                        title: "Height (cm) for Age (months)",
+                        xAxisLabel: "Age (Months)",
+                        data: function (enrolment) {
+                            return createConfigWithData(types.HEIGHT_FOR_AGE, ageGroups.LESS_THAN_2_YEARS, enrolment);
+                        }
+                    },
+                    {
+                        title: "Weight (kg) for Height (cm)",
+                        xAxisLabel: "Age (Months)",
+                        data: function (enrolment) {
+                            return createConfigWithData(types.WEIGHT_FOR_HEIGHT, ageGroups.LESS_THAN_2_YEARS, enrolment);
+                        }
+                    }
+                ],
+                graphsBelow13Months: [
+                    {
+                        title: "Weight (kg) for Age (months)",
+                        xAxisLabel: "Age (Months)",
+                        data: function (enrolment) {
+                            return createConfigWithData(types.WEIGHT_FOR_AGE, ageGroups.LESS_THAN_13_WEEKS, enrolment);
+                        }
+                    },
+                    {
+                        title: "Height (cm) for Age (Weeks)",
+                        xAxisLabel: "Age (Weeks)",
+                        data: function (enrolment) {
+                            return createConfigWithData(types.HEIGHT_FOR_AGE, ageGroups.LESS_THAN_13_WEEKS, enrolment);
+                        }
+                    }
+                ]
             }
         }
     }]
