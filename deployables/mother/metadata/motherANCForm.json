@@ -7,7 +7,8 @@
   "formElementGroups": [
     {
       "uuid": "36debb83-db66-4da1-88c7-23c0dfc47649",
-      "name": "Physical Examination",
+      "name": "ANC Physical Examination",
+      "Basic Details": "Physical Examination",
       "displayOrder": 1,
       "formElements": [
         {
@@ -150,7 +151,8 @@
     },
     {
       "uuid": "cb8b6812-b58b-428d-afbd-7f53748c684d",
-      "name": "Vitals",
+      "name": "ANC Mother Vitals",
+      "display": "Vitals",
       "displayOrder": 2,
       "formElements": [
         {

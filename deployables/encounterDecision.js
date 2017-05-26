@@ -1855,9 +1855,9 @@ const getDecisions = function (encounter) {
         params.complaints.push("Fever");
     }
     params.complaints = params.complaints.filter(function (item) {
-        return item == 'Fever';
+        return item === 'Fever';
     }).concat(params.complaints.filter(function (item) {
-        return item != 'Fever'
+        return item !== 'Fever'
     }));
 
     var potentiallyPregnant = (params.sex === "Female" && (params.age >= 16 && params.age <= 40));
@@ -1867,7 +1867,7 @@ const getDecisions = function (encounter) {
     for (var complaintIndex = 0; complaintIndex < params.complaints.length; complaintIndex++) {
         var weightRangeToCode = getWeightRangeToCode(params.complaints[complaintIndex], params.weight);
         var decision = {};
-        decision.name = "Treatment";
+        decision.name = "Treatment Advice";
         decision.code = weightRangeToCode.code;
 
         var prescriptionSet;

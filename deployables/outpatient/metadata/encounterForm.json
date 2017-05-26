@@ -6,7 +6,8 @@
   "formElementGroups": [
     {
       "uuid": "52c7a463-3044-4ac6-8bfa-dae86fd20878",
-      "name": "Vitals",
+      "name": "Outpatient Vitals",
+      "display": "Vitals",
       "displayOrder": 1,
       "formElements": [
         {
@@ -61,7 +62,8 @@
     },
     {
       "uuid": "cfca8e29-cbf2-4fda-a691-b8fa15abab14",
-      "name": "Physical Examination",
+      "name": "Outpatient Physical Examination",
+      "display": "Physical Examination",
       "displayOrder": 2,
       "formElements": [
         {
@@ -140,7 +142,8 @@
     },
     {
       "uuid": "866bae7d-1a10-48de-a68d-2aef17f92b6b",
-      "name": "Complaint",
+      "name": "Outpatient Complaints",
+      "display": "Complaints",
       "displayOrder": 3,
       "formElements": [
         {

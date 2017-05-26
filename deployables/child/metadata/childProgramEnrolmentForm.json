@@ -7,7 +7,8 @@
   "formElementGroups": [
     {
       "uuid": "062ffc31-c311-485b-baf3-d5a95d10e97c",
-      "name": "Default",
+      "name": "Child Enrolment Basic Details",
+      "display": "Basic Details",
       "displayOrder": 1,
       "formElements": [
         {

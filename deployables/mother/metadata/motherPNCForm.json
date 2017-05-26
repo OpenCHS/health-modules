@@ -7,7 +7,8 @@
   "formElementGroups": [
     {
       "uuid": "9b937fd3-3a23-40c7-bb11-fa2bfd9ce906",
-      "name": "Vitals",
+      "name": "Mother PNC Vitals",
+      "display": "PNC Vitals",
       "formElements": [
         {
           "uuid": "a427afb1-a183-4d92-88eb-2a40e4a00058",
@@ -43,7 +44,8 @@
     },
     {
       "uuid": "bd0672b5-bc94-45c3-a24e-210a7c7b0d93",
-      "name": "Danger Signs",
+      "name": "Mother PNC Danger Signs",
+      "display": "Danger Signs",
       "formElements": [
         {
           "uuid": "3ae759ca-ba9e-43dd-8e64-270fdf0d1b38",

@@ -5,7 +5,8 @@
   "programName": "Mother",
   "formElementGroups": [
     {
-      "name": "Service Details",
+      "name": "Mother Delivery Service Details",
+      "display": "Service Details",
       "uuid": "586b9fc7-7db9-42b5-9e89-ee1f05ac9de8",
       "formElements": [
         {
@@ -30,7 +31,8 @@
       ]
     },
     {
-      "name": "Delivery Medical Details",
+      "name": "Mother Delivery Medical Details",
+      "display": "Medical Details",
       "uuid": "fa392acd-d9bf-4b90-b520-bc28d61300b8",
       "formElements": [
         {

@@ -7,7 +7,8 @@
   "formElementGroups": [
     {
       "uuid": "db1d4fbd-f885-4e56-9c25-1bf4dc4e2805",
-      "name": "Default",
+      "name": "Mother Abortion Basic Details",
+      "display": "Basic Details",
       "displayOrder": 1,
       "formElements": [
         {

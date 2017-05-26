@@ -5,7 +5,8 @@
   "programName": "Child",
   "formElementGroups": [
     {
-      "name": "Recent History",
+      "name": "Child Recent History",
+      "display": "Recent History",
       "uuid": "00595000-54fb-40f2-9493-a57f01881aad",
       "displayOrder": 1,
       "formElements": [
@@ -53,7 +54,8 @@
       ]
     },
     {
-      "name": "Vitals",
+      "name": "Child Vitals",
+      "display": "Vitals",
       "uuid": "abde79ae-b9d5-484d-832e-be69d87824f4",
       "displayOrder": 2,
       "formElements": [
@@ -76,6 +78,7 @@
     },
     {
       "name": "Child Examination",
+      "display": "Examination",
       "uuid": "4c5093dd-feb3-4f94-b930-b7168bb65c71",
       "displayOrder": 3,
       "formElements": [
@@ -107,7 +110,8 @@
     },
     {
       "uuid": "550cc969-4021-4d13-8ad3-d8759388205b",
-      "name": "Anthropometry",
+      "name": "Child Anthropometry",
+      "display": "Anthropometry",
       "displayOrder": 4,
       "formElements": [
         {

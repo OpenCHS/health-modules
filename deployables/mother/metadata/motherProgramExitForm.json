@@ -7,7 +7,8 @@
   "formElementGroups": [
     {
       "uuid": "0f2c45e2-d5fa-40cc-855d-18deedd4e459",
-      "name": "Default Mother Exit",
+      "name": "Mother Exit Basic Details",
+      "display": "Basic Details",
       "displayOrder": 1,
       "formElements": [
         {

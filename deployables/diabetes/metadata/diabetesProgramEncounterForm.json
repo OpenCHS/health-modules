@@ -4,7 +4,8 @@
   "formType": "ProgramEncounter",
   "programName": "Diabetes",
   "formElementGroups": [{
-    "name": "Diabetes Examination",
+    "name": "Diabetes Followup Examination",
+    "display": "Examination",
     "uuid": "3ae2798f-f3c2-4414-a1fb-84d6f3f33ce3",
     "formElements": [
       {

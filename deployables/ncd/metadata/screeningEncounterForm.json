@@ -4,7 +4,8 @@
   "formType": "Encounter",
   "formElementGroups": [
     {
-      "name": "Symptoms",
+      "name": "NCD Screening Symptoms",
+      "display": "Symptoms",
       "uuid": "9386cb05-e797-476b-9d91-74b9939eaaea",
       "formElements": [
         {
@@ -49,7 +50,8 @@
       ]
     },
     {
-      "name": "Habits",
+      "name": "NCD Screening Habits",
+      "display": "Habits",
       "uuid": "8c01f4ad-1f7a-4e1b-a3a4-625e95295ebc",
       "formElements": [
         {
@@ -74,7 +76,8 @@
       ]
     },
     {
-      "name": "Examination",
+      "name": "NCD Screening Examination",
+      "display": "Examination",
       "uuid": "f6053212-fd22-444a-92e2-fed48b781fb3",
       "formElements": [
         {
@@ -123,7 +126,8 @@
       ]
     },
     {
-      "name": "Investigations",
+      "name": "NCD Screening Investigations",
+      "display": "Investigations",
       "uuid": "2fd224c8-befa-478f-bce2-eee3640a0380",
       "formElements": [
         {

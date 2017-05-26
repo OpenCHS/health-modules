@@ -6,7 +6,8 @@
   "formElementGroups": [
     {
       "uuid": "3aa06f6b-ecba-4e20-a87a-15fabd495b6b",
-      "name": "Family",
+      "name": "Individual Registration Family Details",
+      "display": "Family Details",
       "displayOrder": 1,
       "formElements": [
         {
@@ -29,7 +30,8 @@
     },
     {
       "uuid": "2482522b-34e5-4c82-8e80-9a856425b227",
-      "name": "Socio Economic",
+      "name": "Individual Registration Socio-Economic Details",
+      "display": "Socio-Economic Details",
       "displayOrder": 2,
       "formElements": [
         {
@@ -134,7 +136,8 @@
     },
     {
       "uuid": "f0733466-7d78-41e7-b864-20d421da5b41",
-      "name": "Medical",
+      "name": "Individual Registration Medical Details",
+      "display": "Medical Details",
       "displayOrder": 3,
       "formElements": [
         {
