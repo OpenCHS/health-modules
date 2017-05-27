@@ -303,7 +303,7 @@ const config = {
                 graphsBelow13Months: [
                     {
                         title: "Weight (kg) for Age (months)",
-                        xAxisLabel: "Age (Months)",
+                        xAxisLabel: "Age (Weeks)",
                         data: function (enrolment) {
                             return createConfigWithData(types.WEIGHT_FOR_AGE, ageGroups.LESS_THAN_13_WEEKS, enrolment);
                         }
