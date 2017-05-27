@@ -51,120 +51,120 @@ const configs = [
         gender: "Female",
         age: ageGroups.LESS_THAN_5_YEARS,
         referenceKey: "Month",
-        xAxis: obsFor("Weight"),
+        xAxis: ageInMonths,
         type: types.WEIGHT_FOR_AGE,
         file: weightForAgeGirlsBelow5Years,
-        yAxis: ageInMonths
+        yAxis: obsFor("Weight")
     },
     {
         gender: "Female",
         age: ageGroups.LESS_THAN_2_YEARS,
         referenceKey: "Month",
-        xAxis: obsFor("Weight"),
+        xAxis: ageInMonths,
         type: types.WEIGHT_FOR_AGE,
         file: weightForAgeGirlsBelow2Years,
-        yAxis: ageInMonths
+        yAxis: obsFor("Weight")
     },
     {
         gender: "Female",
         age: ageGroups.LESS_THAN_13_WEEKS,
         referenceKey: "Week",
-        xAxis: obsFor("Weight"),
+        xAxis: ageInWeeks,
         type: types.WEIGHT_FOR_AGE,
         file: weightForAgeGirlsBelow13Weeks,
-        yAxis: ageInWeeks
+        yAxis: obsFor("Weight")
     },
     {
         gender: "Male",
         age: ageGroups.LESS_THAN_5_YEARS,
         referenceKey: "Month",
-        xAxis: obsFor("Weight"),
+        xAxis: ageInMonths,
         type: types.WEIGHT_FOR_AGE,
         file: weightForAgeBoysBelow5Years,
-        yAxis: ageInMonths
+        yAxis: obsFor("Weight")
     },
     {
         gender: "Male",
         age: ageGroups.LESS_THAN_2_YEARS,
         referenceKey: "Month",
-        xAxis: obsFor("Weight"),
+        xAxis: ageInMonths,
         type: types.WEIGHT_FOR_AGE,
         file: weightForAgeBoysBelow2Years,
-        yAxis: ageInMonths
+        yAxis: obsFor("Weight")
     },
     {
         gender: "Male",
         age: ageGroups.LESS_THAN_13_WEEKS,
         referenceKey: "Week",
-        xAxis: obsFor("Weight"),
+        xAxis: ageInWeeks,
         type: types.WEIGHT_FOR_AGE,
         file: weightForAgeBoysBelow13Weeks,
-        yAxis: ageInWeeks
+        yAxis: obsFor("Weight")
     },
 
     {
         gender: "Female",
         age: ageGroups.LESS_THAN_5_YEARS,
         referenceKey: "Month",
-        xAxis: obsFor("Height"),
+        xAxis: ageInMonths,
         type: types.HEIGHT_FOR_AGE,
         file: heightForAgeGirlsBelow5Years,
-        yAxis: ageInMonths
+        yAxis: obsFor("Height")
     },
     {
         gender: "Female",
         age: ageGroups.LESS_THAN_2_YEARS,
         referenceKey: "Month",
-        xAxis: obsFor("Height"),
+        xAxis: ageInMonths,
         type: types.HEIGHT_FOR_AGE,
         file: heightForAgeGirlsBelow2Years,
-        yAxis: ageInMonths
+        yAxis: obsFor("Height")
     },
     {
         gender: "Female",
         age: ageGroups.LESS_THAN_13_WEEKS,
         referenceKey: "Week",
-        xAxis: obsFor("Height"),
+        xAxis: ageInWeeks,
         type: types.HEIGHT_FOR_AGE,
         file: heightForAgeGirlsBelow13Weeks,
-        yAxis: ageInWeeks
+        yAxis: obsFor("Height")
     },
     {
         gender: "Male",
         age: ageGroups.LESS_THAN_5_YEARS,
         referenceKey: "Month",
-        xAxis: obsFor("Height"),
+        xAxis: ageInMonths,
         type: types.HEIGHT_FOR_AGE,
         file: heightForAgeBoysBelow5Years,
-        yAxis: ageInMonths
+        yAxis: obsFor("Height")
     },
     {
         gender: "Male",
         age: ageGroups.LESS_THAN_2_YEARS,
         referenceKey: "Month",
-        xAxis: obsFor("Height"),
+        xAxis: ageInMonths,
         type: types.HEIGHT_FOR_AGE,
         file: heightForAgeBoysBelow2Years,
-        yAxis: ageInMonths
+        yAxis: obsFor("Height")
     },
     {
         gender: "Male",
         age: ageGroups.LESS_THAN_13_WEEKS,
         referenceKey: "Week",
-        xAxis: obsFor("Height"),
+        xAxis: ageInWeeks,
         type: types.HEIGHT_FOR_AGE,
         file: heightForAgeBoysBelow13Weeks,
-        yAxis: ageInWeeks
+        yAxis: obsFor("Height")
     },
 
     {
         gender: "Female",
         age: ageGroups.LESS_THAN_5_YEARS,
         referenceKey: "Height",
-        xAxis: obsFor("Height"),
+        xAxis: obsFor("Weight"),
         type: types.WEIGHT_FOR_HEIGHT,
         file: weightForHeightGirlsBelow5Years,
-        yAxis: obsFor("Weight")
+        yAxis: obsFor("Height")
     },
     {
         gender: "Female",
