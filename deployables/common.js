@@ -9,9 +9,9 @@ function C() {
         return new Date(date.getFullYear(), date.getMonth(), date.getDate());
     };
 
-    this.encounterTypeExists = function (encounters, name) {
+    this.encounterExists = function (encounters, encounterTypeName, encounterName) {
         return encounters.some(function (encounter) {
-                return encounter.encounterType.name === name;
+                return encounter.encounterType.name === encounterTypeName && encounter.name === encounterName;
             }
         )
     };

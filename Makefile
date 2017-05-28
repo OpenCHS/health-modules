@@ -16,6 +16,7 @@ deploy-local:
 	./node_modules/.bin/webpack deployables/programConfig.js output/programConfig.js
 	cp -r output/*.js ../openchs-server/external/
 	cp -r deployables/*.json ../openchs-server/external/
+	date
 
 recreate-db:
 	flyway -user=openchs -password=password -url=jdbc:postgresql://localhost:5432/openchs -schemas=openchs clean
@@ -28,9 +29,9 @@ setup-impl-db:
 setup-db: recreate-db setup-health-modules setup-impl-db
 	
 setup-health-modules:
-	curl -X POST http://$(server):8080/forms -d @lbp/registrationForm.json -H "Content-Type: application/json"
-
 	curl -X POST http://$(server):8080/concepts -d @deployables/commonConcepts.json -H "Content-Type: application/json"
+
+	curl -X POST http://$(server):8080/forms -d @lbp/registrationForm.json -H "Content-Type: application/json"
 
 	curl -X POST http://$(server):8080/forms -d @deployables/outpatient/metadata/encounterForm.json -H "Content-Type: application/json"
 	curl -X POST http://$(server):8080/concepts -d @deployables/outpatient/metadata/concepts.json -H "Content-Type: application/json"
@@ -51,6 +52,7 @@ setup-health-modules:
 	curl -X POST http://$(server):8080/forms -d @deployables/ncd/metadata/screeningEncounterForm.json -H "Content-Type: application/json"
 
 	curl -X POST http://$(server):8080/forms -d @deployables/diabetes/metadata/diabetesProgramEncounterForm.json -H "Content-Type: application/json"
+	date
 
 play:
 	echo $(server)

@@ -55,9 +55,10 @@ function Individual() {
     };
 }
 
-function ProgramEncounter(encounterTypeName, encounterDateTime) {
+function ProgramEncounter(encounterTypeName, encounterDateTime, encounterName) {
     this.encounterType = {name: encounterTypeName};
     this.encounterDateTime = encounterDateTime;
+    this.name = encounterName;
     this.observations = new Map();
 }
 

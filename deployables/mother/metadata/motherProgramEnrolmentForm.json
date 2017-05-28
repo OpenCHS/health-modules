@@ -33,7 +33,7 @@
           "keyValues": [],
           "dataType": "Date",
           "displayOrder": 3,
-          "mandatory": false
+          "mandatory": true
         }
       ]
     },

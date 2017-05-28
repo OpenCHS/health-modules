@@ -10,7 +10,7 @@ const getDecisions = function (programEncounter) {
 const getNextScheduledVisits = function (programEncounter) {
     const programImport = allImports.programEncounterExports[programEncounter.programEnrolment.program.name];
     if (programImport !== undefined && programImport.getNextScheduledVisits !== undefined)
-        return programImport.getNextScheduledVisits(programEncounter.programEnrolment);
+        return programImport.getNextScheduledVisits(programEncounter.programEnrolment, programEncounter);
     return [];
 };
 

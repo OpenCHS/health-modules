@@ -11,7 +11,7 @@
   },
   {
     "name": "Pregnancy Induced Hypertension",
-    "uuid": "35557870-2678-4578-9215-ae078dce194c",
+    "uuid": "5a738df9-b09a-4e7d-b683-189a9cdabcad",
     "dataType": "N/A"
   },
   {
@@ -33,5 +33,11 @@
     "name": "Moderate Anemia",
     "uuid": "c67d2c3a-c1c8-4cb7-b76e-b77e02541577",
     "dataType": "N/A"
+  },
+  {
+    "name": "Pregnancy Complications",
+    "uuid": "f34f974b-47b0-424d-ae97-d479c80efa49",
+    "dataType": "Coded",
+    "answers": ["Chronic Hypertension", "Chronic Hypertension with Superimposed Pre-Eclampsia", "Pregnancy Induced Hypertension", "Mild Pre-Eclampsia", "Severe Pre-Eclampsia", "Severe Anemia", "Moderate Anemia"]
   }
 ]

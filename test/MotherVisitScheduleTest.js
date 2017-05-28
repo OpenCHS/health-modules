@@ -8,23 +8,18 @@ describe('Create ANC/PNC Visit Schedule', function () {
         return date1.getFullYear() === date2.getFullYear() && date1.getMonth() === date2.getMonth() && date1.getDate() === date2.getDate();
     };
 
-    const progEnrolment = new ProgramEnrolment('Mother', [new ProgramEncounter('ANC 1', new Date(2017, 1, 3))]);
+    const progEnrolment = new ProgramEnrolment('Mother', [new ProgramEncounter('ANC', new Date(2017, 1, 3), 'ANC 1')]);
     progEnrolment.setObservation('Last Menstrual Period', new Date(2017, 0, 3));
 
     it('Decide next visit details for normal delivery', function(){
-        progEnrolment.encounters.push({
-            encounterType: { name: 'ANC 3'}
-        });
+        progEnrolment.encounters.push(new ProgramEncounter('ANC', undefined, 'ANC 3'));
         const nextVisit = getMotherVisitSchedule.getNextScheduledVisits(progEnrolment)[0];
         expect(nextVisit.name).is.equal('ANC 4');
         expect(matchDate(nextVisit.dueDate, new Date(2017, 8, 12))).is.equal(true);
     });
 
     it('Dont create next visit incase of abortion', function(){
-        progEnrolment.encounters.push({
-            encounterType: { name: 'Abortion'},
-            encounterDateTime: new Date(2017, 5, 20)
-        });
+        progEnrolment.encounters.push(new ProgramEncounter('Abortion', new Date(2017, 5, 20)));
         const nextVisits = getMotherVisitSchedule.getNextScheduledVisits(progEnrolment);
         expect(nextVisits.length).is.equal(0);
     });

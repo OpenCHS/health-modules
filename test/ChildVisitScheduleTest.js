@@ -8,9 +8,7 @@ describe('Create PNC Visit Schedule for Child', function () {
     progEnrolment.setObservation('Date of Delivery', new Date(2017, 0, 3));
 
     it('Decide next visit details', function(){
-        progEnrolment.encounters.push({
-            encounterType: { name: 'PNC 2'}
-        });
+        progEnrolment.encounters.push(new ProgramEncounter('PNC', undefined, 'PNC 2'));
         var nextVisit = getchildVisitSchedule.getNextScheduledVisits(progEnrolment);
         expect(nextVisit.name).is.equal('PNC 3');
         expect(matchDate(nextVisit.dueDate, new Date(2017, 0, 10))).is.equal(true);
@@ -21,9 +19,7 @@ describe('Create PNC Visit Schedule for Child', function () {
     };
 
     it('Dont create next visit incase all visits are done', function(){
-        progEnrolment.encounters.push({
-            encounterType: { name: 'PNC 4'}
-        });
+        progEnrolment.encounters.push(new ProgramEncounter('PNC', undefined, 'PNC 4'));
         var nextVisit = getchildVisitSchedule.getNextScheduledVisits(progEnrolment);
         expect(nextVisit).is.equal(null);
     });

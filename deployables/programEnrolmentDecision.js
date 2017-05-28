@@ -2,9 +2,18 @@ const programImports = require('./programExports');
 
 const getNextScheduledVisits = function (enrolment) {
     const programEnrolmentImport = programImports.programEnrolmentExports[enrolment.program.name];
-    if (programEnrolmentImport === undefined || programEnrolmentImport.getNextScheduledVisits === undefined) return [];
-    const nextScheduledVisits = programEnrolmentImport.getNextScheduledVisits();
-    console.log('' + nextScheduledVisits.length + ' scheduled visits returned');
+    if (programEnrolmentImport === undefined) {
+        console.log('(ProgramEnrolmentDecision) No program enrolment rule set for program: ' + enrolment.program.name);
+        return [];
+    }
+    if (programEnrolmentImport.getNextScheduledVisits === undefined) {
+        console.log('(ProgramEnrolmentDecision) No rule for nextScheduledVisit for program: ' + enrolment.program.name);
+        return [];
+    }
+
+    const nextScheduledVisits = programEnrolmentImport.getNextScheduledVisits(enrolment);
+    console.log('(ProgramEnrolmentDecision) ' + nextScheduledVisits.length + ' scheduled visits returned');
+    return nextScheduledVisits;
 };
 
 const getChecklists = function (enrolment) {
