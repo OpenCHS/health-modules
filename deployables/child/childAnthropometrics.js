@@ -14,6 +14,8 @@ var weightForHeightScoresGirls2_5 = require('./anthropometricReference/wfh_girls
 var weightForHeightScoresBoys2_5 = require('./anthropometricReference/wfh_boys_2_5_zscores');
 
 var bmiForAgeScores = require('../json/bmiForAge');
+const Decision = require('../../test/Entities').Decision;
+const SingleValueCodedDecision = require('../../test/Entities').SingleValueCodedDecision;
 
 var zScoreGradeMappingWeightForAge = {
     'SD3': 1,
@@ -112,17 +114,14 @@ var getDecisions = function (observationsHolder, individual, today) {
     const bmiForAgeStatus = bmiForAgeZscore === null ? null : zScoreStatusMappingBMIForAge[bmiForAgeZscore];*/
 
     const decisions = [];
-    decisions.push({name: 'Weight for age z-score', value: weightForAgeZScore});
-    decisions.push({name: 'Weight for age grade', value: gradeForWeightForAge});
-    decisions.push({name: 'Weight for age status', value: zScoreStatusMappingWeightForAge[weightForAgeZScore]});
-    decisions.push({name: 'Height for age z-score', value: heightForAgeZScore});
-    decisions.push({name: 'Height for age grade', value: zScoreGradeMappingHeightForAge[heightForAgeZScore]});
-    decisions.push({name: 'Height for age status', value: zScoreStatusMappingHeightForAge[heightForAgeZScore]});
-    decisions.push({name: 'Weight for height z-score', value: weightForHeightZScore});
-    decisions.push({
-        name: 'Weight for height status',
-        value: zScoreStatusMappingWeightForHeight[weightForHeightZScore]
-    });
+    decisions.push(new SingleValueCodedDecision('Weight for age z-score', weightForAgeZScore));
+    decisions.push(new Decision('Weight for age grade', gradeForWeightForAge));
+    decisions.push(new SingleValueCodedDecision('Weight for age status', zScoreStatusMappingWeightForAge[weightForAgeZScore]));
+    decisions.push(new SingleValueCodedDecision('Height for age z-score', heightForAgeZScore));
+    decisions.push(new Decision('Height for age grade', zScoreGradeMappingHeightForAge[heightForAgeZScore]));
+    decisions.push(new SingleValueCodedDecision('Height for age status', zScoreStatusMappingHeightForAge[heightForAgeZScore]));
+    decisions.push(new SingleValueCodedDecision('Weight for height z-score', weightForHeightZScore));
+    decisions.push(new SingleValueCodedDecision('Weight for height status', zScoreStatusMappingWeightForHeight[weightForHeightZScore]));
     return decisions;
    /* if (bmiForAgeStatus === null) return decisions;
     else {

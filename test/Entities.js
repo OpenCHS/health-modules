@@ -70,6 +70,17 @@ function ProgramEnrolment(programName, encounters, individualDateOfBirth) {
     this.observations = new Map();
 }
 
+function Decision(name, value) {
+    this.name = name;
+    this.value = value;
+}
+
+function SingleValueCodedDecision(name, value) {
+    this.name = name;
+    if (value === undefined) this.value = [];
+    else this.value = [value];
+}
+
 const prototypes = [ProgramEncounter.prototype, Encounter.prototype, ProgramEnrolment.prototype];
 prototypes.forEach(function (currentPrototype) {
     currentPrototype.getObservationValue = getObservationValue;
@@ -84,5 +95,7 @@ module.exports = {
     ProgramEncounter: ProgramEncounter,
     ProgramEnrolment: ProgramEnrolment,
     Individual: Individual,
-    Form: Form
+    Form: Form,
+    Decision: Decision,
+    SingleValueCodedDecision: SingleValueCodedDecision
 };
