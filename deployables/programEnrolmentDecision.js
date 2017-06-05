@@ -1,28 +1,15 @@
 const programImports = require('./programExports');
 
-const getNextScheduledVisits = function (enrolment) {
-    const programEnrolmentImport = programImports.programEnrolmentExports[enrolment.program.name];
-    if (programEnrolmentImport === undefined) {
-        console.log('(ProgramEnrolmentDecision) No program enrolment rule set for program: ' + enrolment.program.name);
-        return [];
-    }
-    if (programEnrolmentImport.getNextScheduledVisits === undefined) {
-        console.log('(ProgramEnrolmentDecision) No rule for nextScheduledVisit for program: ' + enrolment.program.name);
-        return [];
-    }
+module.exports = {};
 
-    const nextScheduledVisits = programEnrolmentImport.getNextScheduledVisits(enrolment);
-    console.log('(ProgramEnrolmentDecision) ' + nextScheduledVisits.length + ' scheduled visits returned');
-    return nextScheduledVisits;
+module.exports.getDecisions = function (enrolment) {
+    return programImports.executeProgramEnrolmentFunc(enrolment, 'getDecisions');
 };
 
-const getChecklists = function (enrolment) {
-    const programEnrolmentImport = programImports.programEnrolmentExports[enrolment.program.name];
-    if (programEnrolmentImport === undefined || programEnrolmentImport.getChecklists === undefined) return [];
-    return programEnrolmentImport.getChecklists(enrolment);
+module.exports.getNextScheduledVisits = function (enrolment) {
+    return programImports.executeProgramEnrolmentFunc(enrolment, 'getNextScheduledVisits');
 };
 
-module.exports = {
-    getNextScheduledVisits: getNextScheduledVisits,
-    getChecklists: getChecklists
+module.exports.getChecklists = function (enrolment) {
+    return programImports.executeProgramEnrolmentFunc(enrolment, 'getChecklists');
 };

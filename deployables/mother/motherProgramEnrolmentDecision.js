@@ -1,9 +1,12 @@
 const motherVisitSchedule = require('./motherVisitSchedule');
+const programDecision = require('./motherProgramDecision');
 
-const getNextScheduledVisits = function (enrolment) {
-    return motherVisitSchedule.getNextScheduledVisits(enrolment);
+module.exports = {};
+
+module.exports.getNextScheduledVisits = function (enrolment, today) {
+    return motherVisitSchedule.getNextScheduledVisits(enrolment, today);
 };
 
-module.exports = {
-    getNextScheduledVisits: getNextScheduledVisits
+module.exports.getDecisions = function (enrolment, today) {
+    return programDecision.getDecisions(enrolment, today);
 };

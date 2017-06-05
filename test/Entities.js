@@ -2,7 +2,12 @@ const getObservationValue = function (conceptName) {
     return this.observations.get(conceptName);
 };
 const getObservationValueFromEntireEnrolment = function (conceptName) {
-    return this.observations.get(conceptName);
+    var value;
+    this.encounters.forEach(function (encounter) {
+        if (value === undefined) value = encounter.observations.get(conceptName);
+    });
+    if (value === undefined) return this.observations.get(conceptName);
+    return value;
 };
 
 const setObservation = function (conceptName, value) {
@@ -15,7 +20,12 @@ const observationExists = function (conceptName) {
 };
 
 const observationExistsInEntireEnrolment = function (conceptName) {
-    return this.observations.has(conceptName);
+    var obsExists = false;
+    this.encounters.forEach(function (encounter) {
+        if (encounter.observations.has(conceptName)) obsExists = true;
+    });
+    if (!obsExists) return this.observations.has(conceptName);
+    return obsExists;
 };
 
 function Encounter(encounterTypeName) {
@@ -86,9 +96,9 @@ prototypes.forEach(function (currentPrototype) {
     currentPrototype.getObservationValue = getObservationValue;
     currentPrototype.setObservation = setObservation;
     currentPrototype.observationExists = observationExists;
-    currentPrototype.observationExistsInEntireEnrolment = observationExistsInEntireEnrolment;
-    currentPrototype.getObservationValueFromEntireEnrolment = getObservationValueFromEntireEnrolment;
 });
+ProgramEnrolment.prototype.observationExistsInEntireEnrolment = observationExistsInEntireEnrolment;
+ProgramEnrolment.prototype.getObservationValueFromEntireEnrolment = getObservationValueFromEntireEnrolment;
 
 module.exports = {
     Encounter: Encounter,

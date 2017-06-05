@@ -79,7 +79,7 @@ var zScoreStatusMappingWeightForHeight = {
  Same might be true for weight
  */
 var getDecisions = function (observationsHolder, individual, today) {
-    today = C.copyDate(today === undefined ? new Date() : today);
+    today = C.copyDate(today);
 
     var dateOfBirth = individual.dateOfBirth;
     var ageInMonths = C.getAgeInMonths(dateOfBirth, today);

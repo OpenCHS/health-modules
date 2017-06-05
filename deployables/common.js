@@ -26,7 +26,7 @@ function C() {
      handle case to increment # of month if day of month > 20
      */
     this.getAgeInMonths = function (dateOfBirth, today) {
-        today = this.copyDate(today === undefined ? new Date() : today);
+        today = this.copyDate(today);
 
         var birthDate = this.copyDate(dateOfBirth);
         var year1 = birthDate.getFullYear();
@@ -41,9 +41,7 @@ function C() {
         return (numberOfMonths);
     };
 
-    this.getWeeks = function (lmpDate, today){
-        today = this.copyDate(today === undefined ? new Date() : today);
-        var lmpDate = this.copyDate(lmpDate === undefined? new Date(): lmpDate);
+    this.getWeeks = function (lmpDate, today) {
         return (Math.round((today - lmpDate)/ 604800000));
     };
 

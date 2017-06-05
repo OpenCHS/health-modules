@@ -5,7 +5,7 @@ const getDecisions = function (programEnrolment, today) {
     return childAnthroImports.getDecisions(programEnrolment, programEnrolment.individual, today);
 };
 
-const getChecklists = function (programEnrolment) {
+const getChecklists = function (programEnrolment, today) {
     return [childVaccinationSchedule.getVaccSchedule(programEnrolment)];
 };
 

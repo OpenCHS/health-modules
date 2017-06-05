@@ -1,20 +1,11 @@
 const allImports = require('./programExports');
 
-const getDecisions = function (programEncounter) {
-    const programImport = allImports.programEncounterExports[programEncounter.programEnrolment.program.name];
-    if (programImport !== undefined && programImport.getDecisions !== undefined)
-        return programImport.getDecisions(programEncounter);
-    return [];
+module.exports = {};
+
+module.exports.getDecisions = function (programEncounter) {
+    return allImports.executeProgramEncounterFunc(programEncounter, 'getDecisions')(programEncounter);
 };
 
-const getNextScheduledVisits = function (programEncounter) {
-    const programImport = allImports.programEncounterExports[programEncounter.programEnrolment.program.name];
-    if (programImport !== undefined && programImport.getNextScheduledVisits !== undefined)
-        return programImport.getNextScheduledVisits(programEncounter.programEnrolment, programEncounter);
-    return [];
-};
-
-module.exports = {
-    getDecisions: getDecisions,
-    getNextScheduledVisits: getNextScheduledVisits
+module.exports.getNextScheduledVisits = function (programEncounter) {
+    return allImports.executeProgramEncounterFunc(programEncounter, 'getNextScheduledVisits')(programEncounter);
 };
