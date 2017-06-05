@@ -114,112 +114,30 @@
     {
       "uuid": "50a2d045-88fe-44e3-86e0-0dba16f53818",
       "name": "ANC Enrolment Obstetrics History",
-      "display": "Obstetrics History",
+      "display": "History",
       "displayOrder": 3,
       "formElements": [
         {
-          "name": "Ante Partum Haemorrhage",
-          "uuid": "dfc86a35-bdc7-4b0f-a58b-92e5bf3c6301",
-          "keyValues": [],
-          "dataType": "Boolean",
-          "displayOrder": 1,
-          "mandatory": false
-        },
-        {
-          "name": "Post Partum Haemorrhage",
-          "uuid": "23905c0b-6c8a-4f6a-8c16-4135209fa3c5",
-          "keyValues": [],
-          "dataType": "Boolean",
-          "displayOrder": 2,
-          "mandatory": false
-        },
-        {
-          "name": "Pre Eclampsia/ Eclampsia",
-          "uuid": "115633e4-b17e-4bdc-a9a4-e6b90c7f5a47",
-          "keyValues": [],
-          "dataType": "Boolean",
-          "displayOrder": 3,
-          "mandatory": false
-        },
-        {
-          "name": "Pregnancy Induced Hypertension",
-          "uuid": "45790951-f02e-47f6-8722-5de3894ee43a",
-          "keyValues": [],
-          "dataType": "Boolean",
-          "displayOrder": 4,
-          "mandatory": false
-        },
-        {
-          "name": "Intrauterine Growth Retardation",
-          "uuid": "7773d7d2-c875-4014-844d-f73331ab01f6",
-          "keyValues": [],
-          "dataType": "Boolean",
-          "displayOrder": 5,
-          "mandatory": false
-        },
-        {
-          "name": "Three or more than three spontaneous abortions",
-          "uuid": "b9d5e787-0d3c-47b7-a938-b6445d146601",
-          "keyValues": [],
-          "dataType": "Boolean",
-          "displayOrder": 6,
-          "mandatory": false
-        },
-        {
-          "name": "Pre-term labour",
-          "uuid": "56f88de7-68c8-4039-81d2-ff1a8dd44743",
-          "keyValues": [],
-          "dataType": "Boolean",
-          "displayOrder": 7,
-          "mandatory": false
-        },
-        {
-          "name": "Still birth",
-          "uuid": "8935204a-55a5-4f04-9637-3c337c9e6380",
-          "keyValues": [],
-          "dataType": "Boolean",
-          "displayOrder": 8,
-          "mandatory": false
-        },
-        {
-          "name": "Neonatal death within first 28 days",
-          "uuid": "57fdcd52-28cc-4a4b-85e6-416bfe079e02",
-          "keyValues": [],
-          "dataType": "Boolean",
-          "displayOrder": 9,
-          "mandatory": false
-        },
-        {
-          "name": "LSCS/C-section",
-          "uuid": "3dafdb85-30ba-45c1-a461-9e5616a8f72e",
-          "keyValues": [],
-          "dataType": "Boolean",
-          "displayOrder": 10,
-          "mandatory": false
-        },
-        {
-          "name": "Retained Placenta",
-          "uuid": "10b2e0d1-24c1-40aa-a3eb-1213a68f2c39",
-          "keyValues": [],
-          "dataType": "Boolean",
-          "displayOrder": 11,
-          "mandatory": false
-        },
-        {
-          "name": "Prolonged labour",
-          "uuid": "4a27015c-2e39-4481-809a-7c9a898b4d65",
-          "keyValues": [],
-          "dataType": "Boolean",
-          "displayOrder": 12,
-          "mandatory": false
-        },
-        {
-          "name": "Threatened abortion",
-          "uuid": "da0582fb-7d4d-47ab-9fe7-07d097acd8bd",
-          "keyValues": [],
-          "dataType": "Boolean",
-          "displayOrder": 13,
-          "mandatory": false
+          "uuid": "4ae32d41-7c2e-4d7d-8ac6-566c9331f3a1",
+          "name": "Obstetrics History",
+          "dataType": "Coded",
+          "answers": [
+            "Ante Partum Haemorrhage",
+            "Post Partum Haemorrhage",
+            "Pre Eclampsia/ Eclampsia",
+            "Pregnancy Induced Hypertension",
+            "Intrauterine Growth Retardation",
+            "Three or more than three spontaneous abortions",
+            "Pre-term labour",
+            "Still birth",
+            "Retained Placenta",
+            "LSCS/C-section",
+            "Neonatal death within first 28 days",
+            "Retained Placenta",
+            "Prolonged labour",
+            "Threatened abortion"
+          ],
+          "keyValues": [{"key": "Select", "value": "Multi"}]
         }
       ]
     }

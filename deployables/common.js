@@ -59,6 +59,8 @@ function C() {
     };
 
     this.contains = function (array, value) {
+        if (array === undefined || array === null) return false;
+
         return array.some(function (arrayItem) {
             return arrayItem === value;
         });

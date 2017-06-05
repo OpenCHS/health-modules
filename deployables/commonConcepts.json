@@ -43,5 +43,10 @@
     "highNormal": 200,
     "highAbsolute": 300,
     "unit": "cm"
+  },
+  {
+    "name": "Underweight",
+    "uuid": "41b2db08-99a4-428c-a908-641330858b8a",
+    "dataType": "N/A"
   }
 ]

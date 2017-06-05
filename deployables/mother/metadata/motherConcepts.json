@@ -35,9 +35,29 @@
     "dataType": "N/A"
   },
   {
+    "name": "Short Stature",
+    "uuid": "9af1e8e9-f16c-46de-8794-ac302444c63d",
+    "dataType": "N/A"
+  },
+  {
+    "name": "Old age pregnancy",
+    "uuid": "8021adee-ad70-4644-97c6-d0804851f8d3",
+    "dataType": "N/A"
+  },
+  {
+    "name": "Previous Abortion",
+    "uuid": "4a98ed37-1d4c-4a0d-9845-a3828e7f3b30",
+    "dataType": "N/A"
+  },
+  {
+    "name": "Grand Multipara",
+    "uuid": "338d5fb1-0493-4270-8d35-81105c239bbb",
+    "dataType": "N/A"
+  },
+  {
     "name": "Pregnancy Complications",
     "uuid": "f34f974b-47b0-424d-ae97-d479c80efa49",
     "dataType": "Coded",
-    "answers": ["Chronic Hypertension", "Chronic Hypertension with Superimposed Pre-Eclampsia", "Pregnancy Induced Hypertension", "Mild Pre-Eclampsia", "Severe Pre-Eclampsia", "Severe Anemia", "Moderate Anemia"]
+    "answers": ["Chronic Hypertension", "Chronic Hypertension with Superimposed Pre-Eclampsia", "Pregnancy Induced Hypertension", "Mild Pre-Eclampsia", "Severe Pre-Eclampsia", "Severe Anemia", "Moderate Anemia", "Grand Multipara", "Previous Abortion", "Old age pregnancy", "Underweight", "Short Stature"]
   }
 ]

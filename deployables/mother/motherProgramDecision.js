@@ -9,15 +9,43 @@ const getDecisions = function (programEnrolment, today, programEncounter) {
 
     analyseHypertensiveRisks();
     analyseAnemia();
+    manageVaginalBleeding();
+    analyseOtherRisks();
     if (pregnancyComplications.length >= 0){
         decisions.push({name: 'Pregnancy Complications', value: pregnancyComplications});
     }
     return decisions;
 
+    function addIfNotExists(conceptName) {
+        if (programEnrolment.observationExistsInEntireEnrolment(conceptName))
+            pregnancyComplications.push(conceptName);
+    }
+
+    function analyseOtherRisks() {
+        const height = programEnrolment.getObservationValueFromEntireEnrolment('Height');
+        if (height !== undefined && height <= 145)
+            addIfNotExists('Short Stature');
+
+        const weight = programEnrolment.getObservationValueFromEntireEnrolment('Weight');
+        if (weight !== undefined && weight <= 35)
+            addIfNotExists('Underweight');
+
+        if (programEnrolment.individual.getAgeInYears() > 30)
+            addIfNotExists('Old age pregnancy');
+
+        if (programEnrolment.getObservationValue('Abortion') > 0)
+            addIfNotExists('Previous Abortion');
+
+        if (programEnrolment.getObservationValue('Gravida') >= 5)
+            addIfNotExists('Grand Multipara');
+    }
+
     function analyseHypertensiveRisks() {
         const systolic = programEnrolment.getObservationValueFromEntireEnrolment('Systolic');
         const diastolic = programEnrolment.getObservationValueFromEntireEnrolment('Diastolic');
         const urineAlbumen = programEnrolment.getObservationValueFromEntireEnrolment('Urine Albumen');
+        const obsHistory = programEnrolment.getObservationValueFromEntireEnrolment('Obstetrics History');
+
         const mildPreEclempsiaUrineAlbumenValues = ['Trace', '+1', '+2'];
         const severePreEclempsiaUrineAlbumenValues = ['+3', '+4'];
 
@@ -27,7 +55,7 @@ const getDecisions = function (programEnrolment, today, programEncounter) {
         const isBloodPressureHigh = (systolic >= 140) || (diastolic >= 90); //can go in high risk category
         const urineAlbumenIsMild = C.contains(mildPreEclempsiaUrineAlbumenValues, urineAlbumen);
         const urineAlbumenIsSevere = C.contains(severePreEclempsiaUrineAlbumenValues, urineAlbumen);
-        const pregnancyInducedHypertension = programEnrolment.observationExistsInEntireEnrolment('Pregnancy Induced Hypertension');
+        const pregnancyInducedHypertension = C.contains(obsHistory, 'Pregnancy Induced Hypertension');
         const hasConvulsions = programEnrolment.getObservationValueFromEntireEnrolment('Convulsions'); //will be identified in hospital
         const isChronicHypertensive = programEnrolment.observationExistsInEntireEnrolment('Chronic Hypertension');
 
