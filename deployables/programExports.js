@@ -39,3 +39,5 @@ module.exports.executeProgramEncounterFunc = function (programEncounter, funcNam
     }
     return programEncounterExport[funcName](programEncounter, today);
 };
+
+module.exports.programConfig = programConfigExports;

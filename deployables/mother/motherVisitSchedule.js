@@ -13,7 +13,7 @@ const visitSchedule = {
     "PNC 4": {due: 42, max: 42}
 };
 
-const getNextScheduledVisits = function (programEnrolment, currentEncounter) {
+const getNextScheduledVisits = function (programEnrolment, today, currentEncounter) {
     const lmpConceptName = 'Last Menstrual Period';
     const encounters = programEnrolment.encounters.slice();
     const lmpDate = programEnrolment.getObservationValue(lmpConceptName);
@@ -22,7 +22,9 @@ const getNextScheduledVisits = function (programEnrolment, currentEncounter) {
     });
     const deliveryDate = deliveryEncounter !== undefined ? deliveryEncounter.encounterDateTime : undefined;
 
-    if (currentEncounter !== undefined) encounters.push(currentEncounter);
+    if (currentEncounter !== undefined) {
+        encounters.push(currentEncounter);
+    }
 
     console.log(lmpConceptName + ": " + lmpDate + ", Abortion Happened: " + _.encounterExists(encounters, 'Abortion'));
 
