@@ -17,7 +17,8 @@ const getDecisions = function (programEnrolment, today, programEncounter) {
     return decisions;
 
     function addIfNotExists(conceptName) {
-        if (programEnrolment.observationExistsInEntireEnrolment(conceptName))
+        console.log('(MotherProgramDecision) Adding if not exists to preg complications: ' + conceptName);
+        if (!programEnrolment.observationExistsInEntireEnrolment(conceptName))
             pregnancyComplications.push(conceptName);
     }
 
@@ -33,10 +34,11 @@ const getDecisions = function (programEnrolment, today, programEncounter) {
         if (programEnrolment.individual.getAgeInYears() > 30)
             addIfNotExists('Old age pregnancy');
 
+        console.log('(MotherProgramDecision) Abortions: ' + programEnrolment.getObservationValue('Abortion'));
         if (programEnrolment.getObservationValue('Abortion') > 0)
             addIfNotExists('Previous Abortion');
 
-        if (programEnrolment.getObservationValue('Gravida') >= 5)
+        if (programEnrolment.getObservationValue('Gravida') >= 3)
             addIfNotExists('Grand Multipara');
     }
 

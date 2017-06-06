@@ -22,7 +22,7 @@ module.exports.executeProgramEnrolmentFunc = function (enrolment, funcName, toda
         console.log('(ProgramExports) No program enrolment rule for ' + funcName + ' for program: ' + enrolment.program.name);
         return [];
     }
-    programEnrolmentExport[funcName](enrolment, today);
+    return programEnrolmentExport[funcName](enrolment, today);
 };
 
 module.exports.executeProgramEncounterFunc = function (programEncounter, funcName, today) {

@@ -9,7 +9,7 @@
     "uuid": "1e2d41a2-5b6a-4ad7-ab91-51d3cdf122bd",
     "dataType": "Numeric",
     "lowAbsolute": 10,
-    "lowNormal": 60,
+    "lowNormal": 50,
     "highNormal": 80,
     "highAbsolute": 120,
     "unit": "mm Hg"

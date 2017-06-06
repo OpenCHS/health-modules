@@ -60,7 +60,7 @@ describe('Child Program Config', function () {
         // });
         //
         it("that is mapped to a line chart for weight for Age", function () {
-            var weightForAgeWidget = childProgramConfig.programDashboardButtons[0].openOnClick.data.graphsBelow13Months[0];
+            var weightForAgeWidget = childProgramConfig.programDashboardButtons[0].openOnClick.data.graphsBelow13Weeks[0];
             var weightForAgeData = weightForAgeWidget.data(enrolmentStub);
             expect(weightForAgeData.length).to.equal(6);
             console.log(weightForAgeData[0]);
