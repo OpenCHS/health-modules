@@ -34,8 +34,7 @@ const getDecisions = function (programEnrolment, today, programEncounter) {
         if (programEnrolment.individual.getAgeInYears() > 30)
             addIfNotExists('Old age pregnancy');
 
-        console.log('(MotherProgramDecision) Abortions: ' + programEnrolment.getObservationValue('Abortion'));
-        if (programEnrolment.getObservationValue('Abortion') > 0)
+        if (programEnrolment.getObservationValue('Number of abortion') > 0)
             addIfNotExists('Previous Abortion');
 
         if (programEnrolment.getObservationValue('Gravida') >= 3)
