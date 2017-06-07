@@ -13,3 +13,7 @@ module.exports.getNextScheduledVisits = function (enrolment) {
 module.exports.getChecklists = function (enrolment) {
     return programImports.executeProgramEnrolmentFunc(enrolment, 'getChecklists');
 };
+
+module.exports.validate = function (enrolment) {
+    return programImports.executeProgramEnrolmentFunc(enrolment, 'validate');
+};

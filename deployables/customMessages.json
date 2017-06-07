@@ -64,6 +64,8 @@
   "en": {
     "maleCannotBePregnant": "Male cannot be pregnant",
     "lessThanTenCannotBePregnant": "Less than 10 year old cannot be pregnant",
-    "lonartNotToBeGivenToChildren": "Lonart should not be given to children"
+    "lonartNotToBeGivenToChildren": "Lonart should not be given to children",
+    "maleCannotBeEnrolledInMotherProgram": "Male cannot be enrolled in mother program",
+    "lowerThanAgeOfBeingAMother": "Individuals less than 11 years old cannot be registered in mother program"
   }
 }

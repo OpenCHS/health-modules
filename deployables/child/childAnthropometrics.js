@@ -79,8 +79,6 @@ var zScoreStatusMappingWeightForHeight = {
  Same might be true for weight
  */
 var getDecisions = function (observationsHolder, individual, today) {
-    today = C.copyDate(today);
-
     var dateOfBirth = individual.dateOfBirth;
     var ageInMonths = C.getAgeInMonths(dateOfBirth, today);
 
@@ -89,7 +87,7 @@ var getDecisions = function (observationsHolder, individual, today) {
     var heightForAgeGenderValues;
     var weightForHeightGenderValues;
 
-    if (ageInMonths > 60 || !observationsHolder.observationExists('Height') || !observationsHolder.observationExists('Weight')) return [];
+    if (ageInMonths > 60) return [];
     else if (ageInMonths <= 24) {
         heightForAgeGenderValues = individual.gender.name === 'Female' ? heightForAgeScoresGirls0_2 : heightForAgeScoresBoys0_2;
         weightForHeightGenderValues = individual.gender.name === 'Female' ? weightForHeightScoresGirls0_2 : weightForHeightScoresBoys0_2;
@@ -123,11 +121,6 @@ var getDecisions = function (observationsHolder, individual, today) {
     decisions.push(new SingleValueCodedDecision('Weight for height z-score', weightForHeightZScore));
     decisions.push(new SingleValueCodedDecision('Weight for height status', zScoreStatusMappingWeightForHeight[weightForHeightZScore]));
     return decisions;
-   /* if (bmiForAgeStatus === null) return decisions;
-    else {
-        decisions.push({name: 'BMI for age status', value: bmiForAgeStatus});
-
-    }*/
 
     function findRowByEquality(masterTable, key, value) {
         return masterTable.find(function (row) {
@@ -173,7 +166,6 @@ var getDecisions = function (observationsHolder, individual, today) {
             return keys[i];
         }
     }
-
 };
 
 module.exports = {

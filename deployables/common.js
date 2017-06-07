@@ -76,6 +76,14 @@ function C() {
         });
         return matchingDecision ? matchingDecision.value : null;
     };
+
+    this.createValidationResult = function (success, messageKey) {
+        return {success: false, messageKey: messageKey};
+    };
+
+    this.createValidationError = function (messageKey) {
+        return this.createValidationResult(false, messageKey);
+    }
 }
 
 module.exports = new C();

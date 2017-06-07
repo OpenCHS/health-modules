@@ -39,8 +39,8 @@
     },
     {
       "uuid": "71b33c6d-e029-43be-baff-452c3e31890d",
-      "name": "ANC Enrolment Gynae History",
-      "display": "Gynae History",
+      "name": "ANC Enrolment Obstetrics History",
+      "display": "Obstetrics History",
       "displayOrder": 2,
       "formElements": [
         {
@@ -113,8 +113,8 @@
     },
     {
       "uuid": "50a2d045-88fe-44e3-86e0-0dba16f53818",
-      "name": "ANC Enrolment Obstetrics History",
-      "display": "History",
+      "name": "ANC Enrolment past pregnancy complications",
+      "display": "Past pregnancy complications",
       "displayOrder": 3,
       "formElements": [
         {

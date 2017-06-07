@@ -1,7 +1,9 @@
-var getNextScheduledVisits = require('./motherVisitSchedule').getNextScheduledVisits;
 var C = require('../common');
 
-const getDecisions = function (programEnrolment, today, programEncounter) {
+module.exports = {};
+module.exports.getNextScheduledVisits = require('./motherVisitSchedule').getNextScheduledVisits;
+
+module.exports.getDecisions = function (programEnrolment, today, programEncounter) {
     var decisions = [];
     const pregnancyComplications = [];
     const lmpDate = programEnrolment.getObservationValue('Last Menstrual Period');
@@ -97,9 +99,4 @@ const getDecisions = function (programEnrolment, today, programEncounter) {
             pregnancyComplications.push('Moderate Anemia');
         }
     }
-};
-
-module.exports = {
-    getDecisions: getDecisions,
-    getNextScheduledVisits: getNextScheduledVisits
 };
