@@ -66,6 +66,9 @@
     "lessThanTenCannotBePregnant": "Less than 10 year old cannot be pregnant",
     "lonartNotToBeGivenToChildren": "Lonart should not be given to children",
     "maleCannotBeEnrolledInMotherProgram": "Male cannot be enrolled in mother program",
-    "lowerThanAgeOfBeingAMother": "Individuals less than 11 years old cannot be registered in mother program"
+    "lowerThanAgeOfBeingAMother": "Individuals less than 11 years old cannot be registered in mother program",
+    "parityCannotBeGreaterThanGravida" : "Parity cannot be greater than gravida",
+    "abortionsCannotBeGreaterThanGravida" : "Number of abortions cannot be greater than gravida",
+    "parityPlusAbortionCannotBeGreaterThanGravida" : "Parity + Abortions cannot be greater than gravida"
   }
 }

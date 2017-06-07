@@ -20,5 +20,19 @@ module.exports.validate = function (programEnrolment, today) {
     else if (programEnrolment.individual.getAgeInYears() < 11)
         validationResults.push(c.createValidationError('lowerThanAgeOfBeingAMother'));
 
+    const gravida = programEnrolment.getObservationValue('Gravida');
+    const parity = programEnrolment.getObservationValue('Parity');
+    const number_of_abortion = programEnrolment.getObservationValue('Number of abortion');
+
+    if(gravida !== undefined && parity !== undefined && parity > gravida){
+        validationResults.push(c.createValidationError('parityCannotBeGreaterThanGravida'));
+    }
+    if(gravida !== undefined && number_of_abortion !== undefined && number_of_abortion > gravida){
+        validationResults.push(c.createValidationError('abortionsCannotBeGreaterThanGravida'));
+    }
+    if(gravida !== undefined && parity !== undefined && number_of_abortion!== undefined && (parity + number_of_abortion) > gravida){
+        validationResults.push(c.createValidationError('parityPlusAbortionCannotBeGreaterThanGravida'));
+    }
+
     return validationResults;
 };
