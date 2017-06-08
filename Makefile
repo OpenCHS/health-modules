@@ -39,6 +39,7 @@ setup_health_modules:
 	curl -X POST http://$(server):8080/concepts -d @deployables/outpatient/metadata/concepts.json -H "Content-Type: application/json"
 
 	curl -X POST http://$(server):8080/concepts -d @deployables/mother/metadata/motherConcepts.json -H "Content-Type: application/json"
+	curl -X POST http://$(server):8080/programs -d @deployables/mother/metadata/motherProgram.json -H "Content-Type: application/json"
 	curl -X POST http://$(server):8080/forms -d @deployables/mother/metadata/motherProgramEnrolmentForm.json -H "Content-Type: application/json"
 	curl -X POST http://$(server):8080/forms -d @deployables/mother/metadata/motherANCForm.json -H "Content-Type: application/json"
 	curl -X POST http://$(server):8080/forms -d @deployables/mother/metadata/motherDeliveryForm.json -H "Content-Type: application/json"
@@ -47,12 +48,14 @@ setup_health_modules:
 	curl -X POST http://$(server):8080/forms -d @deployables/mother/metadata/motherProgramExitForm.json -H "Content-Type: application/json"
 
 	curl -X POST http://$(server):8080/concepts -d @deployables/child/metadata/concepts.json -H "Content-Type: application/json"
+	curl -X POST http://$(server):8080/programs -d @deployables/child/metadata/childProgram.json -H "Content-Type: application/json"
 	curl -X POST http://$(server):8080/forms -d @deployables/child/metadata/childProgramEnrolmentForm.json -H "Content-Type: application/json"
 	curl -X POST http://$(server):8080/forms -d @deployables/child/metadata/childDefaultProgramEncounterForm.json -H "Content-Type: application/json"
 	curl -X POST http://$(server):8080/forms -d @deployables/child/metadata/childProgramExitForm.json -H "Content-Type: application/json"
 
 	curl -X POST http://$(server):8080/forms -d @deployables/ncd/metadata/screeningEncounterForm.json -H "Content-Type: application/json"
 
+	curl -X POST http://$(server):8080/programs -d @deployables/diabetes/metadata/diabetesProgram.json -H "Content-Type: application/json"
 	curl -X POST http://$(server):8080/forms -d @deployables/diabetes/metadata/diabetesProgramEncounterForm.json -H "Content-Type: application/json"
 	date
 
