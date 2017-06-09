@@ -12,7 +12,8 @@
         {
           "uuid": "77791c29-90ec-485a-9cef-298b9b575dd2",
           "name": "Date of discharge",
-          "dataType": "Date"
+          "dataType": "Date",
+          "mandatory": true
         },
         {
           "uuid": "f48b8eb2-a338-45fd-b63d-3c00d266d388",

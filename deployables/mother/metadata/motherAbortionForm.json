@@ -25,7 +25,7 @@
           "keyValues": [],
           "dataType": "Date",
           "displayOrder": 2,
-          "mandatory": false
+          "mandatory": true
         },
         {
           "name": "Type of Abortion",

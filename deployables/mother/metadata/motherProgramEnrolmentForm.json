@@ -10,7 +10,8 @@
       "name": "ANC Enrolment Basic Details",
       "display": "Basic Details",
       "displayOrder": 1,
-      "formElements": [
+      "formElements
+      ": [
         {
           "name": "Mother card number",
           "uuid": "54917f80-15ea-416b-8746-7f2717a0dc84",
