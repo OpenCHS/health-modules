@@ -257,14 +257,14 @@ const config = {
                 graphsBelow5Years: [
                     {
                         title: "Weight (kg) for Age (months)",
-                        xAxisLabel: "Age (Months)",
+                        xAxisLabel: "Age (months)",
                         data: function (enrolment) {
                             return createConfigWithData(types.WEIGHT_FOR_AGE, ageGroups.LESS_THAN_5_YEARS, enrolment);
                         }
                     },
                     {
                         title: "Height (cm) for Age (months)",
-                        xAxisLabel: "Age (Months)",
+                        xAxisLabel: "Age (months)",
                         data: function (enrolment) {
                             return createConfigWithData(types.HEIGHT_FOR_AGE, ageGroups.LESS_THAN_5_YEARS, enrolment);
                         }
@@ -280,14 +280,14 @@ const config = {
                 graphsBelow2Years: [
                     {
                         title: "Weight (kg) for Age (months)",
-                        xAxisLabel: "Age (Months)",
+                        xAxisLabel: "Age (months)",
                         data: function (enrolment) {
                             return createConfigWithData(types.WEIGHT_FOR_AGE, ageGroups.LESS_THAN_2_YEARS, enrolment);
                         }
                     },
                     {
                         title: "Height (cm) for Age (months)",
-                        xAxisLabel: "Age (Months)",
+                        xAxisLabel: "Age (months)",
                         data: function (enrolment) {
                             return createConfigWithData(types.HEIGHT_FOR_AGE, ageGroups.LESS_THAN_2_YEARS, enrolment);
                         }
@@ -303,14 +303,14 @@ const config = {
                 graphsBelow13Weeks: [
                     {
                         title: "Weight (kg) for Age (weeks)",
-                        xAxisLabel: "Age (Weeks)",
+                        xAxisLabel: "Age (weeks)",
                         data: function (enrolment) {
                             return createConfigWithData(types.WEIGHT_FOR_AGE, ageGroups.LESS_THAN_13_WEEKS, enrolment);
                         }
                     },
                     {
-                        title: "Height (cm) for Age (Weeks)",
-                        xAxisLabel: "Age (Weeks)",
+                        title: "Height (cm) for Age (weeks)",
+                        xAxisLabel: "Age (weeks)",
                         data: function (enrolment) {
                             return createConfigWithData(types.HEIGHT_FOR_AGE, ageGroups.LESS_THAN_13_WEEKS, enrolment);
                         }
