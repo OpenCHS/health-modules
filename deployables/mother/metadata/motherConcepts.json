@@ -60,9 +60,19 @@
     "dataType": "N/A"
   },
   {
+    "name": "Weight Gain Per Month less than 1kg",
+    "uuid": "73ece93d-2065-4ff2-8f87-669142d186e6",
+    "dataType": "N/A"
+  },
+  {
+    "name": "Weight Gain Per Month more than 1.5kg",
+    "uuid": "4d95ca6e-f2a1-42bd-b52b-44fd8e853d63",
+    "dataType": "N/A"
+  },
+  {
     "name": "Pregnancy Complications",
     "uuid": "f34f974b-47b0-424d-ae97-d479c80efa49",
     "dataType": "Coded",
-    "answers": ["Chronic Hypertension", "Chronic Hypertension with Superimposed Pre-Eclampsia", "Pregnancy Induced Hypertension", "Mild Pre-Eclampsia", "Severe Pre-Eclampsia", "Severe Anemia", "Moderate Anemia", "Grand Multipara", "Previous Abortion", "Old age pregnancy", "Underweight", "Short Stature"]
+    "answers": ["Chronic Hypertension", "Chronic Hypertension with Superimposed Pre-Eclampsia", "Pregnancy Induced Hypertension", "Mild Pre-Eclampsia", "Severe Pre-Eclampsia", "Severe Anemia", "Moderate Anemia", "Grand Multipara", "Previous Abortion", "Old age pregnancy", "Underweight", "Short Stature", "Under age pregnancy", "Weight Gain Per Month less than 1kg", "Weight Gain Per Month more than 1.5kg"]
   }
 ]
