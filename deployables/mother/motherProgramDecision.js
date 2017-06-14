@@ -20,21 +20,32 @@ module.exports.getDecisions = function (programEnrolment, today, programEncounte
 
     function addIfNotExists(conceptName) {
         console.log('(MotherProgramDecision) Adding if not exists to preg complications: ' + conceptName);
-        if (!programEnrolment.observationExistsInEntireEnrolment(conceptName))
+        if (!observationExistsInEntireEnrolment(conceptName))
             pregnancyComplications.push(conceptName);
+    }
+    
+    function getObservationValueFromEntireEnrolment(conceptName) {
+        return programEnrolment.getObservationValueFromEntireEnrolment(conceptName, programEncounter);
+    }
+    
+    function observationExistsInEntireEnrolment(conceptName) {
+        return programEnrolment.getObservationValueFromEntireEnrolment(conceptName, programEncounter);
     }
 
     function analyseOtherRisks() {
-        const height = programEnrolment.getObservationValueFromEntireEnrolment('Height');
+        const height = getObservationValueFromEntireEnrolment('Height');
         if (height !== undefined && height <= 145)
             addIfNotExists('Short Stature');
 
-        const weight = programEnrolment.getObservationValueFromEntireEnrolment('Weight');
+        const weight = getObservationValueFromEntireEnrolment('Weight');
         if (weight !== undefined && weight <= 35)
             addIfNotExists('Underweight');
 
         if (programEnrolment.individual.getAgeInYears() > 30)
             addIfNotExists('Old age pregnancy');
+
+        if (programEnrolment.individual.getAgeInYears() < 18)
+            addIfNotExists('Under age pregnancy');
 
         if (programEnrolment.getObservationValue('Number of abortion') > 0)
             addIfNotExists('Previous Abortion');
@@ -44,10 +55,10 @@ module.exports.getDecisions = function (programEnrolment, today, programEncounte
     }
 
     function analyseHypertensiveRisks() {
-        const systolic = programEnrolment.getObservationValueFromEntireEnrolment('Systolic');
-        const diastolic = programEnrolment.getObservationValueFromEntireEnrolment('Diastolic');
-        const urineAlbumen = programEnrolment.getObservationValueFromEntireEnrolment('Urine Albumen');
-        const obsHistory = programEnrolment.getObservationValueFromEntireEnrolment('Obstetrics History');
+        const systolic = getObservationValueFromEntireEnrolment('Systolic');
+        const diastolic = getObservationValueFromEntireEnrolment('Diastolic');
+        const urineAlbumen = getObservationValueFromEntireEnrolment('Urine Albumen');
+        const obsHistory = getObservationValueFromEntireEnrolment('Obstetrics History');
 
         const mildPreEclempsiaUrineAlbumenValues = ['Trace', '+1', '+2'];
         const severePreEclempsiaUrineAlbumenValues = ['+3', '+4'];
@@ -59,8 +70,8 @@ module.exports.getDecisions = function (programEnrolment, today, programEncounte
         const urineAlbumenIsMild = C.contains(mildPreEclempsiaUrineAlbumenValues, urineAlbumen);
         const urineAlbumenIsSevere = C.contains(severePreEclempsiaUrineAlbumenValues, urineAlbumen);
         const pregnancyInducedHypertension = C.contains(obsHistory, 'Pregnancy Induced Hypertension');
-        const hasConvulsions = programEnrolment.getObservationValueFromEntireEnrolment('Convulsions'); //will be identified in hospital
-        const isChronicHypertensive = programEnrolment.observationExistsInEntireEnrolment('Chronic Hypertension');
+        const hasConvulsions = getObservationValueFromEntireEnrolment('Convulsions'); //will be identified in hospital
+        const isChronicHypertensive = observationExistsInEntireEnrolment('Chronic Hypertension');
 
         if (pregnancyPeriodInWeeks <= 20 && isBloodPressureHigh) {
             if (urineAlbumen === 'Absent') pregnancyComplications.push('Chronic Hypertension');
@@ -79,7 +90,7 @@ module.exports.getDecisions = function (programEnrolment, today, programEncounte
     }
 
     function analyseAnemia() { //anm also does this test
-        var hemoglobin = programEnrolment.getObservationValueFromEntireEnrolment('Hb');
+        var hemoglobin = getObservationValueFromEntireEnrolment('Hb');
         if (hemoglobin === undefined) decisions.push({name: 'Investigation Advice', value: 'Send patient to FRU immediately for Hemoglobin Test'});
         else if (hemoglobin < 7) {
             decisions.push({name: 'Treatment Advice', value: "Severe Anemia. Refer to FRU for further checkup and possible transfusion"});
@@ -92,7 +103,7 @@ module.exports.getDecisions = function (programEnrolment, today, programEncounte
     }
 
     function manageVaginalBleeding() {
-        var vaginalBleeding = programEnrolment.getObservationValueFromEntireEnrolment('Vaginal Bleeding'); // provided this has been informed. during the delivery is difficult.
+        var vaginalBleeding = getObservationValueFromEntireEnrolment('Vaginal Bleeding'); // provided this has been informed. during the delivery is difficult.
         if (vaginalBleeding !== undefined && pregnancyPeriodInWeeks > 20) decisions.push({name: 'Referral Advice', value: 'Send patient to FRU immediately'});
         else if (vaginalBleeding && pregnancyPeriodInWeeks <= 20) {
             decisions.push({name: 'Referral Advice', value: "Severe Anemia. Refer to FRU for test"});

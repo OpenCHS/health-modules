@@ -45,6 +45,11 @@ function C() {
         return (Math.round((today - lmpDate)/ 604800000));
     };
 
+    this.getDays = function (firstDate, secondDate) {
+        var oneDay = 24*60*60*1000;
+        return (Math.round(Math.abs((firstDate.getTime() - secondDate.getTime())/(oneDay))));
+    };
+
 
     this.getMatchingKey = function (obsValue, masterData) {
         var keys = Object.keys(masterData);

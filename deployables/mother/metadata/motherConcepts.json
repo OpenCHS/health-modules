@@ -45,6 +45,11 @@
     "dataType": "N/A"
   },
   {
+    "name": "Under age pregnancy",
+    "uuid": "edb0ec5e-56dc-4826-b922-52ed2e182fd8",
+    "dataType": "N/A"
+  },
+  {
     "name": "Previous Abortion",
     "uuid": "4a98ed37-1d4c-4a0d-9845-a3828e7f3b30",
     "dataType": "N/A"

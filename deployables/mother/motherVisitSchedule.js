@@ -43,7 +43,7 @@ const getNextScheduledVisits = function (programEnrolment, today, currentEncount
     return [];
 
     function createNextVisit(baseDate, encounterType, name) {
-        const schedule = visitSchedule[name];
+        const schedule = visitSchedule[name === undefined ? encounterType : name];
         return [{
             name: name,
             encounterType: encounterType,
