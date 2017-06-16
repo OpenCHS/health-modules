@@ -216,7 +216,8 @@ function createReferenceLines(config) {
 
 function findConfig(type, gender, age) {
     return _.find(configs, function (config) {
-        return config.type === type && config.gender === gender.name && config.age === age
+        var genderOfChild = gender.name === 'Male'? 'Male': 'Female';
+        return config.type === type && config.gender === genderOfChild && config.age === age
     });
 }
 
