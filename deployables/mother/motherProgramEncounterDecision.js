@@ -4,19 +4,21 @@ var C = require('../common');
 module.exports = {};
 
 module.exports.getDecisions = function (programEncounter, today) {
-    var decisions = programDecision.getDecisions(programEncounter.programEnrolment, today, programEncounter);
-    
-    const previousEncounter = programEncounter.programEnrolment.findPreviousEncounter(programEncounter);
+    if(programEncounter.encounterType.name === 'ANC') {
 
-    const currentWeight = programEncounter.getObservationValue("Weight");
-    const currentWeightRecordDate = programEncounter.encounterDateTime;
-    const previousWeight = previousEncounter.getObservationValue("Weight");
-    const previousWeightRecordDate = previousEncounter.encounterDateTime;
-    const weightGain = currentWeight - previousWeight;
+        var decisions = programDecision.getDecisions(programEncounter.programEnrolment, today, programEncounter);
 
-    const monthsBetweenCurrentAndPreviousWeightRecord = C.getDays(currentWeightRecordDate, previousWeightRecordDate)/30;
+        const lmpDate = programEncounter.programEnrolment.getObservationValue('Last Menstrual Period');
+        const pregnancyPeriodInWeeks = C.getWeeks(lmpDate, today);
 
-    if(monthsBetweenCurrentAndPreviousWeightRecord >= 1){
+        //TODO this code has duplications. Refactoring to be done. Externalise strings?
+        analyseHypertensiveRisks();
+        analyseAnemia();
+        manageVaginalBleeding();
+        analyseSexuallyTransmittedDisease();
+        analyseSickling();
+        analyseHepatitisB();
+        analyseMalaria();
 
         function addComplication(conceptName) {
             console.log('(MotherProgramEncounterDecision) Adding if not exists to preg complications: ' + conceptName);
@@ -28,15 +30,103 @@ module.exports.getDecisions = function (programEncounter, today) {
             pregnancyComplications.push(conceptName);
         }
 
-        const weightGainPerMonth = weightGain / monthsBetweenCurrentAndPreviousWeightRecord;
-        if(weightGainPerMonth < 1){
-            addComplication('Weight Gain Per Month less than 1kg');
-        }else if(weightGainPerMonth > 1.5){
-            addComplication('Weight Gain Per Month more than 1.5kg');
+        function getObservationValueFromEntireEnrolment(conceptName) {
+            return programEncounter.programEnrolment.getObservationValueFromEntireEnrolment(conceptName, programEncounter);
         }
-    }
 
-    return decisions;
+        function observationExistsInEntireEnrolment(conceptName) {
+            return programEncounter.programEnrolment.getObservationValueFromEntireEnrolment(conceptName, programEncounter);
+        }
+
+
+        function analyseHypertensiveRisks() {
+            const systolic = getObservationValueFromEntireEnrolment('Systolic');
+            const diastolic = getObservationValueFromEntireEnrolment('Diastolic');
+            const urineAlbumin = getObservationValueFromEntireEnrolment('Urine Albumin')[0];
+            const obsHistory = getObservationValueFromEntireEnrolment('Obstetrics History');
+
+            const mildPreEclempsiaUrineAlbuminValues = ['Trace', '+1', '+2'];
+            const severePreEclempsiaUrineAlbuminValues = ['+3', '+4'];
+
+            if (urineAlbumin === undefined)
+                decisions.push(C.decision('Investigation Advice', 'Send patient to FRU immediately for Urine Albumin Test'));
+
+            const isBloodPressureHigh = (systolic >= 140) || (diastolic >= 90); //can go in high risk category
+            const urineAlbuminIsMild = C.contains(mildPreEclempsiaUrineAlbuminValues, urineAlbumin);
+            const urineAlbuminIsSevere = C.contains(severePreEclempsiaUrineAlbuminValues, urineAlbumin);
+            const pregnancyInducedHypertension = C.contains(obsHistory, 'Pregnancy Induced Hypertension');
+            const hasConvulsions = getObservationValueFromEntireEnrolment('Convulsions'); //will be identified in hospital
+            const isChronicHypertensive = observationExistsInEntireEnrolment('Chronic Hypertension');
+
+            if (pregnancyPeriodInWeeks <= 20 && isBloodPressureHigh) {
+                if (urineAlbumin === 'Absent') addComplication('Chronic Hypertension');
+                if (urineAlbuminIsMild || urineAlbuminIsSevere) {
+                    addComplication('Chronic Hypertension with Superimposed Pre-Eclampsia');
+                }
+            } else if (pregnancyPeriodInWeeks > 20 && !isChronicHypertensive) {
+                if (!pregnancyInducedHypertension && isBloodPressureHigh){
+                    addComplication('Pregnancy Induced Hypertension');
+                    if (hasConvulsions && (urineAlbuminIsMild || urineAlbuminIsSevere))
+                        addComplication('Eclampsia');
+                    else if (!hasConvulsions && urineAlbuminIsMild) addComplication('Mild Pre-Eclampsia');
+                    else if (!hasConvulsions && urineAlbuminIsSevere) addComplication('Severe Pre-Eclampsia');
+                }
+            }
+        }
+
+        function analyseAnemia() { //anm also does this test
+            var hemoglobin = getObservationValueFromEntireEnrolment('Hb');
+            if (hemoglobin === undefined) decisions.push({name: 'Investigation Advice', value: 'Send patient to FRU immediately for Hemoglobin Test'});
+            else if (hemoglobin < 7) {
+                decisions.push({name: 'Treatment Advice', value: "Severe Anemia. Refer to FRU for further checkup and possible transfusion"});
+                addComplication('Severe Anemia');
+            } else if (hemoglobin  >= 7 || hemoglobin <= 11){
+                addComplication('Moderate Anemia');
+                decisions.push({name: 'Treatment Advice', value: "Moderate Anemia. Start therapeutic dose of IFA"});
+            } else if ( hemoglobin  > 11)
+                decisions.push({name: 'Treatment Advice', value: "Hb normal. Proceed with Prophylactic treatment against anaemia"});
+        }
+
+        function manageVaginalBleeding() {
+            var vaginalBleeding = getObservationValueFromEntireEnrolment('Vaginal Bleeding')[0]; // provided this has been informed. during the delivery is difficult.
+            if (vaginalBleeding !== undefined && pregnancyPeriodInWeeks > 20) decisions.push({name: 'Referral Advice', value: 'Send patient to FRU immediately'});
+            else if (vaginalBleeding && pregnancyPeriodInWeeks <= 20) {
+                decisions.push({name: 'Referral Advice', value: "Severe Anemia. Refer to FRU for test"});
+                addComplication('Moderate Anemia');
+            }
+        }
+
+        function analyseSexuallyTransmittedDisease() {
+            var hivaids = getObservationValueFromEntireEnrolment('HIV/AIDS');
+            if(hivaids === 'Present') addComplication('HIV/AIDS Positive');
+
+            var vdrl = getObservationValueFromEntireEnrolment('VDRL');
+            if(vdrl === 'Positive') addComplication('VDRL positive');
+        }
+
+        function analyseSickling() {
+            var sickling = getObservationValueFromEntireEnrolment('Sickling Test');
+            if(sickling) addComplication('Sickling Positive');
+            var hbElectrophoresis = getObservationValueFromEntireEnrolment('Hb Electrophoresis');
+            if(hbElectrophoresis) addComplication('Sickle Cell Disease SS');
+        }
+
+        function analyseHepatitisB() {
+            var hepatitisB = getObservationValueFromEntireEnrolment('HbsAg');
+            if(hepatitisB === 'Positive') addComplication('Hepatitis B Positive');
+        }
+
+        function analyseMalaria() {
+            var hepatitisB = getObservationValueFromEntireEnrolment('Paracheck');
+            if(hepatitisB === 'Positive for PF' || hepatitisB === 'Positive for PV' || hepatitisB === 'Positive for PF and PV')
+            addComplication('Malaria');
+        }
+
+        return decisions;
+
+    } else return [];
+
+
 };
 
 

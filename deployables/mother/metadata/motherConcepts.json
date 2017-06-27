@@ -70,9 +70,60 @@
     "dataType": "N/A"
   },
   {
+    "name": "HIV/AIDS Positive",
+    "uuid": "45350576-a60b-4431-90da-65604933d97c",
+    "dataType": "N/A"
+  },
+  {
+    "name": "VDRL Positive",
+    "uuid": "06c6b0ea-8ddc-4ed0-ab58-59ed67659571",
+    "dataType": "N/A"
+  },
+  {
+    "name": "Sickling Positive",
+    "uuid": "4d2733ec-098a-407b-bfd2-1fd123dbe96d",
+    "dataType": "N/A"
+  },
+  {
+    "name": "Sickle Cell Disease SS",
+    "uuid": "705b3ef7-e41a-4954-bc3f-9556eb002f3d",
+    "dataType": "N/A"
+  },
+  {
+    "name": "Hepatitis B Positive",
+    "uuid": "f9b654e6-628b-4bbf-b3ee-2adc5ab7ea1c",
+    "dataType": "N/A"
+  },
+  {
+    "name": "Malaria",
+    "uuid": "0dee2973-eebe-4699-b676-b770fdd1c411",
+    "dataType": "N/A"
+  },
+  {
     "name": "Pregnancy Complications",
     "uuid": "f34f974b-47b0-424d-ae97-d479c80efa49",
     "dataType": "Coded",
-    "answers": ["Chronic Hypertension", "Chronic Hypertension with Superimposed Pre-Eclampsia", "Pregnancy Induced Hypertension", "Mild Pre-Eclampsia", "Severe Pre-Eclampsia", "Severe Anemia", "Moderate Anemia", "Grand Multipara", "Previous Abortion", "Old age pregnancy", "Underweight", "Short Stature", "Under age pregnancy", "Weight Gain Per Month less than 1kg", "Weight Gain Per Month more than 1.5kg"]
+    "answers": ["Chronic Hypertension",
+      "Chronic Hypertension with Superimposed Pre-Eclampsia",
+      "Pregnancy Induced Hypertension",
+      "Mild Pre-Eclampsia",
+      "Severe Pre-Eclampsia",
+      "Severe Anemia",
+      "Moderate Anemia",
+      "Grand Multipara",
+      "Previous Abortion",
+      "Old age pregnancy",
+      "Underweight",
+      "Short Stature",
+      "Under age pregnancy",
+      "Weight Gain Per Month less than 1kg",
+      "Weight Gain Per Month more than 1.5kg",
+      "HIV/AIDS Positive",
+      "VDRL Positive",
+      "Sickling Positive",
+      "Sickle Cell Disease SS",
+      "Hepatitis B Positive",
+      "Malaria"
+      ]
   }
 ]

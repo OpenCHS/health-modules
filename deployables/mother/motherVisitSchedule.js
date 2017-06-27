@@ -37,7 +37,8 @@ const getNextScheduledVisits = function (programEnrolment, today, currentEncount
         if (_.encounterExists(encounters, 'ANC', 'ANC 4')) return createNextVisit(lmpDate, 'Delivery');
         if (_.encounterExists(encounters, 'ANC', 'ANC 3')) return createNextVisit(lmpDate, 'ANC', 'ANC 4');
         if (_.encounterExists(encounters, 'ANC', 'ANC 2')) return createNextVisit(lmpDate, 'ANC', 'ANC 3');
-        return createNextVisit(lmpDate, 'ANC', 'ANC 2');
+        if (_.encounterExists(encounters, 'ANC', 'ANC 1')) return createNextVisit(lmpDate, 'ANC', 'ANC 2');
+        return createNextVisit(lmpDate, 'ANC', 'ANC 1');
     }
 
     return [];
