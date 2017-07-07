@@ -42,7 +42,7 @@ module.exports.getDecisions = function (programEncounter, today) {
         function analyseHypertensiveRisks() {
             const systolic = getObservationValueFromEntireEnrolment('Systolic');
             const diastolic = getObservationValueFromEntireEnrolment('Diastolic');
-            const urineAlbumin = C.itemAtIndex(0, getObservationValueFromEntireEnrolment('Urine Albumin'));
+            const urineAlbumin = getObservationValueFromEntireEnrolment('Urine Albumin');
             const obsHistory = getObservationValueFromEntireEnrolment('Obstetrics History');
 
             const mildPreEclempsiaUrineAlbuminValues = ['Trace', '+1', '+2'];
@@ -88,7 +88,7 @@ module.exports.getDecisions = function (programEncounter, today) {
         }
 
         function manageVaginalBleeding() {
-            var vaginalBleeding = C.itemAtIndex(0, getObservationValueFromEntireEnrolment('Vaginal Bleeding')); // provided this has been informed. during the delivery is difficult.
+            var vaginalBleeding = getObservationValueFromEntireEnrolment('Vaginal Bleeding'); // provided this has been informed. during the delivery is difficult.
             if (vaginalBleeding !== undefined && pregnancyPeriodInWeeks > 20) decisions.push({name: 'Referral Advice', value: 'Send patient to FRU immediately'});
             else if (vaginalBleeding && pregnancyPeriodInWeeks <= 20) {
                 decisions.push({name: 'Referral Advice', value: "Severe Anemia. Refer to FRU for test"});

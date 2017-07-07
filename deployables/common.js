@@ -1,9 +1,5 @@
 function C() {
 
-    this.itemAtIndex = function(index, array) {
-        return array && array.find(function(item, idx) {return idx === index}) || undefined;
-    };
-
     this.addDays = function (date, numberOfDays) {
         const copied = this.copyDate(date);
         copied.setDate(copied.getDate() + numberOfDays);
