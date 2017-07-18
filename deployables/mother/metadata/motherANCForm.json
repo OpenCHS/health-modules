@@ -30,6 +30,24 @@
           "mandatory": false
         },
         {
+          "name": "Pedal Edema",
+          "uuid": "32bed768-4074-45c4-92a6-4bc27f43bbdc",
+          "keyValues": [
+            {
+              "key": "TrueValue",
+              "value": "Present"
+            },
+            {
+              "key": "FalseValue",
+              "value": "Absent"
+            }
+          ],
+          "dataType": "Boolean",
+          "displayOrder": 1,
+          "mandatory": false
+        },
+
+        {
           "name": "Pallor",
           "uuid": "6b5f0898-6ea3-4395-91e2-6e415cada5ff",
           "keyValues": [
