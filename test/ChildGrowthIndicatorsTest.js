@@ -2,7 +2,7 @@ const expect = require('chai').expect;
 const assert = require('chai').assert;
 const getDecisions = require('../deployables/child/childProgramEncounterDecision');
 const C = require('../deployables/common');
-const weightForHeightScores = require('../deployables/json/weightForHeight');
+const weightForHeightScores = require('./weightForHeight');
 const ProgramEncounter = require("./Entities").ProgramEncounter;
 const ProgramEnrolment = require("./Entities").ProgramEnrolment;
 

@@ -13,9 +13,16 @@ var weightForHeightScoresBoys0_2 = require('./anthropometricReference/wfl_boys_0
 var weightForHeightScoresGirls2_5 = require('./anthropometricReference/wfh_girls_2_5_zscores');
 var weightForHeightScoresBoys2_5 = require('./anthropometricReference/wfh_boys_2_5_zscores');
 
-var bmiForAgeScores = require('../json/bmiForAge');
-const Decision = require('../../test/Entities').Decision;
-const SingleValueCodedDecision = require('../../test/Entities').SingleValueCodedDecision;
+function Decision(name, value) {
+    this.name = name;
+    this.value = value;
+}
+
+function SingleValueCodedDecision(name, value) {
+    this.name = name;
+    if (value === undefined) this.value = [];
+    else this.value = [value];
+}
 
 var zScoreGradeMappingWeightForAge = {
     'SD3': 1,
