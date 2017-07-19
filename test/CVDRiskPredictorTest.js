@@ -1,9 +1,9 @@
 var expect = require('chai').expect;
 const assert = require('chai').assert;
-var riskPredictor = require('../deployables/ncd/cvdRiskPredictor');
+var riskPredictor = require('../health_modules/ncd/cvdRiskPredictor');
 const ProgramEncounter = require("./Entities").ProgramEncounter;
 const Individual = require("./Entities").Individual;
-const C = require('../deployables/common');
+const C = require('../health_modules/common');
 
 describe('Make Decision', function () {
     var programEncounter;

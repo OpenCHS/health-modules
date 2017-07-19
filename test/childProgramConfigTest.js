@@ -1,5 +1,5 @@
 const expect = require('chai').expect;
-const childProgramConfig = require('../deployables/child/childProgramConfig');
+const childProgramConfig = require('../health_modules/child/childProgramConfig');
 const moment = require('moment');
 
 describe('Child Program Config', function () {

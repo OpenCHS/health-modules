@@ -1,5 +1,5 @@
 const expect = require('chai').expect;
-const getMotherVisitSchedule = require('../deployables/mother/motherVisitSchedule');
+const getMotherVisitSchedule = require('../health_modules/mother/motherVisitSchedule');
 const ProgramEnrolment = require("./Entities").ProgramEnrolment;
 const ProgramEncounter = require("./Entities").ProgramEncounter;
 

@@ -1,9 +1,9 @@
 var expect = require('chai').expect;
 const assert = require('chai').assert;
-var mother = require('../deployables/mother/motherProgramEncounterDecision');
+var mother = require('../health_modules/mother/motherProgramEncounterDecision');
 const ProgramEncounter = require("./Entities").ProgramEncounter;
 const ProgramEnrolment = require("./Entities").ProgramEnrolment;
-const C = require('../deployables/common');
+const C = require('../health_modules/common');
 
 describe('Make Decision', function () {
 

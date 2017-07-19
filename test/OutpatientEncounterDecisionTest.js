@@ -1,5 +1,5 @@
 var expect = require('chai').expect;
-var decision = require('../deployables/encounterDecision');
+var decision = require('../health_modules/encounterDecision');
 var {Encounter, Form} = require('./Entities');
 
 describe('Make Decision', function () {
