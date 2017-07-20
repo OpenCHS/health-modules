@@ -63,16 +63,16 @@ package_health_modules : package_rules
 	rm -f output/openchs_health_modules.tar.gz
 	rm -rf output/health_modules
 	mkdir output/health_modules
-	cp -r health_modules/commonConcepts.json health_modules/child health_modules/mother health_modules/diabetes health_modules/ncd health_modules/outpatient health_modules/setup.sh output/health_modules/
+	cp -r health_modules/commonConcepts.json health_modules/child health_modules/mother health_modules/diabetes health_modules/ncd health_modules/outpatient health_modules/deploy.sh output/health_modules/
 	mkdir output/health_modules/rules
 	cp output/*.js output/health_modules/rules/
 	cp health_modules/customMessages.json output/health_modules
-	cd output/health_modules && tar zcvf ../openchs_health_modules.tar.gz commonConcepts.json child mother diabetes ncd outpatient rules customMessages.json setup.sh
+	cd output/health_modules && tar zcvf ../openchs_health_modules.tar.gz commonConcepts.json child mother diabetes ncd outpatient rules customMessages.json deploy.sh
 
 package_impl :
 	rm -rf output/impl
 	mkdir output/impl
-	cp lbp/registrationForm.json lbp/villages.sql lbp/catchments.sql lbp/setup.sh output/impl
+	cp lbp/registrationForm.json lbp/villages.sql lbp/catchments.sql lbp/deploy.sh output/impl
 	cd output/impl && tar zcvf ../openchs_impl.tar.gz *.*
 	
 play:

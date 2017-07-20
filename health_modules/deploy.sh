@@ -18,3 +18,5 @@ curl -X POST http://$OPENCHS_SERVER:$OPENCHS_SERVER_PORT/forms -d @$HEALTH_MODUL
 curl -X POST http://$OPENCHS_SERVER:$OPENCHS_SERVER_PORT/forms -d @$HEALTH_MODULES_DIR/ncd/metadata/screeningEncounterForm.json -H "Content-Type: application/json"
 curl -X POST http://$OPENCHS_SERVER:$OPENCHS_SERVER_PORT/programs -d @$HEALTH_MODULES_DIR/diabetes/metadata/diabetesProgram.json -H "Content-Type: application/json"
 curl -X POST http://$OPENCHS_SERVER:$OPENCHS_SERVER_PORT/forms -d @$HEALTH_MODULES_DIR/diabetes/metadata/diabetesProgramEncounterForm.json -H "Content-Type: application/json"
+cp $HEALTH_MODULES_DIR/rules/*.js $SERVER_DIR/external/
+cp $HEALTH_MODULES_DIR/customMessages.json $SERVER_DIR/external/
