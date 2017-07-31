@@ -19,6 +19,7 @@ module.exports.getDecisions = function (programEncounter, today) {
         analyseSickling();
         analyseHepatitisB();
         analyseMalaria();
+        analyseFoetalPresentation();
 
         function addComplication(conceptName) {
             console.log('(MotherProgramEncounterDecision) Adding if not exists to preg complications: ' + conceptName);
@@ -54,7 +55,7 @@ module.exports.getDecisions = function (programEncounter, today) {
             const isBloodPressureHigh = (systolic >= 140) || (diastolic >= 90); //can go in high risk category
             const urineAlbuminIsMild = C.contains(mildPreEclempsiaUrineAlbuminValues, urineAlbumin);
             const urineAlbuminIsSevere = C.contains(severePreEclempsiaUrineAlbuminValues, urineAlbumin);
-            const pregnancyInducedHypertension = C.contains(obsHistory, 'Pregnancy Induced Hypertension');
+            const obsHistoryOfPregnancyInducedHypertension = C.contains(obsHistory, 'Pregnancy Induced Hypertension');
             const hasConvulsions = getObservationValueFromEntireEnrolment('Convulsions'); //will be identified in hospital
             const isChronicHypertensive = observationExistsInEntireEnrolment('Chronic Hypertension');
 
@@ -64,7 +65,7 @@ module.exports.getDecisions = function (programEncounter, today) {
                     addComplication('Chronic Hypertension with Superimposed Pre-Eclampsia');
                 }
             } else if (pregnancyPeriodInWeeks > 20 && !isChronicHypertensive) {
-                if (!pregnancyInducedHypertension && isBloodPressureHigh){
+                if (!obsHistoryOfPregnancyInducedHypertension && isBloodPressureHigh){
                     addComplication('Pregnancy Induced Hypertension');
                     if (hasConvulsions && (urineAlbuminIsMild || urineAlbuminIsSevere))
                         addComplication('Eclampsia');
@@ -98,10 +99,10 @@ module.exports.getDecisions = function (programEncounter, today) {
 
         function analyseSexuallyTransmittedDisease() {
             var hivaids = getObservationValueFromEntireEnrolment('HIV/AIDS');
-            if(hivaids === 'Present') addComplication('HIV/AIDS Positive');
+            if(hivaids === 'Positive') addComplication('HIV/AIDS Positive');
 
             var vdrl = getObservationValueFromEntireEnrolment('VDRL');
-            if(vdrl === 'Positive') addComplication('VDRL positive');
+            if(vdrl === 'Positive') addComplication('VDRL Positive');
         }
 
         function analyseSickling() {
@@ -117,9 +118,16 @@ module.exports.getDecisions = function (programEncounter, today) {
         }
 
         function analyseMalaria() {
-            var hepatitisB = getObservationValueFromEntireEnrolment('Paracheck');
-            if(hepatitisB === 'Positive for PF' || hepatitisB === 'Positive for PV' || hepatitisB === 'Positive for PF and PV')
+            var paracheck = getObservationValueFromEntireEnrolment('Paracheck');
+            if(paracheck === 'Positive for PF' || paracheck === 'Positive for PV' || paracheck === 'Positive for PF and PV')
             addComplication('Malaria');
+        }
+
+        function analyseFoetalPresentation() {
+            var foetalPresentation = getObservationValueFromEntireEnrolment('Foetal presentation');
+            if(C.contains(foetalPresentation, 'Cephalic') || C.contains(foetalPresentation, 'Breech')
+                || C.contains(foetalPresentation, 'Transverse'))
+            addComplication('Malpresentation');
         }
 
         return decisions;
