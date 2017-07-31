@@ -1,7 +1,7 @@
 const _ = require('../common');
 
 //in days
-const visitSchedule = {
+const encounterSchedule = {
     "ANC 1": {due: 40, max: 84},
     "ANC 2": {due: 98, max: 182},
     "ANC 3": {due: 196, max: 238},
@@ -15,43 +15,52 @@ const visitSchedule = {
 
 const getNextScheduledVisits = function (programEnrolment, today, currentEncounter) {
     const lmpConceptName = 'Last Menstrual Period';
-    const encounters = programEnrolment.encounters.slice();
+
+    const encounters = [];
+
     const lmpDate = programEnrolment.getObservationValue(lmpConceptName);
-    const deliveryEncounter = programEnrolment.encounters.find(function (enc) {
-        return enc.encounterType.name === 'Delivery';
-    });
-    const deliveryDate = deliveryEncounter !== undefined ? deliveryEncounter.encounterDateTime : undefined;
 
-    if (currentEncounter !== undefined) {
-        encounters.push(currentEncounter);
+    function findEncounterTypeByName(encounterTypeName) {
+        return programEnrolment.encounters.find(function (encounter) {
+            return encounter.encounterType.name === encounterTypeName;
+        })
     }
 
-    console.log(lmpConceptName + ": " + lmpDate + ", Abortion Happened: " + _.encounterExists(encounters, 'Abortion'));
+    const currentEncounters = programEnrolment.encounters;
 
-    if (programEnrolment.observationExists(lmpConceptName) && !_.encounterExists(encounters, 'Abortion')) {
-        if (_.encounterExists(encounters, 'PNC', 'PNC 4')) return [];
-        if (_.encounterExists(encounters, 'PNC', 'PNC 3')) return createNextVisit(deliveryDate, 'PNC', 'PNC 4');
-        if (_.encounterExists(encounters, 'PNC', 'PNC 2')) return createNextVisit(deliveryDate, 'PNC', 'PNC 3');
-        if (_.encounterExists(encounters, 'PNC', 'PNC 1')) return createNextVisit(deliveryDate, 'PNC', 'PNC 2');
-        if (_.encounterExists(encounters, 'ANC', 'Delivery')) return createNextVisit(deliveryDate, 'PNC', 'PNC 1');
-        if (_.encounterExists(encounters, 'ANC', 'ANC 4')) return createNextVisit(lmpDate, 'Delivery');
-        if (_.encounterExists(encounters, 'ANC', 'ANC 3')) return createNextVisit(lmpDate, 'ANC', 'ANC 4');
-        if (_.encounterExists(encounters, 'ANC', 'ANC 2')) return createNextVisit(lmpDate, 'ANC', 'ANC 3');
-        if (_.encounterExists(encounters, 'ANC', 'ANC 1')) return createNextVisit(lmpDate, 'ANC', 'ANC 2');
-        return createNextVisit(lmpDate, 'ANC', 'ANC 1');
-    }
+    const deliveryEncounter = findEncounterTypeByName('Delivery');
 
-    return [];
+    const deliveryDate = deliveryEncounter && deliveryEncounter.encounterDateTime;
 
-    function createNextVisit(baseDate, encounterType, name) {
-        const schedule = visitSchedule[name === undefined ? encounterType : name];
-        return [{
+    const addEncounter = function (baseDate, encounterType, name) {
+        if (_.encounterExists(currentEncounters, encounterType, name)) return;
+
+        var schedule = encounterSchedule[name === undefined ? encounterType : name];
+
+        encounters.push({
             name: name,
             encounterType: encounterType,
             dueDate: _.addDays(baseDate, schedule.due),
             maxDate: _.addDays(baseDate, schedule.max)
-        }];
+        });
+    };
+
+    if (lmpDate) {
+        addEncounter(lmpDate, 'ANC', 'ANC 1');
+        addEncounter(lmpDate, 'ANC', 'ANC 2');
+        addEncounter(lmpDate, 'ANC', 'ANC 3');
+        addEncounter(lmpDate, 'ANC', 'ANC 4');
+        addEncounter(lmpDate, 'Delivery', 'Delivery');
     }
+
+    if (deliveryDate) {
+        addEncounter(deliveryDate, 'PNC', 'PNC 1');
+        addEncounter(deliveryDate, 'PNC', 'PNC 2');
+        addEncounter(deliveryDate, 'PNC', 'PNC 3');
+        addEncounter(deliveryDate, 'PNC', 'PNC 4');
+    }
+
+    return encounters;
 };
 
 module.exports = {

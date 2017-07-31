@@ -16,13 +16,16 @@ module.exports.getDecisions = function (enrolment, today) {
     return decisions;
 };
 
-module.exports.validate = function (programEnrolment, today) {
+module.exports.validate = function (programEnrolment) {
     const validationResults = [];
 
-    if (programEnrolment.individual.gender === 'Male')
+    if (programEnrolment.individual.gender === 'Male') {
         validationResults.push(c.createValidationError('maleCannotBeEnrolledInMotherProgram'));
-    else if (programEnrolment.individual.getAgeInYears() < 11)
+    }
+
+    if (programEnrolment.individual.getAgeInYears() < 11) {
         validationResults.push(c.createValidationError('lowerThanAgeOfBeingAMother'));
+    }
 
     const gravida = programEnrolment.getObservationValue('Gravida');
     const parity = programEnrolment.getObservationValue('Parity');
