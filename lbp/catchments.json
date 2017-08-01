@@ -1,0 +1,43 @@
+[
+  {
+    "name": "Ghotpadi Cluster",
+    "uuid": "005a1d1a-d5ec-48c8-9589-44a74b1e4bc9",
+    "villages": [
+      "Ghotpadi",
+      "Bhatpar",
+      "Bodange",
+      "Juvi",
+      "Darbha"
+    ]
+  },
+  {
+    "name": "Gopnar Cluster",
+    "uuid": "70d98d09-6a51-44e6-890e-123aa263375f",
+    "villages": [
+    ]
+  },
+  {
+    "name": "Jinjgaon Cluster",
+    "uuid": "16556872-b0cc-4ee8-b567-8e46a69da0c1",
+    "villages": [
+    ]
+  },
+  {
+    "name": "Midapalli Cluster",
+    "uuid": "0e92cb82-c20f-46b4-b4ed-cfc0d7dd263d",
+    "villages": [
+    ]
+  },
+  {
+    "name": "Mirgudwancha Cluster",
+    "uuid": "2a93460f-c37c-483a-b72f-8d3450dd99f3",
+    "villages": [
+    ]
+  },
+  {
+    "name": "Pengunda Cluster",
+    "uuid": "5e4b1637-d661-465d-b8b6-194ad5bb6f2d",
+    "villages": [
+    ]
+  }
+]

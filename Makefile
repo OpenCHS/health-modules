@@ -31,32 +31,32 @@ setup_impl_db:
 setup_db: recreate_db setup_health_modules setup_impl_db
 
 setup_health_modules:
-	curl -X POST http://$(server):8080/concepts -d @health_modules/commonConcepts.json -H "Content-Type: application/json"
+	curl -X POST http://$(server):$(port)/concepts -d @health_modules/commonConcepts.json -H "Content-Type: application/json"
 
-	curl -X POST http://$(server):8080/forms -d @lbp/registrationForm.json -H "Content-Type: application/json"
+	curl -X POST http://$(server):$(port)/forms -d @lbp/registrationForm.json -H "Content-Type: application/json"
 
-	curl -X POST http://$(server):8080/forms -d @health_modules/outpatient/metadata/encounterForm.json -H "Content-Type: application/json"
-	curl -X POST http://$(server):8080/concepts -d @health_modules/outpatient/metadata/concepts.json -H "Content-Type: application/json"
+	curl -X POST http://$(server):$(port)/forms -d @health_modules/outpatient/metadata/encounterForm.json -H "Content-Type: application/json"
+	curl -X POST http://$(server):$(port)/concepts -d @health_modules/outpatient/metadata/concepts.json -H "Content-Type: application/json"
 
-	curl -X POST http://$(server):8080/concepts -d @health_modules/mother/metadata/motherConcepts.json -H "Content-Type: application/json"
-	curl -X POST http://$(server):8080/programs -d @health_modules/mother/metadata/motherProgram.json -H "Content-Type: application/json"
-	curl -X POST http://$(server):8080/forms -d @health_modules/mother/metadata/motherProgramEnrolmentForm.json -H "Content-Type: application/json"
-	curl -X POST http://$(server):8080/forms -d @health_modules/mother/metadata/motherANCForm.json -H "Content-Type: application/json"
-	curl -X POST http://$(server):8080/forms -d @health_modules/mother/metadata/motherDeliveryForm.json -H "Content-Type: application/json"
-	curl -X POST http://$(server):8080/forms -d @health_modules/mother/metadata/motherAbortionForm.json -H "Content-Type: application/json"
-	curl -X POST http://$(server):8080/forms -d @health_modules/mother/metadata/motherPNCForm.json -H "Content-Type: application/json"
-	curl -X POST http://$(server):8080/forms -d @health_modules/mother/metadata/motherProgramExitForm.json -H "Content-Type: application/json"
+	curl -X POST http://$(server):$(port)/concepts -d @health_modules/mother/metadata/motherConcepts.json -H "Content-Type: application/json"
+	curl -X POST http://$(server):$(port)/programs -d @health_modules/mother/metadata/motherProgram.json -H "Content-Type: application/json"
+	curl -X POST http://$(server):$(port)/forms -d @health_modules/mother/metadata/motherProgramEnrolmentForm.json -H "Content-Type: application/json"
+	curl -X POST http://$(server):$(port)/forms -d @health_modules/mother/metadata/motherANCForm.json -H "Content-Type: application/json"
+	curl -X POST http://$(server):$(port)/forms -d @health_modules/mother/metadata/motherDeliveryForm.json -H "Content-Type: application/json"
+	curl -X POST http://$(server):$(port)/forms -d @health_modules/mother/metadata/motherAbortionForm.json -H "Content-Type: application/json"
+	curl -X POST http://$(server):$(port)/forms -d @health_modules/mother/metadata/motherPNCForm.json -H "Content-Type: application/json"
+	curl -X POST http://$(server):$(port)/forms -d @health_modules/mother/metadata/motherProgramExitForm.json -H "Content-Type: application/json"
 
-	curl -X POST http://$(server):8080/concepts -d @health_modules/child/metadata/concepts.json -H "Content-Type: application/json"
-	curl -X POST http://$(server):8080/programs -d @health_modules/child/metadata/childProgram.json -H "Content-Type: application/json"
-	curl -X POST http://$(server):8080/forms -d @health_modules/child/metadata/childProgramEnrolmentForm.json -H "Content-Type: application/json"
-	curl -X POST http://$(server):8080/forms -d @health_modules/child/metadata/childDefaultProgramEncounterForm.json -H "Content-Type: application/json"
-	curl -X POST http://$(server):8080/forms -d @health_modules/child/metadata/childProgramExitForm.json -H "Content-Type: application/json"
+	curl -X POST http://$(server):$(port)/concepts -d @health_modules/child/metadata/concepts.json -H "Content-Type: application/json"
+	curl -X POST http://$(server):$(port)/programs -d @health_modules/child/metadata/childProgram.json -H "Content-Type: application/json"
+	curl -X POST http://$(server):$(port)/forms -d @health_modules/child/metadata/childProgramEnrolmentForm.json -H "Content-Type: application/json"
+	curl -X POST http://$(server):$(port)/forms -d @health_modules/child/metadata/childDefaultProgramEncounterForm.json -H "Content-Type: application/json"
+	curl -X POST http://$(server):$(port)/forms -d @health_modules/child/metadata/childProgramExitForm.json -H "Content-Type: application/json"
 
-	curl -X POST http://$(server):8080/forms -d @health_modules/ncd/metadata/screeningEncounterForm.json -H "Content-Type: application/json"
+	curl -X POST http://$(server):$(port)/forms -d @health_modules/ncd/metadata/screeningEncounterForm.json -H "Content-Type: application/json"
 
-	curl -X POST http://$(server):8080/programs -d @health_modules/diabetes/metadata/diabetesProgram.json -H "Content-Type: application/json"
-	curl -X POST http://$(server):8080/forms -d @health_modules/diabetes/metadata/diabetesProgramEncounterForm.json -H "Content-Type: application/json"
+	curl -X POST http://$(server):$(port)/programs -d @health_modules/diabetes/metadata/diabetesProgram.json -H "Content-Type: application/json"
+	curl -X POST http://$(server):$(port)/forms -d @health_modules/diabetes/metadata/diabetesProgramEncounterForm.json -H "Content-Type: application/json"
 	date
 
 package_health_modules : package_rules

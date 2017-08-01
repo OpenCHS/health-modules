@@ -110,7 +110,14 @@
           "displayOrder": 4,
           "answers": [
             "Madia",
-            "Gond"
+            "Gond",
+            "Kalar",
+            "Khati",
+            "Mahar",
+            "Chambhar",
+            "Bengoli",
+            "Gowari",
+            "Other caste"
           ],
           "mandatory": false
         },
