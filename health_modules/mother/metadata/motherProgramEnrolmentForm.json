@@ -87,26 +87,8 @@
           "name": "Age of youngest child",
           "uuid": "d07f9fdc-2dbe-4b21-abce-eb79c30470b8",
           "keyValues": [],
-          "dataType": "Duration",
+          "dataType": "Numeric",
           "displayOrder": 6,
-          "mandatory": false
-        },
-        {
-          "name": "Gender of youngest child",
-          "uuid": "752b1d07-c87a-429f-8813-f660e489bcea",
-          "keyValues": [
-            {
-              "key": "Select",
-              "value": "Single"
-            }
-          ],
-          "dataType": "Coded",
-          "displayOrder": 7,
-          "answers": [
-            "Male",
-            "Female",
-            "Other Gender"
-          ],
           "mandatory": false
         }
       ]
@@ -135,7 +117,10 @@
             "Neonatal death within first 28 days",
             "Retained Placenta",
             "Prolonged labour",
-            "Threatened abortion"
+            "Threatened abortion",
+            "Intrapartum Death",
+            "Intrauterine Death",
+            "Instrumental Delivery"
           ],
           "keyValues": [{"key": "Select", "value": "Multi"}]
         }

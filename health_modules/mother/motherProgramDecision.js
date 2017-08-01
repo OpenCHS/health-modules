@@ -5,20 +5,20 @@ module.exports.getNextScheduledVisits = require('./motherVisitSchedule').getNext
 
 module.exports.getDecisions = function (programEnrolment, today, programEncounter) {
     var decisions = [];
-    const pregnancyComplications = [];
+    const highRiskConditions = [];
 
 
     analyseOtherRisks();
 
-    if (pregnancyComplications.length >= 0){
-        decisions.push({name: 'Pregnancy Complications', value: pregnancyComplications});
+    if (highRiskConditions.length >= 0){
+        decisions.push({name: 'High Risk Conditions', value: highRiskConditions});
     }
     return decisions;
 
     function addIfNotExists(conceptName) {
         console.log('(MotherProgramDecision) Adding if not exists to preg complications: ' + conceptName);
         if (!observationExistsInEntireEnrolment(conceptName))
-            pregnancyComplications.push(conceptName);
+            highRiskConditions.push(conceptName);
     }
     
     function getObservationValueFromEntireEnrolment(conceptName) {

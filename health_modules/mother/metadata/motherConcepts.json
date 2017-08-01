@@ -100,7 +100,17 @@
     "dataType": "N/A"
   },
   {
-    "name": "Pregnancy Complications",
+    "name": "Malpresentation",
+    "uuid": "96ec37c6-9572-4288-9220-2fe806093bde",
+    "dataType": "N/A"
+  },
+  {
+    "name": "Ante Partum hemorrhage (APH)",
+    "uuid": "bbcab554-15c0-424f-a86f-e12a9ad38a53",
+    "dataType": "N/A"
+  },
+  {
+    "name": "High Risk Conditions",
     "uuid": "f34f974b-47b0-424d-ae97-d479c80efa49",
     "dataType": "Coded",
     "answers": ["Chronic Hypertension",
@@ -124,7 +134,8 @@
       "Sickle Cell Disease SS",
       "Hepatitis B Positive",
       "Malaria",
-      "Malpresentation"
+      "Malpresentation",
+      "Ante Partum hemorrhage (APH)"
       ]
   }
 ]

@@ -9,7 +9,7 @@ module.exports.getDecisions = function (programEncounter, today) {
         var decisions = programDecision.getDecisions(programEncounter.programEnrolment, today, programEncounter);
 
         const lmpDate = programEncounter.programEnrolment.getObservationValue('Last Menstrual Period');
-        const pregnancyPeriodInWeeks = C.getWeeks(lmpDate, today);
+        const pregnancyPeriodInWeeks = C.getWeeks(lmpDate, programEncounter.encounterDateTime);
 
         //TODO this code has duplications. Refactoring to be done. Externalise strings?
         analyseHypertensiveRisks();
@@ -23,12 +23,12 @@ module.exports.getDecisions = function (programEncounter, today) {
 
         function addComplication(conceptName) {
             console.log('(MotherProgramEncounterDecision) Adding if not exists to preg complications: ' + conceptName);
-            var pregnancyComplications = C.findValue(decisions, 'Pregnancy Complications');
-            if (pregnancyComplications === undefined){
-                pregnancyComplications = [];
-                decisions.push({name: 'Pregnancy Complications', value: pregnancyComplications})
+            var highRiskConditions = C.findValue(decisions, 'High Risk Conditions');
+            if (highRiskConditions === undefined){
+                highRiskConditions = [];
+                decisions.push({name: 'High Risk Conditions', value: highRiskConditions})
             }
-            pregnancyComplications.push(conceptName);
+            highRiskConditions.push(conceptName);
         }
 
         function getObservationValueFromEntireEnrolment(conceptName) {
@@ -81,7 +81,7 @@ module.exports.getDecisions = function (programEncounter, today) {
             else if (hemoglobin < 7) {
                 decisions.push({name: 'Treatment Advice', value: "Severe Anemia. Refer to FRU for further checkup and possible transfusion"});
                 addComplication('Severe Anemia');
-            } else if (hemoglobin  >= 7 || hemoglobin <= 11){
+            } else if (hemoglobin  >= 7 && hemoglobin <= 11){
                 addComplication('Moderate Anemia');
                 decisions.push({name: 'Treatment Advice', value: "Moderate Anemia. Start therapeutic dose of IFA"});
             } else if ( hemoglobin  > 11)
@@ -90,7 +90,10 @@ module.exports.getDecisions = function (programEncounter, today) {
 
         function manageVaginalBleeding() {
             var vaginalBleeding = getObservationValueFromEntireEnrolment('Vaginal Bleeding'); // provided this has been informed. during the delivery is difficult.
-            if (vaginalBleeding !== undefined && pregnancyPeriodInWeeks > 20) decisions.push({name: 'Referral Advice', value: 'Send patient to FRU immediately'});
+            if (vaginalBleeding && pregnancyPeriodInWeeks > 20){
+                decisions.push({name: 'Referral Advice', value: 'Send patient to FRU immediately'});
+                addComplication('Ante Partum hemorrhage (APH)');
+            }
             else if (vaginalBleeding && pregnancyPeriodInWeeks <= 20) {
                 decisions.push({name: 'Referral Advice', value: "Severe Anemia. Refer to FRU for test"});
                 addComplication('Moderate Anemia');
