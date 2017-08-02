@@ -9,7 +9,11 @@ module.exports.getNextScheduledVisits = function (enrolment, today) {
 };
 
 module.exports.getDecisions = function (enrolment, today) {
-    return programDecision.getDecisions(enrolment, today);
+    var decisions = programDecision.getDecisions(enrolment, today);
+    const lmpDate = enrolment.getObservationValue('Last Menstrual Period');
+    const edd = c.addDays(lmpDate, 280);
+    decisions.push({name:"Estimated Date of Delivery", value:edd});
+    return decisions;
 };
 
 module.exports.validate = function (programEnrolment, today) {

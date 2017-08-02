@@ -137,5 +137,11 @@
       "Malpresentation",
       "Ante Partum hemorrhage (APH)"
       ]
+  },
+  {
+    "name": "Estimated Date of Delivery",
+    "uuid": "dde911fa-15eb-4564-8deb-bba46e9d3744",
+    "dataType": "Date"
   }
+
 ]
