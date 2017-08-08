@@ -20,17 +20,19 @@ const getNextScheduledVisits = function (programEnrolment, today, currentEncount
 
     const lmpDate = programEnrolment.getObservationValue(lmpConceptName);
 
-    function findEncounterTypeByName(encounterTypeName) {
-        return programEnrolment.encounters.find(function (encounter) {
-            return encounter.encounterType.name === encounterTypeName;
+    const matchingEncounter = function(encounters, encounterTypeName, encounterName) {
+        return encounters.find(function(encounter) {
+            return encounter.encounterType.name === encounterTypeName && encounter.name === encounterName;
         })
-    }
+    };
 
     const currentEncounters = programEnrolment.encounters;
 
-    const deliveryEncounter = findEncounterTypeByName('Delivery');
+    const deliveryEncounter = matchingEncounter(currentEncounters, 'Delivery', 'Delivery');
 
     const deliveryDate = deliveryEncounter && deliveryEncounter.encounterDateTime;
+    console.log("Delivery encounter is " + deliveryEncounter);
+    console.log("Delivery date is " + deliveryDate);
 
     const addEncounter = function (baseDate, encounterType, name) {
         if (_.encounterExists(currentEncounters, encounterType, name)) return;
