@@ -34,6 +34,13 @@
           "dataType": "Date",
           "displayOrder": 3,
           "mandatory": true
+        },
+        {
+          "uuid": "ca21142c-2685-4b9e-a017-0e05c0e0e8d7",
+          "name": "Urine Pregnancy Test Result (UPT)",
+          "dataType": "Boolean",
+          "keyValues": [{"key": "TrueValue", "value": "Positive"}, {"key": "FalseValue", "value": "Negative"}],
+          "displayOrder": 4
         }
       ]
     },

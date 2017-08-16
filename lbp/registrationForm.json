@@ -185,7 +185,10 @@
             "Hypertension",
             "Diabetes",
             "Heart-related Diseases",
-            "TB"
+            "TB",
+            "Sickle Cell",
+            "Epilepsy",
+            "Nephrotic syndrome"
           ],
           "mandatory": false
         }

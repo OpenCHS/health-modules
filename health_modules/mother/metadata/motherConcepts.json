@@ -142,6 +142,11 @@
     "name": "Estimated Date of Delivery",
     "uuid": "dde911fa-15eb-4564-8deb-bba46e9d3744",
     "dataType": "Date"
+  },
+  {
+    "name": "Breast Examination - Nipple",
+    "uuid": "e7139d02-6c9f-44ad-b156-68091e5a4b96",
+    "dataType": "Coded",
+    "answers": ["Retracted", "Flat", "Normal"]
   }
-
 ]

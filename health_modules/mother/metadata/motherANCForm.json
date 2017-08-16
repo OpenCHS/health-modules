@@ -9,7 +9,6 @@
       "uuid": "36debb83-db66-4da1-88c7-23c0dfc47649",
       "name": "ANC Physical Examination",
       "display": "Physical Examination",
-      "Basic Details": "Physical Examination",
       "displayOrder": 1,
       "formElements": [
         {
@@ -47,8 +46,8 @@
           "mandatory": false
         },
         {
-          "name": "Fits/Convulsion",
-          "uuid": "b0f2fead-9d1d-4bef-bb24-4db2aa94f5e0",
+          "name": "Convulsions",
+          "uuid": "e4511f13-5b2a-4df2-9e7b-72729c1f6923",
           "keyValues": [
             {
               "key": "TrueValue",
@@ -64,7 +63,7 @@
           "mandatory": false
         },
         {
-          "name": "Jaundice",
+          "name": "Icterus",
           "uuid": "a9a50a04-6e62-4398-b0ed-1039f82fe323",
           "keyValues": [
             {
@@ -78,23 +77,6 @@
           ],
           "dataType": "Boolean",
           "displayOrder": 4,
-          "mandatory": false
-        },
-        {
-          "name": "No risk symptoms observed",
-          "uuid": "330a0b93-91ed-4ef9-91bc-d7d5613ffec1",
-          "keyValues": [
-            {
-              "key": "TrueValue",
-              "value": "Present"
-            },
-            {
-              "key": "FalseValue",
-              "value": "Absent"
-            }
-          ],
-          "dataType": "Boolean",
-          "displayOrder": 5,
           "mandatory": false
         },
         {
@@ -114,6 +96,21 @@
           "mandatory": false
         },
         {
+          "uuid": "5682fc9d-a852-445d-9e8e-d67a1fa51266",
+          "name": "Breast Examination - Nipple",
+          "dataType": "Coded",
+          "answers": ["Retracted nipple", "Flat", "Normal"],
+          "displayOrder": 8
+        }
+      ]
+    },
+    {
+      "uuid": "1ca46e2e-36bc-415b-ba50-9021588e676a",
+      "name": "Per Abdominal Examination",
+      "display": "Per Abdominal Examination",
+      "displayOrder": 2,
+      "formElements": [
+        {
           "name": "Foetal presentation",
           "uuid": "689a1fc1-08cc-442b-9266-b7e147e7c8fa",
           "keyValues": [
@@ -123,7 +120,7 @@
             }
           ],
           "dataType": "Coded",
-          "displayOrder": 8,
+          "displayOrder": 1,
           "answers": [
             "Cephalic",
             "Breech",
@@ -131,6 +128,35 @@
           ],
           "mandatory": false
         },
+        {
+          "uuid": "e7a89295-3b62-403d-9690-814488bc0a3d",
+          "name": "Fundal Height",
+          "dataType": "Coded",
+          "answers": ["Just above the pubic Symphysis", "Midpoint Between Pubic symphysis and umbilicus"],
+          "displayOrder": 2
+        },
+        {
+          "uuid": "2440a24d-74ad-457a-813b-cce5dfedc136",
+          "name": "Fetal movements",
+          "dataType": "Coded",
+          "answers": ["Normal", "Reduced", "Absent"],
+          "displayOrder": 3
+        },
+        {
+          "uuid": "c30e4c6c-a823-47ff-8c8c-328f89a2587f",
+          "name": "Fetal Heart Sound",
+          "dataType": "Boolean",
+          "keyValues": [{"key": "TrueValue", "value": "Present"}, {"key": "FalseValue", "value": "Absent"}],
+          "displayOrder": 4
+        }
+      ]
+    },
+    {
+      "uuid": "d5427eb1-d286-4f15-9cc2-e751d8c5ed3b",
+      "name": "Per vaginal examination",
+      "display": "Per vaginal examination",
+      "displayOrder": 3,
+      "formElements": [
         {
           "name": "Vaginal Bleeding",
           "uuid": "81e8767e-abc2-4453-a87f-e0ebbd8a8996",
@@ -145,7 +171,7 @@
             }
           ],
           "dataType": "Boolean",
-          "displayOrder": 9,
+          "displayOrder": 1,
           "mandatory": false
         }
       ]
@@ -154,7 +180,7 @@
       "uuid": "cb8b6812-b58b-428d-afbd-7f53748c684d",
       "name": "ANC Mother Vitals",
       "display": "Vitals",
-      "displayOrder": 2,
+      "displayOrder": 4,
       "formElements": [
         {
           "name": "Systolic",
@@ -202,7 +228,7 @@
       "uuid": "07458686-88c5-448f-92ed-c150c0629b4f",
       "name": "ANC Lab Diagnostics - Blood",
       "display": "Lab Diagnostics - Blood",
-      "displayOrder": 3,
+      "displayOrder": 5,
       "formElements": [
         {
           "name": "Blood Examination Date",
@@ -449,6 +475,21 @@
           "dataType": "Text",
           "displayOrder": 2,
           "mandatory": false
+        }
+      ]
+    },
+    {
+      "uuid": "11db35e5-4082-4943-b67d-2ed4f543ce89",
+      "name": "Complaints",
+      "display": "Complaints",
+      "displayOrder": 8,
+      "formElements": [
+        {
+          "uuid": "828eb65a-019a-4600-813d-1e846c73ce27",
+          "name": "Pregnancy Complaints",
+          "dataType": "Coded",
+          "answers": ["Morning Sickness", "Severe Abdominal Pain", "Fever", "PV bleeding", "Headache", "Difficulty in breathing", "PV bleeding", "Blurring of vision", "PV leaking", "Decreased Fetal movements"],
+          "displayOrder": 1
         }
       ]
     }
