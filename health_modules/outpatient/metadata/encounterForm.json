@@ -153,6 +153,12 @@
             {
               "key": "Select",
               "value": "Multi"
+            },
+            {
+              "key": "ExcludedAnswers",
+              "value": [
+                
+              ]
             }
           ],
           "dataType": "Coded",
