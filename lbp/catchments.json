@@ -2,42 +2,172 @@
   {
     "name": "Ghotpadi Cluster",
     "uuid": "005a1d1a-d5ec-48c8-9589-44a74b1e4bc9",
-    "villages": [
-      "Ghotpadi",
-      "Bhatpar",
-      "Bodange",
-      "Juvi",
-      "Darbha"
+    "addressLevels": [
+      {
+        "uuid" : "a1023d97-b3e8-4d69-8d08-bc374222761d",
+        "level" : 1,
+        "name" : "Ghotpadi"
+      },
+      {
+        "uuid" : "83dabf6b-446a-4576-be57-e822f78db418",
+        "level" : 1,
+        "name" : "Bhatpar"
+      },
+      {
+        "uuid" : "ea01bd96-2fba-4dbe-b195-2c2dcb1a87a0",
+        "level" : 1,
+        "name" : "Bodange"
+      },
+      {
+        "uuid" : "1609a925-a653-40a5-9abc-7298905d9d73",
+        "level" : 1,
+        "name" : "Juwi"
+      },
+      {
+        "uuid" : "c854663e-abe2-4d8a-9ab7-d4df76a536e9",
+        "level" : 1,
+        "name" : "Darbha"
+      }
     ]
   },
   {
     "name": "Gopnar Cluster",
     "uuid": "70d98d09-6a51-44e6-890e-123aa263375f",
-    "villages": [
+    "addressLevels": [
+      {
+        "uuid" : "4be957cf-7b34-4d98-8cef-19a7fc1519d3",
+        "level" : 1,
+        "name" : "Gopnar"
+      },
+      {
+        "uuid" : "20168a3d-ef28-4d66-b3a0-ce6512325ee2",
+        "level" : 1,
+        "name" : "Hodri"
+      },
+      {
+        "uuid" : "f8410112-3ae3-4aa1-89ed-caeddfecf23c",
+        "level" : 1,
+        "name" : "Lashkar"
+      },
+      {
+        "uuid" : "f8c356b5-307f-47d4-ad44-1b586bf35ac1",
+        "level" : 1,
+        "name" : "Aldandi"
+      },
+      {
+        "uuid" : "238ce386-66ca-435b-9df8-875a9901b5e4",
+        "level" : 1,
+        "name" : "Morodpar"
+      }
     ]
   },
   {
     "name": "Jinjgaon Cluster",
     "uuid": "16556872-b0cc-4ee8-b567-8e46a69da0c1",
-    "villages": [
+    "addressLevels": [
+      {
+        "uuid" : "9235c387-e531-4b4d-8c9f-ca5c24ec3a38",
+        "level" : 1,
+        "name" : "Jinjgaon"
+      },
+      {
+        "uuid" : "d6e064b3-227d-46c5-9e61-df2f6a30c2fc",
+        "level" : 1,
+        "name" : "Gurnoor"
+      },
+      {
+        "uuid" : "bee8a21d-4d76-42b2-a8c1-e28bcdb6caee",
+        "level" : 1,
+        "name" : "Marampalli"
+      },
+      {
+        "uuid" : "256e2af1-ce34-4907-8f4e-83b229bc1c85",
+        "level" : 1,
+        "name" : "Rela"
+      }
     ]
   },
   {
     "name": "Midapalli Cluster",
     "uuid": "0e92cb82-c20f-46b4-b4ed-cfc0d7dd263d",
-    "villages": [
+    "addressLevels": [
+      {
+        "uuid" : "6ae0a72e-3dfe-436a-bd54-6034a64d136f",
+        "level" : 1,
+        "name" : "Midapalli"
+      },
+      {
+        "uuid" : "ca6d3ca0-310e-4db6-8031-796010a4336a",
+        "level" : 1,
+        "name" : "Kawande"
+      },
+      {
+        "uuid" : "ec037de5-ab46-42e7-89b8-8beffdedf991",
+        "level" : 1,
+        "name" : "Nelgunda"
+      },
+      {
+        "uuid" : "c528aeb4-8c4c-4270-8dea-7a4915db2210",
+        "level" : 1,
+        "name" : "Morometta"
+      }
     ]
   },
   {
     "name": "Mirgudwancha Cluster",
     "uuid": "2a93460f-c37c-483a-b72f-8d3450dd99f3",
-    "villages": [
+    "addressLevels": [
+      {
+        "uuid" : "1598b65d-597f-4379-823b-15bf4af5aeb3",
+        "level" : 1,
+        "name" : "Mirgudwancha"
+      },
+      {
+        "uuid" : "9b2e49b6-ac9a-45dd-925b-c7c01f17a66a",
+        "level" : 1,
+        "name" : "Dobhur"
+      },
+      {
+        "uuid" : "3aa8a4d6-4927-49a7-9cb1-32a5b1f21b77",
+        "level" : 1,
+        "name" : "Puyarkothi"
+      },
+      {
+        "uuid" : "63e69daf-2596-4e34-acf7-de09dcaebeea",
+        "level" : 1,
+        "name" : "Gundurvahi"
+      }
     ]
   },
   {
     "name": "Pengunda Cluster",
     "uuid": "5e4b1637-d661-465d-b8b6-194ad5bb6f2d",
-    "villages": [
+    "addressLevels": [
+      {
+        "uuid" : "fdf8084b-7358-4f83-810c-17cbca2470c0",
+        "level" : 1,
+        "name" : "Pengunda"
+      },
+      {
+        "uuid" : "b2fb9f1b-04f4-406e-a148-3653830fe806",
+        "level" : 1,
+        "name" : "Parainar"
+      },
+      {
+        "uuid" : "e91e2ea5-02ce-4340-aa71-79cad1e439f1",
+        "level" : 1,
+        "name" : "Kucher"
+      },
+      {
+        "uuid" : "70238de5-e4f2-4b67-a2d4-6cd466a5bf49",
+        "level" : 1,
+        "name" : "Mahakapadi"
+      },
+      {
+        "uuid" : "1ad54a05-45da-4b2c-8125-a3c6ecb1b7c9",
+        "level" : 1,
+        "name" : "Gongwada"
+      }
     ]
   }
 ]

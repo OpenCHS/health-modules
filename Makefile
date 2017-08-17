@@ -25,8 +25,7 @@ recreate_db:
 	flyway -user=openchs -password=password -url=jdbc:postgresql://localhost:5432/openchs -schemas=openchs -locations=filesystem:../openchs-server/src/main/resources/db/migration/ migrate
 
 setup_impl_db:
-	psql -h $(server) -U openchs -q -f lbp/villages.sql
-	psql -h $(server) -U openchs -q -f lbp/catchments.sql
+	curl -X POST http://$(server):$(port)/catchments -d @./lbp/catchments.json -H "Content-Type: application/json"
 
 setup_db: recreate_db setup_health_modules setup_impl_db
 
