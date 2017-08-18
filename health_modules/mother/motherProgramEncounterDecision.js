@@ -1,4 +1,3 @@
-const programDecision = require('./motherProgramDecision');
 var C = require('../common');
 
 module.exports = {};
@@ -7,7 +6,7 @@ module.exports.getDecisions = function (programEncounter, today) {
 
     if(programEncounter.encounterType.name === 'ANC') {
 
-        var decisions = programDecision.getDecisions(programEncounter.programEnrolment, today, programEncounter);
+        var decisions = [];
 
         const lmpDate = programEncounter.programEnrolment.getObservationValue('Last Menstrual Period');
         const pregnancyPeriodInWeeks = C.getWeeks(lmpDate, programEncounter.encounterDateTime);
