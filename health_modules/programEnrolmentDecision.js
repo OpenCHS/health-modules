@@ -3,17 +3,17 @@ const programImports = require('./programExports');
 module.exports = {};
 
 module.exports.getDecisions = function (enrolment) {
-    return programImports.executeProgramEnrolmentFunc(enrolment, 'getDecisions');
+    return programImports.execute({parameter: enrolment, type: "enrolment", fn: "getDecisions", defaultValue: {enrolmentDecisions: [], encounterDecisions: [], registrationDecisions: []}})
 };
 
 module.exports.getNextScheduledVisits = function (enrolment) {
-    return programImports.executeProgramEnrolmentFunc(enrolment, 'getNextScheduledVisits');
+    return programImports.execute({parameter: enrolment, type: "enrolment", fn: "getNextScheduledVisits"})
 };
 
 module.exports.getChecklists = function (enrolment) {
-    return programImports.executeProgramEnrolmentFunc(enrolment, 'getChecklists');
+    return programImports.execute({parameter: enrolment, type: "enrolment", fn: "getChecklists"});
 };
 
 module.exports.validate = function (enrolment) {
-    return programImports.executeProgramEnrolmentFunc(enrolment, 'validate');
+    return programImports.execute({parameter: enrolment, type: "enrolment", fn: "validate"});
 };

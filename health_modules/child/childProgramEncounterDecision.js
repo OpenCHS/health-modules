@@ -1,5 +1,5 @@
 var getDecisions = function (programEncounter, today) {
-    return [];
+    return {enrolmentDecisions: [], encounterDecisions: []};
 };
 
 module.exports = {

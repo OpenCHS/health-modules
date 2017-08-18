@@ -1,7 +1,7 @@
 const childVaccinationSchedule = require('./childVaccSchedule');
 
 const getDecisions = function (programEnrolment, today) {
-    return [];
+    return {enrolmentDecisions: [], encounterDecisions: []};
 };
 
 const getChecklists = function (programEnrolment, today) {

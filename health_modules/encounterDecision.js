@@ -1847,7 +1847,7 @@ const hasMalaria = function (paracheckResult) {
 };
 
 const getDecisions = function (encounter) {
-    if (encounter.encounterType.name !== "Outpatient") return [];
+    if (encounter.encounterType.name !== "Outpatient") return {};
 
     var params = getParameters(encounter);
 
@@ -1946,7 +1946,7 @@ const getDecisions = function (encounter) {
         decisions.push(decision);
     }
 
-    return decisions;
+    return {encounterDecisions: decisions};
 };
 
 function getParameters(encounter) {

@@ -22,7 +22,7 @@ describe('Make Decision', function () {
 
     it('Check for mild pre-eclampsia ', function () {
         programEncounter.setObservation("Urine Albumen", '+1');
-        var decisions = mother.getDecisions(programEncounter, referenceDate);
+        var decisions = mother.getDecisions(programEncounter, referenceDate).encounterDecisions;
         var complicationValues = C.findValue(decisions,'High Risk Conditions');
         expect(complicationValues.indexOf("Pregnancy Induced Hypertension")).is.not.equal(-1);
         expect(complicationValues.indexOf("Mild Pre-Eclampsia")).is.not.equal(-1);
@@ -31,7 +31,7 @@ describe('Make Decision', function () {
     it('Check for eclampsia ', function () {
         programEncounter.setObservation("Convulsions", true);
         programEncounter.setObservation("Urine Albumen", '+1');
-        var decisions = mother.getDecisions(programEncounter, referenceDate);
+        var decisions = mother.getDecisions(programEncounter, referenceDate).encounterDecisions;
         var complicationValues = C.findValue(decisions,'High Risk Conditions');
         expect(complicationValues.indexOf("Pregnancy Induced Hypertension")).is.not.equal(-1);
         expect(complicationValues.indexOf("Eclampsia")).is.not.equal(-1);
@@ -39,14 +39,14 @@ describe('Make Decision', function () {
 
     it('Check for severe pre-eclampsia ', function () {
         programEncounter.setObservation("Urine Albumen", '+3');
-        var decisions = mother.getDecisions(programEncounter, referenceDate);
+        var decisions = mother.getDecisions(programEncounter, referenceDate).encounterDecisions;
         var complicationValues = C.findValue(decisions,'High Risk Conditions');
         expect(complicationValues.indexOf("Pregnancy Induced Hypertension")).is.not.equal(-1);
         expect(complicationValues.indexOf("Severe Pre-Eclampsia")).is.not.equal(-1);
     });
 
     it('Check for Anemia based on Hb result', function () {
-        var decisions = mother.getDecisions(programEncounter, referenceDate);
+        var decisions = mother.getDecisions(programEncounter, referenceDate).encounterDecisions;
         var complicationValues = C.findValue(decisions, 'High Risk Conditions');
         expect(complicationValues.indexOf("Severe Anemia")).is.not.equal(-1);
     });

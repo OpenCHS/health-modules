@@ -4,6 +4,7 @@ var C = require('../common');
 module.exports = {};
 
 module.exports.getDecisions = function (programEncounter, today) {
+
     if(programEncounter.encounterType.name === 'ANC') {
 
         var decisions = programDecision.getDecisions(programEncounter.programEnrolment, today, programEncounter);
@@ -128,14 +129,18 @@ module.exports.getDecisions = function (programEncounter, today) {
 
         function analyseFoetalPresentation() {
             var foetalPresentation = getObservationValueFromEntireEnrolment('Foetal presentation');
-            if(C.contains(foetalPresentation, 'Cephalic') || C.contains(foetalPresentation, 'Breech')
-                || C.contains(foetalPresentation, 'Transverse'))
-            addComplication('Malpresentation');
+            if(foetalPresentation === 'Cephalic' || foetalPresentation === 'Breech' || foetalPresentation === 'Transverse') {
+                addComplication('Malpresentation');
+            }
         }
 
-        return decisions;
-
-    } else return [];
+        return {
+            enrolmentDecisions: [{
+                name: 'High Risk Conditions',
+                value: C.findValue(decisions, 'High Risk Conditions')
+            }], encounterDecisions: decisions
+        };
+    } else return {enrolmentDecisions: [], encounterDecisions: []};
 
 
 };

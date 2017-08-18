@@ -48,7 +48,7 @@ describe('Get growth indicators - z-score, grade, status for a child', function 
 
     it('Calculate Weight-for-Age Z Score, grade and status for girls', function () {
         enrolment.individual.gender = {name: 'Female'};
-        var decisions = getDecisions.getDecisions(programEncounter, referenceDate);
+        var decisions = getDecisions.getDecisions(programEncounter, referenceDate).encounterDecisions;
         assert.equal('3', findValue(decisions, 'Weight for age grade'));
         assert.equal('SD3neg', findValue(decisions,'Weight for age z-score'));
         assert.equal('Severely Underweight', findValue(decisions, 'Weight for age status'));
@@ -56,7 +56,7 @@ describe('Get growth indicators - z-score, grade, status for a child', function 
 
     it('Calculate Weight-for-Age Z Score, grade and status for boys', function(){
         enrolment.individual.gender = {name: 'male'};
-        var decisions = getDecisions.getDecisions(programEncounter, referenceDate);
+        var decisions = getDecisions.getDecisions(programEncounter, referenceDate).encounterDecisions;
         assert.equal('3', findValue(decisions, 'Weight for age grade'));
         assert.equal('SD3neg', findValue(decisions,'Weight for age z-score'));
         assert.equal('Severely Underweight', findValue(decisions, 'Weight for age status'));
@@ -64,7 +64,7 @@ describe('Get growth indicators - z-score, grade, status for a child', function 
 
     it('Calculate Height-for-Age Z Score, grade and status for girls', function(){
         enrolment.individual.gender = {name: 'Female'};
-        var decisions = getDecisions.getDecisions(programEncounter, referenceDate);
+        var decisions = getDecisions.getDecisions(programEncounter, referenceDate).encounterDecisions;
         assert.equal('2', findValue(decisions,'Height for age grade'));
         assert.equal('SD2neg', findValue(decisions, 'Height for age z-score'));
         assert.equal('Stunted', findValue(decisions,'Height for age status'));
@@ -72,7 +72,7 @@ describe('Get growth indicators - z-score, grade, status for a child', function 
 
     it('Calculate Height-for-Age Z Score, grade and status for boys', function(){
         enrolment.individual.gender = {name: 'male'};
-        var decisions = getDecisions.getDecisions(programEncounter, referenceDate);
+        var decisions = getDecisions.getDecisions(programEncounter, referenceDate).encounterDecisions;
         assert.equal('2', findValue(decisions,'Height for age grade'));
         assert.equal('SD2neg', findValue(decisions,'Height for age z-score'));
         assert.equal('Stunted', findValue(decisions,'Height for age status'));
@@ -80,7 +80,7 @@ describe('Get growth indicators - z-score, grade, status for a child', function 
 
     it('Calculate Weight-for-Height Z Score and status for girls', function() {
         enrolment.individual.gender = {name: 'Female'};
-        var decisions = getDecisions.getDecisions(programEncounter, referenceDate);
+        var decisions = getDecisions.getDecisions(programEncounter, referenceDate).encounterDecisions;
         assert.equal('SD2neg', findValue(decisions, 'Weight for height z-score'));
         assert.equal('Wasted', findValue(decisions,'Weight for height status'));
     });
