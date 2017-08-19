@@ -1,13 +1,26 @@
-const programImports = require('./programExports');
+const programConfigExports = {};
+programConfigExports.Child = require('./child/childProgramConfig');
+
+const observationRulesExports = {};
+observationRulesExports.Mother = require('./mother/motherProgramObservationRules');
 
 const config = function (programName) {
     if (!programName) {
-        return programImports.programConfig;
+        return programConfigExports;
     }
 
-    return programImports.programConfig[programName];
+    return programConfigExports[programName];
+};
+
+const observationRules = function (programName) {
+    if (!programName) {
+        return observationRulesExports;
+    }
+
+    return observationRulesExports[programName];
 };
 
 module.exports = {
-    config: config
+    config: config,
+    observationRules: observationRules
 };

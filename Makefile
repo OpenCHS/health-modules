@@ -9,13 +9,13 @@ deps:
 
 package_rules:
 	rm -f output/*.js
-	./node_modules/.bin/webpack health_modules/programEncounterDecision.js output/programEncounterDecision.js
-	./node_modules/.bin/webpack health_modules/encounterDecision.js output/encounterDecision.js
-	./node_modules/.bin/webpack health_modules/individualRegistrationDecision.js output/individualRegistrationDecision.js
-	./node_modules/.bin/webpack health_modules/programEnrolmentDecision.js output/programEnrolmentDecision.js
-	./node_modules/.bin/webpack health_modules/programConfig.js output/programConfig.js
+	./node_modules/.bin/webpack --config build/programEncounterDecisionWebpack.config.js
+	./node_modules/.bin/webpack --config build/encounterDecisionWebpack.config.js
+	./node_modules/.bin/webpack --config build/individualRegistrationDecisionWebpack.config.js
+	./node_modules/.bin/webpack --config build/programEnrolmentDecisionWebpack.config.js
+	./node_modules/.bin/webpack --config build/programConfigWebpack.config.js
 
-deploy_local: package_rules
+deploy_rules_locally: package_rules
 	cp -r output/*.js ../openchs-server/external/
 	cp -r health_modules/*.json ../openchs-server/external/
 	date

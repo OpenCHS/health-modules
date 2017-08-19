@@ -42,8 +42,8 @@ function C() {
         return (numberOfMonths);
     };
 
-    this.getWeeks = function (lmpDate, today) {
-        return (Math.round((today - lmpDate)/ 604800000));
+    this.getWeeks = function (lmpDate, date) {
+        return (Math.round((date - lmpDate)/ 604800000));
     };
 
     this.getDays = function (firstDate, secondDate) {

@@ -88,14 +88,6 @@
           "mandatory": false
         },
         {
-          "name": "Height",
-          "uuid": "695fdfda-4c0d-44b2-8a46-62d79fe966b0",
-          "keyValues": [],
-          "dataType": "Numeric",
-          "displayOrder": 7,
-          "mandatory": false
-        },
-        {
           "uuid": "5682fc9d-a852-445d-9e8e-d67a1fa51266",
           "name": "Breast Examination - Nipple",
           "dataType": "Coded",
@@ -131,23 +123,30 @@
         {
           "uuid": "e7a89295-3b62-403d-9690-814488bc0a3d",
           "name": "Fundal Height",
-          "dataType": "Coded",
-          "answers": ["Just above the pubic Symphysis", "Midpoint Between Pubic symphysis and umbilicus"],
+          "dataType": "Numeric",
+          "unit": "Week(s)",
           "displayOrder": 2
+        },
+        {
+          "uuid": "3170cf31-535c-4030-bec1-59229f26d81e",
+          "name": "Fundal height from pubic symphysis",
+          "dataType": "Numeric",
+          "unit": "centimeter(s)",
+          "displayOrder": 3
         },
         {
           "uuid": "2440a24d-74ad-457a-813b-cce5dfedc136",
           "name": "Fetal movements",
           "dataType": "Coded",
           "answers": ["Normal", "Reduced", "Absent"],
-          "displayOrder": 3
+          "displayOrder": 4
         },
         {
           "uuid": "c30e4c6c-a823-47ff-8c8c-328f89a2587f",
           "name": "Fetal Heart Sound",
           "dataType": "Boolean",
           "keyValues": [{"key": "TrueValue", "value": "Present"}, {"key": "FalseValue", "value": "Absent"}],
-          "displayOrder": 4
+          "displayOrder": 5
         }
       ]
     },
@@ -399,7 +398,7 @@
       "uuid": "33b4dfd6-2b49-4230-8132-46bd2232c2db",
       "name": "ANC Lab Diagnostics - Urine",
       "display": "Lab Diagnostics - Urine",
-      "displayOrder": 4,
+      "displayOrder": 6,
       "formElements": [
         {
           "name": "Urine Albumin",
@@ -449,7 +448,7 @@
       "uuid": "353eec4f-052f-466b-9acb-7a740e5c19e5",
       "name": "ANC Lab Diagnostics - USG",
       "display": "Lab Diagnostics - USG",
-      "displayOrder": 5,
+      "displayOrder": 7,
       "formElements": [
         {
           "name": "US Scanning Done",
@@ -489,7 +488,8 @@
           "name": "Pregnancy Complaints",
           "dataType": "Coded",
           "answers": ["Morning Sickness", "Severe Abdominal Pain", "Fever", "PV bleeding", "Headache", "Difficulty in breathing", "PV bleeding", "Blurring of vision", "PV leaking", "Decreased Fetal movements"],
-          "displayOrder": 1
+          "displayOrder": 1,
+          "keyValues": [{"key": "Select", "value": "Multi"}]
         }
       ]
     }

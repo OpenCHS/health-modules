@@ -1,3 +1,5 @@
+const programDecision = require('./motherProgramDecision');
+var observationConditions = require('./motherProgramObservationRules').observationRules;
 var C = require('../common');
 
 module.exports = {};
@@ -140,12 +142,13 @@ module.exports.getDecisions = function (programEncounter, today) {
             }], encounterDecisions: decisions
         };
     } else return {enrolmentDecisions: [], encounterDecisions: []};
-
-
 };
-
-
 
 module.exports.getNextScheduledVisits = function (programEncounter, today) {
     return programDecision.getNextScheduledVisits(programEncounter.programEnrolment, today, programEncounter);
+};
+
+module.exports.getApplicableFormElements = function (formElementGroup, programEncounter, today) {
+    var applicableFormElements = [];
+    formElementGroup.getApplicableFormElements(programEncounter, observationConditions);
 };

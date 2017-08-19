@@ -6,14 +6,13 @@ const ProgramEnrolment = require("./Entities").ProgramEnrolment;
 const C = require('../health_modules/common');
 
 describe('Make Decision', function () {
-
     var enrolment;
     var programEncounter;
     var referenceDate;
 
     beforeEach(function () {
-        programEncounter = new ProgramEncounter();
         referenceDate = new Date(2017, 6, 6);
+        programEncounter = new ProgramEncounter("ANC", referenceDate);
         enrolment = new ProgramEnrolment('Mother', [programEncounter]);
         enrolment.setObservation('Last Menstrual Period', new Date(2017, 1, 10));
         programEncounter.setObservation("Hb", 4).setObservation("Systolic", 150).setObservation("Diastolic", 90);

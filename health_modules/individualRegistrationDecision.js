@@ -20,10 +20,13 @@ const filterElements = function (individual, formElementGroup) {
 // Return array of ValidationResult objects as explained described below. If the array is empty or null then registration will go through
 // passed = boolean
 // message = string
+
+class X {}
+
 const validate = function (individual) {
+    let x = new X();
     return [];
 };
-
 
 module.exports = {
     validate: validate,
