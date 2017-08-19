@@ -17,7 +17,8 @@ const observationRules = function (programName) {
         return observationRulesExports;
     }
 
-    return observationRulesExports[programName];
+    var observationRules = observationRulesExports[programName];
+    return observationRules ? observationRules : [];
 };
 
 module.exports = {
