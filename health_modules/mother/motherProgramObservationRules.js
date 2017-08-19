@@ -28,6 +28,4 @@ function addANCRule(observationRule) {
     observationRules.push(observationRule);
 }
 
-module.exports = {
-    observationRules: observationRules
-};
+module.exports =  observationRules;
