@@ -26,7 +26,7 @@ module.exports.getDecisions = function (programEncounter, today) {
         function addComplication(conceptName) {
             console.log('(MotherProgramEncounterDecision) Adding if not exists to preg complications: ' + conceptName);
             var highRiskConditions = C.findValue(decisions, 'High Risk Conditions');
-            if (highRiskConditions === undefined){
+            if (highRiskConditions === undefined || highRiskConditions === null){
                 highRiskConditions = [];
                 decisions.push({name: 'High Risk Conditions', value: highRiskConditions})
             }

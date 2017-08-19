@@ -26,7 +26,7 @@ function targetFunction(config, programName) {
 
 const executeProgramEnrolmentFunc = function (config) {
     const today = new Date();
-    const programName = config.enrolment.program.name;
+    const programName = config.parameter.program.name;
     const fn = targetFunction(config, programName);
 
     if (!fn) {
