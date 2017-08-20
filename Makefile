@@ -22,7 +22,7 @@ deploy_rules_locally: package_rules
 
 recreate_db:
 	flyway -user=openchs -password=password -url=jdbc:postgresql://localhost:5432/openchs -schemas=openchs clean
-	flyway -user=openchs -password=password -url=jdbc:postgresql://localhost:5432/openchs -schemas=openchs -locations=filesystem:../openchs-server/src/main/resources/db/migration/ migrate
+	flyway -user=openchs -password=password -url=jdbc:postgresql://localhost:5432/openchs -schemas=openchs -locations=filesystem:../openchs-server/openchs-server-api/src/main/resources/db/migration/ migrate
 
 setup_db: recreate_db setup_health_modules
 
