@@ -24,15 +24,10 @@ recreate_db:
 	flyway -user=openchs -password=password -url=jdbc:postgresql://localhost:5432/openchs -schemas=openchs clean
 	flyway -user=openchs -password=password -url=jdbc:postgresql://localhost:5432/openchs -schemas=openchs -locations=filesystem:../openchs-server/src/main/resources/db/migration/ migrate
 
-setup_impl_db:
-	curl -X POST http://$(server):$(port)/catchments -d @./lbp/catchments.json -H "Content-Type: application/json"
-
-setup_db: recreate_db setup_health_modules setup_impl_db
+setup_db: recreate_db setup_health_modules
 
 setup_health_modules:
 	curl -X POST http://$(server):$(port)/concepts -d @health_modules/commonConcepts.json -H "Content-Type: application/json"
-
-	curl -X POST http://$(server):$(port)/forms -d @lbp/registrationForm.json -H "Content-Type: application/json"
 
 	curl -X POST http://$(server):$(port)/forms -d @health_modules/outpatient/metadata/encounterForm.json -H "Content-Type: application/json"
 	curl -X POST http://$(server):$(port)/concepts -d @health_modules/outpatient/metadata/concepts.json -H "Content-Type: application/json"
@@ -58,7 +53,7 @@ setup_health_modules:
 	curl -X POST http://$(server):$(port)/forms -d @health_modules/diabetes/metadata/diabetesProgramEncounterForm.json -H "Content-Type: application/json"
 	date
 
-package_health_modules : package_rules
+deployable : package_rules
 	rm -f output/openchs_health_modules.tar.gz
 	rm -rf output/health_modules
 	mkdir output/health_modules
