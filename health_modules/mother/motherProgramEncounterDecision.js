@@ -135,11 +135,18 @@ module.exports.getDecisions = function (programEncounter, today) {
             }
         }
 
-        return {
-            enrolmentDecisions: [{
+        var highRiskConditions = C.findValue(decisions, 'High Risk Conditions');
+        var enrolmentDecisions = [];
+        if (highRiskConditions) {
+            enrolmentDecisions.push({
                 name: 'High Risk Conditions',
                 value: C.findValue(decisions, 'High Risk Conditions')
-            }], encounterDecisions: decisions
+            })
+        }
+
+        return {
+            enrolmentDecisions: enrolmentDecisions,
+            encounterDecisions: decisions
         };
     } else return {enrolmentDecisions: [], encounterDecisions: []};
 };
