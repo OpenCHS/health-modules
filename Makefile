@@ -26,6 +26,8 @@ recreate_db:
 
 setup_db: recreate_db setup_health_modules
 
+all: setup_db deploy_rules_locally
+
 setup_health_modules:
 	curl -X POST http://$(server):$(port)/concepts -d @health_modules/commonConcepts.json -H "Content-Type: application/json"
 
