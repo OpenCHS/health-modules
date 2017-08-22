@@ -6,9 +6,7 @@ const ProgramEnrolment = require("./Entities").ProgramEnrolment;
 const C = require('../health_modules/common');
 
 describe('High Risk Pregnancy Determination', function () {
-    var enrolment;
-    var programEncounter;
-    var referenceDate;
+    let enrolment, programEncounter, referenceDate;
 
     beforeEach(function () {
         referenceDate = new Date(2017, 6, 6);
