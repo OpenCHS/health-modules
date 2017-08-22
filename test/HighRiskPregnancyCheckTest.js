@@ -5,7 +5,7 @@ const ProgramEncounter = require("./Entities").ProgramEncounter;
 const ProgramEnrolment = require("./Entities").ProgramEnrolment;
 const C = require('../health_modules/common');
 
-describe('Make Decision', function () {
+describe('High Risk Pregnancy Determination', function () {
     var enrolment;
     var programEncounter;
     var referenceDate;
