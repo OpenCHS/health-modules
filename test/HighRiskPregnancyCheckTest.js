@@ -26,7 +26,6 @@ describe('High Risk Pregnancy Determination', () => {
             diastolicConcept = concepts['Diastolic'];
         });
 
-
         describe('Chronic Hypertension', () => {
 
             it("Should not mark Chronic Hypertension as if BP is normal", () => {
@@ -73,23 +72,28 @@ describe('High Risk Pregnancy Determination', () => {
                 urineAlbumin = concepts['Urine Albumin'];
             });
 
-            it('Should not mark superimposed pre-eclampsia and Hypertension with Absent Urine Albumin and normal BP', () => {
-                enrolment.setObservation(systolicConcept.name, systolicConcept.highNormal - 1)
-                    .setObservation(diastolicConcept.name, diastolicConcept.highNormal - 1)
-                    .setObservation(urineAlbumin.name, "Absent");
-                const decisions = mother.getDecisions(programEncounter, referenceDate).encounterDecisions;
-                const complications = C.findValue(decisions, 'High Risk Conditions');
-                expect(complications).to.be.null;
-            });
+            describe('Absence of Urine Albumin', () => {
+                beforeEach(() => {
+                    enrolment.setObservation(systolicConcept.name, systolicConcept.highNormal - 1)
+                        .setObservation(diastolicConcept.name, diastolicConcept.highNormal - 1)
+                        .setObservation(urineAlbumin.name, "Absent");
 
-            it('Should not mark superimposed pre-eclampsia and Hypertension with Absent Urine Albumin', () => {
-                enrolment.setObservation(systolicConcept.name, systolicConcept.highNormal + 1)
-                    .setObservation(diastolicConcept.name, diastolicConcept.highNormal - 1)
-                    .setObservation(urineAlbumin.name, "Absent");
-                const decisions = mother.getDecisions(programEncounter, referenceDate).encounterDecisions;
-                const complications = C.findValue(decisions, 'High Risk Conditions');
-                expect(complications).to.exist;
-                expect(complications).to.be.an('array').to.not.include('Chronic Hypertension with Superimposed Pre-Eclampsia');
+                });
+
+                it('Should not mark superimposed pre-eclampsia and Hypertension with Absent Urine Albumin and normal BP', () => {
+                    const decisions = mother.getDecisions(programEncounter, referenceDate).encounterDecisions;
+                    const complications = C.findValue(decisions, 'High Risk Conditions');
+                    expect(complications).to.be.null;
+                });
+
+                it('Should not mark superimposed pre-eclampsia and Hypertension with Absent Urine Albumin', () => {
+                    enrolment.setObservation(diastolicConcept.name, diastolicConcept.highNormal + 1);
+                    const decisions = mother.getDecisions(programEncounter, referenceDate).encounterDecisions;
+                    const complications = C.findValue(decisions, 'High Risk Conditions');
+                    expect(complications).to.exist;
+                    expect(complications).to.be.an('array').to.not.include('Chronic Hypertension with Superimposed Pre-Eclampsia');
+                });
+
             });
 
             describe('Presence of Urine Albumin', () => {
