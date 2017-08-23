@@ -14,6 +14,10 @@ help:
 # </makefile>
 
 
+port=8021
+server=localhost
+
+
 # <env> (Code Environment)
 test_env: ## Run unit tests
 	npm test
