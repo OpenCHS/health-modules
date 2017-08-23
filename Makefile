@@ -1,13 +1,30 @@
-tests:
+# <makefile>
+# Objects: metadata, package, env (code platform), rules
+# Actions: clean, build, deploy, test
+help:
+	@IFS=$$'\n' ; \
+	help_lines=(`fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//'`); \
+	for help_line in $${help_lines[@]}; do \
+	    IFS=$$'#' ; \
+	    help_split=($$help_line) ; \
+	    help_command=`echo $${help_split[0]} | sed -e 's/^ *//' -e 's/ *$$//'` ; \
+	    help_info=`echo $${help_split[2]} | sed -e 's/^ *//' -e 's/ *$$//'` ; \
+	    printf "%-30s %s\n" $$help_command $$help_info ; \
+	done
+# </makefile>
+
+
+# <env> (Code Environment)
+test_env: ## Run unit tests
 	npm test
 
-setup:
-	npm install --save-dev babel-preset-es2015
-
-deps:
+build_env: ## Install npm dependencies
 	npm install
+# </env>
 
-package_rules:
+
+# <rules>
+build_rules: ## Create webpack files for all the rules
 	rm -f output/*.js
 	./node_modules/.bin/webpack --config build/programEncounterDecisionWebpack.config.js
 	./node_modules/.bin/webpack --config build/encounterDecisionWebpack.config.js
@@ -15,20 +32,15 @@ package_rules:
 	./node_modules/.bin/webpack --config build/programEnrolmentDecisionWebpack.config.js
 	./node_modules/.bin/webpack --config build/programConfigWebpack.config.js
 
-deploy_rules_locally: package_rules
+deploy_rules: build_rules ## build_rules and deploy them to the server
 	cp -r output/*.js ../openchs-server/external/
 	cp -r health_modules/*.json ../openchs-server/external/
 	date
+# </rules>
 
-recreate_db:
-	flyway -user=openchs -password=password -url=jdbc:postgresql://localhost:5432/openchs -schemas=openchs clean
-	flyway -user=openchs -password=password -url=jdbc:postgresql://localhost:5432/openchs -schemas=openchs -locations=filesystem:../openchs-server/openchs-server-api/src/main/resources/db/migration/ migrate
 
-setup_db: recreate_db setup_health_modules
-
-all: setup_db deploy_rules_locally
-
-setup_health_modules:
+# <metadata>
+deploy_metadata: ## Upload metadata to server
 	curl -X POST http://$(server):$(port)/concepts -d @health_modules/commonConcepts.json -H "Content-Type: application/json"
 
 	curl -X POST http://$(server):$(port)/forms -d @health_modules/outpatient/metadata/encounterForm.json -H "Content-Type: application/json"
@@ -54,8 +66,11 @@ setup_health_modules:
 	curl -X POST http://$(server):$(port)/programs -d @health_modules/diabetes/metadata/diabetesProgram.json -H "Content-Type: application/json"
 	curl -X POST http://$(server):$(port)/forms -d @health_modules/diabetes/metadata/diabetesProgramEncounterForm.json -H "Content-Type: application/json"
 	date
+# </metadata>
 
-deployable : package_rules
+
+# <package>
+build_package: build_rules ## Builds a deployable package
 	rm -f output/openchs_health_modules.tar.gz
 	rm -rf output/health_modules
 	mkdir output/health_modules
@@ -64,12 +79,10 @@ deployable : package_rules
 	cp output/*.js output/health_modules/rules/
 	cp health_modules/customMessages.json output/health_modules
 	cd output/health_modules && tar zcvf ../openchs_health_modules.tar.gz commonConcepts.json child mother diabetes ncd outpatient rules customMessages.json deploy.sh
+# </package>
 
-package_impl :
-	rm -rf output/impl
-	mkdir output/impl
-	cp lbp/registrationForm.json lbp/villages.sql lbp/catchments.sql lbp/deploy.sh output/impl
-	cd output/impl && tar zcvf ../openchs_impl.tar.gz *.*
-	
-play:
-	echo $(server)
+
+# <Workflows related, Composite, Convenience and Conventional Actions>
+deploy: deploy_metadata deploy_rules
+test: test_env
+# </Workflows related, Composite, Convenience and Conventional Actions>
