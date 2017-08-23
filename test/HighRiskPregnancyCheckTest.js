@@ -141,6 +141,108 @@ describe('High Risk Pregnancy Determination', () => {
                 enrolment.setObservation('Last Menstrual Period', new Date(2017, 1, 10));
             });
 
+            describe("Pregnancy Induced Hypertension", () => {
+                it("Should not mark high risk for normal BP", () => {
+                    enrolment.setObservation(systolicConcept.name, systolicConcept.highNormal - 1)
+                        .setObservation(diastolicConcept.name, diastolicConcept.highNormal - 1);
+                    const decisions = mother.getDecisions(programEncounter, referenceDate).encounterDecisions;
+                    const complications = C.findValue(decisions, "High Risk Conditions");
+                    expect(complications).to.not.exist;
+                });
+
+                describe("Normal BP during the first 20 weeks", () => {
+                    let programEncounter1, programEncounter2, programEncounter3;
+                    beforeEach(() => {
+                        referenceDate = new Date(2017, 6, 6);
+                        programEncounter1 = new ProgramEncounter("ANC 1", moment(referenceDate).subtract(19, "weeks"));
+                        programEncounter2 = new ProgramEncounter("ANC 2", moment(referenceDate).subtract(10, "weeks"));
+                        programEncounter3 = new ProgramEncounter("ANC 3", referenceDate);
+                        programEncounter1.setObservation(systolicConcept.name, systolicConcept.highNormal - 1)
+                            .setObservation(diastolicConcept.name, diastolicConcept.highNormal - 1);
+                        programEncounter2.setObservation(systolicConcept.name, systolicConcept.highNormal - 1)
+                            .setObservation(diastolicConcept.name, diastolicConcept.highNormal - 1);
+                        enrolment = new ProgramEnrolment('Mother', [programEncounter1, programEncounter2, programEncounter3]);
+                        programEncounter1.programEnrolment = enrolment;
+                        programEncounter2.programEnrolment = enrolment;
+                        programEncounter3.programEnrolment = enrolment;
+                    });
+
+                    it("Should mark high risk for high Systolic BP given normal before 20 Weeks", () => {
+                        programEncounter3.setObservation(systolicConcept.name, systolicConcept.highNormal + 1)
+                            .setObservation(diastolicConcept.name, diastolicConcept.highNormal - 1);
+                        const decisions = mother.getDecisions(programEncounter3, referenceDate).encounterDecisions;
+                        const complications = C.findValue(decisions, "High Risk Conditions");
+                        expect(complications).to.exist;
+                        expect(complications).to.be.an('array').that.includes('Pregnancy Induced Hypertension');
+                    });
+
+                    it("Should mark high risk for high Diastolic BP given normal before 20 Weeks", () => {
+                        programEncounter3.setObservation(systolicConcept.name, systolicConcept.highNormal - 1)
+                            .setObservation(diastolicConcept.name, diastolicConcept.highNormal + 1);
+                        const decisions = mother.getDecisions(programEncounter3, referenceDate).encounterDecisions;
+                        const complications = C.findValue(decisions, "High Risk Conditions");
+                        expect(complications).to.exist;
+                        expect(complications).to.be.an('array').that.includes('Pregnancy Induced Hypertension');
+                    });
+
+                    it("Should mark high risk for high Diastolic and Diastolic BP given normal before 20 Weeks", () => {
+                        programEncounter3.setObservation(systolicConcept.name, systolicConcept.highNormal + 1)
+                            .setObservation(diastolicConcept.name, diastolicConcept.highNormal + 1);
+                        const decisions = mother.getDecisions(programEncounter3, referenceDate).encounterDecisions;
+                        const complications = C.findValue(decisions, "High Risk Conditions");
+                        expect(complications).to.exist;
+                        expect(complications).to.be.an('array').that.includes('Pregnancy Induced Hypertension');
+                    });
+                });
+
+
+                describe("High BP during the first 20 weeks", () => {
+                    let programEncounter1, programEncounter2, programEncounter3;
+                    beforeEach(() => {
+                        referenceDate = new Date(2017, 6, 6);
+                        programEncounter1 = new ProgramEncounter("ANC 1", moment(referenceDate).subtract(19, "weeks"));
+                        programEncounter2 = new ProgramEncounter("ANC 2", moment(referenceDate).subtract(10, "weeks"));
+                        programEncounter3 = new ProgramEncounter("ANC 3", referenceDate);
+                        programEncounter1.setObservation(systolicConcept.name, systolicConcept.highNormal + 1)
+                            .setObservation(diastolicConcept.name, diastolicConcept.highNormal + 1);
+                        programEncounter2.setObservation(systolicConcept.name, systolicConcept.highNormal + 1)
+                            .setObservation(diastolicConcept.name, diastolicConcept.highNormal + 1);
+                        enrolment = new ProgramEnrolment('Mother', [programEncounter1, programEncounter2, programEncounter3]);
+                        programEncounter1.programEnrolment = enrolment;
+                        programEncounter2.programEnrolment = enrolment;
+                        programEncounter3.programEnrolment = enrolment;
+                    });
+
+                    it("Should mark high risk for high Systolic BP given normal before 20 Weeks", () => {
+                        programEncounter3.setObservation(systolicConcept.name, systolicConcept.highNormal + 1)
+                            .setObservation(diastolicConcept.name, diastolicConcept.highNormal - 1);
+                        const decisions = mother.getDecisions(programEncounter3, referenceDate).encounterDecisions;
+                        const complications = C.findValue(decisions, "High Risk Conditions");
+                        expect(complications).to.exist;
+                        expect(complications).to.be.an('array').that.does.not.include('Pregnancy Induced Hypertension');
+                    });
+
+                    it("Should mark high risk for high Diastolic BP given normal before 20 Weeks", () => {
+                        programEncounter3.setObservation(systolicConcept.name, systolicConcept.highNormal - 1)
+                            .setObservation(diastolicConcept.name, diastolicConcept.highNormal + 1);
+                        const decisions = mother.getDecisions(programEncounter3, referenceDate).encounterDecisions;
+                        const complications = C.findValue(decisions, "High Risk Conditions");
+                        expect(complications).to.exist;
+                        expect(complications).to.be.an('array').that.does.not.include('Pregnancy Induced Hypertension');
+                    });
+
+                    it("Should mark high risk for high Diastolic and Diastolic BP given normal before 20 Weeks", () => {
+                        programEncounter3.setObservation(systolicConcept.name, systolicConcept.highNormal + 1)
+                            .setObservation(diastolicConcept.name, diastolicConcept.highNormal + 1);
+                        const decisions = mother.getDecisions(programEncounter3, referenceDate).encounterDecisions;
+                        const complications = C.findValue(decisions, "High Risk Conditions");
+                        expect(complications).to.exist;
+                        expect(complications).to.be.an('array').that.does.not.include('Pregnancy Induced Hypertension');
+                    });
+                });
+
+
+            });
         });
 
 
