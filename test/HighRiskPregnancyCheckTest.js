@@ -1,4 +1,5 @@
 var expect = require('chai').expect;
+const moment = require('moment');
 const assert = require('chai').assert;
 const _ = require('lodash');
 var mother = require('../health_modules/mother/motherProgramEncounterDecision');
@@ -8,22 +9,21 @@ const C = require('../health_modules/common');
 const concepts = require('./Concepts');
 
 describe('High Risk Pregnancy Determination', () => {
-    let enrolment, programEncounter, referenceDate;
+    let enrolment, programEncounter, referenceDate, systolicConcept, diastolicConcept;
 
     beforeEach(() => {
         referenceDate = new Date(2017, 6, 6);
         programEncounter = new ProgramEncounter("ANC", referenceDate);
         enrolment = new ProgramEnrolment('Mother', [programEncounter]);
         programEncounter.programEnrolment = enrolment;
+        systolicConcept = concepts['Systolic'];
+        diastolicConcept = concepts['Diastolic'];
     });
 
     describe("Less than 20 weeks of pregnancy", () => {
-        let systolicConcept, diastolicConcept;
 
         beforeEach(() => {
-            enrolment.setObservation('Last Menstrual Period', new Date(2017, 5, 10));
-            systolicConcept = concepts['Systolic'];
-            diastolicConcept = concepts['Diastolic'];
+            enrolment.setObservation('Last Menstrual Period', moment(referenceDate).subtract(20, "weeks"));
         });
 
         describe('Chronic Hypertension', () => {
@@ -132,6 +132,17 @@ describe('High Risk Pregnancy Determination', () => {
 
             });
         });
+
+    });
+
+    describe("More than 20 weeks of pregnancy", () => {
+        describe("Pregnancy induced Hypertension", () => {
+            beforeEach(() => {
+                enrolment.setObservation('Last Menstrual Period', new Date(2017, 1, 10));
+            });
+
+        });
+
 
     });
 
