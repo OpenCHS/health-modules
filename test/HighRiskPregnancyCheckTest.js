@@ -7,77 +7,131 @@ const ProgramEnrolment = require("./Entities").ProgramEnrolment;
 const C = require('../health_modules/common');
 const concepts = require('./Concepts');
 
-describe('High Risk Pregnancy Determination', function () {
+describe('High Risk Pregnancy Determination', () => {
     let enrolment, programEncounter, referenceDate;
 
-    beforeEach(function () {
+    beforeEach(() => {
         referenceDate = new Date(2017, 6, 6);
         programEncounter = new ProgramEncounter("ANC", referenceDate);
         enrolment = new ProgramEnrolment('Mother', [programEncounter]);
-        enrolment.setObservation('Last Menstrual Period', new Date(2017, 1, 10));
         programEncounter.programEnrolment = enrolment;
     });
 
 
-    it("Should mark Chronic Hypertension as High Risk If Systolic is abnormal high and under 20 weeks", () => {
-        const systolicConcept = concepts['Systolic'];
-        const diastolicConcept = concepts['Diastolic'];
-        enrolment.setObservation('Last Menstrual Period', new Date(2017, 5, 10));
-        enrolment.setObservation(systolicConcept.name, systolicConcept.highNormal + 1);
-        enrolment.setObservation(diastolicConcept.name, diastolicConcept.highNormal - 1);
-        let decisions = mother.getDecisions(programEncounter, referenceDate).encounterDecisions;
-        expect(_.isEmpty(C.findValue(decisions, "High Risk Conditions"))).to.be.false;
+    describe('Chronic Hypertension', () => {
+        let systolicConcept, diastolicConcept;
+
+        beforeEach(() => {
+            enrolment.setObservation('Last Menstrual Period', new Date(2017, 5, 10));
+            systolicConcept = concepts['Systolic'];
+            diastolicConcept = concepts['Diastolic'];
+        });
+
+        it("Should not mark Chronic Hypertension as if BP is normal and below 20 weeks of gestation", () => {
+            enrolment.setObservation(systolicConcept.name, systolicConcept.highNormal - 1)
+                .setObservation(diastolicConcept.name, diastolicConcept.highNormal - 1);
+            const decisions = mother.getDecisions(programEncounter, referenceDate).encounterDecisions;
+            const complications = C.findValue(decisions, "High Risk Conditions");
+            expect(complications).to.not.exist;
+        });
+
+
+        it("Should mark Chronic Hypertension as High Risk If Systolic is abnormal high and under 20 weeks", () => {
+            enrolment.setObservation(systolicConcept.name, systolicConcept.highNormal + 1)
+                .setObservation(diastolicConcept.name, diastolicConcept.highNormal - 1);
+            const decisions = mother.getDecisions(programEncounter, referenceDate).encounterDecisions;
+            const complications = C.findValue(decisions, "High Risk Conditions");
+            expect(complications).to.exist;
+            expect(complications).to.be.an('array').that.includes('Chronic Hypertension');
+        });
+
+        it("Should mark Chronic Hypertension as High Risk If Diastolic is abnormal high and under 20 weeks", () => {
+            enrolment.setObservation(systolicConcept.name, systolicConcept.highNormal - 1)
+                .setObservation(diastolicConcept.name, diastolicConcept.highNormal + 1);
+            const decisions = mother.getDecisions(programEncounter, referenceDate).encounterDecisions;
+            const complications = C.findValue(decisions, "High Risk Conditions");
+            expect(complications).to.exist;
+            expect(complications).to.be.an('array').that.includes('Chronic Hypertension');
+        });
+
+        it("Should mark Chronic Hypertension as High Risk If Diastolic and Systolic is abnormal high and under 20 weeks", () => {
+            enrolment.setObservation(systolicConcept.name, systolicConcept.highNormal + 1)
+                .setObservation(diastolicConcept.name, diastolicConcept.highNormal + 1);
+            const decisions = mother.getDecisions(programEncounter, referenceDate).encounterDecisions;
+            const complications = C.findValue(decisions, "High Risk Conditions");
+            expect(complications).to.exist;
+            expect(complications).to.be.an('array').that.includes('Chronic Hypertension');
+        });
     });
 
-    it("Should mark Chronic Hypertension as High Risk If Diastolic is abnormal high and under 20 weeks", () => {
-        const systolicConcept = concepts['Systolic'];
-        const diastolicConcept = concepts['Diastolic'];
-        enrolment.setObservation('Last Menstrual Period', new Date(2017, 5, 10));
-        enrolment.setObservation(systolicConcept.name, systolicConcept.highNormal - 1);
-        enrolment.setObservation(diastolicConcept.name, diastolicConcept.highNormal + 1);
-        let decisions = mother.getDecisions(programEncounter, referenceDate).encounterDecisions;
-        expect(_.isEmpty(C.findValue(decisions, "High Risk Conditions"))).to.be.false;
+    describe("Chronic Hypertension with Superimposed Pre-Eclampsia", () => {
+        let systolicConcept, diastolicConcept, urineAlbumin;
+
+        beforeEach(() => {
+            enrolment.setObservation('Last Menstrual Period', new Date(2017, 5, 10));
+            systolicConcept = concepts['Systolic'];
+            diastolicConcept = concepts['Diastolic'];
+            urineAlbumin = concepts['Urine Albumin'];
+        });
+
+        it('Should not mark superimposed pre-eclampsia and Hypertension with Absent Urine Albumin and normal BP', () => {
+            enrolment.setObservation(systolicConcept.name, systolicConcept.highNormal - 1)
+                .setObservation(diastolicConcept.name, diastolicConcept.highNormal - 1)
+                .setObservation(urineAlbumin.name, "Absent");
+            const decisions = mother.getDecisions(programEncounter, referenceDate).encounterDecisions;
+            const complications = C.findValue(decisions, 'High Risk Conditions');
+            expect(complications).to.be.null;
+        });
+
+        it('Should not mark superimposed pre-eclampsia and Hypertension with Absent Urine Albumin', () => {
+            enrolment.setObservation(systolicConcept.name, systolicConcept.highNormal + 1)
+                .setObservation(diastolicConcept.name, diastolicConcept.highNormal - 1)
+                .setObservation(urineAlbumin.name, "Absent");
+            const decisions = mother.getDecisions(programEncounter, referenceDate).encounterDecisions;
+            const complications = C.findValue(decisions, 'High Risk Conditions');
+            expect(complications).to.exist;
+            expect(complications).to.be.an('array').to.not.include('Chronic Hypertension with Superimposed Pre-Eclampsia');
+        });
+
+        describe('Presence of Urine Albumin', () => {
+            beforeEach(() => {
+                enrolment.setObservation(systolicConcept.name, systolicConcept.highNormal - 1)
+                    .setObservation(diastolicConcept.name, diastolicConcept.highNormal + 1);
+
+            });
+
+            afterEach(() => {
+                const decisions = mother.getDecisions(programEncounter, referenceDate).encounterDecisions;
+                const complications = C.findValue(decisions, 'High Risk Conditions');
+                expect(complications).to.exist;
+                expect(complications).to.be.an('array').that.includes('Chronic Hypertension with Superimposed Pre-Eclampsia');
+            });
+
+            it('Should mark superimposed pre-eclampsia with Trace Urine Albumin ', () => {
+                enrolment.setObservation("Urine Albumin", 'Trace');
+            });
+
+            it('Should mark superimposed pre-eclampsia with +1 Urine Albumin ', () => {
+                enrolment.setObservation("Urine Albumin", '+1');
+            });
+
+            it('Should mark superimposed pre-eclampsia with +2 Urine Albumin ', () => {
+                enrolment.setObservation("Urine Albumin", '+2');
+            });
+
+            it('Should mark superimposed pre-eclampsia with +3 Urine Albumin ', () => {
+                enrolment.setObservation("Urine Albumin", '+3');
+            });
+
+            it('Should mark superimposed pre-eclampsia with +4 Urine Albumin ', () => {
+                enrolment.setObservation("Urine Albumin", '+4');
+            });
+
+        });
     });
 
-    it("Should mark Chronic Hypertension as High Risk If Diastolic and Systolic is abnormal high and under 20 weeks", () => {
-        const systolicConcept = concepts['Systolic'];
-        const diastolicConcept = concepts['Diastolic'];
-        enrolment.setObservation('Last Menstrual Period', new Date(2017, 5, 10));
-        enrolment.setObservation(systolicConcept.name, systolicConcept.highNormal + 1);
-        enrolment.setObservation(diastolicConcept.name, diastolicConcept.highNormal + 1);
-        let decisions = mother.getDecisions(programEncounter, referenceDate).encounterDecisions;
-        expect(_.isEmpty(C.findValue(decisions, "High Risk Conditions"))).to.be.false;
-    });
 
-    it('Check for mild pre-eclampsia ', function () {
-        programEncounter.setObservation("Hb", 4).setObservation("Systolic", 150).setObservation("Diastolic", 90);
-        programEncounter.setObservation("Urine Albumin", '+1');
-        var decisions = mother.getDecisions(programEncounter, referenceDate).encounterDecisions;
-        var complicationValues = C.findValue(decisions, 'High Risk Conditions');
-        expect(complicationValues.indexOf("Pregnancy Induced Hypertension")).is.not.equal(-1);
-        expect(complicationValues.indexOf("Mild Pre-Eclampsia")).is.not.equal(-1);
-    });
-
-    it('Check for eclampsia ', function () {
-        programEncounter.setObservation("Hb", 4).setObservation("Systolic", 150).setObservation("Diastolic", 90);
-        programEncounter.setObservation("Convulsions", true);
-        programEncounter.setObservation("Urine Albumin", '+1');
-        var decisions = mother.getDecisions(programEncounter, referenceDate).encounterDecisions;
-        var complicationValues = C.findValue(decisions, 'High Risk Conditions');
-        expect(complicationValues.indexOf("Pregnancy Induced Hypertension")).is.not.equal(-1);
-        expect(complicationValues.indexOf("Eclampsia")).is.not.equal(-1);
-    });
-
-    it('Check for severe pre-eclampsia ', function () {
-        programEncounter.setObservation("Hb", 4).setObservation("Systolic", 150).setObservation("Diastolic", 90);
-        programEncounter.setObservation("Urine Albumin", '+3');
-        var decisions = mother.getDecisions(programEncounter, referenceDate).encounterDecisions;
-        var complicationValues = C.findValue(decisions, 'High Risk Conditions');
-        expect(complicationValues.indexOf("Pregnancy Induced Hypertension")).is.not.equal(-1);
-        expect(complicationValues.indexOf("Severe Pre-Eclampsia")).is.not.equal(-1);
-    });
-
-    it('Check for Anemia based on Hb result', function () {
+    it('Check for Anemia based on Hb result', () => {
         programEncounter.setObservation("Hb", 4).setObservation("Systolic", 150).setObservation("Diastolic", 90);
         var decisions = mother.getDecisions(programEncounter, referenceDate).encounterDecisions;
         var complicationValues = C.findValue(decisions, 'High Risk Conditions');
@@ -89,4 +143,5 @@ describe('High Risk Pregnancy Determination', function () {
         var complicationValues = C.findValue(decisions, 'High Risk Conditions');
         expect(complicationValues).is.equal(null);
     });
+
 });
