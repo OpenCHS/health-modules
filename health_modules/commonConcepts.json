@@ -10,7 +10,7 @@
     "dataType": "Numeric",
     "lowAbsolute": 10,
     "lowNormal": 50,
-    "highNormal": 80,
+    "highNormal": 90,
     "highAbsolute": 120,
     "unit": "mm Hg"
   },
@@ -20,7 +20,7 @@
     "dataType": "Numeric",
     "lowAbsolute": 20,
     "lowNormal": 90,
-    "highNormal": 120,
+    "highNormal": 140,
     "highAbsolute": 190,
     "unit": "mm Hg"
   },

@@ -1,9 +1,11 @@
 var expect = require('chai').expect;
 const assert = require('chai').assert;
+const _ = require('lodash');
 var mother = require('../health_modules/mother/motherProgramEncounterDecision');
 const ProgramEncounter = require("./Entities").ProgramEncounter;
 const ProgramEnrolment = require("./Entities").ProgramEnrolment;
 const C = require('../health_modules/common');
+const concepts = require('./Concepts');
 
 describe('High Risk Pregnancy Determination', function () {
     let enrolment, programEncounter, referenceDate;
@@ -14,6 +16,37 @@ describe('High Risk Pregnancy Determination', function () {
         enrolment = new ProgramEnrolment('Mother', [programEncounter]);
         enrolment.setObservation('Last Menstrual Period', new Date(2017, 1, 10));
         programEncounter.programEnrolment = enrolment;
+    });
+
+
+    it("Should mark Chronic Hypertension as High Risk If Systolic is abnormal high and under 20 weeks", () => {
+        const systolicConcept = concepts['Systolic'];
+        const diastolicConcept = concepts['Diastolic'];
+        enrolment.setObservation('Last Menstrual Period', new Date(2017, 5, 10));
+        enrolment.setObservation(systolicConcept.name, systolicConcept.highNormal + 1);
+        enrolment.setObservation(diastolicConcept.name, diastolicConcept.highNormal - 1);
+        let decisions = mother.getDecisions(programEncounter, referenceDate).encounterDecisions;
+        expect(_.isEmpty(C.findValue(decisions, "High Risk Conditions"))).to.be.false;
+    });
+
+    it("Should mark Chronic Hypertension as High Risk If Diastolic is abnormal high and under 20 weeks", () => {
+        const systolicConcept = concepts['Systolic'];
+        const diastolicConcept = concepts['Diastolic'];
+        enrolment.setObservation('Last Menstrual Period', new Date(2017, 5, 10));
+        enrolment.setObservation(systolicConcept.name, systolicConcept.highNormal - 1);
+        enrolment.setObservation(diastolicConcept.name, diastolicConcept.highNormal + 1);
+        let decisions = mother.getDecisions(programEncounter, referenceDate).encounterDecisions;
+        expect(_.isEmpty(C.findValue(decisions, "High Risk Conditions"))).to.be.false;
+    });
+
+    it("Should mark Chronic Hypertension as High Risk If Diastolic and Systolic is abnormal high and under 20 weeks", () => {
+        const systolicConcept = concepts['Systolic'];
+        const diastolicConcept = concepts['Diastolic'];
+        enrolment.setObservation('Last Menstrual Period', new Date(2017, 5, 10));
+        enrolment.setObservation(systolicConcept.name, systolicConcept.highNormal + 1);
+        enrolment.setObservation(diastolicConcept.name, diastolicConcept.highNormal + 1);
+        let decisions = mother.getDecisions(programEncounter, referenceDate).encounterDecisions;
+        expect(_.isEmpty(C.findValue(decisions, "High Risk Conditions"))).to.be.false;
     });
 
     it('Check for mild pre-eclampsia ', function () {
