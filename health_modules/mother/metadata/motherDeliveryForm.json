@@ -60,6 +60,7 @@
           "uuid": "d4d13b86-435f-4fe6-bb74-6a00cd41b174",
           "name": "Delivery Complications",
           "dataType": "Coded",
+          "keyValues": [{"key": "Select", "value": "Multi"}],
           "answers": ["Obstructed Labour", "PPH", "Uterine Rupture", "Vaginal Rupture", "Maternal Death"]
         }
       ]

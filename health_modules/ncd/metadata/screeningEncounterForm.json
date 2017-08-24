@@ -25,14 +25,16 @@
           "uuid": "bce0867c-8604-4dff-b9b5-67a306c392c8",
           "name": "How long did the symptoms last",
           "dataType": "Coded",
-          "answers": ["Lasted few minutes", "Days, weeks or still persisting"]
+          "answers": ["Lasted few minutes", "Days, weeks or still persisting"],
+          "keyValues": [{"key": "Select", "value": "Single"}]
         },
         {
           "uuid": "e90908be-e088-44ac-84fc-82a2a96108ae",
           "name": "Any other symptoms",
           "conceptName": "NCD Screening Other Symptoms",
           "answers": ["Breathing difficulty particularly on exertion", "Swelling of feet", "Urinary difficulties", "History of passing stones"],
-          "dataType": "Coded"
+          "dataType": "Coded",
+          "keyValues": [{"key": "Select", "value": "Multi"}]
         },
         {
           "uuid": "5065a0ae-58b3-4d91-8a91-aaad180b8a90",
@@ -121,7 +123,8 @@
           "uuid": "04fd811e-c111-4fc9-87f8-e74784931a74",
           "name": "Feet examination",
           "dataType": "Coded",
-          "answers": ["Calluses", "Ulcers", "Prominent veins", "Edema", "Injuries"]
+          "answers": ["Calluses", "Ulcers", "Prominent veins", "Edema", "Injuries"],
+          "keyValues": [{"key": "Select", "value": "Multi"}]
         }
       ]
     },

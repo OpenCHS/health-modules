@@ -32,7 +32,6 @@
         {
           "name": "Death reason",
           "uuid": "f6efd6e9-ea2d-4a8f-baeb-6fe12a86f7d8",
-          "keyValues": [],
           "dataType": "Text",
           "displayOrder": 2,
           "mandatory": false
@@ -40,7 +39,6 @@
         {
           "name": "Death place",
           "uuid": "83e6cb7b-5f2d-4c5b-a9d1-0be071d6e956",
-          "keyValues": [],
           "dataType": "Text",
           "displayOrder": 3,
           "mandatory": false

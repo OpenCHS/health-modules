@@ -46,7 +46,7 @@
         {
           "name": "Place of abortion",
           "uuid": "012590a5-15e9-445a-b75f-e41a9d0688cf",
-          "keyValues": [],
+          "keyValues": [{"key": "Select", "value": "Single"}],
           "dataType": "Coded",
           "displayOrder": 4,
           "answers": [

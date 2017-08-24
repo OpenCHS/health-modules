@@ -90,6 +90,7 @@
         {
           "uuid": "5682fc9d-a852-445d-9e8e-d67a1fa51266",
           "name": "Breast Examination - Nipple",
+          "keyValues": [{"key": "Select", "value": "Single"}],
           "dataType": "Coded",
           "answers": ["Retracted nipple", "Flat", "Normal"],
           "displayOrder": 8
@@ -139,6 +140,7 @@
           "name": "Fetal movements",
           "dataType": "Coded",
           "answers": ["Normal", "Reduced", "Absent"],
+          "keyValues": [{"key": "Select", "value": "Single"}],
           "displayOrder": 4
         },
         {
