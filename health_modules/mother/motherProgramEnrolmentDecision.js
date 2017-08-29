@@ -1,6 +1,7 @@
 const motherVisitSchedule = require('./motherVisitSchedule');
 const programDecision = require('./motherProgramDecision');
 const c = require('../common');
+const motherVaccinationSchedule = require('./motherVaccSchedule');
 
 module.exports = {};
 
@@ -42,4 +43,8 @@ module.exports.validate = function (programEnrolment) {
     }
 
     return validationResults;
+};
+
+module.exports.getChecklists = function (programEnrolment, today) {
+    return [motherVaccinationSchedule.getVaccSchedule(programEnrolment)];
 };

@@ -148,5 +148,20 @@
     "uuid": "e7139d02-6c9f-44ad-b156-68091e5a4b96",
     "dataType": "Coded",
     "answers": ["Retracted", "Flat", "Normal"]
+  },
+  {
+    "name": "TT1",
+    "uuid": "96319095-480d-4701-aeb1-2ef161cdc069",
+    "dataType": "N/A"
+  },
+  {
+    "name": "TT Booster",
+    "uuid": "da8638a2-81f3-4491-8ec8-6295701db04f",
+    "dataType": "N/A"
+  },
+  {
+    "name": "TT2",
+    "uuid": "c63c486e-0105-4f34-8566-7cfdb4a84cb5",
+    "dataType": "N/A"
   }
 ]

@@ -89,6 +89,14 @@ function C() {
 
     this.createValidationError = function (messageKey) {
         return this.createValidationResult(false, messageKey);
+    };
+
+    this.addVaccinationSchedule = function(baseDate, nameOfVaccination, dueDateIncrement, maxDateIncrement) {
+        return {
+            name: nameOfVaccination,
+            dueDate: this.addDays(baseDate, dueDateIncrement),
+            maxDate: this.addDays(baseDate, maxDateIncrement)
+        };
     }
 }
 
