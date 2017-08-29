@@ -8,11 +8,11 @@ function ObservationRule(conceptName, {allowedOccurrences = -1, validFrom = 0, v
 
 let observationRules = [];
 addANCRule(new ObservationRule("Breast Examination - Nipple", {allowedOccurrences: 1, validTill: 12}));
-addANCRule(new ObservationRule("Fundal Height", {}));
+addANCRule(new ObservationRule("Fundal Height", {validFrom: 12}));
 addANCRule(new ObservationRule("Fundal height from pubic symphysis", {}));
-addANCRule(new ObservationRule("Fetal movements", {validFrom: 21}));
-addANCRule(new ObservationRule("Fetal Presentation", {validFrom: 29}));
-addANCRule(new ObservationRule("Fetal Heart Sound", {validFrom: 29}));
+addANCRule(new ObservationRule("Fetal movements", {validFrom: 20}));
+addANCRule(new ObservationRule("Foetal presentation", {validFrom: 28}));
+addANCRule(new ObservationRule("Fetal Heart Sound", {validFrom: 28}));
 addANCRule(new ObservationRule("Hb", {allowedOccurrences: 1}));
 addANCRule(new ObservationRule("Blood Sugar", {allowedOccurrences: 1}));
 addANCRule(new ObservationRule("VDRL", {allowedOccurrences: 1}));

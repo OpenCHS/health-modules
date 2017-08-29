@@ -153,31 +153,6 @@
       ]
     },
     {
-      "uuid": "d5427eb1-d286-4f15-9cc2-e751d8c5ed3b",
-      "name": "Per vaginal examination",
-      "display": "Per vaginal examination",
-      "displayOrder": 3,
-      "formElements": [
-        {
-          "name": "Vaginal Bleeding",
-          "uuid": "81e8767e-abc2-4453-a87f-e0ebbd8a8996",
-          "keyValues": [
-            {
-              "key": "TrueValue",
-              "value": "Present"
-            },
-            {
-              "key": "FalseValue",
-              "value": "Absent"
-            }
-          ],
-          "dataType": "Boolean",
-          "displayOrder": 1,
-          "mandatory": false
-        }
-      ]
-    },
-    {
       "uuid": "cb8b6812-b58b-428d-afbd-7f53748c684d",
       "name": "ANC Mother Vitals",
       "display": "Vitals",
@@ -489,7 +464,7 @@
           "uuid": "828eb65a-019a-4600-813d-1e846c73ce27",
           "name": "Pregnancy Complaints",
           "dataType": "Coded",
-          "answers": ["Morning Sickness", "Severe Abdominal Pain", "Fever", "PV bleeding", "Headache", "Difficulty in breathing", "PV bleeding", "Blurring of vision", "PV leaking", "Decreased Fetal movements"],
+          "answers": ["Morning Sickness", "Severe Abdominal Pain", "Fever", "Headache", "Difficulty in breathing", "PV bleeding", "Blurring of vision", "PV leaking", "Decreased Fetal movements"],
           "displayOrder": 1,
           "keyValues": [{"key": "Select", "value": "Multi"}]
         }
