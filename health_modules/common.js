@@ -7,7 +7,7 @@ function C() {
     };
 
     this.copyDate = function (date) {
-        return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+        return new Date(date.getTime());
     };
 
     this.encounterExists = function (encounters, encounterTypeName, encounterName) {
