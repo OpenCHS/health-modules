@@ -2,7 +2,7 @@ const C = require('../common');
 
 var getVaccSchedule = function (programEnrolment) {
     const vaccScheduleItems = [];
-    const lmpDate = programEnrolment.findObservation("Last Menstrual Period");
+    const lmpDate = programEnrolment.getObservationValue('Last Menstrual Period');
 
     //second trimester
     vaccScheduleItems.push(C.addVaccinationSchedule(lmpDate, "TT1", 0, 15));
