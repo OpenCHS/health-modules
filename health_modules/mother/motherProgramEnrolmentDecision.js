@@ -46,5 +46,6 @@ module.exports.validate = function (programEnrolment) {
 };
 
 module.exports.getChecklists = function (programEnrolment, today) {
-    return [motherVaccinationSchedule.getVaccSchedule(programEnrolment)];
+    // return [motherVaccinationSchedule.getVaccSchedule(programEnrolment)];
+    return [];
 };
