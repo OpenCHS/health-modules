@@ -9,15 +9,23 @@ const C = require('../health_modules/common');
 const concepts = require('./Concepts');
 
 describe('High Risk Pregnancy Determination', () => {
-    let enrolment, programEncounter, referenceDate, systolicConcept, diastolicConcept;
+    let enrolment, programEncounter, referenceDate, systolicConcept, diastolicConcept, hb, age, dob, hiv, vdrl, height,
+        weight;
 
     beforeEach(() => {
         referenceDate = new Date(2017, 6, 6);
+        dob = new Date(1990, 6, 6);
+        age = moment(referenceDate).diff(dob, 'years');
         programEncounter = new ProgramEncounter("ANC", referenceDate);
-        enrolment = new ProgramEnrolment('Mother', [programEncounter]);
+        enrolment = new ProgramEnrolment('Mother', [programEncounter], dob);
         programEncounter.programEnrolment = enrolment;
         systolicConcept = concepts['Systolic'];
         diastolicConcept = concepts['Diastolic'];
+        hb = concepts['Hb'];
+        hiv = concepts['HIV/AIDS'];
+        vdrl = concepts['VDRL'];
+        height = concepts["Height"];
+        weight = concepts["Weight"];
     });
 
     describe("Less than 20 weeks of pregnancy", () => {
@@ -250,17 +258,130 @@ describe('High Risk Pregnancy Determination', () => {
 
     });
 
-    it('Check for Anemia based on Hb result', () => {
-        programEncounter.setObservation("Hb", 4).setObservation("Systolic", 150).setObservation("Diastolic", 90);
-        var decisions = mother.getDecisions(programEncounter, referenceDate).encounterDecisions;
-        var complicationValues = C.findValue(decisions, 'High Risk Conditions');
-        expect(complicationValues.indexOf("Severe Anemia")).is.not.equal(-1);
+
+    describe("Anemia", () => {
+        it("Shouldn't have Anemia if hb is normal", () => {
+            const range = hb.range.Female.find((ageRange) => (age >= ageRange.ageStart && age <= ageRange.ageEnd && ageRange.ageUnit === "years"));
+            enrolment.setObservation(hb.name, range.lowNormal + 1);
+            const decisions = mother.getDecisions(programEncounter, referenceDate).encounterDecisions;
+            const complicationValues = C.findValue(decisions, 'High Risk Conditions');
+            expect(complicationValues).to.not.exist;
+        });
+
+        it("Should have Moderate Anemia if hb is moderately below normal", () => {
+            const range = hb.range.Female.find((ageRange) => (age >= ageRange.ageStart && age <= ageRange.ageEnd && ageRange.ageUnit === "years"));
+            enrolment.setObservation(hb.name, range.lowAbsolute + 1);
+            const decisions = mother.getDecisions(programEncounter, referenceDate).encounterDecisions;
+            const complicationValues = C.findValue(decisions, 'High Risk Conditions');
+            expect(complicationValues).to.exist;
+            expect(complicationValues).to.be.an('array').that.includes('Moderate Anemia');
+        });
+
+        it("Should have Severe Anemia if hb is serverly below normal", () => {
+            const range = hb.range.Female.find((ageRange) => (age >= ageRange.ageStart && age <= ageRange.ageEnd && ageRange.ageUnit === "years"));
+            enrolment.setObservation(hb.name, range.lowAbsolute - 1);
+            const decisions = mother.getDecisions(programEncounter, referenceDate).encounterDecisions;
+            const complicationValues = C.findValue(decisions, 'High Risk Conditions');
+            expect(complicationValues).to.exist;
+            expect(complicationValues).to.be.an('array').that.includes('Severe Anemia');
+        });
+
     });
 
-    it('no high risk condition', () => {
-        var decisions = mother.getDecisions(programEncounter, new Date(2017, 2, 10)).encounterDecisions;
-        var complicationValues = C.findValue(decisions, 'High Risk Conditions');
-        expect(complicationValues).is.equal(null);
+    describe("HIV/AIDS", () => {
+        it("Shouldn't mark high risk if HIV/AIDS negative", () => {
+            enrolment.setObservation(hiv.name, 'Negative');
+            const decisions = mother.getDecisions(programEncounter, referenceDate).encounterDecisions;
+            const complicationValues = C.findValue(decisions, 'High Risk Conditions');
+            expect(complicationValues).to.not.exist;
+        });
+
+        it("Should mark high risk if HIV/AIDS Postive", () => {
+            enrolment.setObservation(hiv.name, 'Positive');
+            const decisions = mother.getDecisions(programEncounter, referenceDate).encounterDecisions;
+            const complicationValues = C.findValue(decisions, 'High Risk Conditions');
+            expect(complicationValues).to.exist;
+            expect(complicationValues).to.be.an('array').that.includes('HIV/AIDS Positive');
+        });
     });
 
+
+    describe("VDRL", () => {
+        it("Shouldn't mark high risk if VDRL negative", () => {
+            enrolment.setObservation(vdrl.name, 'Negative');
+            const decisions = mother.getDecisions(programEncounter, referenceDate).encounterDecisions;
+            const complicationValues = C.findValue(decisions, 'High Risk Conditions');
+            expect(complicationValues).to.not.exist;
+        });
+
+        it("Should mark high risk if VDRL Postive", () => {
+            enrolment.setObservation(vdrl.name, 'Positive');
+            const decisions = mother.getDecisions(programEncounter, referenceDate).encounterDecisions;
+            const complicationValues = C.findValue(decisions, 'High Risk Conditions');
+            expect(complicationValues).to.exist;
+            expect(complicationValues).to.be.an('array').that.includes('VDRL Positive');
+        });
+    });
+
+    describe("Short Stature", () => {
+        it("Shouldn't mark high risk if height is not specified", () => {
+            const decisions = mother.getDecisions(programEncounter, referenceDate).encounterDecisions;
+            const complicationValues = C.findValue(decisions, 'High Risk Conditions');
+            expect(complicationValues).to.not.exist;
+        });
+
+        it("Shouldn't mark high risk if height is above 145cms", () => {
+            enrolment.setObservation(height.name, 151);
+            const decisions = mother.getDecisions(programEncounter, referenceDate).encounterDecisions;
+            const complicationValues = C.findValue(decisions, 'High Risk Conditions');
+            expect(complicationValues).to.not.exist;
+        });
+
+        it("Should mark high risk if height is equal to 145cms", () => {
+            enrolment.setObservation(height.name, 145);
+            const decisions = mother.getDecisions(programEncounter, referenceDate).encounterDecisions;
+            const complicationValues = C.findValue(decisions, 'High Risk Conditions');
+            expect(complicationValues).to.exist;
+            expect(complicationValues).to.be.an('array').that.includes('Short Stature');
+        });
+
+        it("Should mark high risk if height is less than 145cms", () => {
+            enrolment.setObservation(height.name, 100);
+            const decisions = mother.getDecisions(programEncounter, referenceDate).encounterDecisions;
+            const complicationValues = C.findValue(decisions, 'High Risk Conditions');
+            expect(complicationValues).to.exist;
+            expect(complicationValues).to.be.an('array').that.includes('Short Stature');
+        });
+    });
+
+    describe("Weight Issues", () => {
+        it("Shouldn't mark high risk if weight is not specified", () => {
+            const decisions = mother.getDecisions(programEncounter, referenceDate).encounterDecisions;
+            const complicationValues = C.findValue(decisions, 'High Risk Conditions');
+            expect(complicationValues).to.not.exist;
+        });
+
+        it("Shouldn't mark high risk if weight is above 35Kgs", () => {
+            enrolment.setObservation(weight.name, 36);
+            const decisions = mother.getDecisions(programEncounter, referenceDate).encounterDecisions;
+            const complicationValues = C.findValue(decisions, 'High Risk Conditions');
+            expect(complicationValues).to.not.exist;
+        });
+
+        it("Should mark high risk if height is equal to 35Kgs", () => {
+            enrolment.setObservation(weight.name, 35);
+            const decisions = mother.getDecisions(programEncounter, referenceDate).encounterDecisions;
+            const complicationValues = C.findValue(decisions, 'High Risk Conditions');
+            expect(complicationValues).to.exist;
+            expect(complicationValues).to.be.an('array').that.includes('Underweight');
+        });
+
+        it("Should mark high risk if height is less than 35Kgs", () => {
+            enrolment.setObservation(weight.name, 31);
+            const decisions = mother.getDecisions(programEncounter, referenceDate).encounterDecisions;
+            const complicationValues = C.findValue(decisions, 'High Risk Conditions');
+            expect(complicationValues).to.exist;
+            expect(complicationValues).to.be.an('array').that.includes('Underweight');
+        });
+    });
 });
