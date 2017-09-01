@@ -384,4 +384,45 @@ describe('High Risk Pregnancy Determination', () => {
             expect(complicationValues).to.be.an('array').that.includes('Underweight');
         });
     });
+
+    describe("Under/Old Age Pregnancy", () => {
+        const setDOBTo = (age) => {
+            referenceDate = new Date(2017, 6, 6);
+            dob = moment(referenceDate).add(age, 'years');
+            programEncounter = new ProgramEncounter("ANC", referenceDate);
+            enrolment = new ProgramEnrolment('Mother', [programEncounter], dob);
+            programEncounter.programEnrolment = enrolment;
+        };
+
+        it("Shouldn't mark high risk if age is 18", () => {
+            setDOBTo(18);
+            const decisions = mother.getDecisions(programEncounter, referenceDate).encounterDecisions;
+            const complicationValues = C.findValue(decisions, 'High Risk Conditions');
+            expect(complicationValues).to.not.exist;
+        });
+
+        it("Shouldn't mark high risk if age is equal to 30", () => {
+            setDOBTo(30);
+            const decisions = mother.getDecisions(programEncounter, referenceDate).encounterDecisions;
+            const complicationValues = C.findValue(decisions, 'High Risk Conditions');
+            expect(complicationValues).to.not.exist;
+        });
+
+        it("Should mark high risk if age is less than 18", () => {
+            setDOBTo(15);
+            const decisions = mother.getDecisions(programEncounter, referenceDate).encounterDecisions;
+            const complicationValues = C.findValue(decisions, 'High Risk Conditions');
+            expect(complicationValues).to.exist;
+            expect(complicationValues).to.be.an('array').that.includes('Under age pregnancy');
+        });
+
+        it("Should mark high risk if age is more than 30", () => {
+            setDOBTo(32);
+            const decisions = mother.getDecisions(programEncounter, referenceDate).encounterDecisions;
+            const complicationValues = C.findValue(decisions, 'High Risk Conditions');
+            expect(complicationValues).to.exist;
+            expect(complicationValues).to.be.an('array').that.includes('Old age pregnancy');
+        });
+    });
+    
 });
