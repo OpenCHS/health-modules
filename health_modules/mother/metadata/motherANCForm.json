@@ -156,7 +156,7 @@
       "uuid": "cb8b6812-b58b-428d-afbd-7f53748c684d",
       "name": "ANC Mother Vitals",
       "display": "Vitals",
-      "displayOrder": 4,
+      "displayOrder": 3,
       "formElements": [
         {
           "name": "Systolic",
@@ -204,7 +204,7 @@
       "uuid": "07458686-88c5-448f-92ed-c150c0629b4f",
       "name": "ANC Lab Diagnostics - Blood",
       "display": "Lab Diagnostics - Blood",
-      "displayOrder": 5,
+      "displayOrder": 4,
       "formElements": [
         {
           "name": "Blood Examination Date",
@@ -375,7 +375,7 @@
       "uuid": "33b4dfd6-2b49-4230-8132-46bd2232c2db",
       "name": "ANC Lab Diagnostics - Urine",
       "display": "Lab Diagnostics - Urine",
-      "displayOrder": 6,
+      "displayOrder": 5,
       "formElements": [
         {
           "name": "Urine Albumin",
@@ -425,7 +425,7 @@
       "uuid": "353eec4f-052f-466b-9acb-7a740e5c19e5",
       "name": "ANC Lab Diagnostics - USG",
       "display": "Lab Diagnostics - USG",
-      "displayOrder": 7,
+      "displayOrder": 6,
       "formElements": [
         {
           "name": "US Scanning Done",
@@ -458,7 +458,7 @@
       "uuid": "11db35e5-4082-4943-b67d-2ed4f543ce89",
       "name": "Complaints",
       "display": "Complaints",
-      "displayOrder": 8,
+      "displayOrder": 7,
       "formElements": [
         {
           "uuid": "828eb65a-019a-4600-813d-1e846c73ce27",
