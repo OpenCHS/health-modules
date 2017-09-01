@@ -65,7 +65,7 @@ describe('High Risk Pregnancy Determination', () => {
             });
         });
 
-        describe("Chronic Hypertension with Superimposed Pre-Eclampsia", () => {
+        describe("Superimposed Pre-Eclampsia", () => {
             let urineAlbumin;
 
             beforeEach(() => {
@@ -91,7 +91,8 @@ describe('High Risk Pregnancy Determination', () => {
                     const decisions = mother.getDecisions(programEncounter, referenceDate).encounterDecisions;
                     const complications = C.findValue(decisions, 'High Risk Conditions');
                     expect(complications).to.exist;
-                    expect(complications).to.be.an('array').to.not.include('Chronic Hypertension with Superimposed Pre-Eclampsia');
+                    expect(complications).to.be.an('array').that.includes('Chronic Hypertension');
+                    expect(complications).to.be.an('array').to.not.include('Superimposed Pre-Eclampsia');
                 });
 
             });
@@ -107,7 +108,8 @@ describe('High Risk Pregnancy Determination', () => {
                     const decisions = mother.getDecisions(programEncounter, referenceDate).encounterDecisions;
                     const complications = C.findValue(decisions, 'High Risk Conditions');
                     expect(complications).to.exist;
-                    expect(complications).to.be.an('array').that.includes('Chronic Hypertension with Superimposed Pre-Eclampsia');
+                    expect(complications).to.be.an('array').that.includes('Chronic Hypertension');
+                    expect(complications).to.be.an('array').that.includes('Superimposed Pre-Eclampsia');
                 });
 
                 it('Should mark superimposed pre-eclampsia with Trace Urine Albumin ', () => {
