@@ -11,7 +11,7 @@ const concepts = require('./Concepts');
 
 describe('High Risk Pregnancy Determination', () => {
     let enrolment, programEncounter, referenceDate, systolicConcept, diastolicConcept, hb, age, dob, hiv, vdrl, height,
-        weight, sicklingTest;
+        weight, sicklingTest, hbE;
 
     beforeEach(() => {
         referenceDate = new Date(2017, 6, 6);
@@ -28,6 +28,7 @@ describe('High Risk Pregnancy Determination', () => {
         height = concepts["Height"];
         weight = concepts["Weight"];
         sicklingTest = concepts["Sickling Test"];
+        hbE = concepts["Hb Electrophoresis"];
         enrolment.setObservation('Last Menstrual Period', moment(referenceDate).subtract(20, "weeks").toDate());
     });
 
@@ -437,7 +438,7 @@ describe('High Risk Pregnancy Determination', () => {
             expect(complicationValues).to.not.exist;
         });
 
-        it("Should mark high risk if Sickling Test Postive", () => {
+        it("Should mark high risk if Sickling Test Positive", () => {
             enrolment.setObservation(sicklingTest.name, 'Negative');
             const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
             const complicationValues = C.findValue(decisions, 'High Risk Conditions');
@@ -445,4 +446,29 @@ describe('High Risk Pregnancy Determination', () => {
             expect(complicationValues).to.be.an('array').that.includes('Sickling Positive');
         });
     });
+
+    describe("Sickle Cell Disease", () => {
+        it("Shouldn't mark high risk if Hb Electrophoresis AA", () => {
+            enrolment.setObservation(hbE.name, 'AA');
+            const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
+            const complicationValues = C.findValue(decisions, 'High Risk Conditions');
+            expect(complicationValues).to.not.exist;
+        });
+
+        it("Shouldn't mark high risk if Hb Electrophoresis AS", () => {
+            enrolment.setObservation(hbE.name, 'AS');
+            const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
+            const complicationValues = C.findValue(decisions, 'High Risk Conditions');
+            expect(complicationValues).to.not.exist;
+        });
+
+        it("Should mark high risk if Hb Electrophoresis SS", () => {
+            enrolment.setObservation(hbE.name, 'SS');
+            const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
+            const complicationValues = C.findValue(decisions, 'High Risk Conditions');
+            expect(complicationValues).to.exist;
+            expect(complicationValues).to.be.an('array').that.includes('Sickle Cell Disease SS');
+        });
+    });
+
 });
