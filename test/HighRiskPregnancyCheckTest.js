@@ -11,7 +11,7 @@ const concepts = require('./Concepts');
 
 describe('High Risk Pregnancy Determination', () => {
     let enrolment, programEncounter, referenceDate, systolicConcept, diastolicConcept, hb, age, dob, hiv, vdrl, height,
-        weight, sicklingTest, hbE;
+        weight, sicklingTest, hbE, hbsAg;
 
     beforeEach(() => {
         referenceDate = new Date(2017, 6, 6);
@@ -29,6 +29,7 @@ describe('High Risk Pregnancy Determination', () => {
         weight = concepts["Weight"];
         sicklingTest = concepts["Sickling Test"];
         hbE = concepts["Hb Electrophoresis"];
+        hbsAg = concepts["HbsAg"];
         enrolment.setObservation('Last Menstrual Period', moment(referenceDate).subtract(20, "weeks").toDate());
     });
 
@@ -468,6 +469,24 @@ describe('High Risk Pregnancy Determination', () => {
             const complicationValues = C.findValue(decisions, 'High Risk Conditions');
             expect(complicationValues).to.exist;
             expect(complicationValues).to.be.an('array').that.includes('Sickle Cell Disease SS');
+        });
+    });
+
+
+    describe("Hepatitis B", () => {
+        it("Shouldn't mark high risk if HbsAg Negative", () => {
+            enrolment.setObservation(hbsAg.name, 'Negative');
+            const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
+            const complicationValues = C.findValue(decisions, 'High Risk Conditions');
+            expect(complicationValues).to.not.exist;
+        });
+
+        it("Should mark high risk if HbsAg Positive", () => {
+            enrolment.setObservation(hbsAg.name, 'Positive');
+            const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
+            const complicationValues = C.findValue(decisions, 'High Risk Conditions');
+            expect(complicationValues).to.exist;
+            expect(complicationValues).to.be.an('array').that.includes('Hepatitis B Positive');
         });
     });
 
