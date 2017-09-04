@@ -11,7 +11,7 @@ const concepts = require('./Concepts');
 
 describe('High Risk Pregnancy Determination', () => {
     let enrolment, programEncounter, referenceDate, systolicConcept, diastolicConcept, hb, age, dob, hiv, vdrl, height,
-        weight;
+        weight, sicklingTest;
 
     beforeEach(() => {
         referenceDate = new Date(2017, 6, 6);
@@ -27,6 +27,7 @@ describe('High Risk Pregnancy Determination', () => {
         vdrl = concepts['VDRL'];
         height = concepts["Height"];
         weight = concepts["Weight"];
+        sicklingTest = concepts["Sickling Test"];
         enrolment.setObservation('Last Menstrual Period', moment(referenceDate).subtract(20, "weeks").toDate());
     });
 
@@ -428,4 +429,20 @@ describe('High Risk Pregnancy Determination', () => {
         });
     });
 
+    describe("Sickling Positive", () => {
+        it("Shouldn't mark high risk if Sickling test negative", () => {
+            enrolment.setObservation(sicklingTest.name, 'Negative');
+            const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
+            const complicationValues = C.findValue(decisions, 'High Risk Conditions');
+            expect(complicationValues).to.not.exist;
+        });
+
+        it("Should mark high risk if Sickling Test Postive", () => {
+            enrolment.setObservation(sicklingTest.name, 'Negative');
+            const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
+            const complicationValues = C.findValue(decisions, 'High Risk Conditions');
+            expect(complicationValues).to.exist;
+            expect(complicationValues).to.be.an('array').that.includes('Sickling Positive');
+        });
+    });
 });
