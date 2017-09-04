@@ -11,7 +11,7 @@ const concepts = require('./Concepts');
 
 describe('High Risk Pregnancy Determination', () => {
     let enrolment, programEncounter, referenceDate, systolicConcept, diastolicConcept, hb, age, dob, hiv, vdrl, height,
-        weight, sicklingTest, hbE, hbsAg;
+        weight, sicklingTest, hbE, hbsAg, obstetricsHistory, paracheck;
 
     beforeEach(() => {
         referenceDate = new Date(2017, 6, 6);
@@ -30,6 +30,8 @@ describe('High Risk Pregnancy Determination', () => {
         sicklingTest = concepts["Sickling Test"];
         hbE = concepts["Hb Electrophoresis"];
         hbsAg = concepts["HbsAg"];
+        paracheck = concepts["Paracheck"];
+        obstetricsHistory = concepts["Obstetrics History"];
         enrolment.setObservation('Last Menstrual Period', moment(referenceDate).subtract(20, "weeks").toDate());
     });
 
@@ -488,6 +490,50 @@ describe('High Risk Pregnancy Determination', () => {
             expect(complicationValues).to.exist;
             expect(complicationValues).to.be.an('array').that.includes('Hepatitis B Positive');
         });
+    });
+
+    describe("Obstetrics History", () => {
+        it("Should mark high risk if Intrauterine Growth Retardation in Obstetrics History", () => {
+            enrolment.setObservation(obstetricsHistory.name, 'Intrauterine Growth Retardation');
+            const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
+            const complicationValues = C.findValue(decisions, 'High Risk Conditions');
+            expect(complicationValues).to.exist;
+            expect(complicationValues).to.be.an('array').that.includes('Intrauterine Growth Retardation');
+        });
+    });
+
+    describe('Malaria', () => {
+        it("Shouldn't mark high risk if Paracheck negative", () => {
+            enrolment.setObservation(paracheck.name, 'Negative');
+            const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
+            const complications = C.findValue(decisions, 'High Risk Conditions');
+            expect(complications).to.not.exist;
+        });
+
+        it('Should mark high risk and malaria positive if Paracheck PV', () => {
+            enrolment.setObservation(paracheck.name, 'Positive for PV');
+            const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
+            const complications = C.findValue(decisions, 'High Risk Conditions');
+            expect(complications).to.exist;
+            expect(complications).to.be.an('array').that.includes('Malaria');
+        });
+
+        it('Should mark high risk and malaria positive if Paracheck PF', () => {
+            enrolment.setObservation(paracheck.name, 'Positive for PF');
+            const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
+            const complications = C.findValue(decisions, 'High Risk Conditions');
+            expect(complications).to.exist;
+            expect(complications).to.be.an('array').that.includes('Malaria');
+        });
+
+        it('Should mark high risk and malaria positive if Paracheck PF and PV', () => {
+            enrolment.setObservation(paracheck.name, 'Positive for PF and PV');
+            const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
+            const complications = C.findValue(decisions, 'High Risk Conditions');
+            expect(complications).to.exist;
+            expect(complications).to.be.an('array').that.includes('Malaria');
+        });
+
     });
 
 });
