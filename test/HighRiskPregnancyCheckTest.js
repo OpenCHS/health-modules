@@ -497,16 +497,16 @@ describe('High Risk Pregnancy Determination', () => {
 
     describe("Weight Issues", () => {
         it("Shouldn't mark high risk if weight is not specified", () => {
-            const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).enrolmentDecisions;
+            const decisions = motherEnrolmentDecision.getDecisions(enrolment, referenceDate).enrolmentDecisions;
             const complicationValues = C.findValue(decisions, 'High Risk Conditions');
-            expect(complicationValues).to.not.exist;
+            expect(complicationValues).to.be.empty;
         });
 
         it("Shouldn't mark high risk if weight is above 35Kgs", () => {
             enrolment.setObservation(weight.name, 36);
-            const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).enrolmentDecisions;
+            const decisions = motherEnrolmentDecision.getDecisions(enrolment, referenceDate).enrolmentDecisions;
             const complicationValues = C.findValue(decisions, 'High Risk Conditions');
-            expect(complicationValues).to.not.exist;
+            expect(complicationValues).to.be.empty;
         });
 
         it("Should mark high risk if weight is equal to 35Kgs", () => {
@@ -628,32 +628,32 @@ describe('High Risk Pregnancy Determination', () => {
 
     describe("Obstetrics History", () => {
         it("Should mark high risk if Intrauterine Growth Retardation in Obstetrics History", () => {
-            enrolment.setObservation(obstetricsHistory.name, 'Intrauterine Growth Retardation');
-            const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
+            enrolment.setObservation(obstetricsHistory.name, ['Intrauterine Growth Retardation']);
+            const decisions = motherEnrolmentDecision.getDecisions(enrolment, referenceDate).enrolmentDecisions;
             const complicationValues = C.findValue(decisions, 'High Risk Conditions');
             expect(complicationValues).to.exist;
-            expect(complicationValues).to.be.an('array').that.includes('Intrauterine Growth Retardation');
+            expect(complicationValues).to.be.an('array').that.includes('IUGR: Intra Uterine Growth Retardation');
         });
 
         it("Should mark high risk if Previous Still Birth in Obstetrics History", () => {
-            enrolment.setObservation(obstetricsHistory.name, 'Still birth');
-            const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
+            enrolment.setObservation(obstetricsHistory.name, ['Still birth']);
+            const decisions = motherEnrolmentDecision.getDecisions(enrolment, referenceDate).enrolmentDecisions;
             const complicationValues = C.findValue(decisions, 'High Risk Conditions');
             expect(complicationValues).to.exist;
-            expect(complicationValues).to.be.an('array').that.includes('Previous still birth');
+            expect(complicationValues).to.be.an('array').that.includes('Previous Still Birth');
         });
 
         it("Should mark high risk if Intrauterine death in Obstetrics History", () => {
-            enrolment.setObservation(obstetricsHistory.name, 'Intrauterine Death');
-            const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
+            enrolment.setObservation(obstetricsHistory.name, ['Intrauterine Death']);
+            const decisions = motherEnrolmentDecision.getDecisions(enrolment, referenceDate).enrolmentDecisions;
             const complicationValues = C.findValue(decisions, 'High Risk Conditions');
             expect(complicationValues).to.exist;
             expect(complicationValues).to.be.an('array').that.includes('Previous Intrauterine Death');
         });
 
         it("Should mark high risk if Retained Placenta in Obstetrics History", () => {
-            enrolment.setObservation(obstetricsHistory.name, 'Retained Placenta');
-            const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
+            programEncounter.setObservation(obstetricsHistory.name,[ 'Retained Placenta']);
+            const decisions = motherEnrolmentDecision.getDecisions(enrolment, referenceDate).enrolmentDecisions;
             const complicationValues = C.findValue(decisions, 'High Risk Conditions');
             expect(complicationValues).to.exist;
             expect(complicationValues).to.be.an('array').that.includes('Previous Retained Placenta');

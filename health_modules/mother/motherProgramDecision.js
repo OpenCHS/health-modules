@@ -9,8 +9,9 @@ module.exports.getDecisions = function (programEnrolment, today, programEncounte
 
 
     analyseOtherRisks();
+    analyzeHistoryBasedComplications();
 
-    if (highRiskConditions.length >= 0){
+    if (highRiskConditions.length >= 0) {
         decisions.push({name: 'High Risk Conditions', value: highRiskConditions});
     }
     return decisions;
@@ -20,11 +21,11 @@ module.exports.getDecisions = function (programEnrolment, today, programEncounte
         if (!observationExistsInEntireEnrolment(conceptName))
             highRiskConditions.push(conceptName);
     }
-    
+
     function getObservationValueFromEntireEnrolment(conceptName) {
         return programEnrolment.getObservationValueFromEntireEnrolment(conceptName, programEncounter);
     }
-    
+
     function observationExistsInEntireEnrolment(conceptName) {
         return programEnrolment.getObservationValueFromEntireEnrolment(conceptName, programEncounter);
     }
@@ -49,5 +50,25 @@ module.exports.getDecisions = function (programEnrolment, today, programEncounte
 
         if (programEnrolment.getObservationValue('Gravida') >= 5)
             addIfNotExists('Grand Multipara');
+    }
+
+    function analyzeHistoryBasedComplications() {
+        const obstetricsHistory = getObservationValueFromEntireEnrolment('Obstetrics History');
+
+        if (C.contains(obstetricsHistory, 'Intrauterine Growth Retardation')) {
+            addIfNotExists("IUGR: Intra Uterine Growth Retardation")
+        }
+
+        if (C.contains(obstetricsHistory, 'Still birth')) {
+            addIfNotExists("Previous Still Birth")
+        }
+
+        if (C.contains(obstetricsHistory, 'Intrauterine Death')) {
+            addIfNotExists("Previous Intrauterine Death")
+        }
+
+        if (C.contains(obstetricsHistory, 'Retained Placenta')) {
+            addIfNotExists("Previous Retained Placenta")
+        }
     }
 };
