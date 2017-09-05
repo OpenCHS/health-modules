@@ -449,14 +449,14 @@ describe('High Risk Pregnancy Determination', () => {
 
     describe("VDRL", () => {
         it("Shouldn't mark high risk if VDRL negative", () => {
-            enrolment.setObservation(vdrl.name, 'Negative');
+            programEncounter.setObservation(vdrl.name, 'Negative');
             const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
             const complicationValues = C.findValue(decisions, 'High Risk Conditions');
             expect(complicationValues).to.not.exist;
         });
 
         it("Should mark high risk if VDRL Postive", () => {
-            enrolment.setObservation(vdrl.name, 'Positive');
+            programEncounter.setObservation(vdrl.name, 'Positive');
             const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
             const complicationValues = C.findValue(decisions, 'High Risk Conditions');
             expect(complicationValues).to.exist;
