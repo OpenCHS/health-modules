@@ -652,7 +652,7 @@ describe('High Risk Pregnancy Determination', () => {
         });
 
         it("Should mark high risk if Retained Placenta in Obstetrics History", () => {
-            programEncounter.setObservation(obstetricsHistory.name, ['Retained Placenta']);
+            enrolment.setObservation(obstetricsHistory.name, ['Retained Placenta']);
             const decisions = motherEnrolmentDecision.getDecisions(enrolment, referenceDate).enrolmentDecisions;
             const complicationValues = C.findValue(decisions, 'High Risk Conditions');
             expect(complicationValues).to.exist;
@@ -660,11 +660,19 @@ describe('High Risk Pregnancy Determination', () => {
         });
 
         it("Should mark high risk if Retained Placenta in Obstetrics History", () => {
-            programEncounter.setObservation(obstetricsHistory.name, ['Three or more than three spontaneous abortions']);
+            enrolment.setObservation(obstetricsHistory.name, ['Three or more than three spontaneous abortions']);
             const decisions = motherEnrolmentDecision.getDecisions(enrolment, referenceDate).enrolmentDecisions;
             const complicationValues = C.findValue(decisions, 'High Risk Conditions');
             expect(complicationValues).to.exist;
             expect(complicationValues).to.be.an('array').that.includes('Previous Abortions');
+        });
+
+        it("Should mark high risk if Gravida is more than 5", () => {
+            enrolment.setObservation("Gravida", 5);
+            const decisions = motherEnrolmentDecision.getDecisions(enrolment, referenceDate).enrolmentDecisions;
+            const complicationValues = C.findValue(decisions, 'High Risk Conditions');
+            expect(complicationValues).to.exist;
+            expect(complicationValues).to.be.an('array').that.includes('Grand Multipara');
         });
     });
 
