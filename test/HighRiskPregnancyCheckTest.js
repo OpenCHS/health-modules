@@ -11,7 +11,7 @@ const concepts = require('./Concepts');
 
 describe('High Risk Pregnancy Determination', () => {
     let enrolment, programEncounter, referenceDate, systolicConcept, diastolicConcept, hb, age, dob, hiv, vdrl, height,
-        weight, sicklingTest, hbE, hbsAg, obstetricsHistory, paracheck;
+        weight, sicklingTest, hbE, hbsAg, obstetricsHistory, paracheck, urineAlbumin;
 
     beforeEach(() => {
         referenceDate = new Date(2017, 6, 6);
@@ -26,6 +26,7 @@ describe('High Risk Pregnancy Determination', () => {
         hiv = concepts['HIV/AIDS'];
         vdrl = concepts['VDRL'];
         height = concepts["Height"];
+        urineAlbumin = concepts['Urine Albumin'];
         weight = concepts["Weight"];
         sicklingTest = concepts["Sickling Test"];
         hbE = concepts["Hb Electrophoresis"];
@@ -106,11 +107,6 @@ describe('High Risk Pregnancy Determination', () => {
         });
 
         describe("Superimposed Pre-Eclampsia", () => {
-            let urineAlbumin;
-
-            beforeEach(() => {
-                urineAlbumin = concepts['Urine Albumin'];
-            });
 
             describe('Absence of Urine Albumin', () => {
                 beforeEach(() => {
@@ -283,6 +279,122 @@ describe('High Risk Pregnancy Determination', () => {
                 });
             });
 
+            describe("Eclampsia", () => {
+                beforeEach(() => {
+                    enrolment.setObservation('High Risk Conditions', []);
+                });
+
+                it("Should not mark Eclampsia for hyper tension, convulsions and Absent Urine Albumin", () => {
+                    programEncounter.setObservation(systolicConcept.name, systolicConcept.highNormal + 1)
+                        .setObservation(diastolicConcept.name, diastolicConcept.highNormal - 1)
+                        .setObservation("Convulsions", true)
+                        .setObservation(urineAlbumin.name, 'Absent');
+                    const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
+                    const complications = C.findValue(decisions, "High Risk Conditions");
+                    expect(complications).to.be.an('array').that.not.includes('Eclampsia');
+
+                });
+
+                it("Should not mark Eclampsia for hyper tension, convulsions and Trace Urine Albumin", () => {
+                    programEncounter.setObservation(systolicConcept.name, systolicConcept.highNormal + 1)
+                        .setObservation(diastolicConcept.name, diastolicConcept.highNormal - 1)
+                        .setObservation("Convulsions", true)
+                        .setObservation(urineAlbumin.name, 'Trace');
+                    const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
+                    const complications = C.findValue(decisions, "High Risk Conditions");
+                    expect(complications).to.be.an('array').that.includes('Eclampsia');
+                });
+
+                it("Should mark Eclampsia for hyper tension, convulsions and +1 Urine Albumin", () => {
+                    programEncounter.setObservation(systolicConcept.name, systolicConcept.highNormal + 1)
+                        .setObservation(diastolicConcept.name, diastolicConcept.highNormal - 1)
+                        .setObservation("Convulsions", true)
+                        .setObservation(urineAlbumin.name, '+1');
+                    const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
+                    const complications = C.findValue(decisions, "High Risk Conditions");
+                    expect(complications).to.be.an('array').that.includes('Eclampsia');
+                });
+
+                it("Should mark Eclampsia for hyper tension, convulsions and +2 Urine Albumin", () => {
+                    programEncounter.setObservation(systolicConcept.name, systolicConcept.highNormal + 1)
+                        .setObservation(diastolicConcept.name, diastolicConcept.highNormal - 1)
+                        .setObservation("Convulsions", true)
+                        .setObservation(urineAlbumin.name, '+2');
+                    const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
+                    const complications = C.findValue(decisions, "High Risk Conditions");
+                    expect(complications).to.be.an('array').that.includes('Eclampsia');
+                });
+
+                it("Should mark Eclampsia for hyper tension, convulsions and +3 Urine Albumin", () => {
+                    programEncounter.setObservation(systolicConcept.name, systolicConcept.highNormal + 1)
+                        .setObservation(diastolicConcept.name, diastolicConcept.highNormal - 1)
+                        .setObservation("Convulsions", true)
+                        .setObservation(urineAlbumin.name, '+3');
+                    const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
+                    const complications = C.findValue(decisions, "High Risk Conditions");
+                    expect(complications).to.be.an('array').that.includes('Eclampsia');
+                });
+
+                it("Should mark Eclampsia for hyper tension, convulsions and +4 Urine Albumin", () => {
+                    programEncounter.setObservation(systolicConcept.name, systolicConcept.highNormal + 1)
+                        .setObservation(diastolicConcept.name, diastolicConcept.highNormal - 1)
+                        .setObservation("Convulsions", true)
+                        .setObservation(urineAlbumin.name, '+4');
+                    const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
+                    const complications = C.findValue(decisions, "High Risk Conditions");
+                    expect(complications).to.be.an('array').that.includes('Eclampsia');
+                });
+
+                it("Should mark Mild Pre-Eclampsia for hyper tension and Trace Urine Albumin", () => {
+                    programEncounter.setObservation(systolicConcept.name, systolicConcept.highNormal + 1)
+                        .setObservation(diastolicConcept.name, diastolicConcept.highNormal - 1)
+                        .setObservation("Convulsions", false)
+                        .setObservation(urineAlbumin.name, 'Trace');
+                    const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
+                    const complications = C.findValue(decisions, "High Risk Conditions");
+                    expect(complications).to.be.an('array').that.includes('Mild Pre-Eclampsia');
+                });
+
+                it("Should mark Mild Pre-Eclampsia for hyper tension and +1 Urine Albumin", () => {
+                    programEncounter.setObservation(systolicConcept.name, systolicConcept.highNormal + 1)
+                        .setObservation(diastolicConcept.name, diastolicConcept.highNormal - 1)
+                        .setObservation("Convulsions", false)
+                        .setObservation(urineAlbumin.name, '+1');
+                    const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
+                    const complications = C.findValue(decisions, "High Risk Conditions");
+                    expect(complications).to.be.an('array').that.includes('Mild Pre-Eclampsia');
+                });
+
+                it("Should mark Mild Pre-Eclampsia for hyper tension and +2 Urine Albumin", () => {
+                    programEncounter.setObservation(systolicConcept.name, systolicConcept.highNormal + 1)
+                        .setObservation(diastolicConcept.name, diastolicConcept.highNormal - 1)
+                        .setObservation("Convulsions", false)
+                        .setObservation(urineAlbumin.name, '+2');
+                    const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
+                    const complications = C.findValue(decisions, "High Risk Conditions");
+                    expect(complications).to.be.an('array').that.includes('Mild Pre-Eclampsia');
+                });
+
+                it("Should mark Mild Pre-Eclampsia for hyper tension and +3 Urine Albumin", () => {
+                    programEncounter.setObservation(systolicConcept.name, systolicConcept.highNormal + 1)
+                        .setObservation(diastolicConcept.name, diastolicConcept.highNormal - 1)
+                        .setObservation("Convulsions", false)
+                        .setObservation(urineAlbumin.name, '+3');
+                    const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
+                    const complications = C.findValue(decisions, "High Risk Conditions");
+                    expect(complications).to.be.an('array').that.includes('Severe Pre-Eclampsia');
+                });
+
+                it("Should mark Mild Pre-Eclampsia for hyper tension and +3 Urine Albumin", () => {
+                    programEncounter.setObservation(systolicConcept.name, systolicConcept.highNormal + 1)
+                        .setObservation(diastolicConcept.name, diastolicConcept.highNormal - 1)
+                        .setObservation("Convulsions", false)
+                        .setObservation(urineAlbumin.name, '+4');
+                    const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
+                    const complications = C.findValue(decisions, "High Risk Conditions");
+                    expect(complications).to.be.an('array').that.includes('Severe Pre-Eclampsia');
+                });
+            });
 
         });
     });
