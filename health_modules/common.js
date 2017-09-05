@@ -91,11 +91,11 @@ function C() {
         return this.createValidationResult(false, messageKey);
     };
 
-    this.addVaccinationSchedule = function(baseDate, nameOfVaccination, dueDateIncrement, maxDateIncrement) {
+    this.addChecklistItem = function(baseDate, nameOfVaccination, dueDateIncrementInDays, maxDateIncrementInDays) {
         return {
             name: nameOfVaccination,
-            dueDate: this.addDays(baseDate, dueDateIncrement),
-            maxDate: this.addDays(baseDate, maxDateIncrement)
+            dueDate: this.addDays(baseDate, dueDateIncrementInDays),
+            maxDate: this.addDays(baseDate, maxDateIncrementInDays)
         };
     }
 }

@@ -7,7 +7,6 @@ describe('Create Child Vaccincation Schedule', function () {
     var date = new Date(2017, 3, 10);
     progEnrolment = {
         individual: {
-            gender: {name: 'Female'},
             dateOfBirth: date
         }
     };
