@@ -586,21 +586,21 @@ describe('High Risk Pregnancy Determination', () => {
 
     describe("Sickle Cell Disease", () => {
         it("Shouldn't mark high risk if Hb Electrophoresis AA", () => {
-            enrolment.setObservation(hbE.name, 'AA');
+            programEncounter.setObservation(hbE.name, 'AA');
             const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
             const complicationValues = C.findValue(decisions, 'High Risk Conditions');
             expect(complicationValues).to.not.exist;
         });
 
         it("Shouldn't mark high risk if Hb Electrophoresis AS", () => {
-            enrolment.setObservation(hbE.name, 'AS');
+            programEncounter.setObservation(hbE.name, 'AS');
             const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
             const complicationValues = C.findValue(decisions, 'High Risk Conditions');
             expect(complicationValues).to.not.exist;
         });
 
         it("Should mark high risk if Hb Electrophoresis SS", () => {
-            enrolment.setObservation(hbE.name, 'SS');
+            programEncounter.setObservation(hbE.name, 'SS');
             const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
             const complicationValues = C.findValue(decisions, 'High Risk Conditions');
             expect(complicationValues).to.exist;

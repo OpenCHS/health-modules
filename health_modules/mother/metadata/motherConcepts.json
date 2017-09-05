@@ -136,8 +136,13 @@
       "Hepatitis B Positive",
       "Malaria",
       "Malpresentation",
+      "Previous Abortions",
+      "Previous Retained Placenta",
+      "Previous Still Birth",
+      "Previous Intrauterine Death",
+      "IUGR: Intra Uterine Growth Retardation",
       "Ante Partum hemorrhage (APH)"
-      ]
+    ]
   },
   {
     "name": "Estimated Date of Delivery",
@@ -148,7 +153,11 @@
     "name": "Breast Examination - Nipple",
     "uuid": "e7139d02-6c9f-44ad-b156-68091e5a4b96",
     "dataType": "Coded",
-    "answers": ["Retracted", "Flat", "Normal"]
+    "answers": [
+      "Retracted",
+      "Flat",
+      "Normal"
+    ]
   },
   {
     "name": "TT1",
@@ -164,5 +173,40 @@
     "name": "TT2",
     "uuid": "c63c486e-0105-4f34-8566-7cfdb4a84cb5",
     "dataType": "N/A"
+  },
+  {
+    "name": "Previous Abortions",
+    "uuid": "d6d91b94-a6b7-4752-860d-6aacdcae508f",
+    "datatype": "N/A"
+  },
+  {
+    "name": "Previous Retained Placenta",
+    "uuid": "b38abfca-d271-4341-87f6-a0809ddb2cee",
+    "datatype": "N/A"
+  },
+  {
+    "name": "Previous Still Birth",
+    "uuid": "e4a6c9f4-b346-4458-88b8-62bcb6ba5635",
+    "datatype": "N/A"
+  },
+  {
+    "name": "Previous Intrauterine Death",
+    "uuid": "a51cb864-15c6-4c4a-9c50-38e5c22ce86e",
+    "datatype": "N/A"
+  },
+  {
+    "name": "IUGR: Intra Uterine Growth Retardation",
+    "uuid": "43991e21-5d46-45e4-bc3b-b6e63e0f88da",
+    "datatype": "N/A"
+  },
+  {
+    "name": "Miscarriage",
+    "uuid": "fb079822-6338-46fe-9919-112686850e2d",
+    "datatype": "N/A"
+  },
+  {
+    "name": "Superimposed Pre-Eclampsia",
+    "uuid": "435f07e5-d9e1-478a-969d-3acad587a15e",
+    "datatype": "N/A"
   }
 ]
