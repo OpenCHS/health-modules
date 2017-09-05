@@ -114,7 +114,7 @@ describe('High Risk Pregnancy Determination', () => {
 
             describe('Absence of Urine Albumin', () => {
                 beforeEach(() => {
-                    enrolment.setObservation(systolicConcept.name, systolicConcept.highNormal - 1)
+                    programEncounter.setObservation(systolicConcept.name, systolicConcept.highNormal - 1)
                         .setObservation(diastolicConcept.name, diastolicConcept.highNormal - 1)
                         .setObservation(urineAlbumin.name, "Absent");
 
@@ -127,7 +127,7 @@ describe('High Risk Pregnancy Determination', () => {
                 });
 
                 it('Should not mark superimposed pre-eclampsia and Hypertension with Absent Urine Albumin', () => {
-                    enrolment.setObservation(diastolicConcept.name, diastolicConcept.highNormal + 1);
+                    programEncounter.setObservation(diastolicConcept.name, diastolicConcept.highNormal + 1);
                     const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
                     const complications = C.findValue(decisions, 'High Risk Conditions');
                     expect(complications).to.exist;
@@ -139,7 +139,7 @@ describe('High Risk Pregnancy Determination', () => {
 
             describe('Presence of Urine Albumin', () => {
                 beforeEach(() => {
-                    enrolment.setObservation(systolicConcept.name, systolicConcept.highNormal - 1)
+                    programEncounter.setObservation(systolicConcept.name, systolicConcept.highNormal - 1)
                         .setObservation(diastolicConcept.name, diastolicConcept.highNormal + 1);
 
                 });
@@ -153,23 +153,23 @@ describe('High Risk Pregnancy Determination', () => {
                 });
 
                 it('Should mark superimposed pre-eclampsia with Trace Urine Albumin ', () => {
-                    enrolment.setObservation("Urine Albumin", 'Trace');
+                    programEncounter.setObservation("Urine Albumin", 'Trace');
                 });
 
                 it('Should mark superimposed pre-eclampsia with +1 Urine Albumin ', () => {
-                    enrolment.setObservation("Urine Albumin", '+1');
+                    programEncounter.setObservation("Urine Albumin", '+1');
                 });
 
                 it('Should mark superimposed pre-eclampsia with +2 Urine Albumin ', () => {
-                    enrolment.setObservation("Urine Albumin", '+2');
+                    programEncounter.setObservation("Urine Albumin", '+2');
                 });
 
                 it('Should mark superimposed pre-eclampsia with +3 Urine Albumin ', () => {
-                    enrolment.setObservation("Urine Albumin", '+3');
+                    programEncounter.setObservation("Urine Albumin", '+3');
                 });
 
                 it('Should mark superimposed pre-eclampsia with +4 Urine Albumin ', () => {
-                    enrolment.setObservation("Urine Albumin", '+4');
+                    programEncounter.setObservation("Urine Albumin", '+4');
                 });
 
             });
