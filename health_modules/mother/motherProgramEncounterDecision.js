@@ -6,7 +6,7 @@ module.exports = {};
 
 module.exports.getDecisions = function (programEncounter, today) {
 
-    if(programEncounter.encounterType.name === 'ANC') {
+    if (programEncounter.encounterType.name === 'ANC') {
 
         var decisions = [];
 
@@ -26,7 +26,7 @@ module.exports.getDecisions = function (programEncounter, today) {
         function addComplication(conceptName) {
             console.log('(MotherProgramEncounterDecision) Adding if not exists to preg complications: ' + conceptName);
             var highRiskConditions = C.findValue(decisions, 'High Risk Conditions');
-            if (highRiskConditions === undefined || highRiskConditions === null){
+            if (highRiskConditions === undefined || highRiskConditions === null) {
                 highRiskConditions = [];
                 decisions.push({name: 'High Risk Conditions', value: highRiskConditions})
             }
@@ -62,12 +62,12 @@ module.exports.getDecisions = function (programEncounter, today) {
             const isChronicHypertensive = observationExistsInEntireEnrolment('Chronic Hypertension');
 
             if (pregnancyPeriodInWeeks <= 20 && isBloodPressureHigh) {
-                if (urineAlbumin === undefined || urineAlbumin === 'Absent') addComplication('Chronic Hypertension');
+                addComplication('Chronic Hypertension');
                 if (urineAlbuminIsMild || urineAlbuminIsSevere) {
-                    addComplication('Chronic Hypertension with Superimposed Pre-Eclampsia');
+                    addComplication('Superimposed Pre-Eclampsia');
                 }
             } else if (pregnancyPeriodInWeeks > 20 && !isChronicHypertensive) {
-                if (!obsHistoryOfPregnancyInducedHypertension && isBloodPressureHigh){
+                if (!obsHistoryOfPregnancyInducedHypertension && isBloodPressureHigh) {
                     addComplication('Pregnancy Induced Hypertension');
                     if (hasConvulsions && (urineAlbuminIsMild || urineAlbuminIsSevere))
                         addComplication('Eclampsia');
@@ -79,58 +79,65 @@ module.exports.getDecisions = function (programEncounter, today) {
 
         function analyseAnemia() { //anm also does this test
             var hemoglobin = getObservationValueFromEntireEnrolment('Hb');
-            if (hemoglobin === undefined) decisions.push({name: 'Investigation Advice', value: 'Send patient to FRU immediately for Hemoglobin Test'});
+            if (hemoglobin === undefined) decisions.push({
+                name: 'Investigation Advice',
+                value: 'Send patient to FRU immediately for Hemoglobin Test'
+            });
             else if (hemoglobin < 7) {
-                decisions.push({name: 'Treatment Advice', value: "Severe Anemia. Refer to FRU for further checkup and possible transfusion"});
+                decisions.push({
+                    name: 'Treatment Advice',
+                    value: "Severe Anemia. Refer to FRU for further checkup and possible transfusion"
+                });
                 addComplication('Severe Anemia');
-            } else if (hemoglobin  >= 7 && hemoglobin <= 11){
+            } else if (hemoglobin >= 7 && hemoglobin <= 11) {
                 addComplication('Moderate Anemia');
                 decisions.push({name: 'Treatment Advice', value: "Moderate Anemia. Start therapeutic dose of IFA"});
-            } else if ( hemoglobin  > 11)
-                decisions.push({name: 'Treatment Advice', value: "Hb normal. Proceed with Prophylactic treatment against anaemia"});
+            } else if (hemoglobin > 11)
+                decisions.push({
+                    name: 'Treatment Advice',
+                    value: "Hb normal. Proceed with Prophylactic treatment against anaemia"
+                });
         }
 
         function manageVaginalBleeding() {
-            var vaginalBleeding = getObservationValueFromEntireEnrolment('Vaginal Bleeding'); // provided this has been informed. during the delivery is difficult.
-            if (vaginalBleeding && pregnancyPeriodInWeeks > 20){
+            let pregnancyComplaints = getObservationValueFromEntireEnrolment("Pregnancy Complaints");
+            var vaginalBleeding = pregnancyComplaints && pregnancyComplaints
+                .indexOf("PV leaking") >= 0;
+            if (vaginalBleeding && pregnancyPeriodInWeeks > 20) {
                 decisions.push({name: 'Referral Advice', value: 'Send patient to FRU immediately'});
                 addComplication('Ante Partum hemorrhage (APH)');
-            }
-            else if (vaginalBleeding && pregnancyPeriodInWeeks <= 20) {
-                decisions.push({name: 'Referral Advice', value: "Severe Anemia. Refer to FRU for test"});
-                addComplication('Moderate Anemia');
             }
         }
 
         function analyseSexuallyTransmittedDisease() {
             var hivaids = getObservationValueFromEntireEnrolment('HIV/AIDS');
-            if(hivaids === 'Positive') addComplication('HIV/AIDS Positive');
+            if (hivaids === 'Positive') addComplication('HIV/AIDS Positive');
 
             var vdrl = getObservationValueFromEntireEnrolment('VDRL');
-            if(vdrl === 'Positive') addComplication('VDRL Positive');
+            if (vdrl === 'Positive') addComplication('VDRL Positive');
         }
 
         function analyseSickling() {
             var sickling = getObservationValueFromEntireEnrolment('Sickling Test');
-            if(sickling) addComplication('Sickling Positive');
+            if (sickling) addComplication('Sickling Positive');
             var hbElectrophoresis = getObservationValueFromEntireEnrolment('Hb Electrophoresis');
-            if(hbElectrophoresis) addComplication('Sickle Cell Disease SS');
+            if (hbElectrophoresis) addComplication('Sickle Cell Disease SS');
         }
 
         function analyseHepatitisB() {
             var hepatitisB = getObservationValueFromEntireEnrolment('HbsAg');
-            if(hepatitisB === 'Positive') addComplication('Hepatitis B Positive');
+            if (hepatitisB === 'Positive') addComplication('Hepatitis B Positive');
         }
 
         function analyseMalaria() {
             var paracheck = getObservationValueFromEntireEnrolment('Paracheck');
-            if(paracheck === 'Positive for PF' || paracheck === 'Positive for PV' || paracheck === 'Positive for PF and PV')
-            addComplication('Malaria');
+            if (paracheck === 'Positive for PF' || paracheck === 'Positive for PV' || paracheck === 'Positive for PF and PV')
+                addComplication('Malaria');
         }
 
         function analyseFoetalPresentation() {
             var foetalPresentation = getObservationValueFromEntireEnrolment('Foetal presentation');
-            if(foetalPresentation === 'Cephalic' || foetalPresentation === 'Breech' || foetalPresentation === 'Transverse') {
+            if (foetalPresentation === 'Cephalic' || foetalPresentation === 'Breech' || foetalPresentation === 'Transverse') {
                 addComplication('Malpresentation');
             }
         }
