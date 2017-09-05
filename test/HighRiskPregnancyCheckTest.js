@@ -403,7 +403,7 @@ describe('High Risk Pregnancy Determination', () => {
     describe("Anemia", () => {
         it("Shouldn't have Anemia if hb is normal", () => {
             const range = hb.range.Female.find((ageRange) => (age >= ageRange.ageStart && age <= ageRange.ageEnd && ageRange.ageUnit === "years"));
-            enrolment.setObservation(hb.name, range.lowNormal + 1);
+            programEncounter.setObservation(hb.name, range.lowNormal + 1);
             const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
             const complicationValues = C.findValue(decisions, 'High Risk Conditions');
             expect(complicationValues).to.not.exist;
@@ -411,7 +411,7 @@ describe('High Risk Pregnancy Determination', () => {
 
         it("Should have Moderate Anemia if hb is moderately below normal", () => {
             const range = hb.range.Female.find((ageRange) => (age >= ageRange.ageStart && age <= ageRange.ageEnd && ageRange.ageUnit === "years"));
-            enrolment.setObservation(hb.name, range.lowAbsolute + 1);
+            programEncounter.setObservation(hb.name, range.lowAbsolute + 1);
             const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
             const complicationValues = C.findValue(decisions, 'High Risk Conditions');
             expect(complicationValues).to.exist;
@@ -420,7 +420,7 @@ describe('High Risk Pregnancy Determination', () => {
 
         it("Should have Severe Anemia if hb is serverly below normal", () => {
             const range = hb.range.Female.find((ageRange) => (age >= ageRange.ageStart && age <= ageRange.ageEnd && ageRange.ageUnit === "years"));
-            enrolment.setObservation(hb.name, range.lowAbsolute - 1);
+            programEncounter.setObservation(hb.name, range.lowAbsolute - 1);
             const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
             const complicationValues = C.findValue(decisions, 'High Risk Conditions');
             expect(complicationValues).to.exist;
