@@ -1,3 +1,5 @@
+var moment = require('moment');
+
 const getObservationValue = function (conceptName) {
     return this.observations.get(conceptName);
 };
@@ -60,8 +62,8 @@ function Individual() {
         this.gender.name = genderName;
     };
 
-    this.getAgeInYears = function (questionName) {
-        return this.years;
+    this.getAgeInYears = function (toDate) {
+        return this.years ? this.years : moment(toDate ? toDate : moment.now()).diff(this.dateOfBirth, 'years');
     };
 }
 

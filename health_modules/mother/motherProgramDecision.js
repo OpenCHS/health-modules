@@ -38,10 +38,10 @@ module.exports.getDecisions = function (programEnrolment, today, programEncounte
         if (weight !== undefined && weight <= 35)
             addIfNotExists('Underweight');
 
-        if (programEnrolment.individual.getAgeInYears() > 30)
+        if (programEnrolment.individual.getAgeInYears(today) > 30)
             addIfNotExists('Old age pregnancy');
 
-        if (programEnrolment.individual.getAgeInYears() < 18)
+        if (programEnrolment.individual.getAgeInYears(today) < 18)
             addIfNotExists('Under age pregnancy');
 
         if (programEnrolment.getObservationValue('Number of abortion') > 0)

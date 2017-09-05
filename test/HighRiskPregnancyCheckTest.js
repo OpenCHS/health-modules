@@ -529,7 +529,7 @@ describe('High Risk Pregnancy Determination', () => {
     describe("Under/Old Age Pregnancy", () => {
         const setDOBTo = (age) => {
             referenceDate = new Date(2017, 6, 6);
-            dob = moment(referenceDate).add(age, 'years').toDate();
+            dob = moment(referenceDate).subtract(age, 'years').toDate();
             programEncounter = new ProgramEncounter("ANC", referenceDate);
             enrolment = new ProgramEnrolment('Mother', [programEncounter], dob);
             programEncounter.programEnrolment = enrolment;
