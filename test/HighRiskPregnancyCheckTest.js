@@ -652,7 +652,7 @@ describe('High Risk Pregnancy Determination', () => {
         });
 
         it("Should mark high risk if Retained Placenta in Obstetrics History", () => {
-            programEncounter.setObservation(obstetricsHistory.name,[ 'Retained Placenta']);
+            programEncounter.setObservation(obstetricsHistory.name, ['Retained Placenta']);
             const decisions = motherEnrolmentDecision.getDecisions(enrolment, referenceDate).enrolmentDecisions;
             const complicationValues = C.findValue(decisions, 'High Risk Conditions');
             expect(complicationValues).to.exist;
@@ -693,7 +693,5 @@ describe('High Risk Pregnancy Determination', () => {
         });
 
     });
-
-    // describe("")
 
 });
