@@ -69,7 +69,7 @@ describe('High Risk Pregnancy Determination', () => {
         describe('Chronic Hypertension', () => {
 
             it("Should not mark Chronic Hypertension as if BP is normal", () => {
-                enrolment.setObservation(systolicConcept.name, systolicConcept.highNormal - 1)
+                programEncounter.setObservation(systolicConcept.name, systolicConcept.highNormal - 1)
                     .setObservation(diastolicConcept.name, diastolicConcept.highNormal - 1);
                 const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
                 const complications = C.findValue(decisions, "High Risk Conditions");
@@ -78,7 +78,7 @@ describe('High Risk Pregnancy Determination', () => {
 
 
             it("Should mark Chronic Hypertension as High Risk If Systolic is abnormal high", () => {
-                enrolment.setObservation(systolicConcept.name, systolicConcept.highNormal + 1)
+                programEncounter.setObservation(systolicConcept.name, systolicConcept.highNormal + 1)
                     .setObservation(diastolicConcept.name, diastolicConcept.highNormal - 1);
                 const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
                 const complications = C.findValue(decisions, "High Risk Conditions");
@@ -87,7 +87,7 @@ describe('High Risk Pregnancy Determination', () => {
             });
 
             it("Should mark Chronic Hypertension as High Risk If Diastolic is abnormal high", () => {
-                enrolment.setObservation(systolicConcept.name, systolicConcept.highNormal - 1)
+                programEncounter.setObservation(systolicConcept.name, systolicConcept.highNormal - 1)
                     .setObservation(diastolicConcept.name, diastolicConcept.highNormal + 1);
                 const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
                 const complications = C.findValue(decisions, "High Risk Conditions");
@@ -96,7 +96,7 @@ describe('High Risk Pregnancy Determination', () => {
             });
 
             it("Should mark Chronic Hypertension as High Risk If Diastolic and Systolic is abnormal high", () => {
-                enrolment.setObservation(systolicConcept.name, systolicConcept.highNormal + 1)
+                programEncounter.setObservation(systolicConcept.name, systolicConcept.highNormal + 1)
                     .setObservation(diastolicConcept.name, diastolicConcept.highNormal + 1);
                 const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
                 const complications = C.findValue(decisions, "High Risk Conditions");
