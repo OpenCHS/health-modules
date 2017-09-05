@@ -187,21 +187,21 @@ describe('High Risk Pregnancy Determination', () => {
         describe("Ante Partum hemorrhage (APH)", () => {
 
             it("Shouldn't mark high risk if Pregnancy complaints are undefined", () => {
-                enrolment.setObservation("Pregnancy Complaints", undefined);
+                programEncounter.setObservation("Pregnancy Complaints", undefined);
                 const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
                 const complications = C.findValue(decisions, "High Risk Conditions");
                 expect(complications).to.not.exist;
             });
 
             it("Shouldn't mark high risk if Pregnancy complaints are empty", () => {
-                enrolment.setObservation("Pregnancy Complaints", []);
+                programEncounter.setObservation("Pregnancy Complaints", []);
                 const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
                 const complications = C.findValue(decisions, "High Risk Conditions");
                 expect(complications).to.not.exist;
             });
 
             it("Should mark high risk if vaginal bleeding is present", () => {
-                enrolment.setObservation("Pregnancy Complaints", ["PV bleeding"]);
+                programEncounter.setObservation("Pregnancy Complaints", ["PV bleeding"]);
                 const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
                 const complications = C.findValue(decisions, "High Risk Conditions");
                 expect(complications).to.exist;
@@ -212,7 +212,7 @@ describe('High Risk Pregnancy Determination', () => {
 
         describe("Pregnancy Induced Hypertension", () => {
             it("Should not mark high risk for normal BP", () => {
-                enrolment.setObservation(systolicConcept.name, systolicConcept.highNormal - 1)
+                programEncounter.setObservation(systolicConcept.name, systolicConcept.highNormal - 1)
                     .setObservation(diastolicConcept.name, diastolicConcept.highNormal - 1);
                 const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
                 const complications = C.findValue(decisions, "High Risk Conditions");
