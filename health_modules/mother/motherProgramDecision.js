@@ -70,5 +70,9 @@ module.exports.getDecisions = function (programEnrolment, today, programEncounte
         if (C.contains(obstetricsHistory, 'Retained Placenta')) {
             addIfNotExists("Previous Retained Placenta")
         }
+
+        if (C.contains(obstetricsHistory, 'Three or more than three spontaneous abortions')) {
+            addIfNotExists("Previous Abortions")
+        }
     }
 };
