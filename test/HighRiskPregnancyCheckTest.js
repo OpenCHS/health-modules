@@ -611,14 +611,14 @@ describe('High Risk Pregnancy Determination', () => {
 
     describe("Hepatitis B", () => {
         it("Shouldn't mark high risk if HbsAg Negative", () => {
-            enrolment.setObservation(hbsAg.name, 'Negative');
+            programEncounter.setObservation(hbsAg.name, 'Negative');
             const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
             const complicationValues = C.findValue(decisions, 'High Risk Conditions');
             expect(complicationValues).to.not.exist;
         });
 
         it("Should mark high risk if HbsAg Positive", () => {
-            enrolment.setObservation(hbsAg.name, 'Positive');
+            programEncounter.setObservation(hbsAg.name, 'Positive');
             const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
             const complicationValues = C.findValue(decisions, 'High Risk Conditions');
             expect(complicationValues).to.exist;
