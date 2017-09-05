@@ -662,14 +662,14 @@ describe('High Risk Pregnancy Determination', () => {
 
     describe('Malaria', () => {
         it("Shouldn't mark high risk if Paracheck negative", () => {
-            enrolment.setObservation(paracheck.name, 'Negative');
+            programEncounter.setObservation(paracheck.name, 'Negative');
             const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
             const complications = C.findValue(decisions, 'High Risk Conditions');
             expect(complications).to.not.exist;
         });
 
         it('Should mark high risk and malaria positive if Paracheck PV', () => {
-            enrolment.setObservation(paracheck.name, 'Positive for PV');
+            programEncounter.setObservation(paracheck.name, 'Positive for PV');
             const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
             const complications = C.findValue(decisions, 'High Risk Conditions');
             expect(complications).to.exist;
@@ -677,7 +677,7 @@ describe('High Risk Pregnancy Determination', () => {
         });
 
         it('Should mark high risk and malaria positive if Paracheck PF', () => {
-            enrolment.setObservation(paracheck.name, 'Positive for PF');
+            programEncounter.setObservation(paracheck.name, 'Positive for PF');
             const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
             const complications = C.findValue(decisions, 'High Risk Conditions');
             expect(complications).to.exist;
@@ -685,7 +685,7 @@ describe('High Risk Pregnancy Determination', () => {
         });
 
         it('Should mark high risk and malaria positive if Paracheck PF and PV', () => {
-            enrolment.setObservation(paracheck.name, 'Positive for PF and PV');
+            programEncounter.setObservation(paracheck.name, 'Positive for PF and PV');
             const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
             const complications = C.findValue(decisions, 'High Risk Conditions');
             expect(complications).to.exist;
