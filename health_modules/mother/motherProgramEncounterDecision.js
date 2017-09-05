@@ -145,7 +145,7 @@ module.exports.getDecisions = function (programEncounter, today) {
 
         function analyseFoetalPresentation() {
             var foetalPresentation = getObservationValueFromEntireEnrolment('Foetal presentation');
-            if (foetalPresentation === 'Cephalic' || foetalPresentation === 'Breech' || foetalPresentation === 'Transverse') {
+            if (foetalPresentation === 'Breech' || foetalPresentation === 'Transverse') {
                 addComplication('Malpresentation');
             }
         }

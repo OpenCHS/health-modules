@@ -710,4 +710,28 @@ describe('High Risk Pregnancy Determination', () => {
 
     });
 
+    describe('Malpresentation', () => {
+        it("Shouldn't mark high risk if Paracheck negative", () => {
+            programEncounter.setObservation('Foetal presentation', 'Cephalic');
+            const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
+            const complications = C.findValue(decisions, 'High Risk Conditions');
+            expect(complications).to.not.exist;
+        });
+
+        it('Should mark high risk and malaria positive if Paracheck PV', () => {
+            programEncounter.setObservation('Foetal presentation', 'Breech');
+            const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
+            const complications = C.findValue(decisions, 'High Risk Conditions');
+            expect(complications).to.exist;
+            expect(complications).to.be.an('array').that.includes('Malpresentation');
+        });
+
+        it('Should mark high risk and malaria positive if Paracheck PF', () => {
+            programEncounter.setObservation('Foetal presentation', 'Transverse');
+            const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
+            const complications = C.findValue(decisions, 'High Risk Conditions');
+            expect(complications).to.exist;
+            expect(complications).to.be.an('array').that.includes('Malpresentation');
+        });
+    });
 });
