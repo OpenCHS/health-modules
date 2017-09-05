@@ -431,14 +431,14 @@ describe('High Risk Pregnancy Determination', () => {
 
     describe("HIV/AIDS", () => {
         it("Shouldn't mark high risk if HIV/AIDS negative", () => {
-            enrolment.setObservation(hiv.name, 'Negative');
+            programEncounter.setObservation(hiv.name, 'Negative');
             const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
             const complicationValues = C.findValue(decisions, 'High Risk Conditions');
             expect(complicationValues).to.not.exist;
         });
 
         it("Should mark high risk if HIV/AIDS Postive", () => {
-            enrolment.setObservation(hiv.name, 'Positive');
+            programEncounter.setObservation(hiv.name, 'Positive');
             const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
             const complicationValues = C.findValue(decisions, 'High Risk Conditions');
             expect(complicationValues).to.exist;
