@@ -102,10 +102,13 @@ module.exports.getDecisions = function (programEncounter, today) {
         function manageVaginalBleeding() {
             let pregnancyComplaints = getObservationValueFromEntireEnrolment("Pregnancy Complaints");
             var vaginalBleeding = pregnancyComplaints && pregnancyComplaints
-                .indexOf("PV leaking") >= 0;
+                .indexOf("PV bleeding") >= 0;
             if (vaginalBleeding && pregnancyPeriodInWeeks > 20) {
                 decisions.push({name: 'Referral Advice', value: 'Send patient to FRU immediately'});
                 addComplication('Ante Partum hemorrhage (APH)');
+            } else if(vaginalBleeding && pregnancyPeriodInWeeks <=20){
+                decisions.push({name: 'Referral Advice', value: 'Send patient to FRU immediately'});
+                addComplication('Miscarriage');
             }
         }
 

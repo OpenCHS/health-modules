@@ -41,6 +41,31 @@ describe('High Risk Pregnancy Determination', () => {
             enrolment.setObservation('Last Menstrual Period', moment(referenceDate).subtract(20, "weeks").toDate());
         });
 
+        describe("Ante Partum hemorrhage (APH)", () => {
+            it("Shouldn't mark high risk if Pregnancy complaints are undefined", () => {
+                enrolment.setObservation("Pregnancy Complaints", undefined);
+                const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
+                const complications = C.findValue(decisions, "High Risk Conditions");
+                expect(complications).to.not.exist;
+            });
+
+            it("Shouldn't mark high risk if Pregnancy complaints are empty", () => {
+                enrolment.setObservation("Pregnancy Complaints", []);
+                const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
+                const complications = C.findValue(decisions, "High Risk Conditions");
+                expect(complications).to.not.exist;
+            });
+
+            it("Shouldn't mark high risk if vaginal bleeding is present", () => {
+                enrolment.setObservation("Pregnancy Complaints", ["PV bleeding"]);
+                const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
+                const complications = C.findValue(decisions, "High Risk Conditions");
+                expect(complications).to.exist;
+                expect(complications).to.be.an('array').that.includes('Miscarriage');
+            });
+
+        });
+
         describe('Chronic Hypertension', () => {
 
             it("Should not mark Chronic Hypertension as if BP is normal", () => {
@@ -158,6 +183,7 @@ describe('High Risk Pregnancy Determination', () => {
         });
 
         describe("Ante Partum hemorrhage (APH)", () => {
+
             it("Shouldn't mark high risk if Pregnancy complaints are undefined", () => {
                 enrolment.setObservation("Pregnancy Complaints", undefined);
                 const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
@@ -173,7 +199,7 @@ describe('High Risk Pregnancy Determination', () => {
             });
 
             it("Should mark high risk if vaginal bleeding is present", () => {
-                enrolment.setObservation("Pregnancy Complaints", ["PV leaking"]);
+                enrolment.setObservation("Pregnancy Complaints", ["PV bleeding"]);
                 const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
                 const complications = C.findValue(decisions, "High Risk Conditions");
                 expect(complications).to.exist;
