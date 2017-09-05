@@ -37,15 +37,19 @@ module.exports.getDecisions = function (programEncounter, today) {
             return programEncounter.programEnrolment.getObservationValueFromEntireEnrolment(conceptName, programEncounter);
         }
 
+        function getObservationValue(conceptName) {
+            return programEncounter.getObservationValue(conceptName);
+        }
+
         function observationExistsInEntireEnrolment(conceptName) {
             return programEncounter.programEnrolment.getObservationValueFromEntireEnrolment(conceptName, programEncounter);
         }
 
 
         function analyseHypertensiveRisks() {
-            const systolic = getObservationValueFromEntireEnrolment('Systolic');
-            const diastolic = getObservationValueFromEntireEnrolment('Diastolic');
-            const urineAlbumin = getObservationValueFromEntireEnrolment('Urine Albumin');
+            const systolic = getObservationValue('Systolic');
+            const diastolic = getObservationValue('Diastolic');
+            const urineAlbumin = getObservationValue('Urine Albumin');
             const obsHistory = getObservationValueFromEntireEnrolment('Obstetrics History');
 
             const mildPreEclempsiaUrineAlbuminValues = ['Trace', '+1', '+2'];
@@ -58,8 +62,9 @@ module.exports.getDecisions = function (programEncounter, today) {
             const urineAlbuminIsMild = C.contains(mildPreEclempsiaUrineAlbuminValues, urineAlbumin);
             const urineAlbuminIsSevere = C.contains(severePreEclempsiaUrineAlbuminValues, urineAlbumin);
             const obsHistoryOfPregnancyInducedHypertension = C.contains(obsHistory, 'Pregnancy Induced Hypertension');
-            const hasConvulsions = getObservationValueFromEntireEnrolment('Convulsions'); //will be identified in hospital
-            const isChronicHypertensive = observationExistsInEntireEnrolment('Chronic Hypertension');
+            const hasConvulsions = getObservationValue('Convulsions'); //will be identified in hospital
+            let highRiskConditions = getObservationValueFromEntireEnrolment('High Risk Conditions');
+            const isChronicHypertensive = highRiskConditions && highRiskConditions.indexOf('Chronic Hypertension') >= 0;
 
             if (pregnancyPeriodInWeeks <= 20 && isBloodPressureHigh) {
                 addComplication('Chronic Hypertension');
@@ -106,7 +111,7 @@ module.exports.getDecisions = function (programEncounter, today) {
             if (vaginalBleeding && pregnancyPeriodInWeeks > 20) {
                 decisions.push({name: 'Referral Advice', value: 'Send patient to FRU immediately'});
                 addComplication('Ante Partum hemorrhage (APH)');
-            } else if(vaginalBleeding && pregnancyPeriodInWeeks <=20){
+            } else if (vaginalBleeding && pregnancyPeriodInWeeks <= 20) {
                 decisions.push({name: 'Referral Advice', value: 'Send patient to FRU immediately'});
                 addComplication('Miscarriage');
             }

@@ -178,8 +178,10 @@ describe('High Risk Pregnancy Determination', () => {
     });
 
     describe("More than 20 weeks of pregnancy", () => {
+        let lmp;
         beforeEach(() => {
-            enrolment.setObservation('Last Menstrual Period', new Date(2017, 1, 10));
+            lmp = new Date(2017, 1, 10);
+            enrolment.setObservation('Last Menstrual Period', lmp);
         });
 
         describe("Ante Partum hemorrhage (APH)", () => {
@@ -221,20 +223,22 @@ describe('High Risk Pregnancy Determination', () => {
                 let programEncounter1, programEncounter2, programEncounter3;
                 beforeEach(() => {
                     referenceDate = new Date(2017, 6, 6);
-                    programEncounter1 = new ProgramEncounter("ANC 1", moment(referenceDate).subtract(19, "weeks"));
-                    programEncounter2 = new ProgramEncounter("ANC 2", moment(referenceDate).subtract(10, "weeks"));
-                    programEncounter3 = new ProgramEncounter("ANC 3", referenceDate);
+                    programEncounter1 = new ProgramEncounter("ANC", moment(lmp).add(4, "weeks").toDate());
+                    programEncounter2 = new ProgramEncounter("ANC", moment(lmp).add(13, "weeks").toDate());
+                    programEncounter3 = new ProgramEncounter("ANC", moment(lmp).add(21, "weeks").toDate());
                     programEncounter1.setObservation(systolicConcept.name, systolicConcept.highNormal - 1)
                         .setObservation(diastolicConcept.name, diastolicConcept.highNormal - 1);
                     programEncounter2.setObservation(systolicConcept.name, systolicConcept.highNormal - 1)
                         .setObservation(diastolicConcept.name, diastolicConcept.highNormal - 1);
                     enrolment = new ProgramEnrolment('Mother', [programEncounter1, programEncounter2, programEncounter3]);
+                    enrolment.setObservation('Last Menstrual Period', lmp);
+                    enrolment.setObservation('High Risk Conditions', []);
                     programEncounter1.programEnrolment = enrolment;
                     programEncounter2.programEnrolment = enrolment;
                     programEncounter3.programEnrolment = enrolment;
                 });
 
-                it("Should mark high risk for high Systolic BP given normal before 20 Weeks", () => {
+                it("Should mark high risk for high Systolic BP given normal BP before 20 Weeks", () => {
                     programEncounter3.setObservation(systolicConcept.name, systolicConcept.highNormal + 1)
                         .setObservation(diastolicConcept.name, diastolicConcept.highNormal - 1);
                     const decisions = motherEncounterDecision.getDecisions(programEncounter3, referenceDate).encounterDecisions;
@@ -243,7 +247,7 @@ describe('High Risk Pregnancy Determination', () => {
                     expect(complications).to.be.an('array').that.includes('Pregnancy Induced Hypertension');
                 });
 
-                it("Should mark high risk for high Diastolic BP given normal before 20 Weeks", () => {
+                it("Should mark high risk for high Diastolic BP given normal BP before 20 Weeks", () => {
                     programEncounter3.setObservation(systolicConcept.name, systolicConcept.highNormal - 1)
                         .setObservation(diastolicConcept.name, diastolicConcept.highNormal + 1);
                     const decisions = motherEncounterDecision.getDecisions(programEncounter3, referenceDate).encounterDecisions;
@@ -267,14 +271,16 @@ describe('High Risk Pregnancy Determination', () => {
                 let programEncounter1, programEncounter2, programEncounter3;
                 beforeEach(() => {
                     referenceDate = new Date(2017, 6, 6);
-                    programEncounter1 = new ProgramEncounter("ANC 1", moment(referenceDate).subtract(19, "weeks"));
-                    programEncounter2 = new ProgramEncounter("ANC 2", moment(referenceDate).subtract(10, "weeks"));
-                    programEncounter3 = new ProgramEncounter("ANC 3", referenceDate);
+                    programEncounter1 = new ProgramEncounter("ANC", moment(lmp).add(4, "weeks").toDate());
+                    programEncounter2 = new ProgramEncounter("ANC", moment(lmp).add(13, "weeks").toDate());
+                    programEncounter3 = new ProgramEncounter("ANC", moment(lmp).add(21, "weeks").toDate());
                     programEncounter1.setObservation(systolicConcept.name, systolicConcept.highNormal + 1)
                         .setObservation(diastolicConcept.name, diastolicConcept.highNormal + 1);
                     programEncounter2.setObservation(systolicConcept.name, systolicConcept.highNormal + 1)
                         .setObservation(diastolicConcept.name, diastolicConcept.highNormal + 1);
                     enrolment = new ProgramEnrolment('Mother', [programEncounter1, programEncounter2, programEncounter3]);
+                    enrolment.setObservation('High Risk Conditions', ["Chronic Hypertension"]);
+                    enrolment.setObservation('Last Menstrual Period', lmp);
                     programEncounter1.programEnrolment = enrolment;
                     programEncounter2.programEnrolment = enrolment;
                     programEncounter3.programEnrolment = enrolment;
@@ -285,8 +291,7 @@ describe('High Risk Pregnancy Determination', () => {
                         .setObservation(diastolicConcept.name, diastolicConcept.highNormal - 1);
                     const decisions = motherEncounterDecision.getDecisions(programEncounter3, referenceDate).encounterDecisions;
                     const complications = C.findValue(decisions, "High Risk Conditions");
-                    expect(complications).to.exist;
-                    expect(complications).to.be.an('array').that.does.not.include('Pregnancy Induced Hypertension');
+                    expect(complications).to.not.exist;
                 });
 
                 it("Should mark high risk for high Diastolic BP given normal before 20 Weeks", () => {
@@ -294,8 +299,7 @@ describe('High Risk Pregnancy Determination', () => {
                         .setObservation(diastolicConcept.name, diastolicConcept.highNormal + 1);
                     const decisions = motherEncounterDecision.getDecisions(programEncounter3, referenceDate).encounterDecisions;
                     const complications = C.findValue(decisions, "High Risk Conditions");
-                    expect(complications).to.exist;
-                    expect(complications).to.be.an('array').that.does.not.include('Pregnancy Induced Hypertension');
+                    expect(complications).to.not.exist;
                 });
 
                 it("Should mark high risk for high Diastolic and Diastolic BP given normal before 20 Weeks", () => {
@@ -303,8 +307,7 @@ describe('High Risk Pregnancy Determination', () => {
                         .setObservation(diastolicConcept.name, diastolicConcept.highNormal + 1);
                     const decisions = motherEncounterDecision.getDecisions(programEncounter3, referenceDate).encounterDecisions;
                     const complications = C.findValue(decisions, "High Risk Conditions");
-                    expect(complications).to.exist;
-                    expect(complications).to.be.an('array').that.does.not.include('Pregnancy Induced Hypertension');
+                    expect(complications).to.not.exist;
                 });
             });
 

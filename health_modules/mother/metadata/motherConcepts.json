@@ -113,8 +113,9 @@
     "name": "High Risk Conditions",
     "uuid": "f34f974b-47b0-424d-ae97-d479c80efa49",
     "dataType": "Coded",
-    "answers": ["Chronic Hypertension",
-      "Chronic Hypertension with Superimposed Pre-Eclampsia",
+    "answers": [
+      "Chronic Hypertension",
+      "Superimposed Pre-Eclampsia",
       "Pregnancy Induced Hypertension",
       "Mild Pre-Eclampsia",
       "Severe Pre-Eclampsia",
