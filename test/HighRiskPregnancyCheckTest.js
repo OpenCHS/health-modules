@@ -456,7 +456,7 @@ describe('High Risk Pregnancy Determination', () => {
         });
 
         it("Should mark high risk if Sickling Test Positive", () => {
-            enrolment.setObservation(sicklingTest.name, 'Negative');
+            enrolment.setObservation(sicklingTest.name, 'Positive');
             const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
             const complicationValues = C.findValue(decisions, 'High Risk Conditions');
             expect(complicationValues).to.exist;
@@ -573,5 +573,7 @@ describe('High Risk Pregnancy Determination', () => {
         });
 
     });
+
+    // describe("")
 
 });

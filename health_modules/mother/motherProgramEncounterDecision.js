@@ -62,7 +62,7 @@ module.exports.getDecisions = function (programEncounter, today) {
             const isChronicHypertensive = observationExistsInEntireEnrolment('Chronic Hypertension');
 
             if (pregnancyPeriodInWeeks <= 20 && isBloodPressureHigh) {
-                if (urineAlbumin === 'Absent') addComplication('Chronic Hypertension');
+                if (urineAlbumin === undefined || urineAlbumin === 'Absent') addComplication('Chronic Hypertension');
                 if (urineAlbuminIsMild || urineAlbuminIsSevere) {
                     addComplication('Chronic Hypertension with Superimposed Pre-Eclampsia');
                 }
