@@ -56,23 +56,23 @@ module.exports.getDecisions = function (programEnrolment, today, programEncounte
         const obstetricsHistory = getObservationValueFromEntireEnrolment('Obstetrics History');
 
         if (C.contains(obstetricsHistory, 'Intrauterine Growth Retardation')) {
-            addIfNotExists("IUGR: Intra Uterine Growth Retardation")
+            addIfNotExists("IUGR: Intra Uterine Growth Retardation");
         }
 
         if (C.contains(obstetricsHistory, 'Still birth')) {
-            addIfNotExists("Previous Still Birth")
+            addIfNotExists("Previous Still Birth");
         }
 
         if (C.contains(obstetricsHistory, 'Intrauterine Death')) {
-            addIfNotExists("Previous Intrauterine Death")
+            addIfNotExists("Previous Intrauterine Death");
         }
 
         if (C.contains(obstetricsHistory, 'Retained Placenta')) {
-            addIfNotExists("Previous Retained Placenta")
+            addIfNotExists("Previous Retained Placenta");
         }
 
         if (C.contains(obstetricsHistory, 'Three or more than three spontaneous abortions')) {
-            addIfNotExists("Previous Abortions")
+            addIfNotExists("Previous Abortions");
         }
     }
 };
