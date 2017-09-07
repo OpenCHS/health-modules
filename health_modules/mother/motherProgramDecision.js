@@ -46,7 +46,7 @@ module.exports.getDecisions = function (programEnrolment, today, programEncounte
             addIfNotExists('Under age pregnancy');
 
         if (programEnrolment.getObservationValue('Number of abortion') > 0)
-            addIfNotExists('Previous Abortion');
+            addIfNotExists('Previous Abortion(s)');
 
         if (programEnrolment.getObservationValue('Gravida') >= 5)
             addIfNotExists('Grand Multipara');
@@ -72,7 +72,7 @@ module.exports.getDecisions = function (programEnrolment, today, programEncounte
         }
 
         if (C.contains(obstetricsHistory, 'Three or more than three spontaneous abortions')) {
-            addIfNotExists("Previous Abortions");
+            addIfNotExists("Previous Abortion(s)");
         }
     }
 };

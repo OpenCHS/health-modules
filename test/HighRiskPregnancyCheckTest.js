@@ -664,7 +664,7 @@ describe('High Risk Pregnancy Determination', () => {
             const decisions = motherEnrolmentDecision.getDecisions(enrolment, referenceDate).enrolmentDecisions;
             const complicationValues = C.findValue(decisions, 'High Risk Conditions');
             expect(complicationValues).to.exist;
-            expect(complicationValues).to.be.an('array').that.includes('Previous Abortions');
+            expect(complicationValues).to.be.an('array').that.includes('Previous Abortion(s)');
         });
 
         it("Should mark high risk if Gravida is more than 5", () => {

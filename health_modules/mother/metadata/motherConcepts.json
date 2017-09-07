@@ -50,11 +50,6 @@
     "dataType": "N/A"
   },
   {
-    "name": "Previous Abortion",
-    "uuid": "4a98ed37-1d4c-4a0d-9845-a3828e7f3b30",
-    "dataType": "N/A"
-  },
-  {
     "name": "Grand Multipara",
     "uuid": "338d5fb1-0493-4270-8d35-81105c239bbb",
     "dataType": "N/A"
@@ -122,7 +117,6 @@
       "Severe Anemia",
       "Moderate Anemia",
       "Grand Multipara",
-      "Previous Abortion",
       "Old age pregnancy",
       "Underweight",
       "Short Stature",
@@ -136,7 +130,7 @@
       "Hepatitis B Positive",
       "Malaria",
       "Malpresentation",
-      "Previous Abortions",
+      "Previous Abortion(s)",
       "Previous Retained Placenta",
       "Previous Still Birth",
       "Previous Intrauterine Death",
@@ -173,31 +167,6 @@
     "name": "TT2",
     "uuid": "c63c486e-0105-4f34-8566-7cfdb4a84cb5",
     "dataType": "N/A"
-  },
-  {
-    "name": "Previous Abortions",
-    "uuid": "d6d91b94-a6b7-4752-860d-6aacdcae508f",
-    "datatype": "N/A"
-  },
-  {
-    "name": "Previous Retained Placenta",
-    "uuid": "b38abfca-d271-4341-87f6-a0809ddb2cee",
-    "datatype": "N/A"
-  },
-  {
-    "name": "Previous Still Birth",
-    "uuid": "e4a6c9f4-b346-4458-88b8-62bcb6ba5635",
-    "datatype": "N/A"
-  },
-  {
-    "name": "Previous Intrauterine Death",
-    "uuid": "a51cb864-15c6-4c4a-9c50-38e5c22ce86e",
-    "datatype": "N/A"
-  },
-  {
-    "name": "IUGR: Intra Uterine Growth Retardation",
-    "uuid": "43991e21-5d46-45e4-bc3b-b6e63e0f88da",
-    "datatype": "N/A"
   },
   {
     "name": "Miscarriage",
