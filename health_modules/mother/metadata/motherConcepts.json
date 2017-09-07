@@ -171,11 +171,16 @@
   {
     "name": "Miscarriage",
     "uuid": "fb079822-6338-46fe-9919-112686850e2d",
-    "datatype": "N/A"
+    "dataType": "N/A"
   },
   {
     "name": "Superimposed Pre-Eclampsia",
     "uuid": "435f07e5-d9e1-478a-969d-3acad587a15e",
-    "datatype": "N/A"
+    "dataType": "N/A"
+  },
+  {
+    "name": "Eclampsia",
+    "uuid": "489f07e5-d9e1-478a-969d-3acad587a15e",
+    "dataType": "N/A"
   }
 ]
