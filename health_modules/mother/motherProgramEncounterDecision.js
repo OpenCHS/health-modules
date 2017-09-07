@@ -56,7 +56,7 @@ module.exports.getDecisions = function (programEncounter, today) {
             const severePreEclempsiaUrineAlbuminValues = ['+3', '+4'];
 
             if (urineAlbumin === undefined)
-                decisions.push(C.decision('Investigation Advice', 'Send patient to FRU immediately for Urine Albumin Test'));
+                C.addInvestigationAdvice(decisions, "Urine Albumin Test");
 
             const isBloodPressureHigh = (systolic >= 140) || (diastolic >= 90); //can go in high risk category
             const urineAlbuminIsMild = C.contains(mildPreEclempsiaUrineAlbuminValues, urineAlbumin);
@@ -84,10 +84,9 @@ module.exports.getDecisions = function (programEncounter, today) {
 
         function analyseAnemia() { //anm also does this test
             var hemoglobin = getObservationValueFromEntireEnrolment('Hb');
-            if (hemoglobin === undefined) decisions.push({
-                name: 'Investigation Advice',
-                value: 'Send patient to FRU immediately for Hemoglobin Test'
-            });
+            if (hemoglobin === undefined) {
+                C.addInvestigationAdvice(decisions, "Haemoglobin Test (Hb)")
+            }
             else if (hemoglobin < 7) {
                 decisions.push({
                     name: 'Treatment Advice',
@@ -127,7 +126,7 @@ module.exports.getDecisions = function (programEncounter, today) {
 
         function analyseSickling() {
             var sickling = getObservationValueFromEntireEnrolment('Sickling Test');
-            if (sickling) addComplication('Sickling Positive');
+            if (sickling === 'Positive') addComplication('Sickling Positive');
             var hbElectrophoresis = getObservationValueFromEntireEnrolment('Hb Electrophoresis');
             if (hbElectrophoresis === 'SS') addComplication('Sickle Cell Disease SS');
         }
@@ -158,7 +157,7 @@ module.exports.getDecisions = function (programEncounter, today) {
                 value: C.findValue(decisions, 'High Risk Conditions')
             })
         }
-
+        C.generateInvestigationDecisions(decisions);
         return {
             enrolmentDecisions: enrolmentDecisions,
             encounterDecisions: decisions

@@ -1,3 +1,5 @@
+const _ = require('lodash');
+
 function C() {
 
     this.addDays = function (date, numberOfDays) {
@@ -43,12 +45,12 @@ function C() {
     };
 
     this.getWeeks = function (lmpDate, date) {
-        return (Math.round((date - lmpDate)/ 604800000));
+        return (Math.round((date - lmpDate) / 604800000));
     };
 
     this.getDays = function (firstDate, secondDate) {
-        var oneDay = 24*60*60*1000;
-        return (Math.round(Math.abs((firstDate.getTime() - secondDate.getTime())/(oneDay))));
+        var oneDay = 24 * 60 * 60 * 1000;
+        return (Math.round(Math.abs((firstDate.getTime() - secondDate.getTime()) / (oneDay))));
     };
 
 
@@ -76,7 +78,30 @@ function C() {
         return {name: name, value: value};
     };
 
-    this.findValue = function(decisions, name) {
+    this.addInvestigationAdvice = function (decisions, value) {
+        let existingDecision = decisions.find((dec) => dec.name === "Investigation Advice");
+        if (_.isNil(existingDecision)) {
+            decisions.push({
+                "name": "Investigation Advice",
+                "value": [value]
+            });
+        } else {
+            _.remove(decisions, (dec) => dec.name === "Investigation Advice");
+            existingDecision.value.push(value);
+            decisions.push(existingDecision);
+        }
+    };
+
+    this.generateInvestigationDecisions = function (decisions) {
+        let existingDecision = decisions.find((dec) => dec.name === "Investigation Advice");
+        if (!_.isNil(existingDecision)) {
+            _.remove(decisions, (dec) => dec.name === "Investigation Advice");
+            existingDecision.value = `Send patient to FRU immediately for ${existingDecision.value.join(', ')}`;
+            decisions.push(existingDecision);
+        }
+    };
+
+    this.findValue = function (decisions, name) {
         var matchingDecision = decisions.find(function (decision) {
             return decision.name === name;
         });
@@ -91,7 +116,7 @@ function C() {
         return this.createValidationResult(false, messageKey);
     };
 
-    this.addChecklistItem = function(baseDate, nameOfVaccination, dueDateIncrementInDays, maxDateIncrementInDays) {
+    this.addChecklistItem = function (baseDate, nameOfVaccination, dueDateIncrementInDays, maxDateIncrementInDays) {
         return {
             name: nameOfVaccination,
             dueDate: this.addDays(baseDate, dueDateIncrementInDays),
