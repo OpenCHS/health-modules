@@ -11,13 +11,13 @@
       "display": "PNC Vitals",
       "formElements": [
         {
-          "uuid": "a427afb1-a183-4d92-88eb-2a40e4a00058",
-          "name": "Diastolic",
+          "uuid": "68bfde5c-92b7-4188-b2a2-bb96abfc174e",
+          "name": "Systolic",
           "dataType": "Numeric"
         },
         {
-          "uuid": "68bfde5c-92b7-4188-b2a2-bb96abfc174e",
-          "name": "Systolic",
+          "uuid": "a427afb1-a183-4d92-88eb-2a40e4a00058",
+          "name": "Diastolic",
           "dataType": "Numeric"
         },
         {
