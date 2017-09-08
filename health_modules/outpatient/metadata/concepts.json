@@ -5,6 +5,11 @@
     "dataType": "Text"
   },
   {
+    "uuid": "8f93ee75-be1b-49be-bf76-719bebd02a6d",
+    "name": "Treatment Advice Alert",
+    "dataType": "Text"
+  },
+  {
     "uuid": "f51dbd85-27aa-4036-88e2-f2ea64c05a2c",
     "name": "Referral Advice",
     "dataType": "Text"

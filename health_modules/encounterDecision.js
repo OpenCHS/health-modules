@@ -1792,6 +1792,8 @@ const medicines = {
     "Septran Syrup": {take: "After"}
 };
 
+const C = require('./common');
+
 const doseQuantityToMarathi = function (doseQuantity, doseUnit) {
     if (doseQuantity === 0.25) return "१/४";
     if (doseQuantity === 0.5 && doseUnit === "Spoon") return "अर्धा";
@@ -1849,7 +1851,7 @@ const hasMalaria = function (paracheckResult) {
 const getDecisions = function (encounter) {
     if (encounter.encounterType.name !== "Outpatient") return {};
 
-    var params = getParameters(encounter);
+    let params = getParameters(encounter);
 
     if (params.complaints.indexOf("Fever") === -1 && hasMalaria(params.paracheckResult)) {
         params.complaints.push("Fever");
@@ -1860,15 +1862,15 @@ const getDecisions = function (encounter) {
         return item !== 'Fever'
     }));
 
-    var potentiallyPregnant = (params.sex === "Female" && (params.age >= 16 && params.age <= 40));
-    var decisions = [];
-    var prescribedMedicines = [];
+    let potentiallyPregnant = (params.sex === "Female" && (params.age >= 16 && params.age <= 40));
+    let mergedDecision = {name: "Treatment Advice", value: "", code: []};
+    let mergedAlertDecision = {name: "Treatment Advice Alert", value: ""};
+    let prescribedMedicines = [];
 
-    for (var complaintIndex = 0; complaintIndex < params.complaints.length; complaintIndex++) {
-        var weightRangeToCode = getWeightRangeToCode(params.complaints[complaintIndex], params.weight);
-        var decision = {};
-        decision.name = "Treatment Advice";
-        decision.code = weightRangeToCode.code;
+    for (let complaintIndex = 0; complaintIndex < params.complaints.length; complaintIndex++) {
+        let weightRangeToCode = getWeightRangeToCode(params.complaints[complaintIndex], params.weight);
+
+        mergedDecision.code.push(weightRangeToCode.code);
 
         var prescriptionSet;
         if (potentiallyPregnant && ["Cough", "Boils", "Wound"].indexOf(params.complaints[complaintIndex]) !== -1) {
@@ -1930,23 +1932,27 @@ const getDecisions = function (encounter) {
                 message += "\n";
             }
         }
-        decision.value = message;
 
+        let alertOverwritesDecision = false;
         if (params.weight >= 13 && params.complaints[complaintIndex] === 'Malaria')
-            decision.alert = "क्लोरोक्विन व पॅरासिटामॉल ही औषधे जेवल्यावर खायला सांगावी";
+            mergedAlertDecision.value += "क्लोरोक्विन व पॅरासिटामॉल ही औषधे जेवल्यावर खायला सांगावी\n";
         else if (params.complaints[complaintIndex] === 'Vomiting')
-            decision.alert = "उलटी असल्यास आधी औषध द्यावे व अर्ध्या तासांनंतर जेवण, दुध द्यावे व अर्ध्या तासांनंतर इतर औषधे द्यावीत";
+            mergedAlertDecision.value += "उलटी असल्यास आधी औषध द्यावे व अर्ध्या तासांनंतर जेवण, दुध द्यावे व अर्ध्या तासांनंतर इतर औषधे द्यावीत\n";
         else if (params.complaints[complaintIndex] === 'Chloroquine Resistant Malaria' && (params.age >= 16 || params.age <= 40) && params.sex === "Female") {
-            decision.alert = "पुढे दवाखान्यात पाठवावे";
-            decision.value = "";
+            mergedAlertDecision.value += "पुढे दवाखान्यात पाठवावे\n";
+            alertOverwritesDecision = true;
         } else if (params.complaints[complaintIndex] === 'Wound') {
-            decision.alert = "ड्रेसिंग";
+            mergedAlertDecision.value = "ड्रेसिंग\n";
         }
 
-        decisions.push(decision);
+        if (!alertOverwritesDecision) {
+            mergedDecision.value += message;
+        }
     }
 
-    return {encounterDecisions: decisions};
+    let encounterDecisions = [mergedDecision];
+    if (!C.isNil(mergedAlertDecision.value)) encounterDecisions.push(mergedAlertDecision);
+    return {encounterDecisions: encounterDecisions};
 };
 
 function getParameters(encounter) {

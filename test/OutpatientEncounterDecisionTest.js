@@ -50,7 +50,7 @@ describe('Make Decision', function () {
     it('Do not give any medicine for chloroquin resistant malaria to women between 16-40', function () {
         var decisions = decision.getDecisions(new Encounter('Outpatient').setObservation("Complaint", ["Chloroquine Resistant Malaria"]).setGender("Female").setAge(25).setObservation("Weight", 40)).encounterDecisions;
         expect(decisions[0].value).to.equal("");
-        expect(decisions[0].alert).to.not.equal(undefined);
+        expect(decisions[1].value).to.not.equal(undefined);
     });
 
     it('Provide day wise instructions when specified for days separately', function () {
@@ -114,9 +114,8 @@ describe('Make Decision', function () {
 
     it('Multiple complaints with overlapping medicines', function () {
         var decisions = decision.getDecisions(new Encounter('Outpatient').setObservation("Complaint", ["Cold", "Fever", "Body Ache"]).setGender("Male").setAge(25).setObservation("Weight", 40)).encounterDecisions;
-        var completeValue = decisions[0].value + decisions[1].value + decisions[2].value;
-        expect((completeValue.match(/सेट्रीझीन/g) || []).length).to.equal(1, completeValue);
-        expect((completeValue.match(/पॅरासिटामॉल/g) || []).length).to.equal(1, completeValue);
+        expect((decisions[0].value.match(/सेट्रीझीन/g) || []).length).to.equal(1, completeValue);
+        expect((decisions[0].value.match(/पॅरासिटामॉल/g) || []).length).to.equal(1, completeValue);
     });
 
     it('Multiple complaints with overlapping medicines and different order of medicines', function () {
@@ -142,14 +141,13 @@ describe('Make Decision', function () {
     it('Alert should be only for the decision for the complaint', () => {
         var complaintConceptName = "Complaint";
         var decisions = decision.getDecisions(new Encounter('Outpatient').setObservation(complaintConceptName, ["Cold", "Vomiting"]).setGender("Male").setAge(10).setObservation("Weight", 22)).encounterDecisions;
-        expect(decisions[0].alert).to.equal(undefined);
-        expect((decisions[1].alert.match(/उलटी असल्यास/g) || []).length).to.equal(1, decisions[0].alert);
+        expect((decisions[1].value.match(/उलटी असल्यास/g) || []).length).to.equal(1, decisions[1].value);
     });
 
     it('Boundary condition of weight', () => {
         var complaintConceptName = "Complaint";
         var decisions = decision.getDecisions(new Encounter('Outpatient').setObservation(complaintConceptName, ["Fever"]).setGender("Male").setAge(10).setObservation("Weight", 5.5).setObservation("Paracheck", ["Positive PV"])).encounterDecisions;
-        expect(decisions.length).to.equal(1);
+        expect(decisions.length).to.equal(2);
     });
 
     it('Give malaria medicine based on paracheck being positive', () => {
