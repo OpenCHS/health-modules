@@ -78,29 +78,6 @@ function C() {
         return {name: name, value: value};
     };
 
-    this.addInvestigationAdvice = function (decisions, value) {
-        let existingDecision = decisions.find((dec) => dec.name === "Investigation Advice");
-        if (_.isNil(existingDecision)) {
-            decisions.push({
-                "name": "Investigation Advice",
-                "value": [value]
-            });
-        } else {
-            _.remove(decisions, (dec) => dec.name === "Investigation Advice");
-            existingDecision.value.push(value);
-            decisions.push(existingDecision);
-        }
-    };
-
-    this.generateInvestigationDecisions = function (decisions) {
-        let existingDecision = decisions.find((dec) => dec.name === "Investigation Advice");
-        if (!_.isNil(existingDecision)) {
-            _.remove(decisions, (dec) => dec.name === "Investigation Advice");
-            existingDecision.value = `Send patient to FRU immediately for ${existingDecision.value.join(', ')}`;
-            decisions.push(existingDecision);
-        }
-    };
-
     this.findValue = function (decisions, name) {
         var matchingDecision = decisions.find(function (decision) {
             return decision.name === name;

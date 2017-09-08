@@ -4,6 +4,31 @@ var C = require('../common');
 
 module.exports = {};
 
+function AdviceBuilder(type, prefixValue) {
+    this.values = [];
+    this.type = type;
+    this.prefixValue = prefixValue;
+
+    this.add = function (value) {
+        this.values.push(value);
+    };
+
+    this.exists = function () {
+        return this.values.length > 0;
+    };
+
+    this.build = function () {
+        return {
+            "name": this.type,
+            "value": `${this.prefixValue} ${this.values.join(', ')}`
+        };
+    };
+}
+
+function InvestigationAdviceBuilder() {
+    return new AdviceBuilder("Investigation Advice", "Send patient to FRU immediately for");
+}
+
 module.exports.getDecisions = function (programEncounter, today) {
 
     if (programEncounter.encounterType.name === 'ANC') {
@@ -13,6 +38,7 @@ module.exports.getDecisions = function (programEncounter, today) {
         const lmpDate = programEncounter.programEnrolment.getObservationValue('Last Menstrual Period');
         const pregnancyPeriodInWeeks = C.getWeeks(lmpDate, programEncounter.encounterDateTime);
 
+        let investigationAdviceBuilder = new InvestigationAdviceBuilder();
         //TODO this code has duplications. Refactoring to be done. Externalise strings?
         analyseHypertensiveRisks();
         analyseAnemia();
@@ -22,6 +48,7 @@ module.exports.getDecisions = function (programEncounter, today) {
         analyseHepatitisB();
         analyseMalaria();
         analyseFoetalPresentation();
+
 
         function addComplication(conceptName) {
             console.log('(MotherProgramEncounterDecision) Adding if not exists to preg complications: ' + conceptName);
@@ -56,7 +83,7 @@ module.exports.getDecisions = function (programEncounter, today) {
             const severePreEclempsiaUrineAlbuminValues = ['+3', '+4'];
 
             if (urineAlbumin === undefined)
-                C.addInvestigationAdvice(decisions, "Urine Albumin Test");
+                investigationAdviceBuilder.add("Urine Albumin Test");
 
             const isBloodPressureHigh = (systolic >= 140) || (diastolic >= 90); //can go in high risk category
             const urineAlbuminIsMild = C.contains(mildPreEclempsiaUrineAlbuminValues, urineAlbumin);
@@ -85,7 +112,7 @@ module.exports.getDecisions = function (programEncounter, today) {
         function analyseAnemia() { //anm also does this test
             var hemoglobin = getObservationValueFromEntireEnrolment('Hb');
             if (hemoglobin === undefined) {
-                C.addInvestigationAdvice(decisions, "Haemoglobin Test (Hb)")
+                investigationAdviceBuilder.add("Haemoglobin Test (Hb)");
             }
             else if (hemoglobin < 7) {
                 decisions.push({
@@ -157,7 +184,7 @@ module.exports.getDecisions = function (programEncounter, today) {
                 value: C.findValue(decisions, 'High Risk Conditions')
             })
         }
-        C.generateInvestigationDecisions(decisions);
+        if (investigationAdviceBuilder.exists()) decisions.push(investigationAdviceBuilder.build());
         return {
             enrolmentDecisions: enrolmentDecisions,
             encounterDecisions: decisions
