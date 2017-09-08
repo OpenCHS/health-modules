@@ -36,6 +36,23 @@ describe('High Risk Pregnancy Determination', () => {
         enrolment.setObservation('Last Menstrual Period', moment(referenceDate).subtract(20, "weeks").toDate());
     });
 
+    it("is run fresh every time ", () => {
+        enrolment.setObservation('Last Menstrual Period', moment(referenceDate).subtract(20, "weeks").toDate());
+        programEncounter.setObservation("High Risk Conditions", ["Dummy high risk condition"]);
+        let decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
+
+        let complications = C.findValue(decisions, "High Risk Conditions");
+        expect(complications).to.not.exist;
+
+        programEncounter.setObservation(systolicConcept.name, systolicConcept.highNormal + 1)
+            .setObservation(diastolicConcept.name, diastolicConcept.highNormal + 1);
+
+        decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
+        complications = C.findValue(decisions, "High Risk Conditions");
+        expect(complications).to.exist;
+        expect(complications).to.be.an('array').to.have.lengthOf(1).that.includes('Chronic Hypertension');
+    });
+
     describe("Less than 20 weeks of pregnancy", () => {
 
         beforeEach(() => {
