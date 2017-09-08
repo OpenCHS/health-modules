@@ -35,10 +35,6 @@ module.exports.getDecisions = function (programEnrolment, today, programEncounte
         if (height !== undefined && height <= 145)
             addIfNotExists('Short Stature');
 
-        const weight = getObservationValueFromEntireEnrolment('Weight');
-        if (weight !== undefined && weight <= 35)
-            addIfNotExists('Underweight');
-
         if (programEnrolment.individual.getAgeInYears(today) > 30)
             addIfNotExists('Old age pregnancy');
 

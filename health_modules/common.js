@@ -99,6 +99,10 @@ function C() {
             dueDate: this.addDays(baseDate, dueDateIncrementInDays),
             maxDate: this.addDays(baseDate, maxDateIncrementInDays)
         };
+    };
+
+    this.isNil = function (obj) {
+        return obj === null || obj === undefined;
     }
 }
 

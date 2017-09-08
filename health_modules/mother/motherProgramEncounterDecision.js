@@ -48,10 +48,16 @@ module.exports.getDecisions = function (programEncounter, today) {
         analyseHepatitisB();
         analyseMalaria();
         analyseFoetalPresentation();
+        analyseOtherRisks();
+
+        function analyseOtherRisks() {
+            const weight = getObservationValue('Weight');
+            if (!C.isNil(weight) && weight <= 35)
+                addComplication('Underweight');
+        }
 
 
         function addComplication(conceptName) {
-            console.log('(MotherProgramEncounterDecision) Adding if not exists to preg complications: ' + conceptName);
             var highRiskConditions = C.findValue(decisions, 'High Risk Conditions');
             if (highRiskConditions === undefined || highRiskConditions === null) {
                 highRiskConditions = [];
@@ -71,7 +77,6 @@ module.exports.getDecisions = function (programEncounter, today) {
         function observationExistsInEntireEnrolment(conceptName) {
             return programEncounter.programEnrolment.getObservationValueFromEntireEnrolment(conceptName, programEncounter);
         }
-
 
         function analyseHypertensiveRisks() {
             const systolic = getObservationValue('Systolic');

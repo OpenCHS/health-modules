@@ -514,29 +514,29 @@ describe('High Risk Pregnancy Determination', () => {
 
     describe("Weight Issues", () => {
         it("Shouldn't mark high risk if weight is not specified", () => {
-            const decisions = motherEnrolmentDecision.getDecisions(enrolment, referenceDate).enrolmentDecisions;
+            const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
             const complicationValues = C.findValue(decisions, 'High Risk Conditions');
-            expect(complicationValues).to.be.empty;
+            expect(complicationValues).to.be.null;
         });
 
         it("Shouldn't mark high risk if weight is above 35Kgs", () => {
-            enrolment.setObservation(weight.name, 36);
-            const decisions = motherEnrolmentDecision.getDecisions(enrolment, referenceDate).enrolmentDecisions;
+            programEncounter.setObservation(weight.name, 36);
+            const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
             const complicationValues = C.findValue(decisions, 'High Risk Conditions');
-            expect(complicationValues).to.be.empty;
+            expect(complicationValues).to.be.null;
         });
 
         it("Should mark high risk if weight is equal to 35Kgs", () => {
-            enrolment.setObservation(weight.name, 35);
-            const decisions = motherEnrolmentDecision.getDecisions(enrolment, referenceDate).enrolmentDecisions;
+            programEncounter.setObservation(weight.name, 35);
+            const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
             const complicationValues = C.findValue(decisions, 'High Risk Conditions');
             expect(complicationValues).to.exist;
             expect(complicationValues).to.be.an('array').that.includes('Underweight');
         });
 
         it("Should mark high risk if weight is less than 35Kgs", () => {
-            enrolment.setObservation(weight.name, 31);
-            const decisions = motherEnrolmentDecision.getDecisions(enrolment, referenceDate).enrolmentDecisions;
+            programEncounter.setObservation(weight.name, 31);
+            const decisions = motherEncounterDecision.getDecisions(programEncounter, referenceDate).encounterDecisions;
             const complicationValues = C.findValue(decisions, 'High Risk Conditions');
             expect(complicationValues).to.exist;
             expect(complicationValues).to.be.an('array').that.includes('Underweight');
