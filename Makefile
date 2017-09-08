@@ -29,6 +29,7 @@ build_env: ## Install npm dependencies
 
 # <rules>
 build_rules: ## Create webpack files for all the rules
+	python build/json_validation.py health_modules
 	rm -f output/*.js
 	./node_modules/.bin/webpack --config build/programEncounterDecisionWebpack.config.js
 	./node_modules/.bin/webpack --config build/encounterDecisionWebpack.config.js
