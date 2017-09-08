@@ -39,8 +39,9 @@
         {
           "uuid": "5065a0ae-58b3-4d91-8a91-aaad180b8a90",
           "name": "Suffering from diabetes",
-          "dataType": "Boolean",
-          "keyValues": [{"key": "TrueValue", "value": "Yes"}, {"key": "FalseValue", "value": "No"}]
+          "dataType": "Coded",
+          "answers": ["Yes", "No"],
+          "keyValues": [{"key": "Select", "value": "Single"}]
         },
         {
           "uuid": "4ebc7a4f-c10c-4139-92c7-3677c9486fda",
@@ -59,14 +60,16 @@
         {
           "name": "Smoking (Current or in last one year)",
           "uuid": "1ee0adc9-b58e-4fe3-b547-bd058a654562",
-          "dataType": "Boolean",
-          "keyValues": [{"key": "TrueValue", "value": "Yes"}, {"key": "FalseValue", "value": "No"}]
+          "dataType": "Coded",
+          "answers": ["Yes", "No"],
+          "keyValues": [{"key": "Select", "value": "Single"}]
         },
         {
           "uuid": "3b478529-2c7a-4eee-a0b2-3cfdf04b8882",
           "name": "High intake of alcohol",
-          "dataType": "Boolean",
-          "keyValues": [{"key": "TrueValue", "value": "Yes"}, {"key": "FalseValue", "value": "No"}]
+          "dataType": "Coded",
+          "answers": ["Yes", "No"],
+          "keyValues": [{"key": "Select", "value": "Single"}]
         },
         {
           "uuid": "238a8d29-b912-437e-9428-58801a4cd4db",

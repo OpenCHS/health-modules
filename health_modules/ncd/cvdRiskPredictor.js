@@ -23,9 +23,9 @@ const getCvdRisk = function (programEncounter) {
 
     function getCvdRiskLevel(programEncounter) {
         const ageInYrs = programEncounter.individual.getAgeInYears();
-        const isSmoker = programEncounter.getObservationValue('Smoking (Current or in last one year)');
+        const isSmoker = programEncounter.getObservationValue('Smoking (Current or in last one year)') === "Yes";
         const gender = programEncounter.individual.gender.name;
-        const hasDiabetes = programEncounter.getObservationValue('Suffering from diabetes');
+        const hasDiabetes = programEncounter.getObservationValue('Suffering from diabetes') === "Yes";
         const systolic = programEncounter.getObservationValue('Systolic');
 
         var masterTable;

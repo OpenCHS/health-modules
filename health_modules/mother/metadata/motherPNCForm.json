@@ -92,8 +92,9 @@
         {
           "uuid": "0e15828b-b23f-4022-b6e1-d400f1ac608f",
           "name": "Does feel hot or have the chills",
-          "dataType": "Boolean",
-          "keyValues": [{"key": "TrueValue", "value": "Yes"}, {"key": "FalseValue", "value": "No"}]
+          "dataType": "Coded",
+          "answers": ["Yes", "No"],
+          "keyValues": [{"key": "Select", "value": "Single"}]
         }
       ]
     }

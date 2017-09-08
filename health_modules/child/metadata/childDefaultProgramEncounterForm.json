@@ -42,14 +42,16 @@
         {
           "uuid": "0dbaa2f0-080b-4657-b421-621943d4dd99",
           "name": "Does child feel hot or have the chills",
-          "dataType": "Boolean",
-          "keyValues": [{"key": "TrueValue", "value": "Yes"}, {"key": "FalseValue", "value": "No"}]
+          "dataType": "Coded",
+          "answers": ["Yes", "No"],
+          "keyValues": [{"key": "Select", "value": "Single"}]
         },
         {
           "uuid": "0311c913-eb2b-4478-b435-dc142e7fe584",
           "name": "Is baby exclusively breastfeeding",
-          "dataType": "Boolean",
-          "keyValues": [{"key": "TrueValue", "value": "Yes"}, {"key": "FalseValue", "value": "No"}]
+          "dataType": "Coded",
+          "answers": ["Yes", "No"],
+          "keyValues": [{"key": "Select", "value": "Single"}]
         }
       ]
     },

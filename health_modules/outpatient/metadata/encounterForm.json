@@ -69,34 +69,18 @@
         {
           "name": "Pallor",
           "uuid": "0321fdc2-055f-44ac-a24e-c66314f04127",
-          "keyValues": [
-            {
-              "key": "TrueValue",
-              "value": "Present"
-            },
-            {
-              "key": "FalseValue",
-              "value": "Absent"
-            }
-          ],
-          "dataType": "Boolean",
+          "dataType": "Coded",
+          "answers": ["Present", "Absent"],
+          "keyValues": [{"key": "Select", "value": "Single"}],
           "displayOrder": 1,
           "mandatory": false
         },
         {
           "name": "Pedal Edema",
           "uuid": "57db3bc2-4a09-4351-bf44-edfe46e00ac1",
-          "keyValues": [
-            {
-              "key": "TrueValue",
-              "value": "Present"
-            },
-            {
-              "key": "FalseValue",
-              "value": "Absent"
-            }
-          ],
-          "dataType": "Boolean",
+          "dataType": "Coded",
+          "answers": ["Present", "Absent"],
+          "keyValues": [{"key": "Select", "value": "Single"}],
           "displayOrder": 2,
           "mandatory": false
         },

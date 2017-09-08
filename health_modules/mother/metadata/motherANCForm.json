@@ -14,68 +14,36 @@
         {
           "name": "Pedal Edema",
           "uuid": "32bed768-4074-45c4-92a6-4bc27f43bbdc",
-          "keyValues": [
-            {
-              "key": "TrueValue",
-              "value": "Present"
-            },
-            {
-              "key": "FalseValue",
-              "value": "Absent"
-            }
-          ],
-          "dataType": "Boolean",
+          "dataType": "Coded",
+          "answers": ["Present", "Absent"],
+          "keyValues": [{"key": "Select", "value": "Single"}],
           "displayOrder": 1,
           "mandatory": false
         },
         {
           "name": "Pallor",
           "uuid": "6b5f0898-6ea3-4395-91e2-6e415cada5ff",
-          "keyValues": [
-            {
-              "key": "TrueValue",
-              "value": "Present"
-            },
-            {
-              "key": "FalseValue",
-              "value": "Absent"
-            }
-          ],
-          "dataType": "Boolean",
+          "dataType": "Coded",
+          "answers": ["Present", "Absent"],
+          "keyValues": [{"key": "Select", "value": "Single"}],
           "displayOrder": 2,
           "mandatory": false
         },
         {
           "name": "Convulsions",
           "uuid": "e4511f13-5b2a-4df2-9e7b-72729c1f6923",
-          "keyValues": [
-            {
-              "key": "TrueValue",
-              "value": "Present"
-            },
-            {
-              "key": "FalseValue",
-              "value": "Absent"
-            }
-          ],
-          "dataType": "Boolean",
+          "dataType": "Coded",
+          "answers": ["Present", "Absent"],
+          "keyValues": [{"key": "Select", "value": "Single"}],
           "displayOrder": 3,
           "mandatory": false
         },
         {
           "name": "Icterus",
           "uuid": "a9a50a04-6e62-4398-b0ed-1039f82fe323",
-          "keyValues": [
-            {
-              "key": "TrueValue",
-              "value": "Present"
-            },
-            {
-              "key": "FalseValue",
-              "value": "Absent"
-            }
-          ],
-          "dataType": "Boolean",
+          "dataType": "Coded",
+          "answers": ["Present", "Absent"],
+          "keyValues": [{"key": "Select", "value": "Single"}],
           "displayOrder": 4,
           "mandatory": false
         },
@@ -164,17 +132,9 @@
         {
           "uuid": "c30e4c6c-a823-47ff-8c8c-328f89a2587f",
           "name": "Fetal Heart Sound",
-          "dataType": "Boolean",
-          "keyValues": [
-            {
-              "key": "TrueValue",
-              "value": "Present"
-            },
-            {
-              "key": "FalseValue",
-              "value": "Absent"
-            }
-          ],
+          "dataType": "Coded",
+          "answers": ["Present", "Absent"],
+          "keyValues": [{"key": "Select", "value": "Single"}],
           "displayOrder": 5
         }
       ]
@@ -470,17 +430,9 @@
         {
           "name": "US Scanning Done",
           "uuid": "e5e671fe-0acf-44e1-9629-0796b274fe65",
-          "keyValues": [
-            {
-              "key": "TrueValue",
-              "value": "Yes"
-            },
-            {
-              "key": "FalseValue",
-              "value": "No"
-            }
-          ],
-          "dataType": "Boolean",
+          "dataType": "Coded",
+          "answers": ["Yes", "No"],
+          "keyValues": [{"key": "Select", "value": "Single"}],
           "displayOrder": 1,
           "mandatory": false
         },

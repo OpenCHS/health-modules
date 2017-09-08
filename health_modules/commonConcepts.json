@@ -48,5 +48,35 @@
     "name": "Underweight",
     "uuid": "41b2db08-99a4-428c-a908-641330858b8a",
     "dataType": "N/A"
+  },
+  {
+    "name": "Yes",
+    "uuid": "e97f6eb6-a393-4c34-81ef-a9f2a623f59e",
+    "dataType": "N/A"
+  },
+  {
+    "name": "No",
+    "uuid": "e7b50c78-3d90-484d-a224-9887887780dc",
+    "dataType": "N/A"
+  },
+  {
+    "name": "Present",
+    "uuid": "57b51d52-981f-4af2-b133-aeffa6d00757",
+    "dataType": "N/A"
+  },
+  {
+    "name": "Absent",
+    "uuid": "10885638-561a-42b6-8b24-8daa01864c89",
+    "dataType": "N/A"
+  },
+  {
+    "name": "Positive",
+    "uuid": "479cd95a-54ef-4818-b84a-09b478fc68b8",
+    "dataType": "N/A"
+  },
+  {
+    "name": "Negative",
+    "uuid": "ad1f0481-a8ed-411a-ac00-d0435a670269",
+    "dataType": "N/A"
   }
 ]

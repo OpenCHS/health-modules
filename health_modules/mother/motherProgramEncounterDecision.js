@@ -89,7 +89,7 @@ module.exports.getDecisions = function (programEncounter, today) {
             const urineAlbuminIsMild = C.contains(mildPreEclempsiaUrineAlbuminValues, urineAlbumin);
             const urineAlbuminIsSevere = C.contains(severePreEclempsiaUrineAlbuminValues, urineAlbumin);
             const obsHistoryOfPregnancyInducedHypertension = C.contains(obsHistory, 'Pregnancy Induced Hypertension');
-            const hasConvulsions = getObservationValue('Convulsions'); //will be identified in hospital
+            const hasConvulsions = getObservationValue('Convulsions') === "Present"; //will be identified in hospital
             let highRiskConditions = getObservationValueFromEntireEnrolment('High Risk Conditions');
             const isChronicHypertensive = highRiskConditions && highRiskConditions.indexOf('Chronic Hypertension') >= 0;
 

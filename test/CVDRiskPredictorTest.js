@@ -13,12 +13,12 @@ describe('Make Decision', function () {
         programEncounter = new ProgramEncounter();
         programEncounter.individual = new Individual();
         programEncounter.individual.setAge(55);
-        programEncounter.setObservation("Smoking (Current or in last one year)", true);
+        programEncounter.setObservation("Smoking (Current or in last one year)", "Yes");
         programEncounter.setObservation("Systolic", 150);
     });
 
     it('Check for diabetes case and female', function () {
-        programEncounter.setObservation("Suffering from diabetes", true);
+        programEncounter.setObservation("Suffering from diabetes", "Yes");
         programEncounter.individual.setGender("Female");
         var decision = riskPredictor.getCvdRisk(programEncounter);
         assert.equal('Moderate',decision.riskClassification);
@@ -28,7 +28,7 @@ describe('Make Decision', function () {
     });
 
     it('Check for diabetes case and male', function () {
-        programEncounter.setObservation("Suffering from diabetes", true);
+        programEncounter.setObservation("Suffering from diabetes", "Yes");
         programEncounter.individual.setGender("Male");
         var decision = riskPredictor.getCvdRisk(programEncounter);
         assert.equal(2, decision.risklevel);
@@ -36,7 +36,7 @@ describe('Make Decision', function () {
     });
 
     it('Check for non-diabetes and female', function () {
-        programEncounter.setObservation("Suffering from diabetes", false);
+        programEncounter.setObservation("Suffering from diabetes", "No");
         programEncounter.individual.setGender("Female");
         var decision = riskPredictor.getCvdRisk(programEncounter);
         assert.equal(2, decision.risklevel);
