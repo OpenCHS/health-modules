@@ -40,6 +40,7 @@ module.exports.getDecisions = function (programEncounter, today) {
 
         let investigationAdviceBuilder = new InvestigationAdviceBuilder();
         //TODO this code has duplications. Refactoring to be done. Externalise strings?
+        addComplicationsObservation();
         analyseHypertensiveRisks();
         analyseAnemia();
         manageVaginalBleeding();
@@ -50,20 +51,19 @@ module.exports.getDecisions = function (programEncounter, today) {
         analyseFoetalPresentation();
         analyseOtherRisks();
 
+        function addComplicationsObservation() {
+            decisions.push({name: 'High Risk Conditions', value: []})
+        }
+
         function analyseOtherRisks() {
             const weight = getObservationValue('Weight');
             if (!C.isNil(weight) && weight <= 35)
                 addComplication('Underweight');
         }
 
-
         function addComplication(conceptName) {
-            var highRiskConditions = C.findValue(decisions, 'High Risk Conditions');
-            if (highRiskConditions === undefined || highRiskConditions === null) {
-                highRiskConditions = [];
-                decisions.push({name: 'High Risk Conditions', value: highRiskConditions})
-            }
-            highRiskConditions.push(conceptName);
+            console.log('(MotherProgramEncounterDecision) Adding if not exists to preg complications: ' + conceptName);
+            C.findValue(decisions, 'High Risk Conditions').push(conceptName);
         }
 
         function getObservationValueFromEntireEnrolment(conceptName) {
